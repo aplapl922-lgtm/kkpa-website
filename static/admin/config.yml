@@ -2,8 +2,6 @@ backend:
   name: github
   repo: aplapl922-lgtm/kkpa-website
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
 
 locale: ko
 media_folder: static/uploads
