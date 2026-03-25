@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>건강정보 — 경기도약사회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #002D62;
+  --navy-d:  #001840;
+  --navy-m:  #004A9E;
+  --accent:  #4A9FD4;
+  --accent-l:#D8EEF9;
+  --bg:      #F4F7FA;
+  --text:    #1B2A3B;
+  --sub:     #5A6A7E;
+  --border:  #DDE6EF;
+  --hh:      68px;
+  --nh:      52px;
+  --r:       16px;
+  --sh:      0 4px 24px rgba(0,45,98,.10);
+  --sh-lg:   0 14px 44px rgba(0,45,98,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ─── HEADER ─── */
+.site-header{position:sticky;top:0;z-index:300;height:var(--hh);background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1.5px solid var(--border);box-shadow:0 2px 16px rgba(0,45,98,.07);}
+.hdr-inner{max-width:1280px;margin:0 auto;padding:0 44px;height:100%;display:flex;align-items:center;gap:16px;}
+.hdr-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.hdr-logo .lmark{width:40px;height:40px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.hdr-logo .lmark svg{width:24px;height:24px}
+.hdr-logo .ltxt .ko{font-size:15.5px;font-weight:700;color:var(--navy);letter-spacing:-.3px}
+.hdr-logo .ltxt .en{font-size:10px;color:var(--sub);font-weight:400}
+.hdr-search{margin-left:auto;display:flex;align-items:center;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:7px 14px;gap:8px;min-width:220px;transition:border .2s;}
+.hdr-search:focus-within{border-color:var(--navy)}
+.hdr-search input{border:none;background:transparent;font-size:13.5px;font-family:inherit;color:var(--text);outline:none;flex:1}
+.hdr-search input::placeholder{color:#aab}
+.hdr-search button{background:none;border:none;cursor:pointer;color:var(--sub);font-size:15px}
+.hdr-tel{display:flex;align-items:center;gap:6px;background:var(--accent-l);border-radius:8px;padding:7px 14px;flex-shrink:0;}
+.hdr-tel span{font-size:12px;color:var(--navy);font-weight:700}
+
+/* ─── TOP NAV ─── */
+.top-nav{background:var(--navy-d);height:var(--nh);display:flex;align-items:stretch;padding:0 28px;position:sticky;top:var(--hh);z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+.top-nav-inner{display:flex;align-items:stretch;max-width:1280px;width:100%;margin:0 auto;padding:0 44px;}
+.tn-item{position:relative;display:flex;align-items:center;padding:0 18px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.65);cursor:pointer;white-space:nowrap;transition:color .15s;border-bottom:2px solid transparent;user-select:none;}
+.tn-item:hover,.tn-item.active{color:white;border-bottom-color:var(--accent)}
+.tn-item.active{font-weight:700}
+.tn-arr{font-size:9px;margin-left:5px;opacity:.6;transition:transform .2s}
+.tn-item:hover .tn-arr{transform:rotate(180deg)}
+.tn-drop{position:absolute;top:100%;left:0;background:var(--navy-d);min-width:170px;border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--accent);border-radius:0 0 10px 10px;box-shadow:0 8px 28px rgba(0,0,0,.3);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all .2s;z-index:500;}
+.tn-item:hover .tn-drop{opacity:1;visibility:visible;transform:translateY(0)}
+.tn-drop a{display:block;padding:10px 18px;font-size:13px;color:rgba(255,255,255,.6);transition:.15s;}
+.tn-drop a:hover{color:white;background:rgba(255,255,255,.06);padding-left:22px}
+.tn-cta{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.tn-cta a{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:7px 16px;border-radius:7px;transition:.2s;white-space:nowrap;}
+.tn-cta .alert-btn{background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.35);color:#FF7F73;}
+.tn-cta .alert-btn:hover{background:rgba(231,76,60,.28)}
+.tn-cta .tel-btn{background:rgba(74,159,212,.12);border:1px solid rgba(74,159,212,.3);color:var(--accent);}
+.tn-cta .tel-btn:hover{background:rgba(74,159,212,.24)}
+
+/* ─── PAGE HERO ─── */
+.page-hero{position:relative;height:260px;overflow:hidden;}
+.page-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:brightness(.38) saturate(.85);}
+.page-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,24,64,.88) 0%,rgba(0,45,98,.6) 60%,rgba(0,75,158,.3) 100%);}
+.page-hero-inner{position:relative;z-index:2;height:100%;max-width:1280px;margin:0 auto;padding:0 44px;display:flex;flex-direction:column;justify-content:center;}
+.page-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.page-label::before{content:'';display:inline-block;width:28px;height:2px;background:var(--accent);border-radius:2px;}
+.page-hero-inner h1{font-family:'Noto Serif KR',serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:white;line-height:1.3;letter-spacing:-.5px;}
+.page-sub{font-size:14.5px;color:rgba(255,255,255,.65);margin-top:10px;}
+
+/* ─── BREADCRUMB + 탭 바 ─── */
+.breadcrumb-bar{background:white;border-bottom:1.5px solid var(--border);box-shadow:0 2px 10px rgba(0,45,98,.05);position:sticky;top:calc(var(--hh) + var(--nh));z-index:100;}
+.bc-inner{max-width:1280px;margin:0 auto;padding:0 44px;display:flex;align-items:center;gap:0;}
+.bc-trail{display:flex;align-items:center;gap:8px;padding:14px 24px 14px 0;flex-shrink:0;}
+.bc-trail a,.bc-trail span{font-size:12.5px;color:var(--sub);}
+.bc-trail a:hover{color:var(--navy)}
+.bc-trail .sep{font-size:10px;color:var(--border)}
+.bc-trail .cur{color:var(--navy);font-weight:700}
+.main-tabs{display:flex;align-items:stretch;flex:1;}
+.main-tab{padding:0 24px;height:52px;display:flex;align-items:center;font-size:13.5px;font-weight:500;color:var(--sub);border-bottom:3px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;gap:7px;}
+.main-tab:hover{color:var(--navy)}
+.main-tab.active{color:var(--navy);font-weight:700;border-bottom-color:var(--navy);}
+.main-tab .tab-count{background:var(--bg);color:var(--sub);font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;transition:.2s;}
+.main-tab.active .tab-count{background:var(--navy);color:white;}
+/* 우측 검색 */
+.bc-search{flex-shrink:0;padding-left:20px;display:flex;align-items:center;}
+.search-box{display:flex;align-items:center;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:8px 14px;gap:8px;width:240px;transition:border .2s;}
+.search-box:focus-within{border-color:var(--navy)}
+.search-box input{border:none;background:transparent;font-size:13.5px;font-family:inherit;outline:none;flex:1;color:var(--text);}
+.search-box input::placeholder{color:#aab}
+
+/* ─── 콘텐츠 영역 ─── */
+.content-area{max-width:1280px;margin:0 auto;padding:44px 44px 80px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ─── 결과 카운트 ─── */
+.result-bar{display:flex;align-items:center;justify-content:flex-end;margin-bottom:28px;}
+.result-count{font-size:13.5px;color:var(--sub);}
+.result-count strong{color:var(--navy);}
+
+/* ─── 카드 그리드 ─── */
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.card-item.hidden{display:none;}
+
+/* ─── 건강정보 카드 ─── */
+.hi-card{background:white;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);border:1px solid var(--border);transition:all .3s;cursor:pointer;display:flex;flex-direction:column;}
+.hi-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);}
+
+/* 썸네일 — 그라데이션 + 아이콘 */
+.hi-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;}
+.hi-thumb .th-icon{font-size:38px;line-height:1;}
+.hi-thumb .th-title{font-size:13px;font-weight:700;color:white;text-align:center;line-height:1.5;}
+
+/* 카드 본문 */
+.hi-body{padding:16px 18px 14px;flex:1;display:flex;flex-direction:column;gap:10px;}
+.hi-title{font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.5;flex:1;}
+.hi-excerpt{font-size:12.5px;color:var(--sub);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+/* 카드 푸터 */
+.hi-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 18px 14px;}
+.hi-views{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--sub);}
+.hi-views svg{flex-shrink:0;}
+.btn-share-sm{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:6px 12px;border-radius:7px;border:1.5px solid var(--border);background:white;color:var(--sub);cursor:pointer;transition:.2s;}
+.btn-share-sm:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ─── 빈 상태 ─── */
+.empty-state{text-align:center;padding:80px 20px;color:var(--sub);}
+.empty-state .ei{font-size:48px;margin-bottom:16px;}
+.empty-state h3{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+
+/* ─── SNS 공유 모달 ─── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;display:none;align-items:center;justify-content:center;}
+.modal-bg.open{display:flex;}
+.modal{background:white;border-radius:20px;padding:32px 36px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.25);animation:popIn .25s ease both;}
+@keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.modal h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.modal .modal-sub{font-size:13px;color:var(--sub);margin-bottom:24px;}
+.share-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.share-btn{display:flex;align-items:center;gap:10px;padding:13px 16px;border-radius:12px;border:1.5px solid var(--border);font-size:13.5px;font-weight:700;cursor:pointer;transition:.2s;background:white;}
+.share-btn:hover{transform:translateY(-2px);box-shadow:var(--sh);}
+.share-btn .sbi{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.sb-kakao .sbi{background:#FEE500;color:#3A1D1D;}
+.sb-band .sbi{background:#6E40C9;color:white;}
+.sb-twitter .sbi{background:#000;color:white;}
+.sb-copy .sbi{background:var(--bg);color:var(--sub);}
+.modal-close{width:100%;padding:12px;border:none;background:var(--bg);border-radius:10px;font-size:14px;font-weight:600;color:var(--sub);cursor:pointer;transition:.2s;}
+.modal-close:hover{background:var(--border);}
+
+/* ─── FOOTER ─── */
+footer{background:var(--navy-d);color:rgba(255,255,255,.6);}
+.ft-inner{max-width:1280px;margin:0 auto;padding:40px 44px 28px;}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:40px;margin-bottom:32px;}
+.ft-brand .ftname{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:700;color:white;margin-bottom:10px}
+.ft-brand p{font-size:13px;line-height:1.75;color:rgba(255,255,255,.5);margin-bottom:14px}
+.ft-contact p{font-size:12.5px;color:rgba(255,255,255,.5);margin-bottom:4px}
+.ft-col h4{font-size:13px;font-weight:700;color:white;margin-bottom:12px}
+.ft-col ul{list-style:none}
+.ft-col ul li{margin-bottom:7px}
+.ft-col ul a{font-size:12.5px;color:rgba(255,255,255,.45);transition:.15s}
+.ft-col ul a:hover{color:white}
+.ft-info-box{background:rgba(255,255,255,.05);border-radius:10px;padding:18px;border:1px solid rgba(255,255,255,.08);font-size:12.5px;line-height:1.8;}
+.ib-label{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:8px}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.ft-bottom p{font-size:12px;color:rgba(255,255,255,.3)}
+.ft-policy{display:flex;gap:16px}
+.ft-policy a{font-size:12px;color:rgba(255,255,255,.3);transition:.15s}
+.ft-policy a:hover{color:rgba(255,255,255,.6)}
+.ft-sns{display:flex;gap:10px;margin-top:14px}
+.ft-sns a{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(255,255,255,.5);transition:.2s;}
+.ft-sns a:hover{background:var(--accent);color:white}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="hdr-inner">
+    <a href="index.html" class="hdr-logo">
+      <div class="lmark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="ltxt">
+        <div class="ko">경기도약사회</div>
+        <div class="en">Gyeonggi Pharmacists Association</div>
+      </div>
+    </a>
+    <div class="hdr-search">
+      <button>🔍</button>
+      <input type="text" placeholder="검색어를 입력하세요">
+    </div>
+    <div class="hdr-tel"><span>📞 031-256-0663</span></div>
+  </div>
+</header>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <div class="tn-item"><a href="index.html" style="color:inherit;">홈</a></div>
+    <div class="tn-item">
+      <a href="about.html" style="color:inherit;">경기도약사회 소개</a> <span class="tn-arr">▾</span>
+      <div class="tn-drop">
+        <a href="about.html">인사말</a>
+        <a href="about.html">연혁</a>
+        <a href="about.html">조직도</a>
+        <a href="about.html">오시는 길</a>
+      </div>
+    </div>
+    <div class="tn-item"><a href="issues.html" style="color:inherit;">핵심 현안</a></div>
+    <div class="tn-item"><a href="media.html" style="color:inherit;">약사회 미디어</a></div>
+    <div class="tn-item active"><a href="health.html" style="color:inherit;">건강정보</a></div>
+    <div class="tn-item"><a href="news.html" style="color:inherit;">소식·공지</a></div>
+    <div class="tn-item">
+      참여마당 <span class="tn-arr">▾</span>
+      <div class="tn-drop"><a href="#">신고센터</a><a href="#">의견 보내기</a></div>
+    </div>
+    <div class="tn-item"><a href="#" style="color:inherit;">고객센터</a></div>
+    <div class="tn-cta">
+      <a href="#" class="alert-btn">🚨 신고센터</a>
+      <a href="tel:031-256-0663" class="tel-btn">📞 031-256-0663</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <img class="page-hero-photo" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1400&q=70&auto=format&fit=crop" alt="건강정보">
+  <div class="page-hero-inner">
+    <div class="page-label">Health Information</div>
+    <h1>건강정보</h1>
+    <p class="page-sub">경기도 약사들이 전하는 믿을 수 있는 건강·의약품 정보</p>
+  </div>
+</div>
+
+<!-- BREADCRUMB + 탭 -->
+<div class="breadcrumb-bar">
+  <div class="bc-inner">
+    <div class="bc-trail">
+      <a href="index.html">홈</a>
+      <span class="sep">›</span>
+      <span class="cur">건강정보</span>
+    </div>
+
+    <div class="bc-search">
+      <div class="search-box">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search-global" placeholder="검색..." oninput="filterAll()">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+<div class="content-area">
+
+  <!-- 전체 탭 -->
+  <div id="panel-all">
+    <div class="result-bar"><div class="result-count" id="result-all">총 <strong>12</strong>개</div></div>
+    <div class="card-grid" id="grid-all">
+
+      <div class="hi-card card-item" data-tab="medicine" data-title="약 올바르게 복용하는 법">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#002D62,#4A9FD4);">
+          <div class="th-icon">💊</div>
+          <div class="th-title">약 올바르게 복용하는 법</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">약 올바르게 복용하는 법</div>
+          <div class="hi-excerpt">식전·식후·식간 복용의 차이, 물과 함께 먹어야 하는 이유, 임의로 용량을 바꾸면 안 되는 까닭을 약사가 쉽게 설명합니다.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 2,841</div>
+          <button class="btn-share-sm" onclick="openShare('약 올바르게 복용하는 법')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="medicine" data-title="고혈압약 갑자기 끊으면 안 되는 이유">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#7B1A1A,#E53E3E);">
+          <div class="th-icon">❤️</div>
+          <div class="th-title">고혈압약 갑자기 끊으면 안 되는 이유</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">고혈압약 갑자기 끊으면 안 되는 이유</div>
+          <div class="hi-excerpt">혈압약을 임의로 중단할 경우 반동성 고혈압과 심뇌혈관 사고 위험이 급증합니다. 복약 지속의 중요성을 알아보세요.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 3,572</div>
+          <button class="btn-share-sm" onclick="openShare('고혈압약 갑자기 끊으면 안 되는 이유')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="medicine" data-title="약 보관 이것만은 꼭 지키세요">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#164E63,#0EA5E9);">
+          <div class="th-icon">📦</div>
+          <div class="th-title">약 보관 이것만은 꼭 지키세요</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">약 보관 이것만은 꼭 지키세요</div>
+          <div class="hi-excerpt">직사광선·고온다습한 환경은 약을 변질시킵니다. 냉장 보관 약품과 상온 보관 약품의 구분법을 정리했습니다.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 1,924</div>
+          <button class="btn-share-sm" onclick="openShare('약 보관 이것만은 꼭 지키세요')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="medicine" data-title="약 버리는 올바른 방법">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#065F46,#10B981);">
+          <div class="th-icon">♻️</div>
+          <div class="th-title">약 버리는 올바른 방법</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">약 버리는 올바른 방법</div>
+          <div class="hi-excerpt">변기나 쓰레기통에 버리면 환경 오염의 원인이 됩니다. 가까운 약국에 반납하는 방법을 안내합니다.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 1,387</div>
+          <button class="btn-share-sm" onclick="openShare('약 버리는 올바른 방법')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="senior" data-title="어르신 다약제 복용 무엇이 위험한가">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#78350F,#D97706);">
+          <div class="th-icon">👴</div>
+          <div class="th-title">어르신 다약제 복용 무엇이 위험한가</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">어르신 다약제 복용 무엇이 위험한가</div>
+          <div class="hi-excerpt">5종 이상 약을 동시에 복용하면 상호작용 위험이 높아집니다. 약사 상담을 통한 안전한 복약 관리법을 안내합니다.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 4,218</div>
+          <button class="btn-share-sm" onclick="openShare('어르신 다약제 복용 무엇이 위험한가')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="senior" data-title="치매 예방을 위한 약 복용 관리">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#4A1D96,#7C3AED);">
+          <div class="th-icon">🧠</div>
+          <div class="th-title">치매 예방을 위한 약 복용 관리</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">치매 예방을 위한 약 복용 관리</div>
+          <div class="hi-excerpt">일부 약물은 장기 복용 시 인지 기능에 영향을 줄 수 있습니다. 약사와 상담하여 복약을 점검받으세요.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 2,653</div>
+          <button class="btn-share-sm" onclick="openShare('치매 예방을 위한 약 복용 관리')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="senior" data-title="골다공증약 올바르게 먹는 법">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#1E3A5F,#2563EB);">
+          <div class="th-icon">🦴</div>
+          <div class="th-title">골다공증약 올바르게 먹는 법</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">골다공증약 올바르게 먹는 법</div>
+          <div class="hi-excerpt">비스포스포네이트 계열 약은 복용 방법이 매우 중요합니다. 잘못 복용하면 효과가 없거나 부작용이 생길 수 있습니다.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 1,845</div>
+          <button class="btn-share-sm" onclick="openShare('골다공증약 올바르게 먹는 법')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="senior" data-title="혈당약과 인슐린 함께 써도 되나요">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#065F46,#059669);">
+          <div class="th-icon">💉</div>
+          <div class="th-title">혈당약과 인슐린 함께 써도 되나요</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">혈당약과 인슐린 함께 써도 되나요</div>
+          <div class="hi-excerpt">당뇨 치료에서 경구약과 인슐린 병용 요법에 대한 궁금증을 약사가 명확하게 답변합니다.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 2,091</div>
+          <button class="btn-share-sm" onclick="openShare('혈당약과 인슐린 함께 써도 되나요')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="child" data-title="아이 해열제 교차 복용 올바른 방법">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#92400E,#F59E0B);">
+          <div class="th-icon">🧒</div>
+          <div class="th-title">아이 해열제 교차 복용 올바른 방법</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">아이 해열제 교차 복용 올바른 방법</div>
+          <div class="hi-excerpt">타이레놀과 부루펜, 교차 복용 간격과 주의사항을 정확히 알아야 아이를 안전하게 지킬 수 있습니다.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 5,934</div>
+          <button class="btn-share-sm" onclick="openShare('아이 해열제 교차 복용 올바른 방법')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="child" data-title="어린이 항생제 임의 중단 위험성">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#7B1A1A,#C53030);">
+          <div class="th-icon">⚠️</div>
+          <div class="th-title">어린이 항생제 임의 중단 위험성</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">어린이 항생제 임의 중단 위험성</div>
+          <div class="hi-excerpt">증상이 좋아졌다고 항생제를 멈추면 내성균이 생길 수 있습니다. 처방 기간을 끝까지 복용하는 것이 중요합니다.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 3,217</div>
+          <button class="btn-share-sm" onclick="openShare('어린이 항생제 임의 중단 위험성')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="child" data-title="어린이 비타민 과다 복용 주의">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#065F46,#34D399);">
+          <div class="th-icon">🌿</div>
+          <div class="th-title">어린이 비타민 과다 복용 주의</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">어린이 비타민 과다 복용 주의</div>
+          <div class="hi-excerpt">비타민도 과하면 독이 됩니다. 지용성 비타민(A·D·E·K)의 과다 복용 위험과 적정 용량을 안내합니다.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 1,763</div>
+          <button class="btn-share-sm" onclick="openShare('어린이 비타민 과다 복용 주의')">↗ 공유</button>
+        </div>
+      </div>
+
+      <div class="hi-card card-item" data-tab="child" data-title="영유아 감기약 안전하게 먹이는 법">
+        <div class="hi-thumb" style="background:linear-gradient(135deg,#1E3A5F,#60A5FA);">
+          <div class="th-icon">🍼</div>
+          <div class="th-title">영유아 감기약 안전하게 먹이는 법</div>
+        </div>
+        <div class="hi-body">
+          <div class="hi-title">영유아 감기약 안전하게 먹이는 법</div>
+          <div class="hi-excerpt">만 2세 미만 영아에게 함부로 감기약을 먹이면 위험할 수 있습니다. 월령별 안전한 복약 가이드를 확인하세요.</div>
+        </div>
+        <div class="hi-footer">
+          <div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 2,489</div>
+          <button class="btn-share-sm" onclick="openShare('영유아 감기약 안전하게 먹이는 법')">↗ 공유</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="empty-state" id="empty-all" style="display:none;">
+      <div class="ei">🔍</div><h3>검색 결과가 없습니다</h3><p>다른 검색어로 시도해 보세요.</p>
+    </div>
+  </div>
+    <div class="card-grid" id="grid-child"></div>
+    <div class="empty-state" id="empty-child" style="display:none;"><div class="ei">🔍</div><h3>검색 결과가 없습니다</h3><p>다른 검색어로 시도해 보세요.</p></div>
+  </div>
+
+</div>
+</main>
+
+<!-- SNS 공유 모달 -->
+<div class="modal-bg" id="shareModal" onclick="closeShareOutside(event)">
+  <div class="modal">
+    <h3>SNS 공유</h3>
+    <p class="modal-sub" id="shareTitle"></p>
+    <div class="share-btns">
+      <button class="share-btn sb-kakao" onclick="shareKakao()"><div class="sbi">💬</div>카카오톡</button>
+      <button class="share-btn sb-band" onclick="shareBand()"><div class="sbi">📣</div>밴드</button>
+      <button class="share-btn sb-twitter" onclick="shareTwitter()"><div class="sbi">𝕏</div>X (트위터)</button>
+      <button class="share-btn sb-copy" onclick="copyLink()"><div class="sbi">🔗</div>링크 복사</button>
+    </div>
+    <button class="modal-close" onclick="closeShare()">닫기</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ftname">경기도약사회</div>
+        <p>경기도민의 건강을 지키고 올바른 약 사용 문화를<br>만들어 가는 경기도약사회입니다.</p>
+        <div class="ft-contact">
+          <p>📍 경기도 수원시 장안구 장안로448번길 17-3 (이목동195-14) 2층</p>
+          <p>📞 <strong>031-256-0663~5</strong> · 📠 031-241-0154</p>
+          <p>✉️ kkpa0800@naver.com</p>
+        </div>
+        <div class="ft-sns">
+          <a href="#" title="페이스북">f</a>
+          <a href="#" title="X">𝕏</a>
+          <a href="#" title="인스타그램">◎</a>
+          <a href="#" title="유튜브">▶</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>경기도약사회 소개</h4>
+        <ul>
+          <li><a href="about.html">인사말</a></li>
+          <li><a href="about.html">연혁</a></li>
+          <li><a href="about.html">조직도</a></li>
+          <li><a href="about.html">오시는 길</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>주요 메뉴</h4>
+        <ul>
+          <li><a href="issues.html">핵심 현안</a></li>
+          <li><a href="media.html">약사회 미디어</a></li>
+          <li><a href="health.html">건강정보</a></li>
+          <li><a href="news.html">소식·공지</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>참여</h4>
+        <ul>
+          <li><a href="#">신고센터</a></li>
+          <li><a href="#">의견 보내기</a></li>
+          <li><a href="#">약사 봉사단</a></li>
+          <li><a href="#">고객센터</a></li>
+        </ul>
+      </div>
+      <div class="ft-info-box">
+        <div class="ib-label">연락처</div>
+        <p>경기도 수원시 장안구<br><strong>031-256-0663~5</strong><br>평일 09:00 – 18:00<br>점심 12:00 – 13:00</p>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>COPYRIGHT(C) KKPA All RIGHTS RESERVED.</p>
+      <div class="ft-policy">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">이메일무단수집거부</a>
+        <a href="#">사이트맵</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+function filterAll() {
+  var query = (document.getElementById('search-global').value || '').trim().toLowerCase();
+  var grid = document.getElementById('grid-all');
+  var items = grid.querySelectorAll('.card-item');
+  var visible = 0;
+  items.forEach(function(item) {
+    var title = (item.dataset.title || '').toLowerCase();
+    var match = !query || title.includes(query);
+    item.classList.toggle('hidden', !match);
+    if (match) visible++;
+  });
+  document.getElementById('result-all').innerHTML = '총 <strong>' + visible + '</strong>개';
+  document.getElementById('empty-all').style.display = visible === 0 ? 'block' : 'none';
+}
+var currentTitle = '';
+function openShare(title) {
+  currentTitle = title;
+  document.getElementById('shareTitle').textContent = '「' + title + '」';
+  document.getElementById('shareModal').classList.add('open');
+}
+function closeShare() { document.getElementById('shareModal').classList.remove('open'); }
+function closeShareOutside(e) { if (e.target === document.getElementById('shareModal')) closeShare(); }
+function shareKakao() { alert('카카오톡 공유 기능은 카카오 SDK 연동 후 사용 가능합니다.'); }
+function shareBand() { window.open('https://band.us/plugin/share?body=' + encodeURIComponent(currentTitle) + '&route=' + encodeURIComponent(location.href), '_blank'); }
+function shareTwitter() { window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(currentTitle) + '&url=' + encodeURIComponent(location.href), '_blank'); }
+function copyLink() { navigator.clipboard.writeText(location.href).then(function() { alert('링크가 복사되었습니다!'); closeShare(); }); }
+</script>
+
+<script>
+// 관리자(admin.html) localStorage 데이터로 건강정보 카드 갱신
+(function syncHealthFromAdmin() {
+  var raw = localStorage.getItem('kkpa_health');
+  if (!raw) return;
+  try {
+    var data = JSON.parse(raw);
+    if (!data || !data.length) return;
+    var grid = document.getElementById('grid-all');
+    if (!grid) return;
+    var iconSizeDefault = 38;
+    var titleSizeDefault = 13;
+    grid.innerHTML = data.map(function(p, i) {
+      var iconSz  = (p.iconSize  || iconSizeDefault) + 'px';
+      var titleSz = (p.titleSize || titleSizeDefault) + 'px';
+      var thumb = p.imageData
+        ? '<div style="width:100%;height:100%;"><img src="' + p.imageData + '" style="width:100%;height:100%;object-fit:cover;"></div>'
+        : '<div style="width:100%;height:100%;background:linear-gradient(135deg,#002D62,#4A9FD4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;">'
+          + '<div style="font-size:' + iconSz + ';line-height:1;">' + (p.icon||'💊') + '</div>'
+          + '<div style="font-size:' + titleSz + ';font-weight:700;color:white;text-align:center;line-height:1.4;">' + p.title + '</div>'
+          + '</div>';
+      return '<div class="hi-card card-item" data-title="' + p.title + '">'
+        + '<div class="hi-thumb">' + thumb + '</div>'
+        + '<div class="hi-body">'
+        + '<div class="hi-title">' + p.title + '</div>'
+        + '<div class="hi-excerpt">' + (p.excerpt||'') + '</div>'
+        + '</div>'
+        + '<div class="hi-footer">'
+        + '<div class="hi-views"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> ' + (p.views||0).toLocaleString() + '</div>'
+        + '<button class="btn-share-sm" onclick="openShare('' + p.title.replace(/'/g,"\'") + '')">↗ 공유</button>'
+        + '</div></div>';
+    }).join('');
+    // 결과 수 업데이트
+    var rc = document.getElementById('result-all');
+    if (rc) rc.innerHTML = '총 <strong>' + data.length + '</strong>개';
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

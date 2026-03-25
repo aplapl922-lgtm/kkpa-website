@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>경기도약사회 — 경기도민의 건강을 지키는 든든한 이웃</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────── */
+:root {
+  --navy:    #002D62;
+  --navy-d:  #001840;
+  --navy-m:  #004A9E;
+  --accent:  #4A9FD4;
+  --accent-d:#2A7DB0;
+  --accent-l:#D8EEF9;
+  --white:   #FFFFFF;
+  --bg:      #F4F7FA;
+  --text:    #1B2A3B;
+  --sub:     #5A6A7E;
+  --border:  #DDE6EF;
+  --sw:      220px;   /* sidebar width */
+  --hh:      68px;    /* header height */
+  --r:       16px;
+  --r-sm:    10px;
+  --sh:      0 4px 24px rgba(0,45,98,.10);
+  --sh-lg:   0 14px 44px rgba(0,45,98,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+img{display:block;object-fit:cover}
+a{text-decoration:none;color:inherit}
+
+/* ─── HEADER ─────────────────────────── */
+.site-header{
+  position:sticky;top:0;z-index:300;
+  height:var(--hh);
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1.5px solid var(--border);
+  box-shadow:0 2px 16px rgba(0,45,98,.07);
+}
+.hdr-inner{
+  max-width:1280px;margin:0 auto;padding:0 44px;
+  height:100%;display:flex;align-items:center;gap:16px;
+}
+.hdr-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.hdr-logo .lmark{
+  width:40px;height:40px;background:var(--navy);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.hdr-logo .lmark svg{width:24px;height:24px}
+.hdr-logo .ltxt .ko{font-size:15.5px;font-weight:700;color:var(--navy);letter-spacing:-.3px}
+.hdr-logo .ltxt .en{font-size:10px;color:var(--sub);font-weight:400}
+
+.hdr-search{
+  margin-left:auto;display:flex;align-items:center;
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:8px;padding:7px 14px;gap:8px;min-width:220px;transition:border .2s;
+}
+.hdr-search:focus-within{border-color:var(--navy)}
+.hdr-search input{border:none;background:transparent;font-size:13.5px;font-family:inherit;color:var(--text);outline:none;flex:1}
+.hdr-search input::placeholder{color:#aab}
+.hdr-search button{background:none;border:none;cursor:pointer;color:var(--sub);font-size:15px}
+
+.hdr-tel{
+  display:flex;align-items:center;gap:6px;
+  background:var(--accent-l);border-radius:8px;padding:7px 14px;flex-shrink:0;
+}
+.hdr-tel span{font-size:12px;color:var(--navy);font-weight:700}
+
+.hdr-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;margin-left:auto}
+.hdr-ham span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:.3s}
+
+/* ─── LAYOUT ─────────────────────────── */
+.layout{display:block;min-height:calc(100vh - var(--hh) - var(--nh))}
+
+/* ─── TOP NAV BAR ─────────────────────────── */
+:root{ --nh: 52px; }
+.top-nav{
+  background:var(--navy-d);
+  height:var(--nh);
+  display:flex;align-items:stretch;
+  padding:0 28px;
+  position:sticky;top:var(--hh);z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+}
+/* top-level nav item */
+.tn-item{
+  position:relative;display:flex;align-items:center;
+  padding:0 18px;
+  font-size:13.5px;font-weight:500;color:rgba(255,255,255,.65);
+  cursor:pointer;white-space:nowrap;transition:color .15s;
+  border-bottom:2px solid transparent;
+  user-select:none;
+}
+.tn-item:hover,.tn-item.active{color:white;border-bottom-color:var(--accent)}
+.tn-item.active{font-weight:700}
+.tn-arr{font-size:9px;margin-left:5px;opacity:.6;transition:transform .2s}
+.tn-item:hover .tn-arr{transform:rotate(180deg)}
+
+/* dropdown */
+.tn-drop{
+  position:absolute;top:100%;left:0;
+  background:var(--navy-d);
+  min-width:170px;
+  border:1px solid rgba(255,255,255,.08);
+  border-top:2px solid var(--accent);
+  border-radius:0 0 10px 10px;
+  box-shadow:0 8px 28px rgba(0,0,0,.3);
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:all .2s;z-index:500;
+}
+.tn-item:hover .tn-drop{opacity:1;visibility:visible;transform:translateY(0)}
+.tn-drop a{
+  display:block;padding:10px 18px;
+  font-size:13px;color:rgba(255,255,255,.6);transition:.15s;
+}
+.tn-drop a:hover{color:white;background:rgba(255,255,255,.06);padding-left:22px}
+.tn-drop a.act{color:var(--accent);font-weight:600}
+
+/* right-side CTA in nav */
+.tn-cta{
+  margin-left:auto;display:flex;align-items:center;gap:10px;
+}
+.tn-cta a{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12.5px;font-weight:700;
+  padding:7px 16px;border-radius:7px;transition:.2s;white-space:nowrap;
+}
+.tn-cta .alert-btn{
+  background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.35);color:#FF7F73;
+}
+.tn-cta .alert-btn:hover{background:rgba(231,76,60,.28)}
+.tn-cta .tel-btn{
+  background:rgba(74,159,212,.12);border:1px solid rgba(74,159,212,.3);color:var(--accent);
+}
+.tn-cta .tel-btn:hover{background:rgba(74,159,212,.24)}
+
+/* ─── MAIN ─────────────────────────── */
+.main-content{width:100%;overflow-x:hidden}
+
+/* ─── HERO (full-bleed photo) ─────────────────────────── */
+.hero{
+  position:relative;height:520px;overflow:hidden;
+}
+.hero-photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;
+  filter:brightness(.48) saturate(.9);
+  transition:transform 8s ease;
+}
+.hero:hover .hero-photo{transform:scale(1.03)}
+/* gradient overlay */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(0,24,64,.85) 0%,rgba(0,45,98,.55) 55%,rgba(0,75,158,.2) 100%);
+}
+/* subtle grain */
+.hero::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.5;pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:2;
+  height:100%;display:flex;align-items:center;
+  padding:0 52px;gap:48px;
+}
+.hero-left{flex:1;max-width:580px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(168,202,186,.18);border:1px solid rgba(168,202,186,.38);
+  color:var(--accent);font-size:12px;font-weight:700;
+  padding:5px 14px;border-radius:20px;margin-bottom:20px;letter-spacing:.5px;
+}
+.hero-badge::before{content:'●';font-size:7px;animation:blink 1.8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(26px,3.8vw,46px);font-weight:700;color:white;
+  line-height:1.32;margin-bottom:16px;letter-spacing:-.5px;
+}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero-desc{font-size:15.5px;color:rgba(255,255,255,.75);line-height:1.82;margin-bottom:34px;max-width:460px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-main{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:var(--navy-d);
+  font-weight:700;font-size:14.5px;padding:14px 28px;border-radius:40px;
+  transition:all .25s;box-shadow:0 4px 20px rgba(168,202,186,.4);
+}
+.btn-main:hover{background:#c5dfd1;transform:translateY(-2px);box-shadow:0 8px 30px rgba(168,202,186,.5)}
+.btn-sub{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.3);
+  color:white;font-weight:600;font-size:14.5px;padding:14px 28px;border-radius:40px;transition:all .25s;
+}
+.btn-sub:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+
+/* hero stat cards floating right */
+.hero-stats{
+  display:flex;flex-direction:column;gap:12px;flex-shrink:0;
+}
+.hstat{
+  background:rgba(255,255,255,.1);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.18);border-radius:14px;
+  padding:16px 22px;display:flex;align-items:center;gap:14px;min-width:210px;
+}
+.hstat .hs-icon{
+  width:42px;height:42px;background:var(--accent);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+.hstat .hs-text strong{display:block;font-size:17px;font-weight:900;color:white;line-height:1}
+.hstat .hs-text span{font-size:11.5px;color:rgba(255,255,255,.6);margin-top:2px;display:block}
+
+/* ─── NOTICE TICKER ─────────────────────────── */
+.ticker{
+  background:white;border-bottom:1px solid var(--border);
+  display:flex;align-items:stretch;height:46px;overflow:hidden;
+}
+.ticker-label{
+  background:var(--navy);color:white;font-size:11.5px;font-weight:700;
+  padding:0 20px;display:flex;align-items:center;gap:6px;
+  white-space:nowrap;flex-shrink:0;letter-spacing:.4px;
+}
+.ticker-roll{flex:1;overflow:hidden;display:flex;align-items:center;padding:0 20px}
+.ticker-items{
+  display:flex;gap:56px;white-space:nowrap;
+  animation:ticker 24s linear infinite;
+}
+.ticker-items a{font-size:13px;color:var(--text);transition:.15s;display:inline-flex;align-items:center;gap:7px}
+.ticker-items a:hover{color:var(--navy);font-weight:600}
+.tnew{background:#E74C3C;color:white;font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:4px}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ─── CENTERED WRAPPER ─────────────────────────── */
+.wrap{max-width:1280px;margin:0 auto;width:100%;padding:0 44px}
+
+.top-nav-inner{
+  display:flex;align-items:stretch;gap:0;
+  max-width:1280px;width:100%;margin:0 auto;padding:0 44px;
+}
+
+.hero-inner{
+  position:relative;z-index:2;
+  height:100%;display:flex;align-items:center;
+  max-width:1280px;margin:0 auto;padding:0 44px;gap:48px;
+}
+
+/* ─── SECTIONS ─────────────────────────── */
+.sections{padding:0;}
+
+/* ── Section header: full-width accent bar design ── */
+.sec-hd{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:56px 0 28px;
+  gap:20px;
+}
+.sec-hd-l{flex:1}
+
+/* eyebrow pill */
+.sec-hd-l .eye{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--navy);color:white;
+  font-size:10.5px;font-weight:700;padding:5px 13px;border-radius:20px;
+  margin-bottom:14px;letter-spacing:1.2px;text-transform:uppercase;
+}
+.sec-hd-l .eye::before{
+  content:'';display:inline-block;width:6px;height:6px;
+  background:var(--accent);border-radius:50%;flex-shrink:0;
+}
+
+/* main title with left accent bar */
+.sec-hd-l h2{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(22px,2.8vw,34px);
+  font-weight:700;color:var(--navy);line-height:1.3;
+  padding-left:18px;
+  border-left:5px solid var(--accent);
+  position:relative;
+}
+/* subtle underline decoration */
+.sec-hd-l h2::after{
+  content:'';display:block;
+  width:56px;height:3px;
+  background:linear-gradient(90deg,var(--accent),transparent);
+  margin-top:10px;
+  border-radius:2px;
+}
+
+.sec-hd-l p{
+  font-size:14px;color:var(--sub);
+  margin-top:10px;padding-left:18px;
+  max-width:520px;line-height:1.75;
+}
+
+.btn-more{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:700;color:white;
+  background:var(--navy);
+  padding:10px 20px;border-radius:9px;
+  transition:.2s;white-space:nowrap;flex-shrink:0;
+  box-shadow:0 2px 10px rgba(0,45,98,.18);
+}
+.btn-more::after{content:'→';font-size:14px}
+.btn-more:hover{background:var(--navy-m);transform:translateY(-1px);box-shadow:0 5px 16px rgba(0,45,98,.25)}
+
+/* ─── QUICK ACCESS (navy band) ─────────────────────────── */
+.qa-band{
+  background:var(--navy);margin:0 -44px;padding:40px 44px;
+}
+.qa-band-head{margin-bottom:24px}
+.qa-band-head h3{font-size:21px;font-weight:700;color:white}
+.qa-band-head p{font-size:13.5px;color:rgba(255,255,255,.5);margin-top:4px}
+.qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.qa-card{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:13px;overflow:hidden;transition:all .28s;
+}
+.qa-card:hover{background:rgba(255,255,255,.12);transform:translateY(-4px)}
+.qa-photo{
+  height:160px;width:100%;object-fit:cover;
+  filter:brightness(.75) saturate(.85);transition:filter .3s;
+}
+.qa-card:hover .qa-photo{filter:brightness(.9) saturate(1)}
+.qa-body{padding:20px}
+.qa-body .qa-icon-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.qa-body .qi{
+  width:32px;height:32px;background:var(--accent);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.qa-body h4{font-size:15px;font-weight:700;color:white}
+.qa-body p{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:16px}
+.qa-body .qa-link{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:700;color:var(--accent);
+  background:rgba(168,202,186,.12);padding:6px 14px;border-radius:20px;transition:.2s;
+}
+.qa-card:hover .qa-link{background:rgba(168,202,186,.22)}
+
+/* ─── POSTERS (photo cards) ─────────────────────────── */
+.poster-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.poster-card{
+  border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);
+  border:1px solid var(--border);transition:all .32s;background:white;cursor:pointer;
+}
+.poster-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
+.poster-photo-wrap{
+  position:relative;aspect-ratio:3/4;overflow:hidden;
+}
+.poster-photo{
+  width:100%;height:100%;object-fit:cover;transition:transform .5s ease;
+}
+.poster-card:hover .poster-photo{transform:scale(1.06)}
+.poster-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(0,29,64,.85) 0%, rgba(0,29,64,.1) 50%, transparent 100%);
+}
+.poster-caption{
+  position:absolute;bottom:0;left:0;right:0;padding:20px 16px;
+}
+.poster-caption h3{font-size:14.5px;font-weight:700;color:white;line-height:1.4;margin-bottom:4px}
+.poster-caption span{font-size:12px;color:rgba(255,255,255,.65)}
+.poster-footer{
+  padding:12px 16px;display:flex;justify-content:space-between;align-items:center;
+}
+.poster-footer .pdate{font-size:12px;color:var(--sub)}
+.poster-dl{
+  font-size:11.5px;font-weight:700;color:var(--navy);
+  background:var(--accent-l);padding:4px 12px;border-radius:12px;transition:.2s;
+}
+.poster-dl:hover{background:var(--accent)}
+
+/* ─── POSTER CAROUSEL ─────────────────────────── */
+.poster-carousel-wrap{
+  position:relative;
+}
+.poster-carousel{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding-bottom:4px;
+  cursor:grab;
+  user-select:none;
+}
+.poster-carousel::-webkit-scrollbar{display:none}
+.poster-carousel.grabbing{cursor:grabbing}
+/* each card takes exactly 1/3 of visible width */
+.poster-carousel .poster-card{
+  flex:0 0 calc((100% - 40px) / 3);
+  min-width:0;
+  scroll-snap-align:start;
+}
+/* nav arrows */
+.carousel-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:10;
+  width:42px;height:42px;border-radius:50%;
+  background:white;border:1.5px solid var(--border);
+  box-shadow:0 4px 16px rgba(0,45,98,.14);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;font-size:16px;color:var(--navy);
+}
+.carousel-arrow:hover{background:var(--navy);color:white;border-color:var(--navy)}
+.carousel-arrow.prev{left:-20px}
+.carousel-arrow.next{right:-20px}
+/* dot indicators */
+.carousel-dots{
+  display:flex;justify-content:center;gap:7px;margin-top:18px;
+}
+.carousel-dots .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border);transition:all .25s;cursor:pointer;
+}
+.carousel-dots .dot.active{background:var(--navy);width:22px;border-radius:4px}
+
+/* ─── ISSUE CAROUSEL ─────────────────────────── */
+.issue-carousel{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding-bottom:4px;
+  cursor:grab;
+  user-select:none;
+}
+.issue-carousel::-webkit-scrollbar{display:none}
+.issue-carousel.grabbing{cursor:grabbing}
+.issue-carousel .issue-card{
+  flex:0 0 calc((100% - 60px) / 4);
+  min-width:260px;
+  scroll-snap-align:start;
+}
+
+/* ─── HEALTH CAROUSEL ─────────────────────────── */
+.health-carousel{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding-bottom:4px;
+  cursor:grab;
+  user-select:none;
+}
+.health-carousel::-webkit-scrollbar{display:none}
+.health-carousel.grabbing{cursor:grabbing}
+.health-carousel .health-card{
+  flex:0 0 calc((100% - 60px) / 4);
+  min-width:240px;
+  scroll-snap-align:start;
+}
+
+/* ─── ISSUES (2-col with photo accent) ─────────────────────────── */
+.issue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.issue-card{
+  background:white;border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--sh);border:1px solid var(--border);transition:all .3s;display:flex;flex-direction:column;
+}
+.issue-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.issue-photo{
+  height:160px;width:100%;object-fit:cover;
+  filter:brightness(.85);transition:filter .3s;
+}
+.issue-card:hover .issue-photo{filter:brightness(1)}
+.issue-body{padding:22px 22px 20px;flex:1;display:flex;flex-direction:column}
+.issue-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.issue-tag{
+  font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:10px;
+}
+.tag-r{background:#FEE2E2;color:#B91C1C}
+.tag-y{background:#FEF3C7;color:#92400E}
+.tag-b{background:#DBEAFE;color:#1D4ED8}
+.issue-body h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px;line-height:1.4}
+.issue-body p{font-size:13.5px;color:var(--sub);line-height:1.78;flex:1}
+.issue-link{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:13px;font-weight:700;color:var(--navy);
+  border:1.5px solid var(--navy);padding:8px 17px;border-radius:8px;
+  align-self:flex-start;margin-top:16px;transition:.2s;
+}
+.issue-link:hover{background:var(--navy);color:white}
+
+/* ─── VOICES (real photo circles) ─────────────────────────── */
+.voice-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.voice-card{
+  background:white;border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--sh);border:1px solid var(--border);
+  transition:all .3s;display:flex;flex-direction:column;align-items:center;
+}
+.voice-card:hover{transform:translateY(-5px);box-shadow:var(--sh-lg)}
+/* top photo strip */
+.voice-photo-strip{
+  width:100%;height:110px;position:relative;overflow:hidden;
+}
+.voice-photo-strip img{
+  width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.8);
+}
+/* circle avatar over strip */
+.voice-avatar{
+  width:72px;height:72px;border-radius:50%;overflow:hidden;
+  border:3px solid var(--accent);
+  margin:-36px auto 12px;position:relative;z-index:1;flex-shrink:0;
+  box-shadow:0 4px 14px rgba(0,45,98,.18);
+}
+.voice-avatar img{width:100%;height:100%;object-fit:cover}
+.voice-info{padding:0 18px 20px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center}
+.voice-info h4{font-size:14.5px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.voice-role{font-size:11.5px;color:var(--sub);margin-bottom:10px}
+.voice-info blockquote{font-size:12.5px;color:var(--sub);line-height:1.7;font-style:italic;margin-bottom:14px;flex:1}
+.vsns{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:16px;transition:.2s;color:white;
+}
+.vsns:hover{opacity:.82;transform:scale(1.04)}
+.vsns-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366)}
+.vsns-fb{background:#1877F2}
+.vsns-yt{background:#FF0000}
+
+/* ─── HEALTH CARDS (photo) ─────────────────────────── */
+.health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.health-card{
+  background:white;border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--sh);border:1px solid var(--border);
+  transition:all .3s;display:flex;flex-direction:column;
+}
+.health-card:hover{transform:translateY(-5px);box-shadow:var(--sh-lg)}
+.health-photo{
+  height:180px;width:100%;object-fit:cover;
+  filter:brightness(.88) saturate(.92);transition:filter .3s;
+  position:relative;
+}
+.health-card:hover .health-photo{filter:brightness(1) saturate(1)}
+.health-photo-wrap{position:relative;overflow:hidden;height:180px}
+.health-photo-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.88);transition:transform .5s,filter .3s;
+}
+.health-card:hover .health-photo-wrap img{transform:scale(1.05);filter:brightness(1)}
+.htag{
+  position:absolute;top:12px;left:12px;z-index:1;
+  font-size:10.5px;font-weight:700;padding:4px 10px;
+  border-radius:10px;background:var(--navy);color:white;
+}
+.health-body{padding:18px 20px;flex:1;display:flex;flex-direction:column}
+.health-body h3{font-size:14.5px;font-weight:700;color:var(--navy);margin-bottom:7px;line-height:1.45}
+.health-body p{font-size:13px;color:var(--sub);line-height:1.7;flex:1}
+.health-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:12px;padding-top:10px;border-top:1px solid var(--border);
+}
+.health-meta .hdate{font-size:11px;color:#9CA3AF}
+.health-meta .hmore{font-size:12px;font-weight:700;color:var(--navy)}
+
+/* ─── MAP ─────────────────────────── */
+.map-band{
+  position:relative;overflow:hidden;
+  height:380px;display:flex;align-items:center;
+}
+.map-bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:brightness(.35) saturate(.7);
+}
+.map-inner{
+  position:relative;z-index:1;
+  width:100%;max-width:1280px;margin:0 auto;padding:0 44px;
+  display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;
+}
+.map-frame{
+  border-radius:var(--r);overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);
+  background:#2a3a50;height:260px;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.12);
+}
+.map-ph{text-align:center;color:rgba(255,255,255,.6)}
+.map-ph .mi{font-size:44px;margin-bottom:8px}
+.map-ph p{font-size:13px}
+.map-info-glass{
+  background:rgba(255,255,255,.1);backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.18);border-radius:var(--r);padding:28px;
+}
+.map-info-glass h3{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:700;color:white;margin-bottom:20px}
+.map-rows{display:flex;flex-direction:column;gap:13px}
+.mrow{display:flex;gap:12px;align-items:flex-start}
+.mrow .mico{font-size:16px;flex-shrink:0;margin-top:2px}
+.mrow div strong{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.9);display:block;margin-bottom:1px}
+.mrow div span{font-size:12.5px;color:rgba(255,255,255,.6)}
+.btn-kakao{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:20px;background:#FEE500;color:#3A1D1D;
+  font-size:13.5px;font-weight:700;padding:11px 22px;border-radius:9px;transition:.2s;
+}
+.btn-kakao:hover{background:#ffd800}
+
+/* ─── FOOTER ─────────────────────────── */
+footer{
+  background:var(--navy-d);color:rgba(255,255,255,.65);
+  padding:52px 0 28px;
+}
+.ft-inner{max-width:1280px;margin:0 auto;padding:0 44px;}
+.ft-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.4fr;
+  gap:40px;margin-bottom:36px;
+}
+.ft-brand .ftname{
+  font-family:'Noto Serif KR',serif;font-size:18px;font-weight:700;color:white;margin-bottom:12px;
+}
+.ft-brand p{font-size:12.5px;line-height:1.85}
+.ft-contact{margin-top:14px;font-size:12.5px}
+.ft-contact p{margin-bottom:4px}
+.ft-contact strong{color:var(--accent)}
+.ft-sns{display:flex;gap:9px;margin-top:16px}
+.ft-sns a{
+  width:37px;height:37px;border-radius:8px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:white;transition:.2s;
+}
+.ft-sns a:hover{background:var(--accent);color:var(--navy-d)}
+
+.ft-col h4{font-size:12.5px;font-weight:700;color:white;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.ft-col ul{list-style:none}
+.ft-col li{margin-bottom:9px}
+.ft-col li a{font-size:12.5px;color:rgba(255,255,255,.5);transition:.15s}
+.ft-col li a:hover{color:var(--accent)}
+.ft-info-box{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:18px;font-size:12px;line-height:1.9;
+}
+.ft-info-box .ib-label{font-size:10.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.ft-info-box strong{color:white}
+
+.ft-bottom{
+  padding-top:22px;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+}
+.ft-bottom p{font-size:12px}
+.ft-policy{display:flex;gap:18px}
+.ft-policy a{font-size:11.5px;color:rgba(255,255,255,.38);transition:.15s}
+.ft-policy a:hover{color:var(--accent)}
+
+/* ─── FADE-IN ─────────────────────────── */
+.fade{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade.vis{opacity:1;transform:none}
+
+/* ─── RESPONSIVE ─────────────────────────── */
+@media(max-width:1100px){
+  .voice-grid{grid-template-columns:repeat(2,1fr)}
+  .ft-grid{grid-template-columns:1fr 1fr;row-gap:28px}
+}
+@media(max-width:960px){
+  .tn-item span.tn-arr{display:none}
+  .hdr-ham{display:flex}
+  .hdr-tel{display:none}
+  .hero-stats{display:none}
+  .top-nav{display:none}
+}
+@media(max-width:640px){
+  .wrap{padding:0 20px}
+  .wrap[style]{padding-left:20px!important;padding-right:20px!important}
+  .hero-inner{padding:0 20px}
+  .map-inner{grid-template-columns:1fr;padding:28px 20px}
+  .map-band{height:auto;padding:40px 0}
+  .voice-grid{grid-template-columns:1fr}
+  footer{padding:40px 0 24px}
+  .ft-inner{padding:0 20px}
+  .ft-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="hdr-inner">
+  <a href="index.html" class="hdr-logo">
+    <div class="lmark">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L4 6.5v11L12 22l8-4.5v-11L12 2z" stroke="#4A9FD4" stroke-width="1.7" fill="none"/>
+        <path d="M9 12h6M12 9v6" stroke="white" stroke-width="1.9" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="ltxt">
+      <span class="ko">경기도약사회</span>
+      <span class="en">Gyeonggi Pharmacists Association</span>
+    </div>
+  </a>
+  <div class="hdr-search">
+    <button>🔍</button>
+    <input type="text" placeholder="검색어를 입력하세요">
+  </div>
+  <div class="hdr-ham" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+  </div><!-- /hdr-inner -->
+</header>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <div class="tn-item active"><a href="index.html" style="color:inherit;">홈</a></div>
+    <div class="tn-item">
+      <a href="about.html" style="color:inherit;">경기도약사회 소개</a> <span class="tn-arr">▾</span>
+      <div class="tn-drop">
+        <a href="about.html">인사말</a>
+        <a href="about.html">연혁</a>
+        <a href="about.html">조직도</a>
+        <a href="about.html">오시는 길</a>
+      </div>
+    </div>
+    <div class="tn-item"><a href="issues.html" style="color:inherit;">핵심 현안</a></div>
+    <div class="tn-item"><a href="media.html" style="color:inherit;">약사회 미디어</a></div>
+    <div class="tn-item"><a href="health.html" style="color:inherit;">건강정보</a></div>
+    <div class="tn-item"><a href="news.html" style="color:inherit;">소식·공지</a></div>
+    <div class="tn-item">
+      참여마당 <span class="tn-arr">▾</span>
+      <div class="tn-drop"><a href="#">신고센터</a><a href="#">의견 보내기</a></div>
+    </div>
+    <div class="tn-item"><a href="#" style="color:inherit;">고객센터</a></div>
+    <div class="tn-cta">
+      <a href="#" class="alert-btn">🚨 신고센터</a>
+      <a href="tel:031-256-0663" class="tel-btn">📞 031-256-0663</a>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main-content">
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <!-- Unsplash: Korean pharmacy / healthcare photo -->
+      <img class="hero-photo"
+        src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80&auto=format&fit=crop"
+        alt="약사 히어로 배경">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-badge">경기도민과 함께하는 약사회</div>
+          <h1>경기도민의 건강을 지키는<br><em>든든한 이웃,</em><br>경기도약사회</h1>
+          <p class="hero-desc">약사의 전문 지식으로 도민의 건강과 의약품 안전을 책임집니다. 올바른 약 사용 문화를 만들어가는 경기도약사회와 함께해주세요.</p>
+          <div class="hero-actions">
+            <a href="#" class="btn-main">💊바로가기1</a>
+            <a href="#" class="btn-sub">⚡바로가기2</a>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat">
+            <div class="hs-icon">🧑‍⚕️</div>
+            <div class="hs-text">
+              <strong>7,200+</strong>
+              <span>경기도 소속 회원 약사</span>
+            </div>
+          </div>
+          <div class="hstat">
+            <div class="hs-icon">🏥</div>
+            <div class="hs-text">
+              <strong>31개 지부</strong>
+              <span>경기도 전 시·군 조직</span>
+            </div>
+          </div>
+          <div class="hstat">
+            <div class="hs-icon">📞</div>
+            <div class="hs-text">
+              <strong>031-256-0663</strong>
+              <span>도민 상담 전화 (평일 9~18시)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker">
+      <div class="ticker-label">📌 공지사항</div>
+      <div class="ticker-roll">
+        <div class="ticker-items" id="ticker-items">
+          <!-- JS로 동적 렌더링 -->
+          <a href="news.html">경기도약사회 공지사항을 확인하세요</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTIONS -->
+    <div class="sections">
+      <div class="wrap" style="padding-top:0;padding-bottom:64px">
+
+      <!-- ── ISSUES CAROUSEL ── -->
+      <div class="fade">
+        <div class="sec-hd">
+          <div class="sec-hd-l">
+            <span class="eye">주요 현안</span>
+            <h2>약업계 핵심 현안</h2>
+            <p>경기도민 건강과 직결되는 현안을 명확히 알려드립니다 — 좌우로 넘겨보세요</p>
+          </div>
+          <a href="issues.html" class="btn-more">전체 현안 보기</a>
+        </div>
+        <div class="poster-carousel-wrap">
+          <button class="carousel-arrow prev" id="issuePrev" aria-label="이전">&#8592;</button>
+          <button class="carousel-arrow next" id="issueNext" aria-label="다음">&#8594;</button>
+          <div class="issue-carousel" id="issueCarousel">
+            <div class="issue-card">
+              <img class="issue-photo" src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=700&q=75&auto=format&fit=crop" alt="창고형 약국">
+              <div class="issue-body">
+                <div class="issue-meta"><span class="issue-tag tag-r">🔴 긴급</span></div>
+                <h3>창고형 약국 문제</h3>
+                <p>대형 창고형 약국의 확산은 동네 약국을 위협하고, 약사의 복약지도 없는 의약품 판매로 도민 안전을 침해합니다. 경기도약사회는 강력히 반대합니다.</p>
+                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
+              </div>
+            </div>
+            <div class="issue-card">
+              <img class="issue-photo" src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=700&q=75&auto=format&fit=crop" alt="한약사 문제">
+              <div class="issue-body">
+                <div class="issue-meta"><span class="issue-tag tag-r">🔴 대응 중</span></div>
+                <h3>한약사 면허 범위 문제</h3>
+                <p>한약사의 일반 의약품 조제·판매 허용 시도는 환자 안전과 의약품 관리 체계를 심각하게 훼손합니다. 명확한 면허 범위 구분이 필요합니다.</p>
+                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
+              </div>
+            </div>
+            <div class="issue-card">
+              <img class="issue-photo" src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=700&q=75&auto=format&fit=crop" alt="성분명 처방">
+              <div class="issue-body">
+                <div class="issue-meta"><span class="issue-tag tag-y">🟡 검토 중</span></div>
+                <h3>성분명 처방 확대</h3>
+                <p>성분명 처방 의무화는 환자 선택권을 제한하고 약국 현장의 혼란을 야기합니다. 충분한 논의와 준비 없이 강행되어서는 안 됩니다.</p>
+                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
+              </div>
+            </div>
+            <div class="issue-card">
+              <img class="issue-photo" src="https://images.unsplash.com/photo-1588776814546-1ffedfe20485?w=700&q=75&auto=format&fit=crop" alt="비대면 처방">
+              <div class="issue-body">
+                <div class="issue-meta"><span class="issue-tag tag-b">🔵 논의 중</span></div>
+                <h3>비대면 처방·조제 현안</h3>
+                <p>비대면 진료의 확대와 약 배달 허용은 의약품 오·남용 위험을 높입니다. 도민 안전을 중심에 둔 신중한 접근이 요구됩니다.</p>
+                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
+              </div>
+            </div>
+            <div class="issue-card">
+              <img class="issue-photo" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=75&auto=format&fit=crop" alt="의약품 공급">
+              <div class="issue-body">
+                <div class="issue-meta"><span class="issue-tag tag-y">🟡 모니터링</span></div>
+                <h3>필수 의약품 공급 불안정</h3>
+                <p>항생제·해열제 등 필수 의약품의 반복적인 수급 불안정 문제는 도민의 일상적 의료 접근권을 위협합니다. 정부 차원의 관리가 필요합니다.</p>
+                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots" id="issueDots">
+            <div class="dot active" data-idx="0"></div>
+            <div class="dot" data-idx="1"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── POSTERS CAROUSEL (이슈 다음) ── -->
+      <div class="fade">
+        <div class="sec-hd">
+          <div class="sec-hd-l">
+            <span class="eye">도민 소통</span>
+            <h2>약사회 미디어</h2>
+            <p>약사들이 직접 제작한 건강·의약품 안전 포스터입니다 — 좌우로 넘겨보세요</p>
+          </div>
+          <a href="media.html" class="btn-more">전체 보기</a>
+        </div>
+        <div class="poster-carousel-wrap">
+          <button class="carousel-arrow prev" id="posterPrev" aria-label="이전">&#8592;</button>
+          <button class="carousel-arrow next" id="posterNext" aria-label="다음">&#8594;</button>
+          <div class="poster-carousel" id="posterCarousel">
+            <div class="poster-card">
+              <div class="poster-photo-wrap">
+                <img class="poster-photo" src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=500&q=75&auto=format&fit=crop" alt="약 복용">
+                <div class="poster-overlay"></div>
+                <div class="poster-caption"><h3>약 올바르게 복용하는 법</h3><span>의약품 복용 전 꼭 알아야 할 기본 수칙</span></div>
+              </div>
+              <div class="poster-footer"><span class="pdate">2025.06</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
+            </div>
+            <div class="poster-card">
+              <div class="poster-photo-wrap">
+                <img class="poster-photo" src="https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?w=500&q=75&auto=format&fit=crop" alt="건강기능식품">
+                <div class="poster-overlay"></div>
+                <div class="poster-caption"><h3>건강기능식품, 약과 함께?</h3><span>병용 복용 시 주의사항 안내</span></div>
+              </div>
+              <div class="poster-footer"><span class="pdate">2025.05</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
+            </div>
+            <div class="poster-card">
+              <div class="poster-photo-wrap">
+                <img class="poster-photo" src="https://images.unsplash.com/photo-1632771522810-5d91b9789e21?w=500&q=75&auto=format&fit=crop" alt="어린이 해열제">
+                <div class="poster-overlay"></div>
+                <div class="poster-caption"><h3>어린이 해열제 이렇게 드세요</h3><span>체중별 적정 용량·복용 간격 안내</span></div>
+              </div>
+              <div class="poster-footer"><span class="pdate">2025.05</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
+            </div>
+            <div class="poster-card">
+              <div class="poster-photo-wrap">
+                <img class="poster-photo" src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=500&q=75&auto=format&fit=crop" alt="창고형 약국">
+                <div class="poster-overlay"></div>
+                <div class="poster-caption"><h3>창고형 약국이 왜 위험한가</h3><span>도민 안전을 위협하는 문제 안내</span></div>
+              </div>
+              <div class="poster-footer"><span class="pdate">2025.04</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
+            </div>
+            <div class="poster-card">
+              <div class="poster-photo-wrap">
+                <img class="poster-photo" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=500&q=75&auto=format&fit=crop" alt="당뇨 약물">
+                <div class="poster-overlay"></div>
+                <div class="poster-caption"><h3>당뇨 약물 관리 총정리</h3><span>경구약부터 인슐린까지 완벽 정리</span></div>
+              </div>
+              <div class="poster-footer"><span class="pdate">2025.04</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
+            </div>
+            <div class="poster-card">
+              <div class="poster-photo-wrap">
+                <img class="poster-photo" src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=500&q=75&auto=format&fit=crop" alt="자외선차단제">
+                <div class="poster-overlay"></div>
+                <div class="poster-caption"><h3>자외선차단제 올바른 사용법</h3><span>SPF·PA 표시 이해, 재도포 시기</span></div>
+              </div>
+              <div class="poster-footer"><span class="pdate">2025.03</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
+            </div>
+          </div>
+          <div class="carousel-dots" id="posterDots">
+            <div class="dot active" data-idx="0"></div>
+            <div class="dot" data-idx="1"></div>
+            <div class="dot" data-idx="2"></div>
+            <div class="dot" data-idx="3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── HEALTH INFO CAROUSEL ── -->
+      <div class="fade">
+        <div class="sec-hd">
+          <div class="sec-hd-l">
+            <span class="eye">건강 정보</span>
+            <h2>약사회가 알려주는 건강 정보</h2>
+            <p>쉬운 약학 지식, 약사회가 직접 알려드립니다 — 좌우로 넘겨보세요</p>
+          </div>
+          <a href="health.html" class="btn-more">전체 보기</a>
+        </div>
+        <div class="poster-carousel-wrap">
+          <button class="carousel-arrow prev" id="healthPrev" aria-label="이전">&#8592;</button>
+          <button class="carousel-arrow next" id="healthNext" aria-label="다음">&#8594;</button>
+          <div class="health-carousel" id="healthCarousel">
+            <a href="health.html" class="health-card">
+              <div class="health-photo-wrap">
+                <span class="htag">의약품</span>
+                <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=500&q=75&auto=format&fit=crop" alt="감기약">
+              </div>
+              <div class="health-body">
+                <h3>감기약, 이렇게 먹어야 효과 있습니다</h3>
+                <p>종합감기약과 단일제 성분, 언제 어떤 걸 선택해야 할까요?</p>
+                <div class="health-meta"><span class="hdate">2025.06.10</span><span class="hmore">읽기 →</span></div>
+              </div>
+            </a>
+            <a href="health.html" class="health-card">
+              <div class="health-photo-wrap">
+                <span class="htag">영양제</span>
+                <img src="https://images.unsplash.com/photo-1616671276441-2f2c277b8bf6?w=500&q=75&auto=format&fit=crop" alt="비타민">
+              </div>
+              <div class="health-body">
+                <h3>비타민D 과다섭취, 조용한 위험</h3>
+                <p>건강기능식품도 용량을 지켜야 합니다. 과다섭취 증상과 적정 용량.</p>
+                <div class="health-meta"><span class="hdate">2025.06.05</span><span class="hmore">읽기 →</span></div>
+              </div>
+            </a>
+            <a href="health.html" class="health-card">
+              <div class="health-photo-wrap">
+                <span class="htag">만성질환</span>
+                <img src="https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?w=500&q=75&auto=format&fit=crop" alt="고혈압약">
+              </div>
+              <div class="health-body">
+                <h3>고혈압약, 갑자기 끊으면 안 되는 이유</h3>
+                <p>복약 지속의 중요성과 부작용 관리 방법.</p>
+                <div class="health-meta"><span class="hdate">2025.05.28</span><span class="hmore">읽기 →</span></div>
+              </div>
+            </a>
+            <a href="health.html" class="health-card">
+              <div class="health-photo-wrap">
+                <span class="htag">어린이</span>
+                <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=500&q=75&auto=format&fit=crop" alt="어린이 약">
+              </div>
+              <div class="health-body">
+                <h3>아이 해열제, 교차 복용 올바른 방법</h3>
+                <p>타이레놀·부루펜 교차 복용 완벽 가이드.</p>
+                <div class="health-meta"><span class="hdate">2025.05.20</span><span class="hmore">읽기 →</span></div>
+              </div>
+            </a>
+            <a href="health.html" class="health-card">
+              <div class="health-photo-wrap">
+                <span class="htag">노인</span>
+                <img src="https://images.unsplash.com/photo-1576765607924-3f7b8410a787?w=500&q=75&auto=format&fit=crop" alt="어르신 약">
+              </div>
+              <div class="health-body">
+                <h3>어르신 다약제 복용, 무엇이 위험한가</h3>
+                <p>5종 이상 약 복용 시 상호작용 위험과 상담 안내.</p>
+                <div class="health-meta"><span class="hdate">2025.05.15</span><span class="hmore">읽기 →</span></div>
+              </div>
+            </a>
+            <a href="health.html" class="health-card">
+              <div class="health-photo-wrap">
+                <span class="htag">상식</span>
+                <img src="https://images.unsplash.com/photo-1563213126-a4273aed2016?w=500&q=75&auto=format&fit=crop" alt="약 보관">
+              </div>
+              <div class="health-body">
+                <h3>약 보관, 이것만은 꼭 지키세요</h3>
+                <p>직사광선·고온다습·냉장 보관 약품 구분법 총정리.</p>
+                <div class="health-meta"><span class="hdate">2025.05.08</span><span class="hmore">읽기 →</span></div>
+              </div>
+            </a>
+          </div>
+          <div class="carousel-dots" id="healthDots">
+            <div class="dot active" data-idx="0"></div>
+            <div class="dot" data-idx="1"></div>
+            <div class="dot" data-idx="2"></div>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- /wrap -->
+    </div><!-- /sections -->
+
+    <!-- ── 오시는 길 배너 ── -->
+    <div class="map-band fade">
+      <img class="map-bg"
+        src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1400&q=70&auto=format&fit=crop"
+        alt="수원 야경">
+      <div class="map-inner">
+        <!-- 좌: 안내 배너 -->
+        <div class="map-frame" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;">
+          <div style="text-align:center;">
+            <div style="font-size:52px;margin-bottom:16px;">🗺️</div>
+            <h3 style="font-family:'Noto Serif KR',serif;font-size:24px;font-weight:700;color:white;margin-bottom:10px;">오시는 길 안내</h3>
+            <p style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:24px;">상세한 교통편 및 위치 안내는<br>경기도약사회 소개 페이지에서 확인하세요</p>
+            <a href="about.html?tab=location"
+              style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--navy-d);font-size:14.5px;font-weight:700;padding:14px 32px;border-radius:40px;transition:.25s;box-shadow:0 4px 20px rgba(74,159,212,.4);"
+              onmouseover="this.style.background='#6BB8E0';this.style.transform='translateY(-2px)'"
+              onmouseout="this.style.background='var(--accent)';this.style.transform='translateY(0)'">
+              📍 오시는 길 자세히 보기
+            </a>
+          </div>
+        </div>
+        <!-- 우: 연락처 요약 -->
+        <div class="map-info-glass">
+          <h3>경기도약사회 오시는 길</h3>
+          <div class="map-rows">
+            <div class="mrow"><span class="mico">📍</span><div><strong>주소</strong><span>경기도 수원시 장안구 장안로448번길 17-3<br>(이목동195-14) 2층</span></div></div>
+            <div class="mrow"><span class="mico">📞</span><div><strong>전화</strong><span>031-256-0663~5</span></div></div>
+            <div class="mrow"><span class="mico">📠</span><div><strong>팩스</strong><span>031-241-0154</span></div></div>
+            <div class="mrow"><span class="mico">✉️</span><div><strong>이메일</strong><span>kkpa0800@naver.com</span></div></div>
+            <div class="mrow"><span class="mico">🕘</span><div><strong>업무시간</strong><span>평일 09:00 – 18:00<br>(점심 12:00 – 13:00, 토·일·공휴일 휴무)</span></div></div>
+          </div>
+          <a href="https://map.naver.com/local/siteview.nhn?code=13303771" target="_blank" class="btn-kakao" style="background:#03C75A;color:white;">🗺️ 네이버지도로 길찾기</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ftname">경기도약사회</div>
+        <p>경기도민의 건강을 지키고 올바른 약 사용 문화를<br>만들어 가는 경기도약사회입니다.</p>
+        <div class="ft-contact">
+          <p>📍 경기도 수원시 장안구 장안로448번길 17-3 (이목동195-14) 2층</p>
+          <p>📞 <strong>031-256-0663~5</strong> · 📠 031-241-0154</p>
+          <p>✉️ kkpa0800@naver.com</p>
+        </div>
+        <div class="ft-sns">
+          <a href="#" title="페이스북">f</a>
+          <a href="#" title="X">𝕏</a>
+          <a href="#" title="인스타그램">◎</a>
+          <a href="#" title="유튜브">▶</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>경기도약사회 소개</h4>
+        <ul>
+          <li><a href="about.html">인사말</a></li>
+          <li><a href="about.html">연혁</a></li>
+          <li><a href="about.html">조직도</a></li>
+          <li><a href="about.html">오시는 길</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>주요 메뉴</h4>
+        <ul>
+          <li><a href="issues.html">핵심 현안</a></li>
+          <li><a href="media.html">약사회 미디어</a></li>
+          <li><a href="health.html">건강정보</a></li>
+          <li><a href="news.html">소식·공지</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>참여</h4>
+        <ul>
+          <li><a href="#">신고센터</a></li>
+          <li><a href="#">의견 보내기</a></li>
+          <li><a href="#">약사 봉사단</a></li>
+          <li><a href="#">고객센터</a></li>
+        </ul>
+      </div>
+      <div class="ft-info-box">
+        <div class="ib-label">연락처</div>
+        <p>경기도 수원시 장안구<br><strong>031-256-0663~5</strong><br>평일 09:00 – 18:00<br>점심 12:00 – 13:00</p>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>COPYRIGHT(C) KKPA All RIGHTS RESERVED.</p>
+      <div class="ft-policy">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">이메일무단수집거부</a>
+        <a href="#">사이트맵</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </main>
+
+<script>
+// ── Fade-in observer ──
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("vis") });
+},{threshold:0.07});
+document.querySelectorAll(".fade").forEach(el=>obs.observe(el));
+
+// ── Generic carousel factory ──
+function initCarousel(carouselId, prevId, nextId, dotsId){
+  const carousel = document.getElementById(carouselId);
+  const dots = document.querySelectorAll("#"+dotsId+" .dot");
+  if(!carousel) return;
+
+  function cardStep(){
+    const card = carousel.firstElementChild;
+    return card ? card.offsetWidth + 20 : 300;
+  }
+  function updateDots(){
+    const idx = Math.round(carousel.scrollLeft / cardStep());
+    dots.forEach((d,i)=> d.classList.toggle("active", i===idx));
+  }
+  document.getElementById(prevId).addEventListener("click",()=>{
+    carousel.scrollBy({left:-cardStep()*4, behavior:"smooth"});
+  });
+  document.getElementById(nextId).addEventListener("click",()=>{
+    carousel.scrollBy({left:cardStep()*4, behavior:"smooth"});
+  });
+  dots.forEach(d=>{
+    d.addEventListener("click",()=>{
+      carousel.scrollTo({left:parseInt(d.dataset.idx)*cardStep()*4, behavior:"smooth"});
+    });
+  });
+  carousel.addEventListener("scroll", updateDots, {passive:true});
+
+  // drag-to-scroll
+  let isDown=false, startX, scrollLeft;
+  carousel.addEventListener("mousedown",e=>{
+    isDown=true; carousel.classList.add("grabbing");
+    startX=e.pageX-carousel.offsetLeft; scrollLeft=carousel.scrollLeft;
+  });
+  ["mouseleave","mouseup"].forEach(ev=>carousel.addEventListener(ev,()=>{
+    isDown=false; carousel.classList.remove("grabbing");
+  }));
+  carousel.addEventListener("mousemove",e=>{
+    if(!isDown) return; e.preventDefault();
+    carousel.scrollLeft = scrollLeft-(e.pageX-carousel.offsetLeft-startX)*1.2;
+  });
+}
+
+initCarousel("posterCarousel",  "posterPrev",  "posterNext",  "posterDots");
+initCarousel("issueCarousel",   "issuePrev",   "issueNext",   "issueDots");
+initCarousel("healthCarousel",  "healthPrev",  "healthNext",  "healthDots");
+</script>
+
+<script>
+// ── 홈페이지 동적 데이터 연동 ──
+// 관리자 페이지(admin.html)의 localStorage 데이터를 홈페이지에 반영
+
+// ── 공지사항 티커 연동 ──
+(function updateTicker() {
+  var raw = localStorage.getItem('kkpa_news');
+  var items = raw ? JSON.parse(raw) : null;
+
+  // 기본 공지 (localStorage 없을 때)
+  var defaults = [
+    {title:'2025년 제68회 정기대의원총회 개최 결과 안내', isNotice:true},
+    {title:'창고형 약국 반대 서명운동 참여 안내', isNotice:true},
+    {title:'경기도약사회, 창고형 약국 반대 긴급 기자회견 개최', isNotice:false},
+    {title:'2025년 상반기 약사 보수교육 일정 안내', isNotice:false},
+    {title:'한약사 면허범위 확대 반대 성명서 발표', isNotice:false},
+  ];
+
+  var posts = items || defaults;
+  // 최신 8개, 중복으로 이어붙여 무한 스크롤 효과
+  var recent = posts.slice(0, 8);
+  var doubled = recent.concat(recent);
+
+  var ticker = document.getElementById('ticker-items');
+  if (!ticker) return;
+
+  ticker.innerHTML = doubled.map(function(p) {
+    var today = new Date();
+    var isNew = false;
+    if (p.date) {
+      var parts = p.date.split('.');
+      var d = new Date(parts[0], parseInt(parts[1])-1, parseInt(parts[2]));
+      isNew = (today - d) < 30 * 24 * 3600 * 1000;
+    } else {
+      isNew = p.isNotice;
+    }
+    var badge = isNew ? ' <span class="tnew">NEW</span>' : '';
+    return '<a href="news.html">' + p.title + badge + '</a>';
+  }).join('');
+})();
+
+// ── 핵심 현안 카드 반영 (상태·설명·배경사진) ──
+(function updateIssues() {
+  var keys = ['warehouse','hanyaksa','generic','nonface'];
+  var cards = document.querySelectorAll('#issueCarousel .issue-card');
+  keys.forEach(function(key, i) {
+    if (!cards[i]) return;
+    var raw = localStorage.getItem('kkpa_issue_' + key);
+    var data = raw ? JSON.parse(raw) : {};
+
+    // 상태 태그
+    var status = data.status || localStorage.getItem('kkpa_is_' + key + '_status');
+    if (status) {
+      var tag = cards[i].querySelector('.issue-tag');
+      if (tag) {
+        tag.textContent = status;
+        tag.className = 'issue-tag';
+        if (status.includes('🔴')) tag.classList.add('tag-r');
+        else if (status.includes('🟡')) tag.classList.add('tag-y');
+        else if (status.includes('🔵')) tag.classList.add('tag-b');
+        else { tag.style.background='#D1FAE5'; tag.style.color='#065F46'; }
+      }
+    }
+
+    // 문제 설명 (카드 본문 p)
+    if (data.problem) {
+      var p = cards[i].querySelector('.issue-body p');
+      if (p) p.textContent = data.problem.substring(0, 120) + (data.problem.length > 120 ? '...' : '');
+    }
+
+    // 배경 사진
+    var imgSrc = data.imageData || localStorage.getItem('kkpa_issue_img_' + key);
+    if (imgSrc) {
+      var img = cards[i].querySelector('.issue-photo');
+      if (img) { img.src = imgSrc; }
+    }
+  });
+})();
+
+// ── 약사회 미디어 카드 연동 (최신 6개) ──
+(function updateMedia() {
+  var raw = localStorage.getItem('kkpa_media');
+  if (!raw) return;
+  var data = JSON.parse(raw);
+  if (!data || !data.length) return;
+  var carousel = document.getElementById('posterCarousel');
+  if (!carousel) return;
+  carousel.innerHTML = data.slice(0, 6).map(function(p) {
+    var typeLabel = {cardnews:'카드뉴스', poster:'포스터', shorts:'쇼츠'}[p.type] || '';
+    var iconSz  = (p.iconSize  || 38) + 'px';
+    var titleSz = (p.titleSize || 13) + 'px';
+    var thumb = p.imageData
+      ? '<img style="width:100%;height:100%;object-fit:cover;" src="' + p.imageData + '" alt="' + p.title + '">'
+      : '<div style="width:100%;height:100%;background:linear-gradient(135deg,' + (p.color||'#002D62') + ',#4A9FD4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px;">'
+        + '<div style="font-size:' + iconSz + ';line-height:1;">' + (p.icon||'📋') + '</div>'
+        + '<div style="font-size:' + titleSz + ';font-weight:700;color:white;text-align:center;line-height:1.4;">' + p.title + '</div>'
+        + '</div>';
+    return '<div class="poster-card">'
+      + '<div class="poster-photo-wrap">' + thumb
+      + '<div class="poster-overlay"></div>'
+      + '<div class="poster-caption"><h3>' + p.title + '</h3><span>' + typeLabel + '</span></div>'
+      + '</div>'
+      + '<div class="poster-footer"><span class="pdate">' + typeLabel + '</span>'
+      + '<a href="media.html" class="poster-dl">보러가기</a></div>'
+      + '</div>';
+  }).join('');
+})();
+
+// ── 건강정보 카드 연동 (최신 4개) ──
+(function updateHealth() {
+  var raw = localStorage.getItem('kkpa_health');
+  if (!raw) return;
+  var data = JSON.parse(raw);
+  if (!data || !data.length) return;
+  var carousel = document.getElementById('healthCarousel');
+  if (!carousel) return;
+  carousel.innerHTML = data.slice(0, 6).map(function(p) {
+    var iconSz  = (p.iconSize  || 38) + 'px';
+    var titleSz = (p.titleSize || 13) + 'px';
+    var thumb = p.imageData
+      ? '<img style="width:100%;height:100%;object-fit:cover;" src="' + p.imageData + '">'
+      : '<div style="width:100%;height:100%;background:linear-gradient(135deg,#002D62,#4A9FD4);display:flex;align-items:center;justify-content:center;">'
+        + '<span style="font-size:' + iconSz + ';">' + (p.icon||'💊') + '</span>'
+        + '</div>';
+    return '<a href="health.html" class="health-card">'
+      + '<div class="health-photo-wrap"><span class="htag">' + (p.cat||'건강정보') + '</span>' + thumb + '</div>'
+      + '<div class="health-body">'
+      + '<h3>' + p.title + '</h3>'
+      + '<p>' + (p.excerpt||'') + '</p>'
+      + '<div class="health-meta"><span class="hmore">읽기 →</span></div>'
+      + '</div></a>';
+  }).join('');
+})();
+</script>
+
+<script>
+// ── Netlify CMS 콘텐츠 → 홈페이지 자동 반영 ──
+async function loadCMSContent() {
+  // 소식·공지 → 티커
+  try {
+    const newsFiles = await fetch('/content/news/').catch(()=>null);
+    // 개별 파일은 아래 updateTicker에서 처리
+  } catch(e) {}
+
+  // 회장 프로필
+  try {
+    const res = await fetch('/content/settings/president.json');
+    if (res.ok) {
+      const d = await res.json();
+      // about.html 반영용으로 localStorage에도 저장
+      localStorage.setItem('kkpa_about_president', JSON.stringify(d));
+    }
+  } catch(e) {}
+
+  // 기관 연락처
+  try {
+    const res = await fetch('/content/settings/contact.json');
+    if (res.ok) {
+      const d = await res.json();
+      localStorage.setItem('kkpa_about_contact', JSON.stringify(d));
+      // 홈페이지 오시는길 섹션 업데이트
+      const addrEl = document.querySelector('.map-info-glass .mrow:first-child .mrow-v');
+      if (addrEl && d.address) addrEl.textContent = d.address;
+    }
+  } catch(e) {}
+}
+// 페이지 로드 시 실행
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadCMSContent);
+} else {
+  loadCMSContent();
+}
+</script>
+</body>
+</html>

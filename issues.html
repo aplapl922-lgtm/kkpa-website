@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>핵심 현안 — 경기도약사회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #002D62;
+  --navy-d:  #001840;
+  --navy-m:  #004A9E;
+  --accent:  #4A9FD4;
+  --accent-l:#D8EEF9;
+  --white:   #FFFFFF;
+  --bg:      #F4F7FA;
+  --text:    #1B2A3B;
+  --sub:     #5A6A7E;
+  --border:  #DDE6EF;
+  --hh:      68px;
+  --nh:      52px;
+  --r:       16px;
+  --sh:      0 4px 24px rgba(0,45,98,.10);
+  --sh-lg:   0 14px 44px rgba(0,45,98,.16);
+  --red:     #E74C3C;
+  --orange:  #E67E22;
+  --yellow:  #F1C40F;
+  --blue:    #2980B9;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ─── HEADER ─── */
+.site-header{position:sticky;top:0;z-index:300;height:var(--hh);background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1.5px solid var(--border);box-shadow:0 2px 16px rgba(0,45,98,.07);}
+.hdr-inner{max-width:1280px;margin:0 auto;padding:0 44px;height:100%;display:flex;align-items:center;gap:16px;}
+.hdr-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.hdr-logo .lmark{width:40px;height:40px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.hdr-logo .lmark svg{width:24px;height:24px}
+.hdr-logo .ltxt .ko{font-size:15.5px;font-weight:700;color:var(--navy);letter-spacing:-.3px}
+.hdr-logo .ltxt .en{font-size:10px;color:var(--sub);font-weight:400}
+.hdr-search{margin-left:auto;display:flex;align-items:center;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:7px 14px;gap:8px;min-width:220px;transition:border .2s;}
+.hdr-search:focus-within{border-color:var(--navy)}
+.hdr-search input{border:none;background:transparent;font-size:13.5px;font-family:inherit;color:var(--text);outline:none;flex:1}
+.hdr-search input::placeholder{color:#aab}
+.hdr-search button{background:none;border:none;cursor:pointer;color:var(--sub);font-size:15px}
+.hdr-tel{display:flex;align-items:center;gap:6px;background:var(--accent-l);border-radius:8px;padding:7px 14px;flex-shrink:0;}
+.hdr-tel span{font-size:12px;color:var(--navy);font-weight:700}
+
+/* ─── TOP NAV ─── */
+.top-nav{background:var(--navy-d);height:var(--nh);display:flex;align-items:stretch;padding:0 28px;position:sticky;top:var(--hh);z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.18);}
+.top-nav-inner{display:flex;align-items:stretch;max-width:1280px;width:100%;margin:0 auto;padding:0 44px;}
+.tn-item{position:relative;display:flex;align-items:center;padding:0 18px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.65);cursor:pointer;white-space:nowrap;transition:color .15s;border-bottom:2px solid transparent;user-select:none;}
+.tn-item:hover,.tn-item.active{color:white;border-bottom-color:var(--accent)}
+.tn-item.active{font-weight:700}
+.tn-arr{font-size:9px;margin-left:5px;opacity:.6;transition:transform .2s}
+.tn-item:hover .tn-arr{transform:rotate(180deg)}
+.tn-drop{position:absolute;top:100%;left:0;background:var(--navy-d);min-width:170px;border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--accent);border-radius:0 0 10px 10px;box-shadow:0 8px 28px rgba(0,0,0,.3);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all .2s;z-index:500;}
+.tn-item:hover .tn-drop{opacity:1;visibility:visible;transform:translateY(0)}
+.tn-drop a{display:block;padding:10px 18px;font-size:13px;color:rgba(255,255,255,.6);transition:.15s;}
+.tn-drop a:hover{color:white;background:rgba(255,255,255,.06);padding-left:22px}
+.tn-drop a.act{color:var(--accent);font-weight:600}
+.tn-cta{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.tn-cta a{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:7px 16px;border-radius:7px;transition:.2s;white-space:nowrap;}
+.tn-cta .alert-btn{background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.35);color:#FF7F73;}
+.tn-cta .alert-btn:hover{background:rgba(231,76,60,.28)}
+.tn-cta .tel-btn{background:rgba(74,159,212,.12);border:1px solid rgba(74,159,212,.3);color:var(--accent);}
+.tn-cta .tel-btn:hover{background:rgba(74,159,212,.24)}
+
+/* ─── PAGE HERO ─── */
+.page-hero{position:relative;height:260px;overflow:hidden;}
+.page-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:brightness(.38) saturate(.85);}
+.page-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,24,64,.88) 0%,rgba(0,45,98,.6) 60%,rgba(0,75,158,.3) 100%);}
+.page-hero-inner{position:relative;z-index:2;height:100%;max-width:1280px;margin:0 auto;padding:0 44px;display:flex;flex-direction:column;justify-content:center;}
+.page-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.page-label::before{content:'';display:inline-block;width:28px;height:2px;background:var(--accent);border-radius:2px;}
+.page-hero-inner h1{font-family:'Noto Serif KR',serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:white;line-height:1.3;letter-spacing:-.5px;}
+.page-sub{font-size:14.5px;color:rgba(255,255,255,.65);margin-top:10px;}
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb-bar{background:white;border-bottom:1.5px solid var(--border);box-shadow:0 2px 10px rgba(0,45,98,.05);position:sticky;top:calc(var(--hh) + var(--nh));z-index:100;}
+.bc-inner{max-width:1280px;margin:0 auto;padding:0 44px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.bc-trail{display:flex;align-items:center;gap:8px;padding:14px 0;flex-shrink:0;}
+.bc-trail a,.bc-trail span{font-size:12.5px;color:var(--sub);}
+.bc-trail a:hover{color:var(--navy)}
+.bc-trail .sep{font-size:10px;color:var(--border)}
+.bc-trail .cur{color:var(--navy);font-weight:700}
+
+/* ─── MAIN LAYOUT ─── */
+.main-wrap{max-width:1280px;margin:0 auto;padding:52px 44px 80px;display:grid;grid-template-columns:340px 1fr;gap:40px;align-items:start;}
+
+/* ─── 카드 목록 (좌) ─── */
+.issue-list{display:flex;flex-direction:column;gap:14px;position:sticky;top:calc(var(--hh) + var(--nh) + 53px + 20px);}
+.issue-card{
+  background:white;border-radius:var(--r);border:1.5px solid var(--border);
+  padding:22px 24px;cursor:pointer;transition:all .25s;
+  display:flex;flex-direction:column;gap:10px;
+  position:relative;overflow:hidden;
+}
+.issue-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--border);transition:background .25s;}
+.issue-card:hover{box-shadow:var(--sh);transform:translateX(4px);border-color:transparent;}
+.issue-card.active{box-shadow:var(--sh-lg);border-color:transparent;transform:translateX(6px);}
+.issue-card.active::before{background:var(--navy)}
+.issue-card:hover::before{background:var(--accent)}
+
+.card-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;width:fit-content;}
+.status-red{background:#FEE2E2;color:#B91C1C;}
+.status-orange{background:#FEF3C7;color:#92400E;}
+.status-blue{background:#DBEAFE;color:#1D4ED8;}
+.status-green{background:#D1FAE5;color:#065F46;}
+
+.card-title{font-size:16px;font-weight:700;color:var(--navy);line-height:1.4;}
+.card-desc{font-size:12.5px;color:var(--sub);line-height:1.7;}
+.card-date{font-size:11.5px;color:var(--border);margin-top:4px;}
+
+/* ─── 상세 영역 (우) ─── */
+.detail-area{background:white;border-radius:20px;border:1.5px solid var(--border);box-shadow:var(--sh);overflow:hidden;animation:fadeUp .35s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.detail-status-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;margin-bottom:14px;width:fit-content;}
+
+.detail-body{padding:36px 40px;}
+.detail-section{margin-bottom:36px;}
+.detail-section:last-child{margin-bottom:0}
+.detail-section h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:14px;padding-left:14px;border-left:4px solid var(--accent);display:flex;align-items:center;gap:8px;}
+.detail-section p{font-size:14.5px;color:var(--text);line-height:1.9;margin-bottom:12px;}
+.detail-section p:last-child{margin-bottom:0}
+
+/* 입장 요약 박스 */
+.position-box{background:var(--navy);border-radius:14px;padding:24px 28px;margin-top:8px;}
+.position-box p{color:rgba(255,255,255,.85);font-size:14px;line-height:1.85;margin-bottom:0;}
+.position-box strong{color:var(--accent);}
+
+/* 현황 태그 목록 */
+.tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.tag{background:var(--accent-l);color:var(--navy-m);font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:20px;}
+.tag.danger{background:#FEE2E2;color:#B91C1C;}
+.tag.warn{background:#FEF3C7;color:#92400E;}
+
+/* 관련 자료 */
+.ref-list{display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+.ref-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border-radius:10px;border:1px solid var(--border);transition:.2s;cursor:pointer;}
+.ref-item:hover{background:var(--accent-l);border-color:var(--accent)}
+.ref-icon{width:36px;height:36px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.ref-item .rt{flex:1}
+.ref-item .rt strong{display:block;font-size:13.5px;font-weight:700;color:var(--navy)}
+.ref-item .rt span{font-size:12px;color:var(--sub)}
+
+/* ─── FOOTER ─── */
+footer{background:var(--navy-d);color:rgba(255,255,255,.6);}
+.ft-inner{max-width:1280px;margin:0 auto;padding:40px 44px 28px;}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:40px;margin-bottom:32px;}
+.ft-brand .ftname{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:700;color:white;margin-bottom:10px}
+.ft-brand p{font-size:13px;line-height:1.75;color:rgba(255,255,255,.5);margin-bottom:14px}
+.ft-contact p{font-size:12.5px;color:rgba(255,255,255,.5);margin-bottom:4px}
+.ft-col h4{font-size:13px;font-weight:700;color:white;margin-bottom:12px}
+.ft-col ul{list-style:none}
+.ft-col ul li{margin-bottom:7px}
+.ft-col ul a{font-size:12.5px;color:rgba(255,255,255,.45);transition:.15s}
+.ft-col ul a:hover{color:white}
+.ft-info-box{background:rgba(255,255,255,.05);border-radius:10px;padding:18px;border:1px solid rgba(255,255,255,.08);font-size:12.5px;line-height:1.8;}
+.ib-label{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:8px}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;align-items:center;justify-content:space-between;}
+.ft-bottom p{font-size:12px;color:rgba(255,255,255,.3)}
+.ft-policy{display:flex;gap:16px}
+.ft-policy a{font-size:12px;color:rgba(255,255,255,.3);transition:.15s}
+.ft-policy a:hover{color:rgba(255,255,255,.6)}
+.ft-sns{display:flex;gap:10px;margin-top:14px}
+.ft-sns a{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(255,255,255,.5);transition:.2s;}
+.ft-sns a:hover{background:var(--accent);color:white}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="hdr-inner">
+    <a href="index.html" class="hdr-logo">
+      <div class="lmark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="ltxt">
+        <div class="ko">경기도약사회</div>
+        <div class="en">Gyeonggi Pharmacists Association</div>
+      </div>
+    </a>
+    <div class="hdr-search">
+      <button>🔍</button>
+      <input type="text" placeholder="검색어를 입력하세요">
+    </div>
+    <div class="hdr-tel"><span>📞 031-256-0663</span></div>
+  </div>
+</header>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <div class="tn-item"><a href="index.html" style="color:inherit;">홈</a></div>
+    <div class="tn-item">
+      <a href="about.html" style="color:inherit;">경기도약사회 소개</a> <span class="tn-arr">▾</span>
+      <div class="tn-drop">
+        <a href="about.html">인사말</a>
+        <a href="about.html">연혁</a>
+        <a href="about.html">조직도</a>
+        <a href="about.html">오시는 길</a>
+      </div>
+    </div>
+    <div class="tn-item active"><a href="issues.html" style="color:inherit;">핵심 현안</a></div>
+    <div class="tn-item"><a href="media.html" style="color:inherit;">약사회 미디어</a></div>
+    <div class="tn-item"><a href="health.html" style="color:inherit;">건강정보</a></div>
+    <div class="tn-item"><a href="news.html" style="color:inherit;">소식·공지</a></div>
+    <div class="tn-item">
+      참여마당 <span class="tn-arr">▾</span>
+      <div class="tn-drop"><a href="#">신고센터</a><a href="#">의견 보내기</a></div>
+    </div>
+    <div class="tn-item"><a href="#" style="color:inherit;">고객센터</a></div>
+    <div class="tn-cta">
+      <a href="#" class="alert-btn">🚨 신고센터</a>
+      <a href="tel:031-256-0663" class="tel-btn">📞 031-256-0663</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <img class="page-hero-photo" src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=1400&q=70&auto=format&fit=crop" alt="핵심 현안">
+  <div class="page-hero-inner">
+    <div class="page-label">Key Issues</div>
+    <h1>핵심 현안</h1>
+    <p class="page-sub">경기도민 건강과 약사 직능에 직결되는 핵심 현안을 명확히 알려드립니다</p>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+  <div class="bc-inner">
+    <div class="bc-trail">
+      <a href="index.html">홈</a>
+      <span class="sep">›</span>
+      <span class="cur" id="bc-cur">핵심 현안</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+<div class="main-wrap">
+
+  <!-- ── 좌: 카드 목록 ── -->
+  <div class="issue-list">
+
+    <div class="issue-card active" onclick="showIssue('warehouse', this)">
+      <div class="card-status status-red">🔴 긴급 대응 중</div>
+      <div class="card-title">창고형 약국 문제</div>
+      <div class="card-desc">복약지도 없는 대량 의약품 판매로 도민 안전을 위협하는 창고형 약국의 확산</div>
+      
+    </div>
+
+    <div class="issue-card" onclick="showIssue('hanyaksa', this)">
+      <div class="card-status status-red">🔴 강력 반대</div>
+      <div class="card-title">한약사 면허 범위 문제</div>
+      <div class="card-desc">한약사의 일반 의약품 조제·판매 허용 시도로 인한 환자 안전 위협</div>
+      
+    </div>
+
+    <div class="issue-card" onclick="showIssue('generic', this)">
+      <div class="card-status status-orange">🟡 검토 중</div>
+      <div class="card-title">성분명 처방 확대</div>
+      <div class="card-desc">성분명 처방 의무화 추진에 따른 환자 선택권 침해 및 약국 현장 혼란</div>
+      
+    </div>
+
+    <div class="issue-card" onclick="showIssue('nonface', this)">
+      <div class="card-status status-blue">🔵 논의 중</div>
+      <div class="card-title">비대면 처방·조제 현안</div>
+      <div class="card-desc">비대면 진료 확대와 약 배달 허용에 따른 의약품 오·남용 위험 증가</div>
+      
+    </div>
+
+  </div>
+
+  <!-- ── 우: 상세 영역 ── -->
+  <div id="detail-area" class="detail-area">
+
+    <!-- ======= 창고형 약국 ======= -->
+    <div id="issue-warehouse">
+      <div style="background:linear-gradient(135deg,#7B1A1A 0%,#B91C1C 100%);padding:44px 40px 40px;position:relative;overflow:hidden;">
+        <!-- 배경 장식 원 -->
+        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
+        <div style="position:absolute;right:60px;bottom:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04);"></div>
+        <!-- 아이콘 -->
+        <div style="font-size:48px;margin-bottom:20px;line-height:1;">🏪</div>
+        <!-- 상태 뱃지 -->
+        <div class="detail-status-badge status-red" style="margin-bottom:16px;">🔴 긴급 대응 중</div>
+        <!-- 제목 -->
+        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;">창고형 약국 문제</h2>
+        <!-- 부제 -->
+        <p id="position-warehouse" style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;">복약지도 없는 대량 의약품 판매, 도민 건강권 위협</p>
+      </div>
+      <div class="detail-body">
+        <div class="detail-section">
+          <h3>💡 무엇이 문제인가요?</h3>
+          <div id="problem-warehouse"><p id="position-warehouse">창고형 약국은 대형 매장에서 의약품을 대량으로 저가에 판매하는 형태로, 약사의 <strong>복약지도 없이</strong> 의약품이 유통되는 구조적 문제를 안고 있습니다.</p>
+          <p id="position-warehouse">전문 약사의 상담 없이 의약품이 판매될 경우 약물 오남용, 부작용 발생, 다약제 복용 문제 등이 증가할 수 있으며, 이는 도민의 건강권을 직접적으로 침해합니다.</p>
+          <p id="position-warehouse">또한 동네 약국의 경영을 압박하여 의약품 접근성과 전문 서비스의 질적 저하로 이어질 우려가 큽니다.</p></div>
+        </div>
+        <div class="detail-section">
+          <h3>📌 경기도약사회 공식 입장</h3>
+          <div class="position-box">
+            <p id="position-warehouse">경기도약사회는 창고형 약국의 허용 및 확산에 <strong>단호히 반대</strong>합니다. 의약품은 전문가의 복약지도가 반드시 수반되어야 하는 전문 물품이며, 이를 일반 상품처럼 대량 판매하는 것은 국민 보건에 심각한 위해를 끼칩니다. 경기도약사회는 관련 법령의 엄격한 적용과 제도적 보완을 강력히 촉구합니다.</p>
+          </div>
+        </div>
+        <div class="detail-section">
+          <h3>🏃 경기도약사회 대응 활동</h3>
+          <div id="actions-warehouse" class="tag-list">
+            <span class="tag">대한약사회 공동 성명 발표</span>
+            <span class="tag">도민 서명운동 참여 독려</span>
+            <span class="tag">긴급 기자회견 개최</span>
+            <span class="tag">관련 기관 공문 발송</span>
+            <span class="tag">회원 안내문 배포</span>
+          </div>
+        </div>
+        <div class="detail-section">
+          <h3>📎 관련 자료</h3>
+          <div id="refs-warehouse" class="ref-list">
+            <div class="ref-item">
+              <div class="ref-icon">📄</div>
+              <div class="rt"><strong>창고형 약국 반대 공식 성명서</strong><span>경기도약사회 공식 문서</span></div>
+            </div>
+            <div class="ref-item">
+              <div class="ref-icon">📰</div>
+              <div class="rt"><strong>창고형 약국 문제점 카드뉴스</strong><span>홍보위원회 제작 자료</span></div>
+            </div>
+            <div class="ref-item">
+              <div class="ref-icon">🎥</div>
+              <div class="rt"><strong>약사회 긴급 기자회견 영상</strong><span>언론 보도 자료</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= 한약사 면허 범위 ======= -->
+    <div id="issue-hanyaksa" style="display:none;">
+      <div style="background:linear-gradient(135deg,#7C2D12 0%,#C2410C 100%);padding:44px 40px 40px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
+        <div style="position:absolute;right:60px;bottom:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04);"></div>
+        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">⚖️</div>
+        <div class="detail-status-badge status-red" style="margin-bottom:16px;position:relative;z-index:1;">🔴 강력 반대</div>
+        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">한약사 면허 범위 문제</h2>
+        <p id="position-hanyaksa" style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">일반 의약품 조제·판매 허용 시도, 환자 안전 위협</p>
+      </div>
+      <div class="detail-body">
+        <div class="detail-section">
+          <h3>💡 무엇이 문제인가요?</h3>
+          <div id="problem-hanyaksa"><p id="position-hanyaksa">일부에서 한약사의 일반 의약품 조제·판매를 허용하려는 시도가 지속되고 있습니다. 한약사는 한약에 특화된 면허를 보유하고 있으며, 일반 의약품에 대한 약학적 전문 교육을 이수하지 않았습니다.</p>
+          <p id="position-hanyaksa">면허 범위를 무분별하게 확장할 경우 <strong>환자 안전</strong>이 위협받고, 의약품 관리 체계가 근본적으로 훼손될 수 있습니다.</p></div>
+        </div>
+        <div class="detail-section">
+          <h3>📌 경기도약사회 공식 입장</h3>
+          <div class="position-box">
+            <p id="position-hanyaksa">경기도약사회는 한약사의 일반 의약품 조제·판매 허용 시도에 <strong>강력히 반대</strong>합니다. 의약품 조제는 6년제 약학 교육을 이수한 약사만이 수행할 수 있어야 하며, 면허 범위의 명확한 구분은 환자 안전을 위한 최소한의 안전망입니다. 경기도약사회는 이 원칙을 지키기 위해 법적·제도적 대응을 계속해 나갈 것입니다.</p>
+          </div>
+        </div>
+        <div class="detail-section">
+          <h3>🏃 경기도약사회 대응 활동</h3>
+          <div id="actions-hanyaksa" class="tag-list">
+            <span class="tag">반대 성명서 발표</span>
+            <span class="tag">전국 약사회 공동 대응</span>
+            <span class="tag">국회의원 면담 진행</span>
+            <span class="tag">회원 대상 교육 실시</span>
+          </div>
+        </div>
+        <div class="detail-section">
+          <h3>📎 관련 자료</h3>
+          <div id="refs-hanyaksa" class="ref-list">
+            <div class="ref-item">
+              <div class="ref-icon">📄</div>
+              <div class="rt"><strong>한약사 면허범위 확대 반대 성명서</strong><span>경기도약사회 공식 문서</span></div>
+            </div>
+            <div class="ref-item">
+              <div class="ref-icon">📰</div>
+              <div class="rt"><strong>약사·한약사 면허 범위 비교 자료</strong><span>법제위원회 분석 자료</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= 성분명 처방 ======= -->
+    <div id="issue-generic" style="display:none;">
+      <div style="background:linear-gradient(135deg,#78350F 0%,#D97706 100%);padding:44px 40px 40px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
+        <div style="position:absolute;right:60px;bottom:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04);"></div>
+        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">💊</div>
+        <div class="detail-status-badge status-orange" style="margin-bottom:16px;position:relative;z-index:1;">🟡 검토 중</div>
+        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">성분명 처방 확대</h2>
+        <p id="position-generic" style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">처방 의무화 추진에 따른 환자 선택권 침해 및 현장 혼란</p>
+      </div>
+      <div class="detail-body">
+        <div class="detail-section">
+          <h3>💡 무엇이 문제인가요?</h3>
+          <div id="problem-generic"><p id="position-generic">성분명 처방 의무화는 특정 제품명 대신 성분명으로만 처방하도록 강제하는 제도입니다. 표면적으로는 의약품 비용 절감을 목표로 하지만, 실제 약국 현장에서는 다양한 문제가 발생합니다.</p>
+          <p id="position-generic">동일 성분이라도 제품마다 부형제, 함량, 제형이 다를 수 있어 약사의 전문적 판단 없이 대체 조제가 이루어질 경우 <strong>치료 효과의 차이</strong>와 <strong>환자 안전 문제</strong>가 발생할 수 있습니다.</p>
+          <p id="position-generic">또한 환자의 의약품 선택권이 제한되고, 약국과 의원 간의 혼선이 불가피합니다.</p></div>
+        </div>
+        <div class="detail-section">
+          <h3>📌 경기도약사회 공식 입장</h3>
+          <div class="position-box">
+            <p id="position-generic">경기도약사회는 성분명 처방 의무화의 <strong>무조건적 강행에 반대</strong>합니다. 충분한 사전 준비와 의료계·약계의 합의 없이 추진될 경우 환자 안전에 심각한 문제가 생길 수 있습니다. 제도 도입 전에 현장 약사 의견 수렴과 시범사업을 통한 검증이 반드시 선행되어야 합니다.</p>
+          </div>
+        </div>
+        <div class="detail-section">
+          <h3>🏃 경기도약사회 대응 활동</h3>
+          <div id="actions-generic" class="tag-list">
+            <span class="tag">공식 의견서 제출</span>
+            <span class="tag">현장 약사 의견 수렴</span>
+            <span class="tag">시범사업 선행 촉구</span>
+            <span class="tag">학술위원회 검토 보고서 발간</span>
+          </div>
+        </div>
+        <div class="detail-section">
+          <h3>📎 관련 자료</h3>
+          <div id="refs-generic" class="ref-list">
+            <div class="ref-item">
+              <div class="ref-icon">📄</div>
+              <div class="rt"><strong>성분명 처방 확대에 대한 경기도약사회 의견서</strong><span>정책위원회 제출 자료</span></div>
+            </div>
+            <div class="ref-item">
+              <div class="ref-icon">📰</div>
+              <div class="rt"><strong>성분명 처방 문제점 분석 자료</strong><span>학술위원회 검토 자료</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= 비대면 처방·조제 ======= -->
+    <div id="issue-nonface" style="display:none;">
+      <div style="background:linear-gradient(135deg,#1E3A5F 0%,#2563EB 100%);padding:44px 40px 40px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
+        <div style="position:absolute;right:60px;bottom:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04);"></div>
+        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">📱</div>
+        <div class="detail-status-badge status-blue" style="margin-bottom:16px;position:relative;z-index:1;">🔵 논의 중</div>
+        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">비대면 처방·조제 현안</h2>
+        <p id="position-nonface" style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">비대면 진료 확대와 약 배달 허용에 따른 의약품 오남용 위험</p>
+      </div>
+      <div class="detail-body">
+        <div class="detail-section">
+          <h3>💡 무엇이 문제인가요?</h3>
+          <div id="problem-nonface"><p id="position-nonface">코로나19 이후 한시적으로 허용된 비대면 진료와 의약품 배달이 제도화되는 방향으로 논의가 이어지고 있습니다. 원거리·거동 불편 환자에게 도움이 될 수 있다는 긍정적 측면도 있으나, 적절한 안전 장치 없이 허용될 경우 심각한 문제가 발생합니다.</p>
+          <p id="position-nonface">약사의 대면 복약지도 없이 의약품이 배달될 경우 <strong>약물 오남용</strong>, <strong>부작용 미인지</strong>, <strong>의약품 보관 문제</strong> 등이 우려됩니다.</p></div>
+        </div>
+        <div class="detail-section">
+          <h3>📌 경기도약사회 공식 입장</h3>
+          <div class="position-box">
+            <p id="position-nonface">경기도약사회는 비대면 처방·조제 제도화에 있어 <strong>환자 안전이 최우선</strong>이어야 함을 강조합니다. 취약계층의 의료 접근성 향상이라는 목표는 공감하나, 약사의 복약지도 의무를 훼손하는 방식의 제도화는 수용할 수 없습니다. 충분한 안전 장치와 약사 참여 보장이 전제되어야 합니다.</p>
+          </div>
+        </div>
+        <div class="detail-section">
+          <h3>🏃 경기도약사회 대응 활동</h3>
+          <div id="actions-nonface" class="tag-list">
+            <span class="tag">공식 입장문 발표</span>
+            <span class="tag">약사 참여 보장 모델 제안</span>
+            <span class="tag">복약지도 의무 수호 결의</span>
+            <span class="tag">관계 부처 의견 제출</span>
+          </div>
+        </div>
+        <div class="detail-section">
+          <h3>📎 관련 자료</h3>
+          <div id="refs-nonface" class="ref-list">
+            <div class="ref-item">
+              <div class="ref-icon">📄</div>
+              <div class="rt"><strong>비대면 처방·조제 관련 경기도약사회 입장문</strong><span>법제위원회 공식 문서</span></div>
+            </div>
+            <div class="ref-item">
+              <div class="ref-icon">📰</div>
+              <div class="rt"><strong>비대면 진료 현황 및 문제점 분석</strong><span>정책위원회 분석 자료</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /detail-area -->
+</div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ftname">경기도약사회</div>
+        <p>경기도민의 건강을 지키고 올바른 약 사용 문화를<br>만들어 가는 경기도약사회입니다.</p>
+        <div class="ft-contact">
+          <p>📍 경기도 수원시 장안구 장안로448번길 17-3 (이목동195-14) 2층</p>
+          <p>📞 <strong>031-256-0663~5</strong> · 📠 031-241-0154</p>
+          <p>✉️ kkpa0800@naver.com</p>
+        </div>
+        <div class="ft-sns">
+          <a href="#" title="페이스북">f</a>
+          <a href="#" title="X">𝕏</a>
+          <a href="#" title="인스타그램">◎</a>
+          <a href="#" title="유튜브">▶</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>경기도약사회 소개</h4>
+        <ul>
+          <li><a href="about.html">인사말</a></li>
+          <li><a href="about.html">연혁</a></li>
+          <li><a href="about.html">조직도</a></li>
+          <li><a href="about.html">오시는 길</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>주요 메뉴</h4>
+        <ul>
+          <li><a href="issues.html">핵심 현안</a></li>
+          <li><a href="media.html">약사회 미디어</a></li>
+          <li><a href="health.html">건강정보</a></li>
+          <li><a href="news.html">소식·공지</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>참여</h4>
+        <ul>
+          <li><a href="#">신고센터</a></li>
+          <li><a href="#">의견 보내기</a></li>
+          <li><a href="#">약사 봉사단</a></li>
+          <li><a href="#">고객센터</a></li>
+        </ul>
+      </div>
+      <div class="ft-info-box">
+        <div class="ib-label">연락처</div>
+        <p>경기도 수원시 장안구<br><strong>031-256-0663~5</strong><br>평일 09:00 – 18:00<br>점심 12:00 – 13:00</p>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>COPYRIGHT(C) KKPA All RIGHTS RESERVED.</p>
+      <div class="ft-policy">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">이메일무단수집거부</a>
+        <a href="#">사이트맵</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</main>
+<script>
+var issues = ['warehouse','hanyaksa','generic','nonface'];
+
+function showIssue(id, cardEl) {
+  document.querySelectorAll('.issue-card').forEach(function(c) {
+    c.classList.remove('active');
+  });
+  if (cardEl) cardEl.classList.add('active');
+  issues.forEach(function(key) {
+    var el = document.getElementById('issue-' + key);
+    if (el) el.style.display = (key === id) ? 'block' : 'none';
+  });
+  var da = document.getElementById('detail-area');
+  if (da) {
+    da.style.animation = 'none';
+    da.offsetHeight;
+    da.style.animation = '';
+  }
+}
+</script>
+
+<script>
+// ── 관리자 데이터 → 서브페이지 현안 자동 반영 ──
+(function syncIssues() {
+  var map = {
+    warehouse: { statusEl:'#status-warehouse', problemEl:'#problem-warehouse', positionEl:'#position-warehouse', actionsEl:'#actions-warehouse', refsEl:'#refs-warehouse', imgEl:'#img-warehouse' },
+    hanyaksa:  { statusEl:'#status-hanyaksa',  problemEl:'#problem-hanyaksa',  positionEl:'#position-hanyaksa',  actionsEl:'#actions-hanyaksa',  refsEl:'#refs-hanyaksa',  imgEl:'#img-hanyaksa'  },
+    generic:   { statusEl:'#status-generic',   problemEl:'#problem-generic',   positionEl:'#position-generic',   actionsEl:'#actions-generic',   refsEl:'#refs-generic',   imgEl:'#img-generic'   },
+    nonface:   { statusEl:'#status-nonface',   problemEl:'#problem-nonface',   positionEl:'#position-nonface',   actionsEl:'#actions-nonface',   refsEl:'#refs-nonface',   imgEl:'#img-nonface'   },
+  };
+  Object.keys(map).forEach(function(key) {
+    var raw = localStorage.getItem('kkpa_issue_' + key);
+    if (!raw) return;
+    var data = JSON.parse(raw);
+    var sel = map[key];
+
+    // 상태 뱃지
+    var statusEl = document.querySelector(sel.statusEl);
+    if (statusEl && data.status) {
+      statusEl.textContent = data.status;
+      statusEl.className = 'detail-status-badge';
+      if (data.status.includes('🔴')) statusEl.classList.add('status-red');
+      else if (data.status.includes('🟡')) statusEl.classList.add('status-orange');
+      else if (data.status.includes('🔵')) statusEl.classList.add('status-blue');
+    }
+
+    // 문제 설명
+    var problemEl = document.querySelector(sel.problemEl);
+    if (problemEl && data.problem) {
+      problemEl.innerHTML = data.problem.split('
+').filter(Boolean).map(function(p){ return '<p>' + p + '</p>'; }).join('');
+    }
+
+    // 공식 입장
+    var positionEl = document.querySelector(sel.positionEl);
+    if (positionEl && data.position) positionEl.textContent = data.position;
+
+    // 대응 활동 태그
+    var actionsEl = document.querySelector(sel.actionsEl);
+    if (actionsEl && data.actions) {
+      actionsEl.innerHTML = data.actions.split(',').map(function(a){
+        return '<span class="tag">' + a.trim() + '</span>';
+      }).join('');
+    }
+
+    // 관련 자료
+    var refsEl = document.querySelector(sel.refsEl);
+    if (refsEl && data.refs && data.refs.length) {
+      refsEl.innerHTML = data.refs.map(function(r){
+        return '<div class="ref-item"><div class="ref-icon">📄</div>'
+          + '<div class="rt"><strong>' + r.title + '</strong><span>' + (r.desc||'') + '</span></div></div>';
+      }).join('');
+    }
+  });
+})();
+</script>
+
+<script>
+// 관리자에서 추가 등록된 현안을 issues.html에 동적으로 추가
+(function syncExtraIssues() {
+  var allKeys = JSON.parse(localStorage.getItem('kkpa_extra_issue_keys') || '[]');
+  if (!allKeys.length) return;
+  var list  = document.querySelector('.issue-list');
+  var detail = document.getElementById('detail-area');
+  if (!list || !detail) return;
+
+  allKeys.forEach(function(key) {
+    var raw = localStorage.getItem('kkpa_extra_issue_' + key);
+    if (!raw) return;
+    var d = JSON.parse(raw);
+
+    // 좌측 카드 추가
+    var card = document.createElement('div');
+    card.className = 'issue-card';
+    var statusClass = d.status && d.status.includes('🔴') ? 'status-red'
+      : d.status && d.status.includes('🟡') ? 'status-orange'
+      : d.status && d.status.includes('🔵') ? 'status-blue' : 'status-red';
+    card.innerHTML = '<div class="card-status ' + statusClass + '">' + (d.status||'🔴 대응 중') + '</div>'
+      + '<div class="card-title">' + d.title + '</div>'
+      + '<div class="card-desc">' + (d.subtitle||'') + '</div>';
+    card.onclick = function() { showExtraIssue(key, card); };
+    list.appendChild(card);
+
+    // 우측 상세 패널 추가
+    var panel = document.createElement('div');
+    panel.id = 'issue-extra-' + key;
+    panel.style.display = 'none';
+
+    var actionTags = (d.actions||'').split(',').filter(Boolean).map(function(a){
+      return '<span class="tag">' + a.trim() + '</span>';
+    }).join('');
+
+    var refItems = (d.refs||[]).map(function(r){
+      return '<div class="ref-item"><div class="ref-icon">📄</div>'
+        + '<div class="rt"><strong>' + r.title + '</strong><span>' + (r.desc||'') + '</span></div></div>';
+    }).join('');
+
+    var heroStyle = d.imageData
+      ? 'background:url(' + d.imageData + ') center/cover;'
+      : 'background:linear-gradient(135deg,' + (d.color1||'#002D62') + ' 0%,' + (d.color2||'#4A9FD4') + ' 100%);';
+
+    panel.innerHTML = '<div style="' + heroStyle + 'padding:44px 40px 40px;position:relative;overflow:hidden;">'
+      + '<div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>'
+      + '<div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">' + (d.icon||'📌') + '</div>'
+      + '<div class="detail-status-badge ' + statusClass + '" style="margin-bottom:16px;position:relative;z-index:1;">' + (d.status||'') + '</div>'
+      + '<h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">' + d.title + '</h2>'
+      + '<p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">' + (d.subtitle||'') + '</p>'
+      + '</div>'
+      + '<div class="detail-body">'
+      + (d.problem ? '<div class="detail-section"><h3>💡 무엇이 문제인가요?</h3>' + d.problem.split('
+').map(function(p){ return '<p>'+p+'</p>'; }).join('') + '</div>' : '')
+      + (d.position ? '<div class="detail-section"><h3>📌 경기도약사회 공식 입장</h3><div class="position-box"><p>' + d.position + '</p></div></div>' : '')
+      + (d.actions ? '<div class="detail-section"><h3>🏃 경기도약사회 대응 활동</h3><div class="tag-list">' + actionTags + '</div></div>' : '')
+      + (refItems ? '<div class="detail-section"><h3>📎 관련 자료</h3><div class="ref-list">' + refItems + '</div></div>' : '')
+      + '</div>';
+
+    detail.appendChild(panel);
+  });
+})();
+
+function showExtraIssue(key, cardEl) {
+  // 기존 showIssue와 동일한 방식으로 전환
+  document.querySelectorAll('.issue-card').forEach(function(c){ c.classList.remove('active'); });
+  if (cardEl) cardEl.classList.add('active');
+  // 모든 패널 숨기기
+  var issues = ['warehouse','hanyaksa','generic','nonface'];
+  issues.forEach(function(k){
+    var el = document.getElementById('issue-' + k);
+    if (el) el.style.display = 'none';
+  });
+  document.querySelectorAll('[id^="issue-extra-"]').forEach(function(el){ el.style.display = 'none'; });
+  // 해당 패널 표시
+  var target = document.getElementById('issue-extra-' + key);
+  if (target) target.style.display = 'block';
+  // detail-area 애니메이션
+  var da = document.getElementById('detail-area');
+  if (da) { da.style.animation='none'; da.offsetHeight; da.style.animation=''; }
+}
+</script>
+</body>
+</html>

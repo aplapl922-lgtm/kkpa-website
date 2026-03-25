@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>경기도약사회 소개 — 경기도약사회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── DESIGN TOKENS (메인과 동일) ─────────────────────────── */
+:root {
+  --navy:    #002D62;
+  --navy-d:  #001840;
+  --navy-m:  #004A9E;
+  --accent:  #4A9FD4;
+  --accent-d:#2A7DB0;
+  --accent-l:#D8EEF9;
+  --white:   #FFFFFF;
+  --bg:      #F4F7FA;
+  --text:    #1B2A3B;
+  --sub:     #5A6A7E;
+  --border:  #DDE6EF;
+  --hh:      68px;
+  --nh:      52px;
+  --r:       16px;
+  --r-sm:    10px;
+  --sh:      0 4px 24px rgba(0,45,98,.10);
+  --sh-lg:   0 14px 44px rgba(0,45,98,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+img{display:block;object-fit:cover}
+a{text-decoration:none;color:inherit}
+
+/* ─── HEADER ─────────────────────────── */
+.site-header{
+  position:sticky;top:0;z-index:300;
+  height:var(--hh);
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1.5px solid var(--border);
+  box-shadow:0 2px 16px rgba(0,45,98,.07);
+}
+.hdr-inner{
+  max-width:1280px;margin:0 auto;padding:0 44px;
+  height:100%;display:flex;align-items:center;gap:16px;
+}
+.hdr-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.hdr-logo .lmark{
+  width:40px;height:40px;background:var(--navy);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.hdr-logo .lmark svg{width:24px;height:24px}
+.hdr-logo .ltxt .ko{font-size:15.5px;font-weight:700;color:var(--navy);letter-spacing:-.3px}
+.hdr-logo .ltxt .en{font-size:10px;color:var(--sub);font-weight:400}
+.hdr-search{
+  margin-left:auto;display:flex;align-items:center;
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:8px;padding:7px 14px;gap:8px;min-width:220px;transition:border .2s;
+}
+.hdr-search:focus-within{border-color:var(--navy)}
+.hdr-search input{border:none;background:transparent;font-size:13.5px;font-family:inherit;color:var(--text);outline:none;flex:1}
+.hdr-search input::placeholder{color:#aab}
+.hdr-search button{background:none;border:none;cursor:pointer;color:var(--sub);font-size:15px}
+.hdr-tel{
+  display:flex;align-items:center;gap:6px;
+  background:var(--accent-l);border-radius:8px;padding:7px 14px;flex-shrink:0;
+}
+.hdr-tel span{font-size:12px;color:var(--navy);font-weight:700}
+
+/* ─── TOP NAV ─────────────────────────── */
+.top-nav{
+  background:var(--navy-d);
+  height:var(--nh);
+  display:flex;align-items:stretch;
+  padding:0 28px;
+  position:sticky;top:var(--hh);z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+}
+.top-nav-inner{
+  display:flex;align-items:stretch;gap:0;
+  max-width:1280px;width:100%;margin:0 auto;padding:0 44px;
+}
+.tn-item{
+  position:relative;display:flex;align-items:center;
+  padding:0 18px;
+  font-size:13.5px;font-weight:500;color:rgba(255,255,255,.65);
+  cursor:pointer;white-space:nowrap;transition:color .15s;
+  border-bottom:2px solid transparent;
+  user-select:none;
+}
+.tn-item:hover,.tn-item.active{color:white;border-bottom-color:var(--accent)}
+.tn-item.active{font-weight:700}
+.tn-arr{font-size:9px;margin-left:5px;opacity:.6;transition:transform .2s}
+.tn-item:hover .tn-arr{transform:rotate(180deg)}
+.tn-drop{
+  position:absolute;top:100%;left:0;
+  background:var(--navy-d);min-width:170px;
+  border:1px solid rgba(255,255,255,.08);
+  border-top:2px solid var(--accent);
+  border-radius:0 0 10px 10px;
+  box-shadow:0 8px 28px rgba(0,0,0,.3);
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:all .2s;z-index:500;
+}
+.tn-item:hover .tn-drop{opacity:1;visibility:visible;transform:translateY(0)}
+.tn-drop a{
+  display:block;padding:10px 18px;
+  font-size:13px;color:rgba(255,255,255,.6);transition:.15s;
+}
+.tn-drop a:hover{color:white;background:rgba(255,255,255,.06);padding-left:22px}
+.tn-drop a.act{color:var(--accent);font-weight:600}
+.tn-cta{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.tn-cta a{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12.5px;font-weight:700;
+  padding:7px 16px;border-radius:7px;transition:.2s;white-space:nowrap;
+}
+.tn-cta .alert-btn{background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.35);color:#FF7F73;}
+.tn-cta .alert-btn:hover{background:rgba(231,76,60,.28)}
+.tn-cta .tel-btn{background:rgba(74,159,212,.12);border:1px solid rgba(74,159,212,.3);color:var(--accent);}
+.tn-cta .tel-btn:hover{background:rgba(74,159,212,.24)}
+
+/* ─── PAGE HERO BANNER ─────────────────────────── */
+.page-hero{
+  position:relative;height:260px;overflow:hidden;
+}
+.page-hero-photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;
+  filter:brightness(.38) saturate(.85);
+}
+.page-hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(0,24,64,.88) 0%,rgba(0,45,98,.6) 60%,rgba(0,75,158,.3) 100%);
+}
+.page-hero-inner{
+  position:relative;z-index:2;
+  height:100%;
+  max-width:1280px;margin:0 auto;padding:0 44px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.page-hero-inner .page-label{
+  font-size:11px;font-weight:700;letter-spacing:2px;color:var(--accent);
+  text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.page-hero-inner .page-label::before{
+  content:'';display:inline-block;width:28px;height:2px;background:var(--accent);border-radius:2px;
+}
+.page-hero-inner h1{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(26px,3.5vw,42px);font-weight:700;color:white;
+  line-height:1.3;letter-spacing:-.5px;
+}
+.page-hero-inner .page-sub{
+  font-size:14.5px;color:rgba(255,255,255,.65);margin-top:10px;
+}
+
+/* ─── BREADCRUMB + TAB BAR ─────────────────────────── */
+.breadcrumb-bar{
+  background:white;border-bottom:1.5px solid var(--border);
+  box-shadow:0 2px 10px rgba(0,45,98,.05);
+  position:sticky;top:calc(var(--hh) + var(--nh));z-index:100;
+}
+.bc-inner{
+  max-width:1280px;margin:0 auto;padding:0 44px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;
+}
+/* breadcrumb trail */
+.bc-trail{
+  display:flex;align-items:center;gap:8px;
+  padding:14px 0;flex-shrink:0;
+}
+.bc-trail a,.bc-trail span{
+  font-size:12.5px;color:var(--sub);
+}
+.bc-trail a{transition:.15s}
+.bc-trail a:hover{color:var(--navy)}
+.bc-trail .sep{font-size:10px;color:var(--border)}
+.bc-trail .cur{color:var(--navy);font-weight:700}
+
+/* sub-tabs */
+.sub-tabs{
+  display:flex;align-items:stretch;gap:0;
+}
+.sub-tab{
+  padding:0 22px;height:52px;
+  display:flex;align-items:center;
+  font-size:13.5px;font-weight:500;color:var(--sub);
+  border-bottom:3px solid transparent;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.sub-tab:hover{color:var(--navy)}
+.sub-tab.active{
+  color:var(--navy);font-weight:700;
+  border-bottom-color:var(--navy);
+}
+
+/* ─── CONTENT AREA ─────────────────────────── */
+.content-wrap{
+  max-width:1280px;margin:0 auto;padding:56px 44px 80px;
+}
+
+/* ─── SECTION: 인사말 ─────────────────────────── */
+.section-panel{display:none;opacity:1;transform:none}
+.section-panel.visible{display:block;animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* Greeting layout */
+.greeting-layout{
+  display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:start;
+}
+.greeting-text .eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--navy);color:white;
+  font-size:10.5px;font-weight:700;padding:5px 13px;border-radius:20px;
+  margin-bottom:20px;letter-spacing:1.2px;text-transform:uppercase;
+}
+.greeting-text .eyebrow::before{
+  content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;
+}
+.greeting-text h2{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(22px,2.5vw,32px);font-weight:700;color:var(--navy);
+  line-height:1.4;margin-bottom:28px;
+  padding-left:18px;border-left:5px solid var(--accent);
+}
+.greeting-text h2 em{color:var(--accent);font-style:normal}
+.greeting-body{
+  font-size:15.5px;line-height:2;color:var(--text);
+  padding-left:18px;
+}
+.greeting-body p+p{margin-top:20px}
+.greeting-body strong{color:var(--navy);font-weight:700}
+.greeting-sig{
+  margin-top:36px;padding:24px 28px;
+  background:var(--bg);border-radius:12px;border-left:4px solid var(--navy);
+  padding-left:24px;
+}
+.greeting-sig .sig-title{font-size:12px;color:var(--sub);margin-bottom:4px;letter-spacing:.5px}
+.greeting-sig .sig-name{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:700;color:var(--navy)}
+.greeting-sig .sig-sub{font-size:13px;color:var(--sub);margin-top:4px}
+
+/* 회장 photo card */
+.president-card{
+  background:white;border-radius:20px;overflow:hidden;
+  box-shadow:var(--sh-lg);border:1px solid var(--border);
+  position:sticky;top:calc(var(--hh) + var(--nh) + 56px);
+}
+.president-photo{
+  width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;
+}
+.president-info{padding:24px 26px}
+.president-info .badge{
+  display:inline-block;background:var(--navy);color:white;
+  font-size:10px;font-weight:700;padding:3px 10px;border-radius:12px;
+  margin-bottom:10px;letter-spacing:.5px;
+}
+.president-info h3{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.president-info .ptitle{font-size:13px;color:var(--sub);margin-bottom:14px}
+.president-info .profile-rows{display:flex;flex-direction:column;gap:7px}
+.president-info .prow{display:flex;gap:10px;font-size:13px}
+.president-info .prow .pk{color:var(--sub);flex-shrink:0;min-width:52px}
+.president-info .prow .pv{color:var(--text);font-weight:500}
+
+/* ─── SECTION: 연혁 ─────────────────────────── */
+.history-layout{display:grid;grid-template-columns:180px 1fr;gap:0;position:relative}
+.history-layout::before{
+  content:'';position:absolute;left:180px;top:0;bottom:0;
+  width:2px;background:var(--border);
+}
+/* decade nav */
+.decade-nav{
+  padding-top:8px;position:sticky;
+  top:calc(var(--hh) + var(--nh) + 56px + 52px);
+  align-self:start;
+}
+.decade-btn{
+  display:block;padding:10px 16px;
+  font-size:13.5px;font-weight:600;color:var(--sub);
+  cursor:pointer;transition:.2s;border-radius:8px 0 0 8px;
+  position:relative;
+}
+.decade-btn::after{
+  content:'';position:absolute;right:-2px;top:50%;transform:translateY(-50%);
+  width:6px;height:6px;border-radius:50%;background:var(--border);transition:.2s;
+}
+.decade-btn.active,
+.decade-btn:hover{color:var(--navy);background:var(--accent-l)}
+.decade-btn.active::after{background:var(--navy);width:8px;height:8px}
+
+/* timeline */
+.timeline{padding:0 0 0 48px}
+.decade-block{margin-bottom:48px}
+.decade-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:28px;font-weight:700;color:var(--navy);
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:14px;
+}
+.decade-title::before{
+  content:'';width:14px;height:14px;border-radius:50%;
+  background:var(--navy);border:3px solid white;
+  box-shadow:0 0 0 3px var(--accent);flex-shrink:0;
+  margin-left:-55px;margin-right:0;
+}
+.tl-item{
+  display:grid;grid-template-columns:70px 1fr;gap:16px;
+  padding:14px 0;border-bottom:1px dashed var(--border);
+  align-items:start;
+}
+.tl-item:last-child{border-bottom:none}
+.tl-year{
+  font-size:13px;font-weight:700;color:var(--accent);
+  padding-top:2px;
+}
+.tl-content h4{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.tl-content p{font-size:13.5px;color:var(--sub);line-height:1.7}
+.tl-badge{
+  display:inline-block;font-size:10px;font-weight:700;
+  padding:2px 8px;border-radius:8px;margin-right:6px;margin-bottom:4px;vertical-align:middle;
+}
+.tl-b-blue{background:var(--accent-l);color:var(--navy-m)}
+.tl-b-navy{background:rgba(0,45,98,.1);color:var(--navy)}
+
+/* ─── SECTION: 조직도 ─────────────────────────── */
+.org-intro{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:40px;gap:20px;
+}
+.org-intro-text h2{
+  font-family:'Noto Serif KR',serif;
+  font-size:26px;font-weight:700;color:var(--navy);margin-bottom:8px;
+}
+.org-intro-text p{font-size:14px;color:var(--sub);line-height:1.75;max-width:520px}
+.org-dl-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--navy);color:white;font-size:13.5px;font-weight:700;
+  padding:11px 22px;border-radius:10px;transition:.2s;flex-shrink:0;
+}
+.org-dl-btn:hover{background:var(--navy-m);transform:translateY(-2px)}
+
+/* org chart */
+.org-chart{
+  background:white;border-radius:20px;border:1.5px solid var(--border);
+  box-shadow:var(--sh);overflow:hidden;
+}
+.org-chart-head{
+  background:var(--navy);padding:20px 32px;
+  display:flex;align-items:center;gap:12px;
+}
+.org-chart-head h3{font-size:15px;font-weight:700;color:white}
+.org-chart-head span{font-size:12px;color:rgba(255,255,255,.5)}
+.org-body{padding:36px 40px 40px}
+
+/* top box */
+.org-top{display:flex;justify-content:center;margin-bottom:0}
+.org-box{
+  background:white;border-radius:12px;padding:14px 28px;text-align:center;
+  box-shadow:0 2px 12px rgba(0,45,98,.12);border:1.5px solid var(--border);
+  min-width:140px;position:relative;transition:all .25s;cursor:default;
+}
+.org-box:hover{transform:translateY(-3px);box-shadow:var(--sh-lg);border-color:var(--accent)}
+.org-box.primary{background:var(--navy);border-color:var(--navy)}
+.org-box.primary .ob-title{color:white}
+.org-box.primary .ob-sub{color:rgba(255,255,255,.6)}
+.org-box.accent-box{background:var(--accent);border-color:var(--accent)}
+.org-box.accent-box .ob-title{color:white}
+.org-box.accent-box .ob-sub{color:rgba(255,255,255,.75)}
+.ob-icon{font-size:20px;margin-bottom:6px}
+.ob-title{font-size:14px;font-weight:700;color:var(--navy);display:block}
+.ob-sub{font-size:11.5px;color:var(--sub);display:block;margin-top:2px}
+
+/* connector lines */
+.org-connector{
+  display:flex;justify-content:center;
+  height:36px;position:relative;
+}
+.org-connector::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;
+  width:2px;background:var(--border);transform:translateX(-50%);
+}
+.org-row{
+  display:flex;gap:16px;justify-content:center;
+  position:relative;flex-wrap:wrap;
+}
+/* horizontal line spanning children */
+.org-row-wrap{position:relative;margin-bottom:0}
+.org-h-line{
+  height:36px;position:relative;margin-bottom:0;
+  display:flex;align-items:flex-start;justify-content:center;
+}
+.org-h-line::before{
+  content:'';position:absolute;left:50%;top:0;
+  width:2px;height:18px;background:var(--border);transform:translateX(-50%);
+}
+/* tree section */
+.org-tree-section{margin-top:8px}
+.org-level{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+.org-branch{display:flex;flex-direction:column;align-items:center;gap:0}
+.org-branch-line{width:2px;height:28px;background:var(--border);margin:0 auto}
+/* 소위원회 group */
+.org-sub-group{
+  background:var(--bg);border-radius:12px;padding:18px 16px;
+  border:1.5px dashed var(--border);margin-top:12px;min-width:140px;
+}
+.org-sub-group-title{font-size:11px;font-weight:700;color:var(--sub);margin-bottom:10px;letter-spacing:.5px;text-align:center}
+.org-sub-group .org-box{margin-bottom:8px;min-width:120px;padding:10px 16px}
+.org-sub-group .org-box:last-child{margin-bottom:0}
+
+/* ─── SECTION: 오시는 길 ─────────────────────────── */
+.location-layout{display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:start}
+.map-placeholder{
+  background:var(--navy);border-radius:20px;overflow:hidden;
+  height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  position:relative;
+}
+.map-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background:url("https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=900&q=60&auto=format&fit=crop") center/cover;
+  opacity:.3;
+}
+.map-overlay-text{position:relative;z-index:2;text-align:center}
+.map-overlay-text .map-emoji{font-size:48px;margin-bottom:8px}
+.map-overlay-text p{color:rgba(255,255,255,.6);font-size:13px}
+.map-overlay-text strong{color:white;display:block;font-size:15px;margin-bottom:4px}
+.btn-kakao{
+  position:relative;z-index:2;
+  display:inline-flex;align-items:center;gap:8px;
+  background:#FEE500;color:#3A1D1D;font-size:13.5px;font-weight:700;
+  padding:11px 24px;border-radius:10px;transition:.2s;margin-top:16px;
+}
+.btn-kakao:hover{background:#F0D800;transform:translateY(-2px)}
+
+.location-info{background:white;border-radius:20px;padding:32px;box-shadow:var(--sh);border:1.5px solid var(--border)}
+.location-info h3{
+  font-family:'Noto Serif KR',serif;
+  font-size:20px;font-weight:700;color:var(--navy);margin-bottom:24px;
+  padding-bottom:16px;border-bottom:2px solid var(--border);
+}
+.info-rows{display:flex;flex-direction:column;gap:16px}
+.info-row{display:flex;gap:14px;align-items:flex-start}
+.info-icon{
+  width:36px;height:36px;background:var(--accent-l);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;
+}
+.info-row .ird{flex:1}
+.info-row .ird strong{display:block;font-size:12px;color:var(--sub);margin-bottom:3px;letter-spacing:.3px}
+.info-row .ird span{font-size:14px;color:var(--text);font-weight:500;line-height:1.5}
+.transport-section{margin-top:24px;padding-top:20px;border-top:1.5px solid var(--border)}
+.transport-section h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.transport-item{
+  display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;
+}
+.transport-item .tr-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:12px;
+  flex-shrink:0;margin-top:1px;
+}
+.tr-bus{background:#3A6BC1;color:white}
+.tr-subway{background:#1F9147;color:white}
+.transport-item .tr-text{font-size:13px;color:var(--sub);line-height:1.6}
+
+/* ─── STAT BAND ─────────────────────────── */
+.stat-band{
+  background:var(--navy);padding:48px 0;margin-top:60px;
+}
+.stat-band-inner{
+  max-width:1280px;margin:0 auto;padding:0 44px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+}
+.stat-item{
+  text-align:center;padding:20px 24px;
+  border-right:1px solid rgba(255,255,255,.1);
+}
+.stat-item:last-child{border-right:none}
+.stat-num{
+  font-family:'Noto Serif KR',serif;
+  font-size:38px;font-weight:700;color:white;display:block;
+  line-height:1;margin-bottom:8px;
+}
+.stat-num em{color:var(--accent);font-style:normal}
+.stat-label{font-size:13px;color:rgba(255,255,255,.55)}
+
+/* ─── FOOTER ─────────────────────────── */
+footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:0}
+.ft-inner{max-width:1280px;margin:0 auto;padding:40px 44px 28px}
+.ft-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr auto;
+  gap:40px;margin-bottom:32px;
+}
+.ft-brand .ftname{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:700;color:white;margin-bottom:10px}
+.ft-brand p{font-size:13px;line-height:1.75;color:rgba(255,255,255,.5);margin-bottom:14px}
+.ft-contact p{font-size:12.5px;color:rgba(255,255,255,.5);margin-bottom:4px}
+.ft-contact a{color:rgba(255,255,255,.5)}
+.ft-sns{display:flex;gap:10px;margin-top:14px}
+.ft-sns a{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:rgba(255,255,255,.5);transition:.2s;
+}
+.ft-sns a:hover{background:var(--accent);color:white}
+.ft-col h4{font-size:13px;font-weight:700;color:white;margin-bottom:12px}
+.ft-col ul{list-style:none}
+.ft-col ul li{margin-bottom:7px}
+.ft-col ul a{font-size:12.5px;color:rgba(255,255,255,.45);transition:.15s}
+.ft-col ul a:hover{color:white}
+.ft-info-box{
+  background:rgba(255,255,255,.05);border-radius:10px;padding:18px;
+  border:1px solid rgba(255,255,255,.08);font-size:12.5px;line-height:1.8;
+}
+.ib-label{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:8px}
+.ft-bottom{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:20px;display:flex;align-items:center;justify-content:space-between;
+}
+.ft-bottom p{font-size:12px;color:rgba(255,255,255,.3)}
+.ft-policy{display:flex;gap:16px}
+.ft-policy a{font-size:12px;color:rgba(255,255,255,.3);transition:.15s}
+.ft-policy a:hover{color:rgba(255,255,255,.6)}
+
+/* ─── ANIMATION ─────────────────────────── */
+.fade{opacity:0;transform:translateY(20px);transition:opacity .55s ease, transform .55s ease}
+.fade.vis{opacity:1;transform:translateY(0)}
+
+/* ─── RESPONSIVE ─────────────────────────── */
+@media(max-width:900px){
+  .greeting-layout{grid-template-columns:1fr}
+  .president-card{position:static}
+  .history-layout{grid-template-columns:1fr}
+  .history-layout::before{display:none}
+  .decade-nav{position:static;display:flex;flex-wrap:wrap;gap:4px;padding:0 0 16px}
+  .decade-title::before{display:none}
+  .timeline{padding:0}
+  .org-body{padding:20px}
+  .location-layout{grid-template-columns:1fr}
+  .stat-band-inner{grid-template-columns:repeat(2,1fr)}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .bc-inner{flex-direction:column;align-items:flex-start;gap:0}
+  .sub-tabs{overflow-x:auto;width:100%}
+  .hdr-inner{padding:0 20px}
+  .content-wrap{padding:32px 20px 60px}
+  .top-nav-inner{padding:0 20px}
+  .page-hero-inner{padding:0 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────── -->
+<header class="site-header">
+  <div class="hdr-inner">
+    <a href="index.html" class="hdr-logo">
+      <div class="lmark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="ltxt">
+        <div class="ko">경기도약사회</div>
+        <div class="en">Gyeonggi Pharmacists Association</div>
+      </div>
+    </a>
+    <div class="hdr-search">
+      <button aria-label="검색">🔍</button>
+      <input type="text" placeholder="검색어를 입력하세요">
+    </div>
+    <div class="hdr-tel">
+      <span>📞 031-256-0663</span>
+    </div>
+  </div>
+</header>
+
+<!-- ─── TOP NAV ─────────────────────────── -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <div class="tn-item"><a href="index.html" style="color:inherit;">홈</a></div>
+    <div class="tn-item active">
+      <a href="about.html" style="color:inherit;">경기도약사회 소개</a> <span class="tn-arr">▾</span>
+      <div class="tn-drop">
+        <a href="about.html?tab=greeting">인사말</a>
+        <a href="about.html?tab=history">연혁</a>
+        <a href="about.html?tab=org">조직도</a>
+        <a href="about.html?tab=location">오시는 길</a>
+      </div>
+    </div>
+    <div class="tn-item"><a href="issues.html" style="color:inherit;">핵심 현안</a></div>
+    <div class="tn-item"><a href="media.html" style="color:inherit;">약사회 미디어</a></div>
+    <div class="tn-item"><a href="health.html" style="color:inherit;">건강정보</a></div>
+    <div class="tn-item"><a href="news.html" style="color:inherit;">소식·공지</a></div>
+    <div class="tn-item">
+      참여마당 <span class="tn-arr">▾</span>
+      <div class="tn-drop"><a href="#">신고센터</a><a href="#">의견 보내기</a></div>
+    </div>
+    <div class="tn-item"><a href="#" style="color:inherit;">고객센터</a></div>
+    <div class="tn-cta">
+      <a href="#" class="alert-btn">🚨 신고센터</a>
+      <a href="tel:031-256-0663" class="tel-btn">📞 031-256-0663</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── PAGE HERO ─────────────────────────── -->
+<div class="page-hero">
+  <img class="page-hero-photo"
+    src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1400&q=70&auto=format&fit=crop"
+    alt="경기도약사회 소개 배경">
+  <div class="page-hero-inner">
+    <div class="page-label">About Us</div>
+    <h1>경기도약사회 소개</h1>
+    <p class="page-sub">경기도민의 건강을 지키는 경기도약사회를 소개합니다</p>
+  </div>
+</div>
+
+<!-- ─── BREADCRUMB + TAB BAR ─────────────────────────── -->
+<div class="breadcrumb-bar">
+  <div class="bc-inner">
+    <div class="bc-trail">
+      <a href="index.html">홈</a>
+      <span class="sep">›</span>
+      <span class="cur" id="bc-cur">경기도약사회 소개 · 인사말</span>
+    </div>
+    <div class="sub-tabs">
+      <div class="sub-tab active" data-tab="greeting" onclick="showTab('greeting')">인사말</div>
+      <div class="sub-tab" data-tab="history" onclick="showTab('history')">연혁</div>
+      <div class="sub-tab" data-tab="org" onclick="showTab('org')">조직도</div>
+      <div class="sub-tab" data-tab="location" onclick="showTab('location')">오시는 길</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MAIN CONTENT ─────────────────────────── -->
+<main>
+
+<!-- ═══════════════ 인사말 ═══════════════ -->
+<div class="content-wrap section-panel visible" id="tab-greeting">
+
+  <div class="greeting-layout">
+    <!-- 본문 텍스트 -->
+    <div class="greeting-text">
+      <span class="eyebrow" id="greeting-eyebrow">회장 인사말</span>
+      <h2>약사가 <em>함께하는</em> 경기도,<br>더 건강한 내일을 약속합니다</h2>
+      <div class="greeting-body">
+        <p>
+          경기도약사회 홈페이지를 방문해 주신 도민 여러분과 회원 약사 여러분께
+          <strong>깊은 감사</strong>의 말씀을 드립니다.
+        </p>
+        <p>
+          경기도약사회는 1,400만 경기도민의 건강과 의약품 안전을 지키기 위해
+          <strong>7,200여 명의 회원 약사</strong>가 함께하는 단체입니다.
+          우리 약사들은 전문 지식과 따뜻한 마음으로 매일 도민 곁에서 올바른 약 사용을
+          돕고, 건강한 삶을 지원하고 있습니다.
+        </p>
+        <p>
+          최근 약업계는 창고형 약국 문제, 한약사 면허 범위 논란, 비대면 처방 확대 등
+          다양한 도전에 직면해 있습니다. 경기도약사회는 도민의 안전과 약사 직능 수호를
+          위해 <strong>단호하고 일관된 입장</strong>을 견지하며, 이를 사회에 명확히
+          알려나가겠습니다.
+        </p>
+        <p>
+          동시에 교육·연수 강화, 지부 역량 지원, 도민 건강정보 제공 등
+          <strong>회원과 도민 모두를 위한 서비스</strong>를 더욱 내실 있게
+          다듬어 가겠습니다. 여러분의 변함없는 관심과 성원을 부탁드립니다.
+        </p>
+      </div>
+      <div class="greeting-sig">
+        <div class="sig-title">경기도약사회</div>
+        <div class="sig-name" id="sig-name">회장 홍 길 동</div>
+        <div class="sig-sub" id="sig-sub">Gyeonggi Pharmacists Association President</div>
+      </div>
+    </div>
+
+    <!-- 회장 사진 카드 -->
+    <div class="president-card">
+      <img class="president-photo"
+        src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80&auto=format&fit=crop"
+        alt="회장 사진">
+      <div class="president-info">
+        <span class="badge" id="president-badge">제○대 회장</span>
+        <h3 id="president-name">홍 길 동</h3>
+        <div class="ptitle" id="president-title">경기도약사회 회장</div>
+        <div class="profile-rows">
+          <div class="prow"><span class="pk">취임</span><span class="pv" id="president-inaug">2023년 3월</span></div>
+          <div class="prow"><span class="pk">소속</span><span class="pv" id="president-org">수원시 ○○약국</span></div>
+          <div class="prow"><span class="pk">학력</span><span class="pv" id="president-edu">○○대학교 약학대학</span></div>
+          <div class="prow"><span class="pk">경력</span><span class="pv" id="president-career">전 수원지부장, 전 부회장</span></div>
+          <div class="prow"><span class="pk">연락처</span><span class="pv" id="president-contact">031-256-0663</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /tab-greeting -->
+
+<!-- ═══════════════ 연혁 ═══════════════ -->
+<div class="content-wrap section-panel" id="tab-history">
+
+  <!-- 기본 정보 카드 -->
+  <div style="background:white;border-radius:16px;border:1.5px solid var(--border);box-shadow:var(--sh);padding:32px 36px;margin-bottom:48px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
+      <div style="padding:0 28px 0 0;border-right:1px solid var(--border);">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:1px;margin-bottom:10px;">명칭</div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy);line-height:1.6;">사단법인 대한약사회 경기도지부</div>
+        <div style="font-size:13.5px;color:var(--sub);margin-top:4px;">호칭 : 경기도약사회</div>
+      </div>
+      <div style="padding:0 28px;border-right:1px solid var(--border);">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:1px;margin-bottom:10px;">소재지 및 연락처</div>
+        <div style="font-size:14px;font-weight:700;color:var(--navy);">경기도 수원시 장안구 장안로448번길 17-3 (이목동195-14) 2층</div>
+        <div style="font-size:13.5px;color:var(--sub);margin-top:4px;">대표전화 : 031-256-0663~5</div>
+      </div>
+      <div style="padding:0 0 0 28px;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:1px;margin-bottom:10px;">설립 정보</div>
+        <div style="font-size:14px;color:var(--text);line-height:1.8;">
+          <span style="color:var(--sub);">설립일자 :</span> <strong>1954. 11. 06</strong><br>
+          <span style="color:var(--sub);">설립근거 :</span> 약사법 제12조의2<br>
+          <span style="color:var(--sub);">설립목적 :</span> 사회복지의 증진과 국민보건향상을 위하여 약사 및 약학에 관한 연구 개선 발전을 도모하여 약사의 권익 옹호와 윤리 확립
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="history-layout">
+    <!-- 연대 네비 -->
+    <div class="decade-nav">
+      <div class="decade-btn active" onclick="scrollToDecade('d2020',this)">2020년대</div>
+      <div class="decade-btn" onclick="scrollToDecade('d2010',this)">2010년대</div>
+      <div class="decade-btn" onclick="scrollToDecade('d2000',this)">2000년대</div>
+      <div class="decade-btn" onclick="scrollToDecade('d1950',this)">창립~1990</div>
+    </div>
+
+    <!-- 타임라인 -->
+    <div class="timeline">
+
+      <div class="decade-block" id="d2020">
+        <div class="decade-title">2020년대</div>
+        <div class="tl-item">
+          <div class="tl-year">2025</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">취임</span>
+            <h4>제68회 정기대의원총회 개최 / 제34대 회장 취임</h4>
+            <p>2025년 2월 22일, 라마다프라자호텔에서 개최. 제34대 경기도약사회장에 연제덕 회장 취임.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2022</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">취임</span>
+            <h4>제65회 정기대의원총회 개최 / 제33대 회장 취임</h4>
+            <p>2022년 2월 19일, 라마다프라자호텔에서 개최. 제33대 경기도약사회장에 박영달 회장 취임.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="decade-block" id="d2010">
+        <div class="decade-title">2010년대</div>
+        <div class="tl-item">
+          <div class="tl-year">2019</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">취임</span>
+            <h4>제62회 정기대의원총회 개최 / 제32대 회장 취임</h4>
+            <p>2019년 2월 23일, 노보텔앰배서더호텔에서 개최. 제32대 경기도약사회장에 박영달 회장 취임.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2016</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">취임</span>
+            <h4>제59회 정기대의원총회 개최 / 제31대 회장 취임</h4>
+            <p>2016년 2월 27일, 라마다프라자호텔에서 개최. 제31대 경기도약사회장에 최광훈 회장 취임.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2013</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">취임</span>
+            <h4>제56회 정기대의원총회 개최 / 제30대 회장 취임</h4>
+            <p>2013년 2월 16일, 라마다프라자호텔에서 개최. 제30대 경기도약사회장에 함삼균 회장 취임.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2010</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">취임</span>
+            <h4>제53회 정기대의원총회 개최 / 제29대 회장 취임</h4>
+            <p>2010년 2월 20일, 호텔리츠에서 개최. 제29대 경기도약사회장에 김현태 회장 취임.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="decade-block" id="d2000">
+        <div class="decade-title">2000년대</div>
+        <div class="tl-item">
+          <div class="tl-year">2007</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">취임</span>
+            <h4>제50회 정기대의원총회 개최 / 제28대 회장 취임</h4>
+            <p>2007년 2월 10일, 호텔리츠에서 개최. 제28대 경기도약사회장에 박기배 회장 취임.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2005</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-blue">준공</span>
+            <h4>경기도약사회관 준공식 개최</h4>
+            <p>2005년 10월 16일, 수원시 장안구 이목동 195-14번지에서 준공식 개최.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2005</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-blue">이전</span>
+            <h4>경기도약사회 사무국 신청사로 이전</h4>
+            <p>2005년 10월 11일, 수원시 장안구 영화동 180-8번지에서 25년만에 수원시 장안구 이목동 195-14번지로 이전.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2005</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-blue">시설</span>
+            <h4>경기도약사회관 신축을 위한 기공식 개최</h4>
+            <p>2005년 5월 19일, 경기도약사회관 신축 기공식 개최.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2004</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-blue">시설</span>
+            <h4>경기도약사회관 신축 부지 매입</h4>
+            <p>2004년 5월 24일, 경기도 수원시 장안구 이목동 195-14, 15번지 200평 매입.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2004</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">취임</span>
+            <h4>제47회 정기대의원총회 개최 / 제27대 회장 취임</h4>
+            <p>2004년 2월 7일, 경기중소기업종합지원센터에서 개최. 제27대 경기도약사회장에 김경옥 회장 취임.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2003</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">제도</span>
+            <h4>회장·지부장 직선제 도입</h4>
+            <p>2003년 5월 2일, 대한약사회 정관 개정에 따라 대한약사회장 및 지부장 선출 방법을 대의원선거에서 회원 직접 선거로 변경.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="decade-block" id="d1950">
+        <div class="decade-title">창립 ~ 1990년대</div>
+        <div class="tl-item">
+          <div class="tl-year">1981</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-blue">분리</span>
+            <h4>인천시 분회를 인천직할시 지부로 분리 독립</h4>
+            <p>1981년 9월 28일, 인천시 분회를 인천직할시 지부로 분리 독립 (창립총회 개최).</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1979</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">시설</span>
+            <h4>약사회관 개관 기념식 개최</h4>
+            <p>1979년 8월 23일, 약사회관 개관 기념식 개최.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1979</div>
+          <div class="tl-content">
+            <h4>사무국 수원시 장안구 영화동으로 이전</h4>
+            <p>1979년 6월 14일, 사무국을 수원시 장안구 영화동 180-8로 이전.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1975</div>
+          <div class="tl-content">
+            <h4>정·부회장 직선제 시행</h4>
+            <p>1975년 12월 15일, 제19회 정기총회를 대한약사회 회관 회의실에서 개최하고 정·부회장 입후보제를 직선제로 정함.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1971</div>
+          <div class="tl-content">
+            <h4>사무국 수원시로 이전</h4>
+            <p>1971년 3월 12일, 사무국을 대한약사회에서 수원시 매산로1가 61번지 삼화약국 2층으로 이전.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1967</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-navy">명칭변경</span>
+            <h4>경기도약사회를 대한약사회 경기도지부로 환원</h4>
+            <p>1967년 9월 13일, 제11회 정기총회를 대한약사회관 회의실에서 개최하고 법률 제1910호(1967.03.03)에 의하여 경기도약사회를 대한약사회 경기도지부로 함 (지방자치제에서 중앙집권제로 변경).</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1966</div>
+          <div class="tl-content">
+            <h4>사무국을 대한약사회 회관으로 이전</h4>
+            <p>1966년 9월 26일, 제10회 정기총회를 대한약사회관 회의실에서 개최하고 사무국을 대한약사회 회관에 두기로 회칙 개정.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1965</div>
+          <div class="tl-content">
+            <h4>각 시·군 지부의 명칭을 분회로 개칭</h4>
+            <p>1965년 9월 29일, 제9회 정기총회를 대한약품공업협회 회의실에서 개최하고 각 시·군 지부의 명칭을 분회로 개칭.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1963</div>
+          <div class="tl-content">
+            <h4>사무소를 대한약사회관에 설치</h4>
+            <p>1963년 5월 4일, 임시총회를 대한약사회관 회의실에서 개최하고 사무소를 대한약사회관에 설치.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1962</div>
+          <div class="tl-content">
+            <h4>사무소를 서울특별시 종로2가 영보빌딩 33호실에 설치</h4>
+            <p>1962년 11월 7일, 제6회 정기총회를 인천시 상공회의소 회의실에서 개최하고 사무소를 서울특별시 종로2가 영보빌딩 33호실에 설치.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1961</div>
+          <div class="tl-content">
+            <h4>연락소를 인천시 동화약국에 개설</h4>
+            <p>1961년 10월 3일, 제5회 정기총회를 개최하여 전체 회원 총회를 대의원 총회로 하기로 하고 연락소를 인천시 동화약국에 개설.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1954</div>
+          <div class="tl-content">
+            <span class="tl-badge tl-b-blue">창립</span>
+            <h4>경기도약사회 창립</h4>
+            <p>1954년 11월 6일, 경기도약사회 창립 (연락 사무소 : 서울 종로5가 천도약품 건물).</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+  </div>
+</div><!-- /tab-history -->
+
+<!-- ═══════════════ 조직도 ═══════════════ -->
+<div class="content-wrap section-panel" id="tab-org">
+<style>
+.gb-circle{background:#c8a96e;border-radius:50%;width:88px;height:88px;font-size:15px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.gb{background:#c8a96e;border-radius:40px;padding:11px 30px;font-size:14px;font-weight:700;color:white;white-space:nowrap;}
+.gb-sm{background:#c8a96e;border-radius:30px;padding:8px 20px;font-size:13px;font-weight:700;color:white;white-space:nowrap;}
+.gb-outline{border:1.5px solid #c8a96e;border-radius:30px;padding:8px 20px;font-size:13px;font-weight:600;color:#c8a96e;white-space:nowrap;}
+.vline{width:2px;background:rgba(200,169,110,.4);margin:0 auto;}
+.hline{height:2px;background:rgba(200,169,110,.4);}
+.pill-w{background:white;border-radius:30px;padding:7px 9px;font-size:10.5px;font-weight:700;color:var(--navy);writing-mode:vertical-rl;min-height:60px;display:flex;align-items:center;justify-content:center;letter-spacing:1px;flex-shrink:0;}
+.pill-d{background:rgba(255,255,255,.1);border:1px solid rgba(200,169,110,.3);border-radius:30px;padding:7px 9px;font-size:10px;color:rgba(255,255,255,.85);writing-mode:vertical-rl;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex-shrink:0;}
+.pill-d .pn{font-weight:700;font-size:11px;color:white;}
+.pill-d .pp{font-size:9.5px;color:rgba(255,255,255,.6);}
+.pill-box{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.pill-stem{width:2px;height:20px;background:rgba(200,169,110,.4);}
+/* 위원회 pill - 흰 배경 세로 긴 것 */
+.com-pill{background:rgba(200,169,110,.85);border-radius:24px;padding:10px 10px;font-size:11px;font-weight:700;color:white;writing-mode:vertical-rl;min-height:100px;display:flex;align-items:center;justify-content:center;letter-spacing:1px;flex-shrink:0;}
+.com-pill.hi{background:white;color:var(--navy);}
+</style>
+
+<!-- ────────── 제34대 집행부 조직도 ────────── -->
+<div style="margin-bottom:56px;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:32px;">
+    <div style="font-size:18px;font-weight:700;color:var(--navy);font-family:'Noto Serif KR',serif;padding-left:16px;border-left:5px solid var(--accent);">제34대 집행부 조직도</div>
+    <div style="font-size:12px;color:var(--sub);margin-left:auto;">· 24위원회 / 2본부</div>
+  </div>
+  <div style="background:#f0ede8;border-radius:20px;padding:44px 28px 48px;overflow-x:auto;">
+    <div style="min-width:1000px;">
+
+      <!-- 대의원총회 / 회장 / 감사 -->
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:0;">
+        <div style="display:flex;justify-content:center;">
+          <div style="background:#c8a96e;border-radius:30px;padding:10px 28px;font-size:13px;font-weight:700;color:white;">대의원총회</div>
+        </div>
+        <div style="background:#c8a96e;border-radius:50%;width:86px;height:86px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:white;">회 장</div>
+        <div style="display:flex;justify-content:center;">
+          <div style="background:#c8a96e;border-radius:30px;padding:10px 32px;font-size:13px;font-weight:700;color:white;">감 사</div>
+        </div>
+      </div>
+
+      <!-- 이사회 -->
+      <div style="width:2px;height:24px;background:#b8996a;margin:0 auto;"></div>
+      <div style="display:flex;justify-content:center;"><div style="background:#c8a96e;border-radius:30px;padding:10px 36px;font-size:14px;font-weight:700;color:white;">이 사 회</div></div>
+      <div style="width:2px;height:20px;background:#b8996a;margin:0 auto;"></div>
+      <div style="display:flex;justify-content:center;"><div style="background:#c8a96e;border-radius:30px;padding:10px 32px;font-size:14px;font-weight:700;color:white;">상임이사회</div></div>
+      <div style="width:2px;height:24px;background:#b8996a;margin:0 auto;"></div>
+
+      <!-- 상임이사회 → 분회장그룹(좌) + 본부(우) 수평 분기 -->
+      <!-- 구조: 좌끝선 ─── 중앙수직선 ─── 우끝선 -->
+      <div style="position:relative;height:2px;background:#b8996a;margin:0 8%;">
+        <!-- 좌 내림선 -->
+        <div style="position:absolute;left:0;top:0;width:2px;height:24px;background:#b8996a;"></div>
+        <!-- 우 내림선 -->
+        <div style="position:absolute;right:0;top:0;width:2px;height:24px;background:#b8996a;"></div>
+      </div>
+      <div style="height:24px;"></div>
+
+      <!-- 분회장그룹(좌) + 본부(우) -->
+      <div style="display:flex;align-items:flex-start;margin:0 8%;gap:0;">
+        <!-- 좌: 분회장·자문위원·회장단 -->
+        <div style="display:flex;gap:8px;">
+          <div style="background:#c8a96e;border-radius:30px;padding:10px 20px;font-size:13px;font-weight:700;color:white;">분회장</div>
+          <div style="background:#c8a96e;border-radius:30px;padding:10px 20px;font-size:13px;font-weight:700;color:white;">자문위원</div>
+          <div style="background:#c8a96e;border-radius:30px;padding:10px 20px;font-size:13px;font-weight:700;color:white;">회장단</div>
+        </div>
+        <div style="flex:1;"></div>
+        <!-- 우: 본부 -->
+        <div style="background:#c8a96e;border-radius:14px;padding:14px 20px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;">
+          <div style="font-size:13px;font-weight:700;color:white;margin-bottom:2px;">본 부</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.9);">· 대외협력본부</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.9);">· 마약퇴치사업본부</div>
+        </div>
+      </div>
+
+      <div style="height:20px;"></div>
+
+      <!-- 위원회 전체 수평선 + pill들 -->
+      <div style="position:relative;">
+        <!-- 전체 너비 수평선 -->
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#b8996a;"></div>
+        <!-- 위원회 pill들 -->
+        <div style="display:flex;gap:6px;justify-content:center;padding-top:0;">
+          <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">윤리위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">총무위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">건강보험위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">병원약사위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">약국위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">건기식위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">약사지도위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">정보통신위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">홍보위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">의약품안전사용위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">방문약료위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">돌봄통합위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">학술위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">정책위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">편집위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">한약위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">법제위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">청년약사위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">공직약사위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">산업약사위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">근무약사위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">문화복지위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">여약사위원회</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:16px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:20px;padding:12px 11px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;min-height:80px;display:flex;align-items:center;justify-content:center;">국제위원회</div></div>
+        </div>
+      </div>
+
+      <!-- 사무국 -->
+      <div style="width:2px;height:28px;background:#b8996a;margin:0 auto;"></div>
+      <div style="display:flex;justify-content:center;">
+        <div style="background:#c8a96e;border-radius:30px;padding:12px 52px;font-size:15px;font-weight:700;color:white;">사 무 국</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ────────── 31개 시·군분회 조직도 ────────── -->
+<div>
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:32px;">
+    <div style="font-size:18px;font-weight:700;color:var(--navy);font-family:'Noto Serif KR',serif;padding-left:16px;border-left:5px solid var(--accent);">31개 시·군분회 조직도</div>
+  </div>
+  <div style="background:#f0ede8;border-radius:20px;padding:44px 16px 48px;overflow-x:auto;">
+    <div style="min-width:1300px;">
+
+      <!-- 경기도약사회 -->
+      <div style="display:flex;justify-content:center;">
+        <div style="background:#c8a96e;border-radius:30px;padding:12px 56px;font-size:15px;font-weight:700;color:white;">경기도약사회</div>
+      </div>
+      <!-- 세로선 -->
+      <div style="width:2px;height:24px;background:#b8996a;margin:0 auto;"></div>
+      <!-- 31개 시군분회 -->
+      <div style="display:flex;justify-content:center;">
+        <div style="background:#c8a96e;border-radius:30px;padding:12px 48px;font-size:15px;font-weight:700;color:white;">31개 시·군분회</div>
+      </div>
+      <!-- 세로선 24px -->
+      <div style="width:2px;height:24px;background:#b8996a;margin:0 auto;"></div>
+      <!-- 전체 수평선 -->
+      <div style="height:2px;background:#b8996a;margin:0;"></div>
+
+      <!-- 31개 분회 열 -->
+      <div style="display:flex;gap:4px;justify-content:center;align-items:flex-start;">
+        <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">고양시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 조기성</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">과천시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 송정화</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">광명시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 민필기</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">광주시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 김영민</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">구리시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 박미경</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">군포시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 이영주</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">김포시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 전복례</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">남양주시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 김종길</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">동두천시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 김의순</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">부천시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 박재성</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">성남시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 전성표</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">수원시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 김호진</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">시흥시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 홍성원</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">안산시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 임용수</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">안성시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 신명수</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">안양시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 조태연</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">양주시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 김문호</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">여주시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 번춘지</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">오산시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 문정인</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">용인시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 곽은호</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">의왕시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 이정근</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">의정부시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 구현모</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">이천시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 정욱형</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">파주시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 백준호</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">평택시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 최영규</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">포천시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 장명섭</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">하남시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 최용한</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">화성시분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 이진형</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">가평군분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 안병현</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">양평군분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 양수은</div></div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;"><div style="width:2px;height:20px;background:#b8996a;"></div><div style="background:#c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:700;color:white;letter-spacing:1px;white-space:nowrap;">연천군분회</div><div style="width:2px;height:10px;background:#b8996a;"></div><div style="background:white;border:1.5px solid #c8a96e;border-radius:16px;padding:10px 10px;writing-mode:vertical-rl;font-size:11px;font-weight:600;color:#5a3e1b;letter-spacing:1px;white-space:nowrap;">분회장 김주식</div></div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-org -->
+
+<!-- ═══════════════ 오시는 길 ═══════════════ -->
+<div class="content-wrap section-panel" id="tab-location">
+  <div class="location-layout">
+    <div>
+      <div class="map-placeholder">
+        <div class="map-overlay-text">
+          <div class="map-emoji">🗺️</div>
+          <strong>네이버지도 임베드 영역</strong>
+          <p>경기도 수원시 장안구 장안로448번길 17-3 (이목동195-14) 2층</p>
+          <a href="https://map.naver.com/local/siteview.nhn?code=13303771" target="_blank" class="btn-kakao" style="background:#03C75A;color:white;margin-top:16px;">🗺️ 네이버지도로 길찾기</a>
+        </div>
+      </div>
+    </div>
+    <div class="location-info">
+      <h3>경기도약사회 오시는 길</h3>
+      <div class="info-rows">
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="ird"><strong>주소</strong><span>경기도 수원시 장안구 장안로448번길 17-3 (이목동195-14) 2층</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📞</div>
+          <div class="ird"><strong>전화 / 팩스</strong><span>031-256-0663~5 / FAX 031-241-0154</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🕘</div>
+          <div class="ird"><strong>업무시간</strong><span>평일 09:00 – 18:00<br>점심시간 12:00 – 13:00 (토·일·공휴일 휴무)</span></div>
+        </div>
+      </div>
+      <div class="transport-section">
+        <h4>대중교통 안내</h4>
+        <div class="transport-item">
+          <span class="tr-badge tr-subway">🚇 지하철</span>
+          <span class="tr-text">1호선 수원역 하차 후 버스 환승</span>
+        </div>
+        <div class="transport-item">
+          <span class="tr-badge tr-bus">🚌 버스</span>
+          <span class="tr-text">수원 시내버스 이용 → 장안구청 방면</span>
+        </div>
+      </div>
+      <div style="margin-top:20px;">
+        <a href="https://map.naver.com/local/siteview.nhn?code=13303771" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#03C75A;color:white;font-size:14px;font-weight:700;padding:13px 20px;border-radius:10px;">
+          🗺️ 네이버지도로 길찾기
+        </a>
+      </div>
+    </div>
+  </div>
+</div><!-- /tab-location -->
+
+<!-- ─── STAT BAND (공통) ─────────────────────────── -->
+<div class="stat-band fade">
+  <div class="stat-band-inner">
+    <div class="stat-item">
+      <span class="stat-num">7,<em>200</em>+</span>
+      <span class="stat-label">경기도 소속 회원 약사</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num"><em>31</em>개</span>
+      <span class="stat-label">시·군 지부 조직</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num"><em>50</em>+</span>
+      <span class="stat-label">년 역사</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">1,<em>400</em>만</span>
+      <span class="stat-label">경기도민 건강 파트너</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─────────────────────────── -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ftname">경기도약사회</div>
+        <p>경기도민의 건강을 지키고 올바른 약 사용 문화를<br>만들어 가는 경기도약사회입니다.</p>
+        <div class="ft-contact">
+          <p>📍 경기도 수원시 장안구 장안로448번길 17-3 (이목동195-14) 2층</p>
+          <p>📞 <strong>031-256-0663~5</strong> · 📠 031-241-0154</p>
+          <p>✉️ kkpa0800@naver.com</p>
+        </div>
+        <div class="ft-sns">
+          <a href="#" title="페이스북">f</a>
+          <a href="#" title="X">𝕏</a>
+          <a href="#" title="인스타그램">◎</a>
+          <a href="#" title="유튜브">▶</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>경기도약사회 소개</h4>
+        <ul>
+          <li><a href="about.html?tab=greeting">인사말</a></li>
+          <li><a href="about.html?tab=history">연혁</a></li>
+          <li><a href="about.html?tab=org">조직도</a></li>
+          <li><a href="about.html?tab=location">오시는 길</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>주요 메뉴</h4>
+        <ul>
+          <li><a href="issues.html">핵심 현안</a></li>
+          <li><a href="media.html">약사회 미디어</a></li>
+          <li><a href="health.html">건강정보</a></li>
+          <li><a href="news.html">소식·공지</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>참여</h4>
+        <ul>
+          <li><a href="#">신고센터</a></li>
+          <li><a href="#">의견 보내기</a></li>
+          <li><a href="#">약사 봉사단</a></li>
+          <li><a href="#">고객센터</a></li>
+        </ul>
+      </div>
+      <div class="ft-info-box">
+        <div class="ib-label">연락처</div>
+        <p>경기도 수원시 장안구<br><strong>031-256-0663~5</strong><br>평일 09:00 – 18:00<br>점심 12:00 – 13:00</p>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>COPYRIGHT(C) KKPA All RIGHTS RESERVED.</p>
+      <div class="ft-policy">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">이메일무단수집거부</a>
+        <a href="#">사이트맵</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</main>
+<script>
+var tabLabels = {
+  greeting: '경기도약사회 소개 · 인사말',
+  history:  '경기도약사회 소개 · 연혁',
+  org:      '경기도약사회 소개 · 조직도',
+  location: '경기도약사회 소개 · 오시는 길'
+};
+
+function showTab(id) {
+  document.querySelectorAll('.section-panel').forEach(function(p) {
+    p.classList.remove('visible');
+  });
+  var target = document.getElementById('tab-' + id);
+  if (target) { target.classList.add('visible'); }
+  document.querySelectorAll('.sub-tab').forEach(function(t) {
+    t.classList.toggle('active', t.dataset.tab === id);
+  });
+  var bc = document.getElementById('bc-cur');
+  if (bc) bc.textContent = tabLabels[id] || '경기도약사회 소개';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+
+function scrollToDecade(id, btn) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  document.querySelectorAll('.decade-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var offset = 68 + 52 + 52 + 20;
+  var y = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}
+
+// URL 파라미터로 탭 초기화 (예: about.html?tab=history)
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var tab = params.get('tab');
+  if (tab) { showTab(tab); }
+})();
+</script>
+
+<script>
+// Netlify CMS content 파일에서 직접 읽어서 반영
+(async function loadAboutCMS() {
+  try {
+    const res = await fetch('/content/settings/president.json');
+    if (!res.ok) return;
+    const d = await res.json();
+    const map = {
+      'president-badge':   d.badge,
+      'president-name':    d.name,
+      'president-title':   d.title,
+      'president-inaug':   d.inaug,
+      'president-org':     d.org,
+      'president-edu':     d.edu,
+      'president-career':  d.career,
+      'president-contact': d.contact,
+    };
+    Object.keys(map).forEach(id => {
+      const el = document.getElementById(id);
+      if (el && map[id]) el.textContent = map[id];
+    });
+  } catch(e) {}
+  try {
+    const res = await fetch('/content/settings/contact.json');
+    if (!res.ok) return;
+    const d = await res.json();
+    document.querySelectorAll('.contact-address').forEach(el => { if(d.address) el.textContent = d.address; });
+    document.querySelectorAll('.contact-tel').forEach(el => { if(d.tel) el.textContent = d.tel; });
+    document.querySelectorAll('.contact-email').forEach(el => { if(d.email) el.textContent = d.email; });
+    document.querySelectorAll('.contact-hours').forEach(el => { if(d.hours) el.textContent = d.hours; });
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
