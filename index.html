@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<script>
+// Netlify Identity 초대/복구 토큰 감지 → CMS로 리다이렉트
+(function() {
+  var hash = window.location.hash;
+  if (hash && (
+    hash.indexOf('invite_token=') !== -1 ||
+    hash.indexOf('recovery_token=') !== -1 ||
+    hash.indexOf('confirmation_token=') !== -1 ||
+    hash.indexOf('access_token=') !== -1
+  )) {
+    window.location.href = '/static/admin/index.html' + hash;
+  }
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>경기도약사회 — 경기도민의 건강을 지키는 든든한 이웃</title>
