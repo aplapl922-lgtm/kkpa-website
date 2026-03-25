@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: aplapl922-lgtm/kkpa-website
+  name: git-gateway
   branch: main
 
 locale: ko
