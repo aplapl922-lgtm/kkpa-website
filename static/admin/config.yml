@@ -2,6 +2,8 @@ backend:
   name: github
   repo: aplapl922-lgtm/kkpa-website
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 locale: ko
 media_folder: static/uploads
@@ -68,7 +70,7 @@ collections:
         name: president
         file: content/settings/president.json
         fields:
-          - { label: 배지(예 제34대 회장), name: badge, widget: string }
+          - { label: "배지(예: 제34대 회장)", name: badge, widget: string }
           - { label: 이름, name: name, widget: string }
           - { label: 직함, name: title, widget: string }
           - { label: 취임일, name: inaug, widget: string }
