@@ -1083,5 +1083,46 @@ function showAdminHealth(item, cardEl) {
   da.style.animation='none'; da.offsetHeight; da.style.animation='';
 }
 </script>
+
+<script>
+// ── Admin CMS(kkpa_health) → health.html 좌측 목록 반영 ──
+(function syncHealth() {
+  var raw = localStorage.getItem('kkpa_health');
+  if (!raw) return;
+  try {
+    var items = JSON.parse(raw).filter(function(i){ return !i._deleted; });
+    if (!items.length) return;
+    var list = document.querySelector('.issue-list');
+    if (!list) return;
+    var detail = document.querySelector('.detail-area');
+    if (!detail) return;
+    list.innerHTML = items.map(function(item, i) {
+      return '<div class="issue-card'+(i===0?' active':'')+'" onclick="showIssue('h'+i+'',this)">'
+        +'<div class="card-status" style="background:var(--accent-l);color:var(--navy-m);">'+(item.cat||'건강정보')+'</div>'
+        +'<div class="card-title">'+item.title+'</div>'
+        +'<div class="card-desc">'+(item.excerpt||item.subtitle||'')+'</div>'
+        +'</div>';
+    }).join('');
+    items.forEach(function(item, i) {
+      var existing = document.getElementById('issue-h'+i);
+      if (!existing) {
+        var div = document.createElement('div');
+        div.id = 'issue-h'+i;
+        div.style.display = i===0 ? 'block' : 'none';
+        var bg = item.color || '#002D62';
+        div.innerHTML = '<div style="background:linear-gradient(135deg,'+bg+',#4A9FD4);padding:44px 40px 40px;">'
+          +'<div style="font-size:52px;margin-bottom:20px;">'+(item.icon||'💊')+'</div>'
+          +'<h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;margin-bottom:10px;">'+item.title+'</h2>'
+          +'<p style="font-size:13.5px;color:rgba(255,255,255,.65);">'+(item.excerpt||'')+'</p>'
+          +'</div>'
+          +'<div class="detail-body"><div class="detail-section"><h3>💡 내용</h3>'
+          +(item.sections && item.sections[0] ? '<p>'+item.sections[0].content+'</p>' : '<p>'+(item.excerpt||item.title)+'</p>')
+          +'</div></div>';
+        detail.appendChild(div);
+      }
+    });
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>

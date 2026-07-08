@@ -1451,5 +1451,37 @@ function scrollToDecade(id, btn) {
   } catch(e) {}
 })();
 </script>
+
+<script>
+// ── Admin CMS → 소개 페이지 반영 ──
+(function syncAbout() {
+  var data = localStorage.getItem('kkpa_about');
+  if (!data) return;
+  try {
+    var d = JSON.parse(data);
+    var map = {
+      'president-badge':   d.badge,
+      'president-name':    d.name,
+      'president-title':   d.title,
+      'president-inaug':   d.inaug,
+      'president-org':     d.org,
+      'president-edu':     d.edu,
+      'president-career':  d.career,
+    };
+    Object.keys(map).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && map[id]) el.textContent = map[id];
+    });
+    // 인사말 제목
+    var gtEl = document.querySelector('.greeting-title, .sig-title, h2.greeting');
+    if (gtEl && d.greetingTitle) gtEl.textContent = d.greetingTitle;
+    // 인사말 본문
+    var gbEl = document.querySelector('.greeting-body, .greeting-text, .sig-text');
+    if (gbEl && d.greetingBody) {
+      gbEl.innerHTML = d.greetingBody.split('\n').filter(Boolean).map(function(p){ return '<p>'+p+'</p>'; }).join('');
+    }
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>

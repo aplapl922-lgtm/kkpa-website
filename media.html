@@ -1148,5 +1148,48 @@ function showAdminMedia(item, cardEl) {
   da.style.animation='none'; da.offsetHeight; da.style.animation='';
 }
 </script>
+
+<script>
+// ── Admin CMS(kkpa_onair) → media.html 좌측 목록 반영 ──
+(function syncMedia() {
+  var raw = localStorage.getItem('kkpa_onair');
+  if (!raw) return;
+  try {
+    var items = JSON.parse(raw).filter(function(i){ return !i._deleted; });
+    if (!items.length) return;
+    var list = document.querySelector('.issue-list');
+    if (!list) return;
+    var detail = document.querySelector('.detail-area');
+    if (!detail) return;
+    // 기존 카드 지우고 admin 데이터로 교체
+    list.innerHTML = items.map(function(item, i) {
+      return '<div class="issue-card'+(i===0?' active':'')+'" onclick="showIssue('onair'+i+'',this)" data-onair="'+i+'">'
+        +'<div class="card-status status-blue">'+item.type+'</div>'
+        +'<div class="card-title">'+item.title+'</div>'
+        +'<div class="card-desc">'+(item.subtitle||item.cardDesc||'')+'</div>'
+        +'</div>';
+    }).join('');
+    // 상세 패널도 추가
+    items.forEach(function(item, i) {
+      var existing = document.getElementById('issue-onair'+i);
+      if (!existing) {
+        var div = document.createElement('div');
+        div.id = 'issue-onair'+i;
+        div.style.display = i===0 ? 'block' : 'none';
+        var bg = item.color || '#002D62';
+        div.innerHTML = '<div style="background:linear-gradient(135deg,'+bg+',#4A9FD4);padding:44px 40px 40px;">'
+          +'<div style="font-size:52px;margin-bottom:20px;">'+(item.icon||'📋')+'</div>'
+          +'<h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;margin-bottom:10px;">'+item.title+'</h2>'
+          +'<p style="font-size:13.5px;color:rgba(255,255,255,.65);">'+(item.subtitle||'')+'</p>'
+          +'</div>'
+          +'<div class="detail-body"><div class="detail-section"><h3>📋 콘텐츠 소개</h3>'
+          +(item.sections && item.sections[0] ? '<p>'+item.sections[0].content+'</p>' : '<p>'+item.title+'</p>')
+          +'</div></div>';
+        detail.appendChild(div);
+      }
+    });
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>

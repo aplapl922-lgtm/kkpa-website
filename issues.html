@@ -1088,5 +1088,30 @@ function showAdminIssue(item, cardEl) {
   da.style.animation='none'; da.offsetHeight; da.style.animation='';
 }
 </script>
+
+<script>
+// ── Admin CMS(kkpa_briefing) → issues.html 반영 ──
+(function syncIssues() {
+  var raw = localStorage.getItem('kkpa_briefing');
+  if (!raw) return;
+  try {
+    var items = JSON.parse(raw).filter(function(i){ return !i._deleted; });
+    items.forEach(function(item) {
+      // 상태 배지
+      var statusEl = document.getElementById('status-' + item.id);
+      if (statusEl && item.subtitle) statusEl.textContent = item.subtitle;
+      // 섹션 내용
+      if (item.sections) {
+        item.sections.forEach(function(sec, si) {
+          var el = document.getElementById('section-' + item.id + '-' + si);
+          if (el && sec.content) {
+            el.innerHTML = sec.content.split('\n\n').map(function(p){ return '<p>'+p+'</p>'; }).join('');
+          }
+        });
+      }
+    });
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
