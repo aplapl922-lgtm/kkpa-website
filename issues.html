@@ -448,7 +448,7 @@ function closeMobileNav(){
   <div class="issue-list" id="issues-list"><div style="padding:20px;color:#888;">로딩 중...</div></div>
 
   <!-- ── 우: 상세 영역 ── -->
-  <div id="detail-area" class="detail-area">
+  <div id="issues-detail" class="detail-area">
 
     <!-- ======= 창고형 약국 ======= -->
     <div id="issue-warehouse">
@@ -709,7 +709,7 @@ function showIssue(id, cardEl) {
     var el = document.getElementById('issue-' + key);
     if (el) el.style.display = (key === id) ? 'block' : 'none';
   });
-  var da = document.getElementById('detail-area');
+  var da = document.getElementById('issues-detail');
   if (da) {
     da.style.animation = 'none';
     da.offsetHeight;
@@ -717,7 +717,7 @@ function showIssue(id, cardEl) {
   }
   // 모바일에서 상세 내용으로 자동 스크롤
   if (window.innerWidth <= 900) {
-    var da = document.getElementById('detail-area');
+    var da = document.getElementById('issues-detail');
     if (da) {
       setTimeout(function() {
         da.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -834,7 +834,7 @@ function toggleMobAcc(head) {
   var allKeys = JSON.parse(localStorage.getItem('kkpa_extra_issue_keys') || '[]');
   if (!allKeys.length) return;
   var list  = document.querySelector('.issue-list');
-  var detail = document.getElementById('detail-area');
+  var detail = document.getElementById('issues-detail');
   if (!list || !detail) return;
 
   allKeys.forEach(function(key) {
@@ -906,7 +906,7 @@ function showExtraIssue(key, cardEl) {
   var target = document.getElementById('issue-extra-' + key);
   if (target) target.style.display = 'block';
   // detail-area 애니메이션
-  var da = document.getElementById('detail-area');
+  var da = document.getElementById('issues-detail');
   if (da) { da.style.animation='none'; da.offsetHeight; da.style.animation=''; }
 }
 </script>
@@ -974,7 +974,7 @@ function showSheetIssue(item, cardEl) {
   document.querySelectorAll('.issue-card').forEach(function(c){ c.classList.remove('active'); });
   if (cardEl) cardEl.classList.add('active');
 
-  var da = document.getElementById('detail-area');
+  var da = document.getElementById('issues-detail');
   if (!da) return;
   da.innerHTML =
     '<div style="padding:32px 36px;">'
@@ -1044,7 +1044,7 @@ window.addEventListener('load', loadFromSheet);
 function showAdminIssue(item, cardEl) {
   document.querySelectorAll('.issue-card').forEach(function(c){ c.classList.remove('active'); });
   if (cardEl) cardEl.classList.add('active');
-  var da = document.getElementById('detail-area');
+  var da = document.getElementById('issues-detail');
   if (!da) return;
   var sectionsHtml = (item.sections||[]).map(function(sec){
     return '<div class="detail-section">'
@@ -1485,7 +1485,7 @@ function showIssue(id, cardEl) {
     var el = document.getElementById('issue-' + key);
     if (el) el.style.display = (key === id) ? 'block' : 'none';
   });
-  var da = document.getElementById('detail-area');
+  var da = document.getElementById('issues-detail');
   if (da) {
     da.style.animation = 'none';
     da.offsetHeight;
@@ -1493,7 +1493,7 @@ function showIssue(id, cardEl) {
   }
   // 모바일에서 상세 내용으로 자동 스크롤
   if (window.innerWidth <= 900) {
-    var da = document.getElementById('detail-area');
+    var da = document.getElementById('issues-detail');
     if (da) {
       setTimeout(function() {
         da.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1610,7 +1610,7 @@ function toggleMobAcc(head) {
   var allKeys = JSON.parse(localStorage.getItem('kkpa_extra_issue_keys') || '[]');
   if (!allKeys.length) return;
   var list  = document.querySelector('.issue-list');
-  var detail = document.getElementById('detail-area');
+  var detail = document.getElementById('issues-detail');
   if (!list || !detail) return;
 
   allKeys.forEach(function(key) {
@@ -1682,7 +1682,7 @@ function showExtraIssue(key, cardEl) {
   var target = document.getElementById('issue-extra-' + key);
   if (target) target.style.display = 'block';
   // detail-area 애니메이션
-  var da = document.getElementById('detail-area');
+  var da = document.getElementById('issues-detail');
   if (da) { da.style.animation='none'; da.offsetHeight; da.style.animation=''; }
 }
 </script>
@@ -1750,7 +1750,7 @@ function showSheetIssue(item, cardEl) {
   document.querySelectorAll('.issue-card').forEach(function(c){ c.classList.remove('active'); });
   if (cardEl) cardEl.classList.add('active');
 
-  var da = document.getElementById('detail-area');
+  var da = document.getElementById('issues-detail');
   if (!da) return;
   da.innerHTML =
     '<div style="padding:32px 36px;">'
@@ -1820,7 +1820,7 @@ window.addEventListener('load', loadFromSheet);
 function showAdminIssue(item, cardEl) {
   document.querySelectorAll('.issue-card').forEach(function(c){ c.classList.remove('active'); });
   if (cardEl) cardEl.classList.add('active');
-  var da = document.getElementById('detail-area');
+  var da = document.getElementById('issues-detail');
   if (!da) return;
   var sectionsHtml = (item.sections||[]).map(function(sec){
     return '<div class="detail-section">'
