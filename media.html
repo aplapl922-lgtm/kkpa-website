@@ -1065,5 +1065,156 @@ function showOnair(idx, cardEl) {
   if (cardEl) cardEl.classList.add('active');
 }
 </script>
+
+<script>
+// ── defaultData (admin과 동일) ──
+var defaultData = {
+  briefing: [
+    {
+      id: 'warehouse',
+      title: '창고형 약국 문제',
+      cardDesc: '복약지도 없는 대량 의약품 판매로 국민 안전을 위협하는 창고형 약국의 확산',
+      subtitle: '복약지도 없는 대량 의약품 판매, 국민 건강권 위협',
+      color: '#B91C1C',
+      date: '2025.06',
+      sections: [
+        {title:'💡 무엇이 문제인가요?', content:'창고형 약국은 대형 매장에서 의약품을 대량으로 저가에 판매하는 형태로, 약사의 복약지도 없이 의약품이 유통되는 구조적 문제를 안고 있습니다.\n\n전문 약사의 상담 없이 의약품이 판매될 경우 약물 오남용, 부작용 발생, 다약제 복용 문제 등이 증가할 수 있으며, 이는 국민의 건강권을 직접적으로 침해합니다.'},
+        {title:'📌 경기도약사회 공식 입장', content:'경기도약사회는 창고형 약국의 허용 및 확산에 단호히 반대합니다. 의약품은 전문가의 복약지도가 반드시 수반되어야 하는 전문 물품이며, 이를 일반 상품처럼 대량 판매하는 것은 국민 보건에 심각한 위해를 끼칩니다.'},
+        {title:'🏃 경기도약사회 대응 활동', content:'대한약사회 공동 성명 발표, 국민 서명운동 참여 독려, 긴급 기자회견 개최, 관련 기관 공문 발송'},
+      ]
+    },
+    {
+      id: 'hanyaksa',
+      title: '한약사 면허 범위 문제',
+      cardDesc: '한약사의 일반 의약품 조제·판매 허용 시도로 인한 환자 안전 위협',
+      subtitle: '일반 의약품 조제·판매 허용 시도, 환자 안전 위협',
+      color: '#C2410C',
+      date: '2025.05',
+      sections: [
+        {title:'💡 무엇이 문제인가요?', content:'일부에서 한약사의 일반 의약품 조제·판매를 허용하려는 시도가 지속되고 있습니다. 한약사는 한약에 특화된 면허를 보유하고 있으며, 일반 의약품에 대한 약학적 전문 교육을 이수하지 않았습니다.'},
+        {title:'📌 경기도약사회 공식 입장', content:'경기도약사회는 한약사의 일반 의약품 조제·판매 허용 시도에 강력히 반대합니다. 의약품 조제는 6년제 약학 교육을 이수한 약사만이 수행할 수 있어야 하며, 면허 범위의 명확한 구분은 환자 안전을 위한 최소한의 안전망입니다.'},
+        {title:'🏃 경기도약사회 대응 활동', content:'반대 성명서 발표, 전국 약사회 공동 대응, 국회의원 면담 진행, 회원 대상 교육 실시'},
+      ]
+    },
+    {
+      id: 'generic',
+      title: '성분명 처방 확대',
+      cardDesc: '성분명 처방 의무화 추진에 따른 환자 선택권 침해 및 약국 현장 혼란',
+      subtitle: '처방 의무화 추진에 따른 환자 선택권 침해 및 현장 혼란',
+      color: '#D97706',
+      date: '2025.05',
+      sections: [
+        {title:'💡 무엇이 문제인가요?', content:'성분명 처방 의무화는 특정 제품명 대신 성분명으로만 처방하도록 강제하는 제도입니다. 표면적으로는 의약품 비용 절감을 목표로 하지만, 실제 약국 현장에서는 다양한 문제가 발생합니다.'},
+        {title:'📌 경기도약사회 공식 입장', content:'경기도약사회는 성분명 처방 의무화의 일방적 강행에 반대합니다. 충분한 준비 기간과 현장 약사와의 협의 없이 추진되는 것은 환자 안전을 위협할 수 있습니다.'},
+        {title:'🏃 경기도약사회 대응 활동', content:'정책 토론회 개최, 현장 약사 의견 수렴, 보건복지부 건의서 제출'},
+      ]
+    },
+    {
+      id: 'nonface',
+      title: '비대면 처방·조제 현안',
+      cardDesc: '비대면 진료 확대와 약 배달 허용에 따른 의약품 오·남용 위험 증가',
+      subtitle: '비대면 진료 확대와 약 배달 허용에 따른 의약품 오·남용 위험',
+      color: '#1D4ED8',
+      date: '2025.04',
+      sections: [
+        {title:'💡 무엇이 문제인가요?', content:'비대면 진료의 무분별한 확대와 의약품 배달 허용은 약사의 복약지도 없이 의약품이 전달되는 상황을 초래합니다. 이는 의약품 오·남용 위험을 크게 높입니다.'},
+        {title:'📌 경기도약사회 공식 입장', content:'경기도약사회는 국민 안전을 중심에 둔 신중한 접근을 요구합니다. 비대면 진료와 약 배달은 반드시 약사의 복약지도가 보장되는 체계 안에서 이루어져야 합니다.'},
+        {title:'🏃 경기도약사회 대응 활동', content:'국민 안전 캠페인 진행, 관련 법령 개정 건의, 언론 인터뷰 및 홍보 활동'},
+      ]
+    },
+  ],
+  health: [
+    {id:'h1', title:'약 올바르게 복용하는 법', cardDesc:'식전·식후·식간 복용의 차이와 물과 함께 먹어야 하는 이유', detailTitle:'약 올바르게 복용하는 법', subtitle:'올바른 복약 습관이 치료 효과를 높입니다', date:'2025.06', sections:[
+      {title:'💡 무엇이 중요한가요?', content:'약을 올바르게 복용하는 것은 치료 효과를 높이고 부작용을 줄이는 데 매우 중요합니다.\n\n식전 복용은 위장이 비어있을 때 흡수가 잘 되는 약에 적용됩니다. 식전 30분이 원칙입니다.\n\n식후 복용은 위장 자극이 강한 약에 적용됩니다. 식사 후 30분 이내에 복용하는 것이 원칙입니다.'},
+      {title:'📌 약사 TIP', content:'물 없이 약을 삼키거나 주스, 우유, 술 등 다른 음료와 함께 복용하면 약의 효과가 변할 수 있습니다. 반드시 물 한 컵(200ml)과 함께 복용하세요.'},
+    ]},
+    {id:'h2', title:'고혈압약 갑자기 끊으면 안 되는 이유', cardDesc:'혈압약 임의 중단 시 반동성 고혈압과 심뇌혈관 사고 위험', detailTitle:'고혈압약 갑자기 끊으면 안 되는 이유', subtitle:'혈압이 정상이어도 약은 계속 복용해야 합니다', date:'2025.05', sections:[
+      {title:'💡 무엇이 중요한가요?', content:'혈압약은 혈압을 낮추는 것이지 고혈압을 완치하는 것이 아닙니다. 약을 갑자기 끊으면 반동성 고혈압이 발생해 뇌졸중, 심근경색 등 위험한 심뇌혈관 사고로 이어질 수 있습니다.'},
+      {title:'📌 약사 TIP', content:'혈압약은 의사와 상담 없이 절대 중단하지 마세요. 부작용이 있다면 반드시 의사나 약사에게 알려 다른 약으로 바꾸는 것이 안전합니다.'},
+    ]},
+    {id:'h3', title:'약 보관 이것만은 꼭 지키세요', cardDesc:'직사광선·고온다습한 환경은 약을 변질시킵니다', detailTitle:'약 보관 이것만은 꼭 지키세요', subtitle:'잘못된 보관이 약효를 떨어뜨립니다', date:'2025.05', sections:[
+      {title:'💡 무엇이 중요한가요?', content:'약의 보관 방법을 잘못 지키면 약효가 떨어지거나 변질될 수 있습니다. 상온 보관이 원칙인 약은 직사광선과 습기를 피한 서늘한 곳에 보관하세요.'},
+      {title:'📌 약사 TIP', content:'어린이의 손이 닿지 않는 곳에 보관하고, 유효기간이 지난 약은 가까운 약국에 반납하여 안전하게 폐기하세요.'},
+    ]},
+  ],
+  onair: [
+    {id:'o1', title:'약 올바르게 복용하는 법', cardDesc:'식전·식후·식간 복용의 차이와 올바른 복약 시간', detailTitle:'약 올바르게 복용하는 법', subtitle:'올바른 복약 습관으로 치료 효과를 높이세요', type:'카드뉴스', date:'2025.06', imageUrl:'', sections:[
+      {title:'📋 콘텐츠 소개', content:'식전·식후·식간 복용의 차이를 쉽게 설명하는 카드뉴스입니다.'},
+    ]},
+    {id:'o2', title:'창고형 약국이 왜 위험한가', cardDesc:'30초 안에 핵심만 담아 설명하는 쇼츠 영상', detailTitle:'창고형 약국이 왜 위험한가', subtitle:'복약지도 없는 의약품 판매의 위험성', type:'쇼츠', date:'2025.05', imageUrl:'', sections:[
+      {title:'▶️ 영상 소개', content:'창고형 약국의 문제점을 30초 안에 핵심만 담아 설명하는 쇼츠 영상입니다.'},
+    ]},
+    {id:'o3', title:'어린이 해열제 올바른 사용법', cardDesc:'체중별 적정 용량과 교차 복용 가이드', detailTitle:'어린이 해열제 올바른 사용법', subtitle:'체중에 맞는 올바른 해열제 사용법', type:'포스터', date:'2025.04', imageUrl:'', sections:[
+      {title:'🖼️ 포스터 소개', content:'체중별 적정 용량과 교차 복용 방법을 한눈에 볼 수 있는 포스터입니다.'},
+    ]},
+  ]
+};
+
+(function init() {
+  // localStorage 있으면 그 데이터, 없으면 defaultData 사용
+  var raw = localStorage.getItem('kkpa_onair');
+  var items;
+  if (raw) {
+    try { items = JSON.parse(raw).filter(function(i){ return !i._deleted; }); } catch(e) { items = defaultData.onair; }
+  } else {
+    items = defaultData.onair;
+  }
+
+  var list = document.getElementById('onair-list');
+  var detail = document.getElementById('onair-detail');
+  if (!list || !detail || !items || !items.length) return;
+
+  var STATUS = {red:{cls:'status-red',txt:'🔴 긴급 대응'}, orange:{cls:'status-orange',txt:'🟡 검토 중'}, blue:{cls:'status-blue',txt:'🔵 정책 추진'}};
+  var COLORS = ['linear-gradient(135deg,#002D62,#4A9FD4)','linear-gradient(135deg,#7B1A1A,#B91C1C)','linear-gradient(135deg,#065F46,#10B981)','linear-gradient(135deg,#78350F,#D97706)','linear-gradient(135deg,#1E1B4B,#6D28D9)'];
+
+  // 좌측 목록
+  list.innerHTML = items.map(function(item, i) {
+    var statusColor = item.statusColor || 'blue';
+    var st = STATUS[statusColor] || {cls:'status-blue', txt:'🔵 논의 중'};
+    var catBadge = item.cat
+      ? '<div class="card-status" style="background:var(--accent-l);color:var(--navy-m);">' + item.cat + '</div>'
+      : '<div class="card-status ' + st.cls + '">' + st.txt + '</div>';
+    return '<div class="issue-card' + (i===0?' active':'') + '" onclick="showOnair(' + i + ',this)">'
+      + catBadge
+      + '<div class="card-title">' + item.title + '</div>'
+      + '<div class="card-desc">' + (item.cardDesc || item.excerpt || item.subtitle || '') + '</div>'
+      + '</div>';
+  }).join('');
+
+  // 우측 상세
+  detail.innerHTML = items.map(function(item, i) {
+    var bg = item.color ? 'linear-gradient(135deg,' + item.color + ',#4A9FD4)' : COLORS[i % COLORS.length];
+    var sections = '';
+    if (item.sections && item.sections.length) {
+      sections = item.sections.map(function(sec) {
+        return '<div class="detail-section"><h3>' + sec.title + '</h3>'
+          + sec.content.split('\n\n').filter(Boolean).map(function(p){ return '<p>' + p + '</p>'; }).join('')
+          + '</div>';
+      }).join('');
+    } else {
+      sections = '<div class="detail-section"><h3>💡 내용</h3><p>' + (item.cardDesc || item.excerpt || item.subtitle || item.title) + '</p></div>';
+    }
+    return '<div id="onair-p' + i + '" style="display:' + (i===0?'block':'none') + ';">'
+      + '<div style="background:' + bg + ';padding:44px 40px 40px;position:relative;overflow:hidden;">'
+      + '<div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>'
+      + '<div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">' + (item.icon || '📋') + '</div>'
+      + '<h2 style="font-family:\'Noto Serif KR\',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">' + item.title + '</h2>'
+      + '<p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">' + (item.subtitle || item.cardDesc || item.excerpt || '') + '</p>'
+      + '</div>'
+      + '<div class="detail-body">' + sections + '</div>'
+      + '</div>';
+  }).join('');
+
+  showOnair(0, list.querySelector('.issue-card'));
+})();
+
+function showOnair(idx, cardEl) {
+  document.getElementById('onair-detail').querySelectorAll('[id^="onair-p"]').forEach(function(el){ el.style.display='none'; });
+  var t = document.getElementById('onair-p' + idx);
+  if (t) t.style.display = 'block';
+  document.querySelectorAll('#onair-list .issue-card').forEach(function(c){ c.classList.remove('active'); });
+  if (cardEl) cardEl.classList.add('active');
+}
+</script>
 </body>
 </html>
