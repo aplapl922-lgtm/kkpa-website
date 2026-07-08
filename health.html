@@ -441,149 +441,10 @@ function closeMobileNav(){
 <div class="main-wrap">
 
   <!-- 좌: 게시물 목록 -->
-  <div class="issue-list">
-    <div class="issue-card active" onclick="showPanel('h1',this)">
-      <div class="card-title">약 올바르게 복용하는 법</div>
-      <div class="card-desc">식전·식후·식간 복용의 차이와 물과 함께 먹어야 하는 이유</div>
-    </div>
-    <div class="issue-card" onclick="showPanel('h2',this)">
-      <div class="card-title">고혈압약 갑자기 끊으면 안 되는 이유</div>
-      <div class="card-desc">혈압약 임의 중단 시 반동성 고혈압과 심뇌혈관 사고 위험</div>
-    </div>
-    <div class="issue-card" onclick="showPanel('h3',this)">
-      <div class="card-title">약 보관 이것만은 꼭 지키세요</div>
-      <div class="card-desc">직사광선·고온다습한 환경은 약을 변질시킵니다</div>
-    </div>
-    <div class="issue-card" onclick="showPanel('h4',this)">
-      <div class="card-title">약 버리는 올바른 방법</div>
-      <div class="card-desc">변기나 쓰레기통에 버리면 환경 오염의 원인이 됩니다</div>
-    </div>
-    <div class="issue-card" onclick="showPanel('h5',this)">
-      <div class="card-title">어르신 다약제 복용 무엇이 위험한가</div>
-      <div class="card-desc">5종 이상 약을 동시에 복용하면 상호작용 위험이 높아집니다</div>
-    </div>
-    <div class="issue-card" onclick="showPanel('h6',this)">
-      <div class="card-title">골다공증약 올바르게 먹는 법</div>
-      <div class="card-desc">비스포스포네이트 계열 약은 복용 방법이 매우 중요합니다</div>
-    </div>
-    <div class="issue-card" onclick="showPanel('h7',this)">
-      <div class="card-title">아이 해열제 교차 복용 올바른 방법</div>
-      <div class="card-desc">타이레놀과 부루펜 교차 복용 간격과 주의사항</div>
-    </div>
-    <div class="issue-card" onclick="showPanel('h8',this)">
-      <div class="card-title">어린이 항생제 임의 중단 위험성</div>
-      <div class="card-desc">증상이 좋아졌다고 항생제를 멈추면 내성균이 생길 수 있습니다</div>
-    </div>
-  </div>
+  <div class="issue-list" id="health-list"><div style="padding:20px;color:#888;">로딩 중...</div></div>
 
   <!-- 우: 상세 내용 -->
-  <div class="detail-area">
-
-    <div id="panel-h1">
-      <div style="background:linear-gradient(135deg,#002D62,#4A9FD4);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">💊</div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">약 올바르게 복용하는 법</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">식전·식후·식간 복용의 차이와 물과 함께 먹어야 하는 이유</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>💡 무엇이 중요한가요?</h3><p>약을 올바르게 복용하는 것은 치료 효과를 높이고 부작용을 줄이는 데 매우 중요합니다.</p><p><strong>식전 복용</strong>은 위장이 비어있을 때 흡수가 잘 되는 약에 적용됩니다. 식전 30분이 원칙입니다.</p><p><strong>식후 복용</strong>은 위장 자극이 강한 약에 적용됩니다. 식사 후 30분 이내에 복용하는 것이 원칙입니다.</p><p><strong>식간 복용</strong>은 식사와 식사 사이, 즉 공복 상태에서 복용하는 것입니다.</p></div>
-        <div class="detail-section"><h3>📌 약사 TIP</h3><div class="position-box"><p>물 없이 약을 삼키거나 주스, 우유, 술 등 다른 음료와 함께 복용하면 약의 효과가 변할 수 있습니다. 반드시 물 한 컵(200ml)과 함께 복용하세요. 임의로 용량을 늘리거나 줄이면 치료 효과가 없거나 부작용이 생길 수 있으니 반드시 처방대로 복용하세요.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-h2" style="display:none;">
-      <div style="background:linear-gradient(135deg,#7B1A1A,#E53E3E);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">❤️</div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">고혈압약 갑자기 끊으면 안 되는 이유</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">혈압약 임의 중단 시 반동성 고혈압과 심뇌혈관 사고 위험</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>💡 무엇이 중요한가요?</h3><p>혈압이 정상으로 돌아왔다고 임의로 혈압약을 중단하면 매우 위험할 수 있습니다.</p><p>혈압약은 혈압을 낮추는 것이지 고혈압을 완치하는 것이 아닙니다. 약을 갑자기 끊으면 <strong>반동성 고혈압</strong>이 발생해 뇌졸중, 심근경색 등 위험한 심뇌혈관 사고로 이어질 수 있습니다.</p></div>
-        <div class="detail-section"><h3>📌 약사 TIP</h3><div class="position-box"><p>혈압약은 의사와 상담 없이 절대 중단하지 마세요. 부작용이 있다면 반드시 의사나 약사에게 알려 다른 약으로 바꾸는 것이 안전합니다. 혈압이 정상이 되어도 약은 계속 복용해야 합니다.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-h3" style="display:none;">
-      <div style="background:linear-gradient(135deg,#065F46,#10B981);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">📦</div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">약 보관 이것만은 꼭 지키세요</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">직사광선·고온다습한 환경은 약을 변질시킵니다</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>💡 무엇이 중요한가요?</h3><p>약의 보관 방법을 잘못 지키면 약효가 떨어지거나 변질될 수 있습니다.</p><p><strong>상온 보관</strong>이 원칙인 약은 직사광선과 습기를 피한 서늘한 곳에 보관하세요. 욕실이나 주방은 습기가 많아 부적합합니다.</p><p><strong>냉장 보관</strong>이 필요한 약(인슐린, 일부 안약 등)은 냉동되지 않도록 주의하고, 냉장실에 보관하세요.</p></div>
-        <div class="detail-section"><h3>📌 약사 TIP</h3><div class="position-box"><p>어린이의 손이 닿지 않는 곳에 보관하고, 유효기간이 지난 약은 가까운 약국에 반납하여 안전하게 폐기하세요. 차 안에 약을 보관하지 마세요. 차 내부 온도가 높아 변질될 수 있습니다.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-h4" style="display:none;">
-      <div style="background:linear-gradient(135deg,#78350F,#D97706);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">♻️</div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">약 버리는 올바른 방법</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">변기나 쓰레기통에 버리면 환경 오염의 원인이 됩니다</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>💡 무엇이 중요한가요?</h3><p>가정에 남은 폐의약품을 일반 쓰레기나 변기에 버리면 토양과 수질 오염의 원인이 됩니다.</p><p>폐의약품은 반드시 <strong>가까운 약국</strong>이나 보건소의 폐의약품 수거함에 반납해야 합니다.</p></div>
-        <div class="detail-section"><h3>📌 약사 TIP</h3><div class="position-box"><p>알약은 포장째로, 물약은 뚜껑을 닫아, 가루약은 봉지째로 반납하세요. 주사기는 뚜껑을 닫아 별도 봉투에 담아 반납합니다. 폐의약품 수거함은 전국 약국과 보건소에 비치되어 있습니다.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-h5" style="display:none;">
-      <div style="background:linear-gradient(135deg,#1E1B4B,#6D28D9);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">👴</div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">어르신 다약제 복용 무엇이 위험한가</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">5종 이상 약을 동시에 복용하면 상호작용 위험이 높아집니다</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>💡 무엇이 중요한가요?</h3><p>여러 가지 만성질환을 가진 어르신들은 많은 종류의 약을 복용하는 경우가 많습니다. 5종 이상을 동시에 복용하는 것을 <strong>다약제 복용</strong>이라고 하며, 이 경우 약물 간 상호작용 위험이 크게 높아집니다.</p><p>다약제 복용의 위험으로는 낙상 위험 증가, 인지기능 저하, 식욕 감소, 소화기 장애 등이 있습니다.</p></div>
-        <div class="detail-section"><h3>📌 약사 TIP</h3><div class="position-box"><p>복용 중인 모든 약(처방약, 일반약, 건강기능식품)을 약봉지에 모아 가까운 약국에서 복약 상담을 받아보세요. 중복되거나 불필요한 약을 정리할 수 있습니다.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-h6" style="display:none;">
-      <div style="background:linear-gradient(135deg,#164E63,#0EA5E9);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">🦴</div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">골다공증약 올바르게 먹는 법</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">비스포스포네이트 계열 약은 복용 방법이 매우 중요합니다</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>💡 무엇이 중요한가요?</h3><p>골다공증 치료에 널리 쓰이는 비스포스포네이트 계열 약(알렌드론산 등)은 복용 방법이 매우 까다롭습니다.</p><p><strong>올바른 복용 방법:</strong> 아침에 일어나자마자 공복에, 물 한 컵(200ml)으로, 복용 후 30분간 눕지 말고 서 있거나 앉아 있어야 합니다.</p></div>
-        <div class="detail-section"><h3>📌 약사 TIP</h3><div class="position-box"><p>이 약을 눕거나 누워서 복용하면 식도에 손상을 줄 수 있습니다. 복용 후 30분간은 음식이나 다른 약을 먹지 마세요. 칼슘제와 함께 복용하면 흡수를 방해하므로 시간 간격을 두어야 합니다.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-h7" style="display:none;">
-      <div style="background:linear-gradient(135deg,#92400E,#F59E0B);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">🧒</div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">아이 해열제 교차 복용 올바른 방법</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">타이레놀과 부루펜 교차 복용 간격과 주의사항</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>💡 무엇이 중요한가요?</h3><p>아이가 열이 심할 때 두 가지 해열제를 교차로 사용하면 더 오래, 더 안정적으로 해열 효과를 볼 수 있습니다.</p><p><strong>교차 복용 원칙:</strong> 아세트아미노펜(타이레놀)과 이부프로펜(부루펜)을 4시간 간격으로 교차 복용합니다.</p></div>
-        <div class="detail-section"><h3>📌 약사 TIP</h3><div class="position-box"><p>두 약을 동시에 복용하면 안 됩니다. 반드시 4시간 이상 간격을 두고, 체중에 맞는 용량을 지켜주세요. 만 3개월 미만 영아, 신장 질환이 있는 경우 이부프로펜 사용을 피해야 합니다.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-h8" style="display:none;">
-      <div style="background:linear-gradient(135deg,#7B1A1A,#E53E3E);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">⚠️</div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">어린이 항생제 임의 중단 위험성</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">증상이 좋아졌다고 항생제를 멈추면 내성균이 생길 수 있습니다</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>💡 무엇이 중요한가요?</h3><p>아이가 항생제를 먹고 1~2일 만에 증상이 나아지면 부모님들이 스스로 투약을 중단하는 경우가 많습니다. 하지만 이는 매우 위험한 행동입니다.</p><p>항생제를 처방 기간보다 일찍 중단하면 세균이 완전히 제거되지 않아 <strong>항생제 내성균</strong>이 생길 수 있고, 재발 가능성도 높아집니다.</p></div>
-        <div class="detail-section"><h3>📌 약사 TIP</h3><div class="position-box"><p>증상이 나아져도 처방된 기간까지 항생제를 복용하세요. 부작용이 의심되면 임의로 중단하지 말고 반드시 의사나 약사에게 상담하세요.</p></div></div>
-      </div>
-    </div>
-
-  </div><!-- /detail-area -->
+  <div class="detail-area" id="health-detail"><div style="padding:40px;text-align:center;color:#888;"><p style="font-size:32px;">🌿</p><p>왼쪽에서 항목을 선택해주세요</p></div></div><!-- /detail-area -->
 
 
 <div class="mob-accordion">
@@ -1084,45 +945,69 @@ function showAdminHealth(item, cardEl) {
 }
 </script>
 
+
+
 <script>
-// ── Admin CMS(kkpa_health) → health.html 좌측 목록 반영 ──
-(function syncHealth() {
+(function initHealth() {
   var raw = localStorage.getItem('kkpa_health');
-  if (!raw) return;
-  try {
-    var items = JSON.parse(raw).filter(function(i){ return !i._deleted; });
-    if (!items.length) return;
-    var list = document.querySelector('.issue-list');
-    if (!list) return;
-    var detail = document.querySelector('.detail-area');
-    if (!detail) return;
-    list.innerHTML = items.map(function(item, i) {
-      return '<div class="issue-card'+(i===0?' active':'')+'" onclick="showIssue('h'+i+'',this)">'
-        +'<div class="card-status" style="background:var(--accent-l);color:var(--navy-m);">'+(item.cat||'건강정보')+'</div>'
-        +'<div class="card-title">'+item.title+'</div>'
-        +'<div class="card-desc">'+(item.excerpt||item.subtitle||'')+'</div>'
-        +'</div>';
-    }).join('');
-    items.forEach(function(item, i) {
-      var existing = document.getElementById('issue-h'+i);
-      if (!existing) {
-        var div = document.createElement('div');
-        div.id = 'issue-h'+i;
-        div.style.display = i===0 ? 'block' : 'none';
-        var bg = item.color || '#002D62';
-        div.innerHTML = '<div style="background:linear-gradient(135deg,'+bg+',#4A9FD4);padding:44px 40px 40px;">'
-          +'<div style="font-size:52px;margin-bottom:20px;">'+(item.icon||'💊')+'</div>'
-          +'<h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;margin-bottom:10px;">'+item.title+'</h2>'
-          +'<p style="font-size:13.5px;color:rgba(255,255,255,.65);">'+(item.excerpt||'')+'</p>'
-          +'</div>'
-          +'<div class="detail-body"><div class="detail-section"><h3>💡 내용</h3>'
-          +(item.sections && item.sections[0] ? '<p>'+item.sections[0].content+'</p>' : '<p>'+(item.excerpt||item.title)+'</p>')
-          +'</div></div>';
-        detail.appendChild(div);
-      }
-    });
-  } catch(e) {}
+  var items = [];
+  if (raw) { try { items = JSON.parse(raw).filter(function(i){ return !i._deleted; }); } catch(e){} }
+
+  var list = document.getElementById('health-list');
+  var detail = document.getElementById('health-detail');
+  if (!list || !detail) return;
+
+  if (!items.length) {
+    list.innerHTML = '<div style="padding:20px;color:#888;">관리자에서 건강정보를 등록해주세요</div>';
+    return;
+  }
+
+  var COLORS = ['linear-gradient(135deg,#002D62,#4A9FD4)','linear-gradient(135deg,#7B1A1A,#E53E3E)',
+    'linear-gradient(135deg,#065F46,#10B981)','linear-gradient(135deg,#78350F,#D97706)',
+    'linear-gradient(135deg,#1E1B4B,#6D28D9)','linear-gradient(135deg,#164E63,#0EA5E9)'];
+
+  list.innerHTML = items.map(function(item, i) {
+    return '<div class="issue-card'+(i===0?' active':'')+'" onclick="showHealth('+i+',this)">'
+      +'<div class="card-status" style="background:var(--accent-l);color:var(--navy-m);">'+(item.cat||'건강정보')+'</div>'
+      +'<div class="card-title">'+item.title+'</div>'
+      +'<div class="card-desc">'+(item.excerpt||item.subtitle||'')+'</div>'
+      +'</div>';
+  }).join('');
+
+  detail.innerHTML = items.map(function(item, i) {
+    var bg = item.color ? 'linear-gradient(135deg,'+item.color+',#4A9FD4)' : COLORS[i%COLORS.length];
+    var sections = '';
+    if (item.sections && item.sections.length) {
+      sections = item.sections.map(function(sec){
+        return '<div class="detail-section"><h3>'+sec.title+'</h3>'
+          +sec.content.split('\n\n').filter(Boolean).map(function(p){return '<p>'+p+'</p>';}).join('')
+          +'</div>';
+      }).join('');
+    } else {
+      sections = '<div class="detail-section"><h3>💡 내용</h3><p>'+(item.excerpt||item.title)+'</p></div>';
+    }
+    return '<div id="hp'+i+'" style="display:'+(i===0?'block':'none')+';">'
+      +'<div style="background:'+bg+';padding:44px 40px 40px;position:relative;overflow:hidden;">'
+      +'<div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>'
+      +'<div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">'+(item.icon||'💊')+'</div>'
+      +'<div style="font-size:12px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,.6);margin-bottom:12px;position:relative;z-index:1;">'+(item.cat||'건강정보')+'</div>'
+      +'<h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">'+item.title+'</h2>'
+      +'<p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">'+(item.excerpt||'')+'</p>'
+      +'</div>'
+      +'<div class="detail-body">'+sections+'</div>'
+      +'</div>';
+  }).join('');
+
+  showHealth(0, list.querySelector('.issue-card'));
 })();
+
+function showHealth(idx, cardEl) {
+  document.getElementById('health-detail').querySelectorAll('[id^="hp"]').forEach(function(el){el.style.display='none';});
+  var t = document.getElementById('hp'+idx);
+  if (t) t.style.display='block';
+  document.querySelectorAll('#health-list .issue-card').forEach(function(c){c.classList.remove('active');});
+  if (cardEl) cardEl.classList.add('active');
+}
 </script>
 </body>
 </html>

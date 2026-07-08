@@ -449,173 +449,10 @@ function closeMobileNav(){
 <div class="main-wrap">
 
   <!-- 좌: 콘텐츠 목록 -->
-  <div class="issue-list">
-    <div class="issue-card active" data-cat="cardnews" onclick="showPanel('cn1',this)">
-      <div class="card-title">창고형 약국 무엇이 문제인가</div>
-      <div class="card-desc">복약지도 없는 대량 의약품 판매로 국민 안전을 위협하는 창고형 약국의 확산</div>
-    </div>
-    <div class="issue-card" data-cat="cardnews" onclick="showPanel('cn2',this)">
-      <div class="card-title">약 올바르게 복용하는 법</div>
-      <div class="card-desc">식전·식후·식간 복용의 차이와 올바른 약 복용법 안내</div>
-    </div>
-    <div class="issue-card" data-cat="cardnews" onclick="showPanel('cn3',this)">
-      <div class="card-title">한약사 면허 범위 무엇이 문제인가</div>
-      <div class="card-desc">한약사의 일반 의약품 조제 허용 시도의 문제점</div>
-    </div>
-    <div class="issue-card" data-cat="cardnews" onclick="showPanel('cn4',this)">
-      <div class="card-title">아이 해열제 교차 복용 방법</div>
-      <div class="card-desc">타이레놀과 부루펜 교차 복용 간격과 주의사항</div>
-    </div>
-    <div class="issue-card" data-cat="poster" onclick="showPanel('ps1',this)">
-      <div class="card-title">창고형 약국 반대</div>
-      <div class="card-desc">창고형 약국 확산을 막고 국민 건강권을 지키기 위한 홍보 포스터</div>
-    </div>
-    <div class="issue-card" data-cat="poster" onclick="showPanel('ps2',this)">
-      <div class="card-title">약 올바르게 복용하기</div>
-      <div class="card-desc">올바른 약 복용 방법을 한눈에 볼 수 있는 인포그래픽 포스터</div>
-    </div>
-    <div class="issue-card" data-cat="poster" onclick="showPanel('ps3',this)">
-      <div class="card-title">어르신 다약제 복용 주의</div>
-      <div class="card-desc">5종 이상 약을 동시에 복용하는 어르신들을 위한 주의 안내</div>
-    </div>
-    <div class="issue-card" data-cat="shorts" onclick="showPanel('sh1',this)">
-      <div class="card-title">창고형 약국 30초 설명</div>
-      <div class="card-desc">창고형 약국 문제를 30초 안에 쉽게 설명하는 쇼츠 영상</div>
-    </div>
-    <div class="issue-card" data-cat="shorts" onclick="showPanel('sh2',this)">
-      <div class="card-title">약 복용 전 꼭 확인하세요</div>
-      <div class="card-desc">약을 복용하기 전 반드시 확인해야 할 사항들 안내</div>
-    </div>
-    <div class="issue-card" data-cat="shorts" onclick="showPanel('sh3',this)">
-      <div class="card-title">약 버리는 올바른 방법</div>
-      <div class="card-desc">폐의약품을 안전하게 버리는 방법 안내</div>
-    </div>
-  </div>
+  <div class="issue-list" id="onair-list"><div style="padding:20px;color:#888;">로딩 중...</div></div>
 
   <!-- 우: 상세 내용 -->
-  <div class="detail-area">
-
-    <div id="panel-cn1">
-      <div style="background:linear-gradient(135deg,#7B1A1A,#B91C1C);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">창고형 약국 무엇이 문제인가</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">복약지도 없는 대량 의약품 판매로 국민 안전을 위협하는 창고형 약국의 확산</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>📋 콘텐츠 소개</h3><p>창고형 약국의 문제점을 5장의 카드뉴스로 쉽게 설명합니다. 복약지도 없는 의약품 판매가 왜 위험한지, 어떤 법적 문제가 있는지 알기 쉽게 정리했습니다.</p></div>
-        <div class="detail-section"><h3>💡 핵심 내용</h3><div class="position-box"><p>의약품은 전문가의 복약지도가 반드시 수반되어야 하는 전문 물품입니다. 창고형 약국은 이를 일반 상품처럼 대량 판매하여 국민 보건에 심각한 위해를 끼칩니다.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-cn2" style="display:none;">
-      <div style="background:linear-gradient(135deg,#004A9E,#4A9FD4);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">약 올바르게 복용하는 법</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">식전·식후·식간 복용의 차이와 올바른 약 복용법 안내</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>📋 콘텐츠 소개</h3><p>식전·식후·식간 복용의 차이, 물과 함께 먹어야 하는 이유, 임의로 용량을 바꾸면 안 되는 까닭을 6장의 카드뉴스로 알기 쉽게 설명합니다.</p></div>
-        <div class="detail-section"><h3>💡 핵심 내용</h3><div class="position-box"><p>반드시 물 한 컵과 함께 복용하고, 처방된 용량과 복용 시간을 정확히 지키는 것이 중요합니다. 임의로 용량을 늘리거나 줄이면 치료 효과가 없거나 부작용이 생길 수 있습니다.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-cn3" style="display:none;">
-      <div style="background:linear-gradient(135deg,#1E1B4B,#6D28D9);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">한약사 면허 범위 무엇이 문제인가</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">한약사의 일반 의약품 조제 허용 시도의 문제점</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>📋 콘텐츠 소개</h3><p>한약사의 일반 의약품 조제·판매를 허용하려는 시도의 문제점을 명확히 설명합니다. 면허 범위의 중요성과 환자 안전에 미치는 영향을 다룹니다.</p></div>
-        <div class="detail-section"><h3>💡 핵심 내용</h3><div class="position-box"><p>의약품 조제는 6년제 약학 교육을 이수한 약사만이 수행할 수 있어야 합니다. 면허 범위의 명확한 구분은 환자 안전을 위한 최소한의 안전망입니다.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-cn4" style="display:none;">
-      <div style="background:linear-gradient(135deg,#92400E,#F59E0B);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">아이 해열제 교차 복용 방법</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">타이레놀과 부루펜 교차 복용 간격과 주의사항</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>📋 콘텐츠 소개</h3><p>아이가 열이 심할 때 두 가지 해열제를 교차로 사용하는 올바른 방법을 5장의 카드뉴스로 안내합니다.</p></div>
-        <div class="detail-section"><h3>💡 핵심 내용</h3><div class="position-box"><p>아세트아미노펜(타이레놀)과 이부프로펜(부루펜)을 4시간 간격으로 교차 복용합니다. 두 약을 동시에 복용하면 안 되며, 반드시 체중에 맞는 용량을 지켜주세요.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-ps1" style="display:none;">
-      <div style="background:linear-gradient(135deg,#7B1A1A,#B91C1C);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">창고형 약국 반대</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">창고형 약국 확산을 막고 국민 건강권을 지키기 위한 홍보 포스터</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>🖼️ 포스터 소개</h3><p>창고형 약국 반대 캠페인을 위한 공식 홍보 포스터입니다. SNS, 약국 내 부착, 온라인 배포 등 다양한 방식으로 활용할 수 있습니다.</p></div>
-        <div class="detail-section"><h3>💡 활용 안내</h3><div class="position-box"><p>이 포스터는 경기도 약사 회원 여러분의 약국에 부착하거나 SNS에 공유하여 국민들에게 창고형 약국의 위험성을 알리는 데 활용해 주세요.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-ps2" style="display:none;">
-      <div style="background:linear-gradient(135deg,#002D62,#4A9FD4);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">약 올바르게 복용하기</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">올바른 약 복용 방법을 한눈에 볼 수 있는 인포그래픽 포스터</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>🖼️ 포스터 소개</h3><p>올바른 약 복용법을 한눈에 볼 수 있도록 인포그래픽으로 제작한 포스터입니다. 약국 내 부착 및 온라인 배포용으로 제작되었습니다.</p></div>
-        <div class="detail-section"><h3>💡 활용 안내</h3><div class="position-box"><p>국민들이 약을 올바르게 복용할 수 있도록 약국 내 눈에 잘 띄는 곳에 부착해 주세요.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-ps3" style="display:none;">
-      <div style="background:linear-gradient(135deg,#065F46,#34D399);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">어르신 다약제 복용 주의</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">5종 이상 약을 동시에 복용하는 어르신들을 위한 주의 안내</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>🖼️ 포스터 소개</h3><p>다약제 복용 어르신을 위한 주의 안내 포스터입니다. 약국 내 어르신 환자분들이 잘 볼 수 있는 곳에 부착해 주세요.</p></div>
-        <div class="detail-section"><h3>💡 활용 안내</h3><div class="position-box"><p>복용 중인 모든 약을 약봉지에 모아 가까운 약국에서 복약 상담을 받도록 국민들에게 안내해 주세요.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-sh1" style="display:none;">
-      <div style="background:linear-gradient(135deg,#7B1A1A,#B91C1C);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">창고형 약국 30초 설명</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">창고형 약국 문제를 30초 안에 쉽게 설명하는 쇼츠 영상</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>▶️ 영상 소개</h3><p>창고형 약국의 문제점을 30초 안에 핵심만 담아 설명하는 쇼츠 영상입니다. SNS에 공유하여 더 많은 국민들에게 알려주세요.</p></div>
-        <div class="detail-section"><h3>💡 공유 안내</h3><div class="position-box"><p>이 영상을 유튜브 쇼츠, 인스타그램 릴스, 틱톡 등 SNS에 공유하여 창고형 약국의 위험성을 널리 알려주세요.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-sh2" style="display:none;">
-      <div style="background:linear-gradient(135deg,#004A9E,#4A9FD4);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">약 복용 전 꼭 확인하세요</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">약을 복용하기 전 반드시 확인해야 할 사항들 안내</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>▶️ 영상 소개</h3><p>약을 복용하기 전 반드시 확인해야 할 사항들을 45초 쇼츠 영상으로 알기 쉽게 안내합니다.</p></div>
-        <div class="detail-section"><h3>💡 공유 안내</h3><div class="position-box"><p>올바른 약 복용 문화 확산을 위해 SNS에 공유하여 더 많은 국민들에게 알려주세요.</p></div></div>
-      </div>
-    </div>
-
-    <div id="panel-sh3" style="display:none;">
-      <div style="background:linear-gradient(135deg,#164E63,#0EA5E9);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">약 버리는 올바른 방법</h2>
-        <p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">폐의약품을 안전하게 버리는 방법 안내</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section"><h3>▶️ 영상 소개</h3><p>폐의약품을 안전하게 버리는 방법을 40초 쇼츠 영상으로 안내합니다. 환경을 지키는 올바른 폐의약품 처리 방법을 알려드립니다.</p></div>
-        <div class="detail-section"><h3>💡 공유 안내</h3><div class="position-box"><p>가까운 약국에 폐의약품을 반납하는 것이 환경과 건강을 지키는 올바른 방법입니다. SNS에 공유하여 알려주세요.</p></div></div>
-      </div>
-    </div>
-
-  </div><!-- /detail-area -->
+  <div class="detail-area" id="onair-detail"><div style="padding:40px;text-align:center;color:#888;"><p style="font-size:32px;">📺</p><p>왼쪽에서 콘텐츠를 선택해주세요</p></div></div><!-- /detail-area -->
 
 
 <div class="mob-accordion">
@@ -1149,47 +986,84 @@ function showAdminMedia(item, cardEl) {
 }
 </script>
 
+
+
 <script>
-// ── Admin CMS(kkpa_onair) → media.html 좌측 목록 반영 ──
-(function syncMedia() {
+// ── 경기약사 ON AIR: admin 데이터로 완전 구성 ──
+(function init() {
   var raw = localStorage.getItem('kkpa_onair');
-  if (!raw) return;
-  try {
-    var items = JSON.parse(raw).filter(function(i){ return !i._deleted; });
-    if (!items.length) return;
-    var list = document.querySelector('.issue-list');
-    if (!list) return;
-    var detail = document.querySelector('.detail-area');
-    if (!detail) return;
-    // 기존 카드 지우고 admin 데이터로 교체
-    list.innerHTML = items.map(function(item, i) {
-      return '<div class="issue-card'+(i===0?' active':'')+'" onclick="showIssue('onair'+i+'',this)" data-onair="'+i+'">'
-        +'<div class="card-status status-blue">'+item.type+'</div>'
-        +'<div class="card-title">'+item.title+'</div>'
-        +'<div class="card-desc">'+(item.subtitle||item.cardDesc||'')+'</div>'
-        +'</div>';
-    }).join('');
-    // 상세 패널도 추가
-    items.forEach(function(item, i) {
-      var existing = document.getElementById('issue-onair'+i);
-      if (!existing) {
-        var div = document.createElement('div');
-        div.id = 'issue-onair'+i;
-        div.style.display = i===0 ? 'block' : 'none';
-        var bg = item.color || '#002D62';
-        div.innerHTML = '<div style="background:linear-gradient(135deg,'+bg+',#4A9FD4);padding:44px 40px 40px;">'
-          +'<div style="font-size:52px;margin-bottom:20px;">'+(item.icon||'📋')+'</div>'
-          +'<h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;margin-bottom:10px;">'+item.title+'</h2>'
-          +'<p style="font-size:13.5px;color:rgba(255,255,255,.65);">'+(item.subtitle||'')+'</p>'
-          +'</div>'
-          +'<div class="detail-body"><div class="detail-section"><h3>📋 콘텐츠 소개</h3>'
-          +(item.sections && item.sections[0] ? '<p>'+item.sections[0].content+'</p>' : '<p>'+item.title+'</p>')
-          +'</div></div>';
-        detail.appendChild(div);
-      }
-    });
-  } catch(e) {}
+  var items = [];
+
+  if (raw) {
+    try {
+      items = JSON.parse(raw).filter(function(i){ return !i._deleted; });
+    } catch(e) {}
+  }
+
+  var list = document.getElementById('onair-list');
+  var detail = document.getElementById('onair-detail');
+  if (!list || !detail) return;
+
+  if (!items.length) {
+    list.innerHTML = '<div style="padding:20px;color:#888;">관리자에서 콘텐츠를 등록해주세요</div>';
+    return;
+  }
+
+  // 좌측 목록
+  list.innerHTML = items.map(function(item, i) {
+    return '<div class="issue-card' + (i===0?' active':'') + '" onclick="showOnair(' + i + ',this)">'
+      + '<div class="card-status status-blue">' + (item.type||'콘텐츠') + '</div>'
+      + '<div class="card-title">' + item.title + '</div>'
+      + '<div class="card-desc">' + (item.cardDesc||item.subtitle||'') + '</div>'
+      + '</div>';
+  }).join('');
+
+  // 우측 상세 (모든 패널 미리 생성)
+  var COLORS = ['linear-gradient(135deg,#002D62,#4A9FD4)',
+    'linear-gradient(135deg,#7B1A1A,#B91C1C)',
+    'linear-gradient(135deg,#065F46,#10B981)',
+    'linear-gradient(135deg,#78350F,#D97706)',
+    'linear-gradient(135deg,#1E1B4B,#6D28D9)'];
+
+  detail.innerHTML = items.map(function(item, i) {
+    var bg = item.color ? 'linear-gradient(135deg,' + item.color + ',#4A9FD4)' : COLORS[i % COLORS.length];
+    var sections = '';
+    if (item.sections && item.sections.length) {
+      sections = item.sections.map(function(sec) {
+        return '<div class="detail-section"><h3>' + sec.title + '</h3>'
+          + sec.content.split('\n\n').filter(Boolean).map(function(p){ return '<p>' + p + '</p>'; }).join('')
+          + '</div>';
+      }).join('');
+    } else {
+      sections = '<div class="detail-section"><h3>📋 콘텐츠 소개</h3><p>' + (item.cardDesc||item.subtitle||item.title) + '</p></div>';
+    }
+    return '<div id="onair-p' + i + '" style="display:' + (i===0?'block':'none') + ';">'
+      + '<div style="background:' + bg + ';padding:44px 40px 40px;position:relative;overflow:hidden;">'
+      + '<div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>'
+      + '<div style="font-size:52px;margin-bottom:20px;line-height:1;position:relative;z-index:1;">' + (item.icon||'📋') + '</div>'
+      + '<div style="font-size:12px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,.6);margin-bottom:12px;position:relative;z-index:1;">' + (item.type||'콘텐츠') + ' · ' + (item.date||'') + '</div>'
+      + '<h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;position:relative;z-index:1;">' + item.title + '</h2>'
+      + '<p style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;position:relative;z-index:1;">' + (item.subtitle||item.cardDesc||'') + '</p>'
+      + '</div>'
+      + '<div class="detail-body">' + sections + '</div>'
+      + '</div>';
+  }).join('');
+
+  // 첫번째 항목 표시
+  showOnair(0, list.querySelector('.issue-card'));
 })();
+
+function showOnair(idx, cardEl) {
+  // 모든 패널 숨기기
+  var detail = document.getElementById('onair-detail');
+  detail.querySelectorAll('[id^="onair-p"]').forEach(function(el){ el.style.display='none'; });
+  // 선택 패널 표시
+  var target = document.getElementById('onair-p' + idx);
+  if (target) target.style.display = 'block';
+  // 카드 active
+  document.querySelectorAll('#onair-list .issue-card').forEach(function(c){ c.classList.remove('active'); });
+  if (cardEl) cardEl.classList.add('active');
+}
 </script>
 </body>
 </html>
