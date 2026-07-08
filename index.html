@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script>
-// Netlify Identity 초대/복구 토큰 감지 → CMS로 리다이렉트
-(function() {
-  var hash = window.location.hash;
-  if (hash && (
-    hash.indexOf('invite_token=') !== -1 ||
-    hash.indexOf('recovery_token=') !== -1 ||
-    hash.indexOf('confirmation_token=') !== -1 ||
-    hash.indexOf('access_token=') !== -1
-  )) {
-    window.location.href = '/static/admin/index.html' + hash;
-  }
-})();
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>경기도약사회 — 경기도민의 건강을 지키는 든든한 이웃</title>
+<title>경기도약사회 — 국민의 건강을 지키는 든든한 이웃</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -85,8 +71,7 @@ a{text-decoration:none;color:inherit}
 }
 .hdr-tel span{font-size:12px;color:var(--navy);font-weight:700}
 
-.hdr-ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;margin-left:auto}
-.hdr-ham span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:.3s}
+
 
 /* ─── LAYOUT ─────────────────────────── */
 .layout{display:block;min-height:calc(100vh - var(--hh) - var(--nh))}
@@ -162,15 +147,10 @@ a{text-decoration:none;color:inherit}
 }
 .hero-photo{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;
-  filter:brightness(.48) saturate(.9);
   transition:transform 8s ease;
 }
 .hero:hover .hero-photo{transform:scale(1.03)}
-/* gradient overlay */
-.hero::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(100deg,rgba(0,24,64,.85) 0%,rgba(0,45,98,.55) 55%,rgba(0,75,158,.2) 100%);
-}
+/* gradient overlay removed */
 /* subtle grain */
 .hero::before{
   content:'';position:absolute;inset:0;z-index:1;
@@ -230,24 +210,34 @@ a{text-decoration:none;color:inherit}
 .hstat .hs-text span{font-size:11.5px;color:rgba(255,255,255,.6);margin-top:2px;display:block}
 
 /* ─── NOTICE TICKER ─────────────────────────── */
-.ticker{
+.sns-bar{
   background:white;border-bottom:1px solid var(--border);
-  display:flex;align-items:stretch;height:46px;overflow:hidden;
+  padding:0 44px;
 }
-.ticker-label{
-  background:var(--navy);color:white;font-size:11.5px;font-weight:700;
-  padding:0 20px;display:flex;align-items:center;gap:6px;
-  white-space:nowrap;flex-shrink:0;letter-spacing:.4px;
+.sns-bar-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;gap:0;
+  height:52px;
 }
-.ticker-roll{flex:1;overflow:hidden;display:flex;align-items:center;padding:0 20px}
-.ticker-items{
-  display:flex;gap:56px;white-space:nowrap;
-  animation:ticker 24s linear infinite;
+.sns-bar-label{
+  font-size:11.5px;font-weight:700;color:var(--sub);
+  white-space:nowrap;padding-right:20px;border-right:1px solid var(--border);
+  margin-right:20px;letter-spacing:.3px;
 }
-.ticker-items a{font-size:13px;color:var(--text);transition:.15s;display:inline-flex;align-items:center;gap:7px}
-.ticker-items a:hover{color:var(--navy);font-weight:600}
-.tnew{background:#E74C3C;color:white;font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:4px}
-@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.sns-link{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:600;color:var(--navy);
+  padding:6px 16px;border-radius:20px;transition:.2s;
+  white-space:nowrap;
+}
+.sns-link:hover{background:var(--accent-l);color:var(--navy)}
+.sns-link .sns-icon{font-size:16px;}
+.sns-divider{width:1px;height:18px;background:var(--border);margin:0 4px;flex-shrink:0;}
+@media(max-width:540px){
+  .sns-bar{padding:0 16px;}
+  .sns-bar-label{display:none;}
+  .sns-link{padding:6px 10px;font-size:12px;}
+}
 
 /* ─── CENTERED WRAPPER ─────────────────────────── */
 .wrap{max-width:1280px;margin:0 auto;width:100%;padding:0 44px}
@@ -362,7 +352,7 @@ a{text-decoration:none;color:inherit}
 }
 .poster-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
 .poster-photo-wrap{
-  position:relative;aspect-ratio:3/4;overflow:hidden;
+  position:relative;aspect-ratio:1/1;overflow:hidden;
 }
 .poster-photo{
   width:100%;height:100%;object-fit:cover;transition:transform .5s ease;
@@ -370,22 +360,21 @@ a{text-decoration:none;color:inherit}
 .poster-card:hover .poster-photo{transform:scale(1.06)}
 .poster-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(0,29,64,.85) 0%, rgba(0,29,64,.1) 50%, transparent 100%);
+  background:linear-gradient(to top, rgba(0,29,64,.88) 0%, rgba(0,29,64,.08) 55%, transparent 100%);
+}
+/* 콘텐츠 타입 뱃지 (쇼츠/포스터/카드뉴스) */
+.poster-type{
+  position:absolute;top:10px;left:10px;z-index:1;
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:10.5px;font-weight:700;color:white;
+  background:rgba(0,24,64,.55);backdrop-filter:blur(6px);
+  padding:4px 10px;border-radius:20px;letter-spacing:.2px;
 }
 .poster-caption{
-  position:absolute;bottom:0;left:0;right:0;padding:20px 16px;
+  position:absolute;bottom:0;left:0;right:0;padding:14px;
 }
-.poster-caption h3{font-size:14.5px;font-weight:700;color:white;line-height:1.4;margin-bottom:4px}
-.poster-caption span{font-size:12px;color:rgba(255,255,255,.65)}
-.poster-footer{
-  padding:12px 16px;display:flex;justify-content:space-between;align-items:center;
-}
-.poster-footer .pdate{font-size:12px;color:var(--sub)}
-.poster-dl{
-  font-size:11.5px;font-weight:700;color:var(--navy);
-  background:var(--accent-l);padding:4px 12px;border-radius:12px;transition:.2s;
-}
-.poster-dl:hover{background:var(--accent)}
+.poster-caption h3{font-size:13px;font-weight:700;color:white;line-height:1.4;margin-bottom:3px}
+.poster-caption span{font-size:11px;color:rgba(255,255,255,.65)}
 
 /* ─── POSTER CAROUSEL ─────────────────────────── */
 .poster-carousel-wrap{
@@ -393,7 +382,7 @@ a{text-decoration:none;color:inherit}
 }
 .poster-carousel{
   display:flex;
-  gap:20px;
+  gap:18px;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
@@ -404,9 +393,9 @@ a{text-decoration:none;color:inherit}
 }
 .poster-carousel::-webkit-scrollbar{display:none}
 .poster-carousel.grabbing{cursor:grabbing}
-/* each card takes exactly 1/3 of visible width */
+/* each card takes exactly 1/4 of visible width */
 .poster-carousel .poster-card{
-  flex:0 0 calc((100% - 40px) / 3);
+  flex:0 0 calc((100% - 54px) / 4);
   min-width:0;
   scroll-snap-align:start;
 }
@@ -448,7 +437,7 @@ a{text-decoration:none;color:inherit}
 .issue-carousel.grabbing{cursor:grabbing}
 .issue-carousel .issue-card{
   flex:0 0 calc((100% - 60px) / 4);
-  min-width:260px;
+  min-width:0;
   scroll-snap-align:start;
 }
 
@@ -474,33 +463,36 @@ a{text-decoration:none;color:inherit}
 
 /* ─── ISSUES (2-col with photo accent) ─────────────────────────── */
 .issue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+/* ─── ISSUE CARD (컴팩트 오버레이 — poster-card와 동일 구조) ─────── */
 .issue-card{
-  background:white;border-radius:var(--r);overflow:hidden;
-  box-shadow:var(--sh);border:1px solid var(--border);transition:all .3s;display:flex;flex-direction:column;
+  border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);
+  border:1px solid var(--border);transition:all .32s;cursor:pointer;
 }
-.issue-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.issue-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg)}
+.issue-photo-wrap{
+  position:relative;aspect-ratio:1/1;overflow:hidden;
+}
 .issue-photo{
-  height:160px;width:100%;object-fit:cover;
-  filter:brightness(.85);transition:filter .3s;
+  width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block;
 }
-.issue-card:hover .issue-photo{filter:brightness(1)}
-.issue-body{padding:22px 22px 20px;flex:1;display:flex;flex-direction:column}
-.issue-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.issue-tag{
-  font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:10px;
+.issue-card:hover .issue-photo{transform:scale(1.06)}
+.issue-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(4,44,83,.9) 0%, rgba(4,44,83,.08) 55%, transparent 100%);
 }
-.tag-r{background:#FEE2E2;color:#B91C1C}
-.tag-y{background:#FEF3C7;color:#92400E}
-.tag-b{background:#DBEAFE;color:#1D4ED8}
-.issue-body h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px;line-height:1.4}
-.issue-body p{font-size:13.5px;color:var(--sub);line-height:1.78;flex:1}
-.issue-link{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:13px;font-weight:700;color:var(--navy);
-  border:1.5px solid var(--navy);padding:8px 17px;border-radius:8px;
-  align-self:flex-start;margin-top:16px;transition:.2s;
+.issue-badge{
+  position:absolute;top:10px;left:10px;z-index:1;
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:10.5px;font-weight:700;color:white;
+  padding:4px 10px;border-radius:20px;letter-spacing:.2px;
 }
-.issue-link:hover{background:var(--navy);color:white}
+.issue-badge.tag-r{background:rgba(185,28,28,.75);backdrop-filter:blur(6px);}
+.issue-badge.tag-y{background:rgba(146,64,14,.75);backdrop-filter:blur(6px);}
+.issue-badge.tag-b{background:rgba(29,78,216,.75);backdrop-filter:blur(6px);}
+.issue-caption{
+  position:absolute;bottom:0;left:0;right:0;padding:14px;
+}
+.issue-caption h3{font-size:13px;font-weight:700;color:white;line-height:1.4;margin:0}
 
 /* ─── VOICES (real photo circles) ─────────────────────────── */
 .voice-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
@@ -580,7 +572,6 @@ a{text-decoration:none;color:inherit}
 }
 .map-bg{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  filter:brightness(.35) saturate(.7);
 }
 .map-inner{
   position:relative;z-index:1;
@@ -670,22 +661,130 @@ footer{
 }
 @media(max-width:960px){
   .tn-item span.tn-arr{display:none}
-  .hdr-ham{display:flex}
-  .hdr-tel{display:none}
-  .hero-stats{display:none}
-  .top-nav{display:none}
 }
-@media(max-width:640px){
+@media(max-width:760px){
   .wrap{padding:0 20px}
   .wrap[style]{padding-left:20px!important;padding-right:20px!important}
-  .hero-inner{padding:0 20px}
+
+  /* 히어로: 세로 스택, 높이 자동 */
+  .hero{height:auto;min-height:480px;}
+  .hero-inner{
+    flex-direction:column;align-items:flex-start;
+    padding:64px 24px 36px;gap:28px;
+  }
+  .hero-left{max-width:100%;}
+  .hero-desc{max-width:100%;}
+  /* 통계 카드: 가로 배치로 전환 */
+  .hero-stats{
+    flex-direction:row;width:100%;gap:10px;
+  }
+  .hstat{flex:1;min-width:0;padding:14px 16px;gap:10px;}
+  .hstat .hs-icon{width:36px;height:36px;font-size:16px;}
+  .hstat .hs-text strong{font-size:15px;}
+  .hstat .hs-text span{font-size:10.5px;}
+
+  /* 섹션 헤더: 세로 스택 */
+  .sec-hd{flex-direction:column;align-items:flex-start;padding:40px 0 22px;gap:14px;}
+  .btn-more{align-self:flex-start;}
+
+  /* 캐러셀 카드: 모바일에서 1.1장씩 보이도록 */
+  .issue-carousel .issue-card,
+  .issue-carousel .issue-card,
+  .health-carousel .health-card,
+  .poster-carousel .poster-card{
+    flex:0 0 78%;
+    min-width:0;
+  }
+
+  /* 캐러셀 좌우 화살표는 모바일에서 숨김 (스와이프로 대체) */
+  .carousel-arrow{display:none;}
+}
+@media(max-width:640px){
+  .hero-inner{padding:52px 20px 28px}
+  .hero h1{font-size:clamp(22px,7vw,30px)}
+  .hero-badge{font-size:11px;padding:4px 12px}
+  .hero-desc{font-size:14px;margin-bottom:24px}
+  .hero-stats{flex-direction:column}
   .map-inner{grid-template-columns:1fr;padding:28px 20px}
   .map-band{height:auto;padding:40px 0}
   .voice-grid{grid-template-columns:1fr}
   footer{padding:40px 0 24px}
   .ft-inner{padding:0 20px}
   .ft-grid{grid-template-columns:1fr}
+  .issue-carousel .issue-card,
+  .health-carousel .health-card,
+  .poster-carousel .poster-card{flex:0 0 88%}
 }
+
+/* ─── MOBILE NAV (hamburger + drawer) ─────────────────────────── */
+.hdr-ham{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  cursor:pointer;padding:8px;margin-left:8px;flex-shrink:0;
+  width:38px;height:38px;border-radius:8px;border:none;background:transparent;
+}
+.hdr-ham span{display:block;width:20px;height:2px;background:var(--navy);border-radius:2px;transition:.25s;}
+.hdr-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hdr-ham.open span:nth-child(2){opacity:0}
+.hdr-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.mnav-overlay{
+  position:fixed;inset:0;background:rgba(0,24,64,.5);z-index:900;
+  opacity:0;visibility:hidden;transition:opacity .25s;
+}
+.mnav-overlay.open{opacity:1;visibility:visible}
+
+.mnav-drawer{
+  position:fixed;top:0;right:0;height:100%;width:78%;max-width:320px;
+  background:var(--navy-d);z-index:901;
+  box-shadow:-8px 0 30px rgba(0,0,0,.25);
+  transform:translateX(100%);transition:transform .3s ease;
+  overflow-y:auto;padding:20px 0 40px;
+}
+.mnav-drawer.open{transform:translateX(0)}
+.mnav-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px 18px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:8px;
+}
+.mnav-head .mnav-title{font-size:13px;font-weight:700;color:white;letter-spacing:.5px}
+.mnav-close{
+  background:none;border:none;color:rgba(255,255,255,.6);font-size:22px;
+  cursor:pointer;line-height:1;padding:4px;
+}
+.mnav-drawer .mn-item{border-bottom:1px solid rgba(255,255,255,.06)}
+.mnav-drawer .mn-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 22px;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.8);
+  cursor:pointer;
+}
+.mnav-drawer .mn-item.active .mn-link{color:var(--accent);font-weight:700}
+.mnav-drawer .mn-arr{font-size:11px;opacity:.5;transition:transform .2s}
+.mnav-drawer .mn-item.expanded .mn-arr{transform:rotate(180deg)}
+.mnav-drawer .mn-sub{
+  max-height:0;overflow:hidden;transition:max-height .25s ease;
+  background:rgba(0,0,0,.18);
+}
+.mnav-drawer .mn-item.expanded .mn-sub{max-height:240px}
+.mnav-drawer .mn-sub a{
+  display:block;padding:12px 22px 12px 36px;font-size:13.5px;color:rgba(255,255,255,.6);
+}
+.mnav-drawer .mn-sub a:hover{color:white}
+
+@media(max-width:960px){
+  .top-nav{display:none}
+  .hdr-ham{display:flex}
+  .hdr-tel{display:none}
+}
+@media(max-width:760px){
+  .hdr-search{min-width:0;flex:1;max-width:240px}
+}
+@media(max-width:540px){
+  .hdr-inner{padding:0 16px;gap:10px}
+  .hdr-search{display:none}
+  .hdr-logo .ltxt .en{display:none}
+}
+
+.hdr-logo{display:flex;align-items:center;}
+.hdr-search{display:none!important;}
 </style>
 </head>
 <body>
@@ -693,23 +792,10 @@ footer{
 <!-- HEADER -->
 <header class="site-header">
   <div class="hdr-inner">
-  <a href="index.html" class="hdr-logo">
-    <div class="lmark">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2L4 6.5v11L12 22l8-4.5v-11L12 2z" stroke="#4A9FD4" stroke-width="1.7" fill="none"/>
-        <path d="M9 12h6M12 9v6" stroke="white" stroke-width="1.9" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <div class="ltxt">
-      <span class="ko">경기도약사회</span>
-      <span class="en">Gyeonggi Pharmacists Association</span>
-    </div>
+    <a href="index.html" class="hdr-logo">
+    <img src="data:image/png;base64,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" alt="경기도약사회" style="height:40px;width:auto;">
   </a>
-  <div class="hdr-search">
-    <button>🔍</button>
-    <input type="text" placeholder="검색어를 입력하세요">
-  </div>
-  <div class="hdr-ham" onclick="this.classList.toggle('open')">
+  <div class="hdr-ham" id="hdrHam" onclick="toggleMobileNav()">
     <span></span><span></span><span></span>
   </div>
   </div><!-- /hdr-inner -->
@@ -728,21 +814,93 @@ footer{
         <a href="about.html">오시는 길</a>
       </div>
     </div>
-    <div class="tn-item"><a href="issues.html" style="color:inherit;">핵심 현안</a></div>
-    <div class="tn-item"><a href="media.html" style="color:inherit;">약사회 미디어</a></div>
-    <div class="tn-item"><a href="health.html" style="color:inherit;">건강정보</a></div>
-    <div class="tn-item"><a href="news.html" style="color:inherit;">소식·공지</a></div>
-    <div class="tn-item">
-      참여마당 <span class="tn-arr">▾</span>
-      <div class="tn-drop"><a href="#">신고센터</a><a href="#">의견 보내기</a></div>
-    </div>
-    <div class="tn-item"><a href="#" style="color:inherit;">고객센터</a></div>
-    <div class="tn-cta">
-      <a href="#" class="alert-btn">🚨 신고센터</a>
-      <a href="tel:031-256-0663" class="tel-btn">📞 031-256-0663</a>
-    </div>
+    <div class="tn-item"><a href="media.html" style="color:inherit;">경기약사 ON AIR</a></div>
+
+    <div class="tn-item"><a href="health.html" style="color:inherit;">슬기로운 약 복용법</a></div>
+
+    <div class="tn-item"><a href="issues.html" style="color:inherit;">약사정책 국민브리핑</a></div>
   </div>
 </nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mnav-overlay" id="mnavOverlay" onclick="closeMobileNav()"></div>
+<div class="mnav-drawer" id="mnavDrawer">
+  <div class="mnav-head">
+    <span class="mnav-title">MENU</span>
+    <button class="mnav-close" onclick="closeMobileNav()" aria-label="닫기">✕</button>
+  </div>
+  <div id="mnavList"></div>
+</div>
+<script>
+// 모바일 네비게이션: 데스크톱 top-nav를 복제해 드로어 생성
+(function buildMobileNav(){
+  var src = document.querySelector('.top-nav .top-nav-inner');
+  var list = document.getElementById('mnavList');
+  if(!src || !list) return;
+  Array.prototype.forEach.call(src.children, function(item){
+    if(!item.classList.contains('tn-item')) return;
+    var link = item.querySelector('a');
+    if(!link) return;
+    var drop = item.querySelector('.tn-drop');
+    var mnItem = document.createElement('div');
+    mnItem.className = 'mn-item' + (item.classList.contains('active') ? ' active' : '');
+
+    var mnLink = document.createElement('div');
+    mnLink.className = 'mn-link';
+    var span = document.createElement('span');
+    span.textContent = link.textContent.trim();
+    mnLink.appendChild(span);
+
+    if(drop){
+      var arr = document.createElement('span');
+      arr.className = 'mn-arr';
+      arr.textContent = '▾';
+      mnLink.appendChild(arr);
+      mnLink.addEventListener('click', function(e){
+        e.preventDefault();
+        mnItem.classList.toggle('expanded');
+      });
+      var sub = document.createElement('div');
+      sub.className = 'mn-sub';
+      Array.prototype.forEach.call(drop.querySelectorAll('a'), function(a){
+        var subA = document.createElement('a');
+        subA.href = a.getAttribute('href');
+        subA.textContent = a.textContent.trim();
+        sub.appendChild(subA);
+      });
+      mnItem.appendChild(mnLink);
+      mnItem.appendChild(sub);
+    } else {
+      mnLink.addEventListener('click', function(){
+        window.location.href = link.getAttribute('href');
+      });
+      mnItem.appendChild(mnLink);
+    }
+    list.appendChild(mnItem);
+  });
+})();
+
+function toggleMobileNav(){
+  var ham = document.getElementById('hdrHam');
+  var overlay = document.getElementById('mnavOverlay');
+  var drawer = document.getElementById('mnavDrawer');
+  var isOpen = drawer.classList.contains('open');
+  if(isOpen){ closeMobileNav(); }
+  else {
+    ham.classList.add('open');
+    overlay.classList.add('open');
+    drawer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+function closeMobileNav(){
+  document.getElementById('hdrHam').classList.remove('open');
+  document.getElementById('mnavOverlay').classList.remove('open');
+  document.getElementById('mnavDrawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+
 
 <!-- MAIN -->
 <main class="main-content">
@@ -750,18 +908,12 @@ footer{
     <!-- ── HERO ── -->
     <section class="hero">
       <!-- Unsplash: Korean pharmacy / healthcare photo -->
-      <img class="hero-photo"
-        src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80&auto=format&fit=crop"
-        alt="약사 히어로 배경">
+      <img class="hero-photo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABkAAAAIICAIAAAC5KrXiAAAO10lEQVR4nO3YQU6DUBRAUXETbsb9bwvnpColD7jVcyakSfP+47ejuywfn29jlrlRx4aNLnD88CvW2H3Gvi9efXOnnTc5+Na/08auXUoLH7RsnhFz6xyaFLuNCVe90h+8uj16r/3MRr3tOezHH/P1fun5jV/vDm7xD69pnRzWvr/RV73f5a/zxIGn7/bbP+2Sy1m//XDNkSeMP2n++Nh185yZ9sj7yAkAAAAAcBIBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACAtC89dhNzfQVF8wAAAABJRU5ErkJggg==" alt="히어로 배경">
       <div class="hero-inner">
         <div class="hero-left">
-          <div class="hero-badge">경기도민과 함께하는 약사회</div>
-          <h1>경기도민의 건강을 지키는<br><em>든든한 이웃,</em><br>경기도약사회</h1>
-          <p class="hero-desc">약사의 전문 지식으로 도민의 건강과 의약품 안전을 책임집니다. 올바른 약 사용 문화를 만들어가는 경기도약사회와 함께해주세요.</p>
-          <div class="hero-actions">
-            <a href="#" class="btn-main">💊바로가기1</a>
-            <a href="#" class="btn-sub">⚡바로가기2</a>
-          </div>
+          <div class="hero-badge">국민과 함께하는 약사회</div>
+          <h1>국민의 건강을 지키는<br><em>든든한 이웃,</em><br>경기도약사회</h1>
+          <p class="hero-desc">약사의 전문 지식으로 국민의 건강과 의약품 안전을 책임집니다. 올바른 약 사용 문화를 만들어가는 경기도약사회와 함께해주세요.</p>
         </div>
         <div class="hero-stats">
           <div class="hstat">
@@ -778,25 +930,39 @@ footer{
               <span>경기도 전 시·군 조직</span>
             </div>
           </div>
-          <div class="hstat">
-            <div class="hs-icon">📞</div>
-            <div class="hs-text">
-              <strong>031-256-0663</strong>
-              <span>도민 상담 전화 (평일 9~18시)</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- TICKER -->
-    <div class="ticker">
-      <div class="ticker-label">📌 공지사항</div>
-      <div class="ticker-roll">
-        <div class="ticker-items" id="ticker-items">
-          <!-- JS로 동적 렌더링 -->
-          <a href="news.html">경기도약사회 공지사항을 확인하세요</a>
-        </div>
+    <!-- SNS 바로가기 -->
+    <div class="sns-bar">
+      <div class="sns-bar-inner">
+        <span class="sns-bar-label">🔗 바로가기</span>
+        <a class="sns-link" href="https://www.instagram.com/kkpa0800/" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+            <defs>
+              <radialGradient id="ig1" cx="30%" cy="107%" r="150%">
+                <stop offset="0%" stop-color="#fdf497"/>
+                <stop offset="5%" stop-color="#fdf497"/>
+                <stop offset="45%" stop-color="#fd5949"/>
+                <stop offset="60%" stop-color="#d6249f"/>
+                <stop offset="90%" stop-color="#285AEB"/>
+              </radialGradient>
+            </defs>
+            <rect x="2" y="2" width="20" height="20" rx="5.5" ry="5.5" fill="url(#ig1)"/>
+            <circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="1.8" fill="none"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+          </svg>
+          경기도약사회 인스타그램
+        </a>
+        <div class="sns-divider"></div>
+        <a class="sns-link" href="https://www.kpanet.or.kr" target="_blank" rel="noopener">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA8QAAADrCAYAAACvvl+JAABNxUlEQVR4nO3df3xT52Ev/s/BNsIYY9eYE2Mfublk6UzSNA7JQDLs7uvQbyDpssINMua2CWwZS/btwmrR4OxH727X790NJJYysv7+cQPpFiOFxms2Ch0O7bdgGboQko5Aw0Koz7FxhO0ahG2EbZ7vH7KMcfghyZKeI53P+/Xyq0lqWw+WJc7nPM/zeRQhBIiIiIiIiIisZprsARARERERERHJwEBMRERERERElsRATERERERERJbEQExERERERESWxEBMRERERERElsRATERERERERJbEQExERERERESWxEBMRERERERElsRATERERERERJbEQExERERERESWxEBMRERERERElsRATERERERERJbEQExERERERESWxEBMRERERERElsRATERERERERJbEQExERERERESWxEBMRERERERElsRATERERERERJbEQExERERERESWxEBMRERERERElsRATERERERERJbEQExERERERESWxEBMRERERERElsRATERERERERJbEQExERERERESWxEBMRERERERElsRATERERERERJbEQExERERERESWxEBMRERERERElqSU/l//INL9oALAj7wrUVNdoaT7sZNpVUOLOHC0U/YwPuIyBF73rELNPcn7+erdIXHP2h3I6CcsSSrnFQIAPl42G0Dk97nm7nIsubsC9rH/Zi8r5I8qjZr3nBAAEHinE3p3CL/uPn/V///xstkfeZ74HBERERFR7jQJl4RB42L6HzTJtm4/LFr++STUW2fKHspVgvtDOPjWoym52dDbcRHqx2ck+9tmnCMf/Cbyvyf7xv9by75TwEUBjAIYuoyV9bcLhq/Uat5zQgTe6cQ//fgEej4MR/7jDAXIUYDcq3/c0edq/Hm6cBkr19wunl73O3x+iIiIiCwsV/YAMlHb0U7RuP4NqLWFsodyleDpQWx56f6Mn3k3OzX/Gi+bSb8KLT8/fXX4GgvI9csXMHxNUfOeE+K57Ydx5M0gMCsHavF0qGW22L54wvPUcuA0Wv71feDkMF758UqxpLqCzw0RERGRxShqbfqXTAeNizjoq8/I4KZ3h0TlvBeh1hbJHspVgr0XsfL+2/Cad2VKfqZ6d0hULvk2Z4gTFAwNA+HLQM8oVtbfjjUPVIEBLD5tRzvFc9t/gZbXTgLzpl/7xkSCgsYQUF6IV575PdSvqOJzQkRERGQRnCGO08YtrcB9JlsmPTSChXfMTVkYpqlTC/Mis5OlY7PHe04B3SPY2Hiv+NK6RQzGN7GqoUW0+E8C8/Kgzk/+60/V8hEcuoi1T76OnatOiG2Ny/icEBEREVkAW6bjsHFLq2j515ORcGMm7YN4sXGZ7FFQjNTCPKhlNqjVBdi28x1U3vEN/PmWVqF3h9K+WsPs9O6QWNXQIlpefw/qJ2am9LWn5udCnT8TLW+8j8qHXwafDyIiIqLsx0Aco+Y9J8SLnjehaiabHT42gFd+vCojl58TIvtfo8F43tfx3PbDDMZjItsTtqHlwGmolQVpe1x1zgwgdxiV87YxFBMRERFlOQbiGOjdIbH2wRaod6bvojwWQWMQT7nv5Z7HLKAWT4daOwubn/05Kuv/afwYIauKhmG1tljKigw1PxdqbTFDMREREVGWYyC+Cb07JCoffhlw5MseylWCvRex8jO3Y1vjMobhLKLOmwGEI3tZVzW0WHK2WO8OiRWNu4H75N+AYigmIiIiym4MxDexcUsrcGkoqY22U8USrew2vpf1wGlUzvua5WaLN25pxbsHf22evfqOWdxTTERERJSlGIhvYOv2w6Lln09G9hSaSfsQS7QsQC3Mg1pbiLUPtlhmb/H4ay6Ne4ZvRs3PBS4MoXnvcdlDISIiIqIkYyC+jrajnaJx/RtQbzVbidYFbHnpfpZoWYhaW4jNX/kZVjTuzupZSr07JBrX7zfdaw6ILGXfvH5/Vv/8iYiIiKyIgfga9O6QWHLPdqi1hbKHcpXg2Yt4yn0fNq9bxDBsMeqtM/HuUSOrl+427z0O3GWSZdLXcp8tsoWCiIiIiLIGA/E1bNzSCtxnrlmqYN9FLPzkXJZoWZg6ZwYwPJSVoVjvDonN6/dDLbXJHsp1qYV5aNl5Mut+9kRERERWxkA8yfgeRrMU+iBSooWCArR4V8keCkmmlkTPyH0RbUc7syaYmX52OKoij7PERERERFmEgXgCs+4bRvsQDn7tYdjLCjk7TGNn5BZhyT3bs2K2MhNmh6M4S0xERESUXRiIx5h23/DpQZZo0TWptUVZcUZuxswOR5XmsHGaiIiIKEswEI8x5b7h3otY+dnbWaJF15cFZ+Q27zkBFOTIHkbM1FIbG6eJiIiIsgQDMYBVDS2i5fX3TLdveOEdc/GadyXDMF2Xmp+b0UVbendIHAkEI3+OTLIgDwePdsoeBRERERFNUYZdhSZf854TouW1k1DnF8geytXaL+DFb6yWPQrKAGrJDATPDKF573E8vW6R7OHE5fnth4GSzJkdHlcwDTt/cgL1K6pkj4QsIBAICMPQY/58l6su7huphqGLQCAQ8+drmh1OpzPlN2zjHVeqJPIzTQa/3xfzjc50PScUGz53mSPe9xmn0wlNs/P5MpF4n8PJ7+mWDsR6d0isfbDFfPuG94dw8K313DdMMVPnzcDm9a0QgMiUJfZ6d0hs2/Im1GqT3YyKgVqYh5bmk9A3hwTL7iiVnE6HaG8/FPPnOxyL4XLVxfUYgUBA1NTUxPU1bvcX4XQ64/qaeCUyrlSoqJgX9890qgxDFw7HYnR2non5a1yuR+B0vprCUVGsEnndBgLtKRwRXY/X6xFu96a4vqatrQ2aZk/RiChedXWrhd+/K+bPv9Z7umUDsd4dEpXztkGtLZY9lKuwRIsSpdbORuP6/Vi7fEFGhLTmvccBLYPfgsbKtTJtVp4yh9/vE+3th2C3V8T0+eFwOKHHefVVHwoL81FcXBLT5/f39wFI/VtMe3sAOTlAeXlsf/5UESL9u1H8fj+6u8/E/NwPDFyAopj+bd8S0vW6peRoano+5ucKAHSd26XMxDB04ffvius5vNZ7egZfjU5NpETLXDNTLNGiKXPMQOXDL6Pj9UdNH4ozrUxrsmi5Vn2G3IAguj7++pqNYRiYOTNf9jCIsl423kjyeJrE4OCg1DEIIfDlL/+PlP9wdd1IyvexZCDeuv2waPnnk6Y6b5glWpQMan5uRuwnHi/Tmp/hF3xj5VrcS0xERESyNTZuFlu3PoeZEiPO4CDgcmVWD5LlAnHb0U7RuP4N0+0bRvsgS7QoKSL7ic09c5mxZVqTsVyLiIiITOKDDz5ASUkRCgpmSRvDjBmZt4XDUoFY7w6JJfdsh1pbJHsoVwkeG8ArP17FfcOUPHflmXaWOJPLtCZjuRYRUWoZhj6+4Y/NvuZhGLqIZ7mq3a7x+UuDTAuiZmGpQBzZN2yeZdIAEDQG8ZT7XtSvqOJvMCWNmfe3ZnyZ1mQs15LO7W4Qfv9OZMpeWCEE2tsP8eKQaEykiKodhqGjoyNyxFj0qDHD6Br/PE0rF5pmR2WlHUIIOJ01cDicDFtplkgDvM+3Ey4Xm5nJnLLoqvTGTLlvuPciVn7mdmxrXMY3cUq++2zYuKUVr3lXyh7JVba+9AuopTbZw0gaM998sAKPp0l4vS/E1TAp28QLfCIrCgQCor09gECgDYFAAIbRhcLCfOTlTUdubh4AwGaL/D0x+bV96tT7eO+9EwCAH/5wF0ZHI//d5XpEOJ01cLlcDMcp5vU2xbUsl83MZHaWCMTNe06Ybt8wS7Qo1dTCPLTsPAm90TzLeZv3nBA9H4ahlmVPIAbAci2JOjs7UViY4eVsdF2jo9FjnuSZPbtY6uNnE7/fJ/x+H/z+XcjJAYqKIqEqnhtaNpttPCxPDGStrfvwwx/ugtu9CS7XI8Lj8TIYp4iuG+M3LoiyQdYHYr07JNY+2GKqMAwAaB9iiVaMgsZF2UO4Wq4SeeXkKoBtGtR8E7+MynLx/PbD+PvGZbJHAgAIvNMJzMjC6xOWaxElnaZpcLsbJI9CYPXqOsljyHx+v094PB60tx9CSUlRSlZ0FBTMGg/Ira37YLdXwuV6RDQ0bILT6czCv3iIKFlMfCWfHCsbXgMc5po9CB67gC0v3c8SrRgEjYs46KuXPYyrdHSHoH94HsaHIRw42okj7UFg1rRIOC401x1TtXg6tm15E19at0j6LLHeHRLbns2OMq3JWK5FlHwuV53icjGMZrJAICC83ib4/bugqqVp29oQDcetrfvg9+/ijDFRmgkhbv5JJpLVgXhVQ4s48u5ZqHNmyB7KuODZi3jKfR82r1vEN+UYlFbMMN2Ng8k1Em1HO8XBtzvR9nYXWnwngXl55grGWq4pSp+yrkxrMpZrERGN83o9wu3elLIZ4VhEg/Hu3a/jnXd+ia9+9avC5aoz1TUFUTIJIdDXdw59feekjuPOO++U+vjxytqrU1OWaPVdxMJPzmWJVpapqa5Qaqojf9m3PdYpntv+C7T4TwL26aZYTm2W0qdsK9OazCw/ZyIimQxDF253A/z+XaYpuyspmYvf/KYPdXVr4PEYgsVblK3uv/9+3H///VLHMHPmTDz22LqMen3Jv1pPgbajnaYs0UJBAVq8q2QPhVKoprpCea26Am3rOsWSL7yOYN8A1BITrFCQXPq0dfth0dMbzupADED6z5mISCbD0IXdXil1Vvh6bDYb7PYKuN2bsG/fv+Fb3/q2YCimbPPkk3/K3+kEZF0g1rtDYsk926HWFskeytXah3DwrdXgzJE11FRXKB27PidWNryGI/9xFupcyaF4hoLAO/KCWuDtLsA2TcpjpxXLtYiuKRAICPkFWenndrthlSW60TBstiA8md1egZ/97A0sXboUBw4cYCgmouwLxBu3tAL3mWeZNAAETw+yRMuC7GWFypuvPIaNW1rFi55/h3pnbOf1pYJaPB3bnn0TX3os/eVaendItDSfhFplrtdlKrBcKzP09/ehqOhjkh5doKHhi5Zbrun1NuGXv3wLBQWzZQ8lbYLBHtlDSJtkhuH+/j6EQkPj/65p5WOPceX87pKSIuTm5o0fvxSvkpK56OnpxhNP/AlniokouwKxKfcN917Eys/ezhItC9vWuEzRygpF41d+Jvd3szQHevd52MvSu5Wgee9xoDQnrY8pFcu1TK2/vw8bNjyJpiYP35PTSFEU2Gz5CQcYMi/D0MUTT/wJSkoSX5k3MHABfX3noGnzsGHDk3A4HHA6nQAwfvPIMHSh6wYMQ4ff74OuG2hvPwRVLU3o96qkZC52796DnTt3Ys2aNQzFZDrnz59HX19fZtU1J8Gtt96a9tdi1gRis+4bXnjHXLzmXck3WYvbvG6REjjaJVreeF9e6/msyHLeaAFYumR7mdZkLNciIitxuxuwe/eehGaHw+EwgsEeuFyP4GbnBWuaXdE0OwAnosdxTTzfOJFgbLdX4EtfehrTpk1DQ4M77vETpcqhQ+3C4XDKHkbafeUr/xP/43/8TdofNysCsXn3DV/Ai99YLXsUZBKveVcq967dIY4cPyunaCtHgd4dSutDWqZMazKWaxGRBfj9PpFom3Rf31ncddc9aGn50Q2D8I1Ez6r2eDzi+9//Hjo6TqG4eE5c3yNatOVyuaTMEttsNpw69T7s9oqEZgKFEGhvP2S5bRjZbvfu3Zg1azo+9rG5soeSNr29Z6Aocn6Ns6LlxpT7hveHcPCt9dw3TFd5sXEZUDY70jqeZmphHl5rPgm9O5S25Tc795wACiy0XDpqrFyLiCibNTR8MaEwrOudeOihhxEItCuJhuGJ3G638p3vfBe33FKO/v7euL++sDAfXq9nqsNImM1mg6IoCX10dp6RNm6ibJHxgXjjllbR8q8noRbmyR7KOJZo0fXUVFcoG2vnAxfSH4gBALOmQe8+n5aH0rtD4kggKO0s5uDQiJQbD8CEcq003nwgIkonr9cjurvjD2O63gmX6xH4fK8m9RrJ6XQq+/f/FCUlatyhuLi4BB7PC/D7fXzPJrKgjA7EzXtOiBc9b0LVzDM7zBItupkvrVsElMuZJUaugo40LZtu3nscmC3nLSY4NILfqiiCJmk2HsB4uRYRUbYxDF243ZtQXh7f7HBf39mUhOEoTbMrBw4cQHl5ZdyhWFVL8eUvfxmGoTMUE1lMxgZivTsk1j7YAvXOAtlDGccSLYqFvaxQ2bhsPhC+nP4HHzuPONX07pDYvH6/vL3DA6PY8Ad34rknnEDvsJQhRMu1OEtMRNnG7/cjJ87dMOFwGHfddU/KwnCUptmVr371q/j4x29DOByO+etsNht+9av3EAgEUjg6IjKjjAzEendIVD78MuDIlz2Uq7UPRvaIEt3EmgeqgP7R9D9wmoq1mvceB+6SuI3h/GWsfaAK9SuqlIX3qvJmicfKtYisTgiBmTMLIISwzIfDsRguV11W3iBvano+7tnhYLAHHo83RSO6mstVp/zhH/5R3GdBFxbmo729PUWjIiKzysiW6Y1bWoFLQ1ALJR1fcw3BYwN45ceruG+YYlJTXaEsdKjiyAe/Se8e21wFv07DHuJmiWVawaERLHSqiB55VL+iCkeaDgAy9jKPlWuxbZqsLtWzgpQ+hqGLzs4zcZVpDQxcgMv1SMJt0olwu92K3+8Tp069H/NxTJG9xF40NDTwXGIiC8m4QLx1+2HR8s8nod5qon3DxiCect+L+hVVfPOkmC2trsCRE71AGhc6qPm56DiT2hni8TKt+ZJWcPSPYM2EALrk7grgwmWgNP1DGS/X2hzimcRElBUSWS7d13cubbPDE7lcddi0aVPcTdiBQAAulz1FoyKKTzxL/zNR9IbV4OBlTJsmZ/FyRgXitqOdonH9G1BrC2UPZVyw9yJWfuZ2bGtcxotdiovzUxXY9tLbaX/cno6L0LtTF9Bkl2ktrJ57ValdTXWFsnCxKo6cTvNsfNRYudbT6xal/7GJiJIs3uXSXV2d8HiapJyTm8gscXTZtMtVl+LRJYemzeMZxFlICIHi4jkQQuC3fuu3ZA8npTo6OgAAjzzy3/Bnf/ZnUn6XMyYQ690hseSe7VBri2QPZRxLtGgqKssKgZHs6lsaL9OqnSVnAAOj11ye/PS6RVi78V8ALf1vedFyrfrlCzhLTEQZLZHl0kDk4l6WmpoaHDv2jqmXTYfDYUyfPj2BrxRwudYkfTwk39/+7VeVv/3br8oehmVkTCDeuKUVuM88y6QBAO1DePEbq2WPgjKUvWw2IKFXK5XMUKZVv3zBR/5z/Yoq5bn7Dqd/z3bUWLkW9xITJV8gEBCGoY+XIRmGjo4OffyfAUDT7KisjCyBFULA6ayBw+GE3a5xdi0OPl/8y6XnzSuH271J2s/Y4XDA4/GiuFjWCG4sHA5j/vzbEAi08/eQSJKMCMSm3Dd87AK2vHQ/S7QoYfayQqW0ckb6b5vnAHr3edjLkr/1wExlWpPJ2LM9juVaREnldjeIzk4DbW1tMIwuAJGlrgCQlzcdubmRG3PRWcFTp97He++dGP/6H/5wF0bHbkg6HIuF3a7B5aqD0+lkQL4BJc6fTDTsyeRy1Sma1hD337W6bkDTuI+YyApMH4hNuW/47EU85b7vqn2KRFZntjKtydY8UIVt33wLKE7fkKJYrkU0dX6/T/j9PgQCAZw79xvk5U1HQcGsmJbv2my2q5bMFhRc2dYRDct+/y4AkbC9erUrrY3ImcIwDMycGft7fG9vD5555i9SOKLYaJod8ewjBqKrC5ypG5SF5OREfnfI/AxDFwAsd2PQ1IHYlPuG+y5i4SfnskSLpkzvDomejotQP26e48OmwmxlWpOxXIsoM3k8HuH3+9DefgglJUUoKJiF4uKSpH3/aFiOhuTvfOeb8Hi8cLkeEQ0NmxiMJ9D1DuTlJbLXVa7KSjvee+9EXIGYrs8wdP4sM1Q08Pp8figKEAi0QdeN8e0l0RU3mlYeDcbjX1tTUwOHwwFNs2fd+6KpA7HZ9g0Hh0aAggK0eFfJHgpR4kbH9i8nkVnLtCZjuRZR5ggEAsLrbYLfvwuqWhp3kVOiiotLUFwMtLbug9+/C273F0VDg9tyMybXosS5Znp0FNA0LUWjiZ2m2TE8fCnmz8+0pmmzKyoqQiDQhoYGt+yhWJJh6MLv9yMQaBtfCRPtAigqKkJubt74DY7J77OnTr0//s/Hjr0zfnyappULTbOjrq4ODocz4wOyaQPxqoYW0fL6e1ArC2QP5Yr2IRx8a/V19ygSxUPvPg/I2W6bdGYt05qM5VpEmcHtbhBe7wsoKSlKWxCerKBgFgoKZuE73/kWPJ4X4PPtFC5XnSn//i8omIV9+/4NdntFQr0UmmaPqdSpra3tquXmsX5vyh6REruuuF+X8d5MoamZHIJzciLhN97nbeJKAJvNdlU53alT7+PppzdhdDTSxeBy1cHtdmfkEy1nfeNNjJdomSgMB08PskSLkurg253AjPT/OpVWzkj6TR0zl2lNtrS6AghfTvWwrm2sXIuIrs0wdFFXt1p4vS/Abq+IO3ylQnFxCez2CtTVrYHX6zHtWXkFBbOgKErcH5cuxT5zqml2hMPhFP4pUkPTNAwODsX8+Xl506HrHSkcUeaKLq2NR25u3njzO6We1+sRdnslnn56E1pb98Fur0B5efLfT202G8rLK2C3V+DUqfexadMmOJ0O4fGY933yekwXiMdLtMzUKN17ESs/eztLtCip2t7uAmymewnGbbxMS8aMKwD0Dse1L3fNA1VAv5zzrsbLtbpDGfeXBVGqGYYunnjiT+D375I2K3wjdnsF3O5N8Ho9IroPj24ukQCV/DHEVwY2PHwJdntlCkdElHyGoQun0yHc7k0pC8HXY7PZPhKMA4FAxrxPmupq/EqJlokapYdGsPCOuXjNu5JhmJJG7w6JluaTUAvTu8w4ODSCynnJfX09v/0wUCJxdvheFfUrqmJ+fY6Va0U6AWQYK9cioisMQxdLly7Fz372hinDcFQ0FO/cuRNWDMWVlXaMjAzLHkbc4i0DGxwcMsXeZzMyDCPus6htNhva2w9Z8jWTLtFZ4VOn3pf6HjoxGNfU1Jh6Vc1EpgrEZivRAgC0X8CLjctkj4KyjN59Hpgl4eU3IlCZxEItvTsktm15E2qxpNbRgdEbHrV0PWtWVAH9cgJxtFyLs8REV7jdDejp6UZJydwpfZ/+/j7oeuf4hxACQojxf+/q6sTAwIUpLfu12yvwpS89Db/fP6WxZqJ4y6nMctwO968mT7yz7RPpuvzfhWxUV7d6fFbYLO3f0WDsdm9CXd1q01/vmCYQj+8bTvOM2Y0E94dw8K313DdMSffc9l8ARRJmVcOXUXN3edK+XfPe41Iam6NK59gS2sqwed0iZeE9c+XNEo+VaxFRZGbD79+VcBiOhmAhLmPDhifh8+2ErneMfXQqkY8OtLW14bnnmrBs2acxf/5t0PXOhINx9EKPM143NnNmvikCcbxlYJGSIJ5BfC0+X3NCx57l5ADt7YEUjMi6op0LZt1mAkTeK3fvfh1Op8PUW01MEYhNuW+YJVqUInp3SLTsNNfNn0RtfekXUEvl3I0MDo2gsizx5d8s1yKSzzD08ZmNeIXDYeh6JzZseBJtbW3Q9S6lqcmjuFx1iqbZlYnHJGmaXXE6nUpDg1vx+V5VAoF2xefbifnzb0MwmFgwVtVSLF261FKh2OFwIBSKvZyquLgEPl9zCkd0c4ahi+jZqjQ1fr9PGMaZhL42evRSprPbK1BTUwO7vULE+6Fp5cLjaUra+4Xb3ZD0zoVwOJz04rySkrk4duxtuFyupH7fZJJ+7NKVfcNFsocyjiValEobt7QCFZLC8EWBJXcn541T7w6Jno6LUD8+IynfL269w3j6b2Iv05pszQNV2PbNt4Di5A0pVuPlWptDPJOYLM3lckFVS+P+ur6+s7jrrnvQ0vKjhM+/dLnqlMgxIQ1i3759OH36P1FcPCfmr7fZbPj1rzvg9/t5vuoNGMYZGIYuZJ3j7Pf7497zqmnlaTtX1Waz4dixt+F0OhIOSn6/3/TnZOfm5mXNkulEA+iZM11JW77vdjdMeWY4HA6jt7dn7LzwyOrB+fNvA3ClDC96Myl6bFOiJV3FxXPw1luH4HY3CI/Ha7rfVemB2Gz7hlmiRanUdrRTtPhPQv2EnN/50ooZSVv18Pz2w0CRnEUmiZRpTTZWriWOnJZ0JvFYuVY8DdlENyOEwKZN7rgurPfv34/8/PQfc2gYumhvPxT3BZ2ud8LlegQ+36tJeS/zeLxKIBAQjz32eXz4YVdcoVhVS/Hd734XLpdLWuBLJ5erTnE4POLUqfdj3quYkwOpNw0CgTYUFcU+6RIOh8dDQboUF8/BqVPvJ/S1wWBPkkdzfX6/DyUliU1gRYu1AoGASNfNhmwVCATGj6ZLxMDABfT1nYPDsRjPPPMXcDic170BZBi6CAQCMAxj/EzjkpLEgrGqVsDrfQEuV53pfgekBeLiopn4862touVfT0LVzBOI0T6IF7+xWvYoKAvJXg0RHBrBwls/lpTvNV6mVS3prPAEy7QmW7OiCkee/TkgIRBHy7Xqly/gLDElhc1mwwcfnMK77/4yrq/Lzy+QUsSSyMzdwMCFpIbhKKfTqezY8QOxYcMf4+zZYMw/D5vNhnffPY5AIACXy57MIcVtYOACZs6M/z05Ly8PbnfqwuqcOfJuGhiGHvcsWm9vD5555i9SOKprM0sZ0o0EAoEpHeMT3UfsdHJ/9lS43Q0JrawJh8MIBnvgcj0Cj8cb06oCTbMr0fe2hgb32DaXyFJtVS2N+/dWVUvx2GOfx/79PzXVTUQ50zuzpuG7Le9gm/ffTRWGg8cG8MqPV3HfMCWd3h0SlQ+/DDgkBUgAGBhFfRJCJJC5ZVqTsVyLso3NZkNxcUlcHzIuxKN7h8vL45vh6Os7B4/Hm5IxOZ1O5Y/+6PG4Z9wKC/PR3t6ekjHFamDgAj796f97QolY7B+G0aW4XHUxv5/W1dWhtzf2n9HEmwbp5vV6UFgYXyPy6ChMvddRlsj+4antxZ4zpxQ+ny9JI7Imj8cj2tsPxf2+3d/fi9mzZ6OtrQ0+36tKomFU0+yKz/eq4vPtxMc+VoL+/t64vt5ms+E///OU6Vr6pQRitXg6vC8fgbogPYdFxyJoDOIp971TWoJJdD0bt7QCl4bkLM2NunA5afuHpZZp9V/Cf38wOcEeYLkWkQyJzA7reic8nqaU7pV0u92Kw7E4rlKZ4uISeDxey5RruVwujI7G9zWqWoovf/nLaf0ZGYYuPJ4X4mpEDofDcDgWm34/rgxTWS4dNXHZdJKGZTl+vy/u2eFwOIxbbinHjh0/SNreeJerTtm3bx9KStS4S7hU1Xw3RqS1TEs7t/Qagr0XsfIzt2Nb4zK+AVJS6d0hsaqhRbS8/h7UOZLKpzC2XHqxmpTVD817ToieD5PbQBiXC6Nwfip5jYprHqgC+uO8ukuS8XItnklMFhPvWabRoNLQ4E7539NutzuhfZnZUhh0M5pmj/umgc1mw69+9V5aZ4Xc7oa4A1xvbw/q6upSNKLMFQgEhN+/a0rLpaMKC/Px6qvmmh3MFH6/L6HZ4WCwB/v3/zTpRXGaZlcOHDgQ9/ulGW+MmOLYJZlYokWp0na0U1TOexEtB05DrZS4VBpI6nLpwDudwAw5L5dklGlNNlauJW/Z9Fi5FpGVGIaOvLzYb4ynM6hEiqPiC3zAlVZWK3C56uK+CI6e3ez3+1J+ERxt4I03wHG59LW9+qo/7qXn15OfX4C2tsw/fkmG9vb2uJ8HXe9EW1tbylY9RJZQ74Sux7f9q6SkCF5vUyqGlBDLB2K0D+HFxmWyR0FZZuOWVrHk/n+EWltkjvOGk7RcWu8OiW3PvilvhUeSyrQmW7OiCuiXE4ij5VqcJSYraWtriyusjI4CDkf6inhqamowNDQQ8+ebYR9xOiWytByIhOK6ujUpXTrt9/sSauBNx5L8TOXzNce19PxGorODHo/Hcn/njY4CYgp/6nifh2gJYaobnSNH2D2CgYELMX+N2Y7hsnQgDp4exJaX7meJFiXN1u2Hxdzar4kXd74jr4F5kqQul86SMq3JWK5FRBQfj8eb0NJyu70CdntlSpZLer0eUVe3Ju4wnM4l+cmmaeUp3lffIM6d60/q91TVUvj95tpDGg9d74QQIu4Ph2Mx6uqmsgIhvqe5r+8cXK60raxBX9+5mD8/emPELN0L0s8hliXYexErP3t7Si6us9apEQQLkrh3NFcBchQgV5FbNjVFzXtOiJ0/OYEDb3WipzcMtdRmqj3yyZxVlVqm1RPG1k1LU/b9l1ZX4MiJXiA5q8LiM1aulaxl7URmZhi6MIyuuEKLppWnfJbj6sfTMDg4hOLi2D4/L2+6pZZMA5FWbrf7i+JrX3sBqhpfALXbK1BTUwOPp0kkK4TW1a2O+4ilqGCwB42N6T9qKSp6HE4iXK5HkjyaKwxDn9J5t9czcZbY7c6smxDRJcjpPkc3EAjE/b4JIG1HXCX6OLpuQNPkHlkHWDQQB/suZu2+4aO/Copfne5Dd+8ABi+OTG1txgQXhy9j60u1SfleUcaHIejdIfy6+zyOtAeB4hzANu2qcNzTG8Zz2w+b4u4REBkzABwYm83rOBNCz4dhoGAa1MI8aWHxRpI1q7p1+2ERDfxSJLEl+1rWPFCFbd98CyhO2UNc13i51uYQzySmKUtkL1cyynJilcgyOcPogmHopjq3cqLc3Dx0dFgrEAORc0n37NmLnp6zcRf9RPcUBwJtoqFhU8IBw+/3CY/Hg1/+8q2Eglt0dlhWMAuHw5g3rxxvvnkkoa9P8ezwlJulr0dVS/G9730XdXXpP586EyVywy3Vqweufiy7omnlprlej5flAnFwaAQoKECLd5XsoSRN29tdYuee49h94AP857vnAJsC5CDelRXXNyyw+N5b0P6Dz6fsRdV2tFPs/MkJbGs9hWDXeWBWLtT83Mj+yqYDqXrY+OWO/Qhskd0Gan4u1DLzheCoZM6q7txzAiiI85yUJEnmsu/rGSvXEkdO/0bOioWxcq2n1y1K/2NT1tD1Tvh8O+P6mp07m7F//xtpC8VOpzOjL5yuZWRkGHa7JnsYaadpduXxx/9YbNq0KaEwardXoLV1H/z+XXC5HhEuVx2cTudNL+INQxeBQAAejwft7YegqqUoKZmb0J8hGOxBS8uPEvraZMnPzzfd3uVos3SyZ4ejbDYb3n//ODweT8rOFrey6Nnk6aRpdpw69X7MN8dycoD29kDaZrFvxHKBGO1DOPjWamTDLMyJD/rE332/HS9/5z+A8jzMKsiB+vHkH+0THBpJXri+jprqCqWmugJfemyReH77YWzbfwrB7vNQS2aYctY1Y/xyGPXLF0z52+jdIXEkEIQ6X8Z6YqSsTGuyNSuqcOTZnwMyAnFBDja/fBT1yxdwlpgSEp3pcrnq4vr9aW9vF8PDl1I1rGuK98IJSO/SuniPhTp37hyczpoUjsi83G63oigQbndiobigYBYKCmaNB2MgsvxZ0+zQtCs3GQwjsrKgra0N7e2HAERmGacS2GQtf80EXm9TymaHo4qKSrFv3z4EAgHB5+DGDMOI++z2dKustOO9907EvVrEDCwViLOpRGvH68fEuj/4EXBfPtQ7zFHelAz2skLl7xuXYc3yKrHkC68j2DcAtUTe+b2ZLNgTxtaXapNy86d573FgtrwOvlSVaU22ed0iZefeE+LIB+mfJVbzcxHsOI+DRzu5l5hoknTPJLS1tSE/P3v+bk21sX3ACYdi4EowBoB9+/4Nw8OXMDg4NP7/R29Q5OcXJGXWkmH4+rxeT0Kzw+FwOK4wZLPZcOrUe/B6m+B0vhrvMC1F0zSMjsb++TK2cXR06MjNjf1kldFRXHXTSybLtExnU4nW//7+IbHuD16HWjvbHEf6pEBNdYXSsetzWLhgLoJ9F2UPJzMlaXYYkF+mtXn976Tt8ZZWVwDhy2l7vKsU5WLnT07IeWyiNKqstGNkZDjmzy8qKkIgkJ6zSw1DF+3th+K6sDfThZ0sDQ1uxeNpinsP+7UUFMxCcXEJyssrxj+Ki0tQXFySlNmn6NYChuGPMgw9oRsb4XAYFRUa+vrOxvV1JSVz4ffvsuQxTPEwQ/HUzRiGnpGzw4BFAnFwaAQL78yOEq0tLx0Wf/n4G1BrC2UPJeXsZYXKm688pjAUxy945iK2JGl2OFqmJc35y0kL9rFY80AV0B/HbdgkGi/X4pnElOU0zY54lmkXFMyC378rLUd0+P3+hJYmmmEfnGwNDW6loeGL0PXOuM8oToeBgQvjM8Pxbi2wikSLtILBHnzta19Hbe2n4w7FqlqK73//eyk5isuqok3e6fqZRk8PiJdZgr4lAjHClyOzPhnO95NfiWf+8A2otbNlDyWtWryrgNJCeWfEZpjg0AgWVs9N2moI6WVaTjWte/7HyrXk/b6NlWsRZbPVq10IhYZu/okTlJQU4Ykn/iSloTg6O1ZeHvs1Q3TvttlKkWTxeLxKW1sbZs+ejWDQPOer63onli37NJdJ30D06Kp4C/Z0vRMeTxOcTqfyjW98E/PmaXHdELHZbOjoOAW3uyHeIVtGIqV90a0m6eDxeFBYGH/PjFnKCC0RiNXi6dj27JsZPevS3TOANU/+GIVLZ8oeStrZywqVLY9WA/0MxDHRL+HFxmXJ+VbRMi1Z50T3j6SlTGuy+hVV8n7fxsq1Mvn9iuhmnE6n4nAsjuuiuaBgFnbv3gO/35+ycSUyO9bb2wOXqy5FI8pMTqdT2b//p/jCF+TPFkdnhT2eJvh8ryoMw9eWaKt09IZQ9DxpTbMrO3b8IO5zlYuL5+Cttw7B7W7g333XoGl2xeV6BAMDF2L+mjlzSuHz+VI4qisCgUDcvQuaNs80NxItEYgBQK0uQOW8bRl7kfncjl8IFF5Gfp7JK+ZSZPO6RcrC6rmcJb6JYO9FrHTdnrTiOJllWsme6Y5H/fIFQOVsKb9van4uMFauRZTN6urq4r5ojp5d6/Umf79horNj8+aVSzvD1sw0za40NXkVn28n5s+/Le3BuL+/76pZ4Whgo48yDF3U1NQkVFYWDPZ85Ngkp9OZ0H5yVa2A1/sC9xNfh9NZg3PnzsX8+dFl06n+eXq9nrh7F/r7+1BXV5/CUcXHMoEYAOCYhcqHX864UNzRfV54vnIY6pzM3KieLC82LgM+jL2ExWqCQyNYeEfy9srr3SGxef1+ecdeDYxKa1u2lxUqG5fNZ7kWUQq5XC7ccceCuEPSxFCcjOXThqGLaBhOZHbMLHvgzMrlqlMCgXalra1tPBgPDFxIWTiOBuENG55EW1sbZ4VjkOi+4YlLpSf/fy6XCw89tCKuGU2A+4lvxOFwxtU0DaT+5xkIBBIqYQuFhrB6tSsVQ0qIpQKxmp8LDA9lXCjete89oNJSJ2RdU011hbLQIXFvp9m1DyVtqTQwNjt8l8QW8zSXaU3m/FQFcIHlWkSpoml25fHH/zjuWWLgSij+0z99ckoXel6vR9jtlWht3Zfw7Fgql3BnE6fTOR6Mly379Hg47uqaWkCOBmBd74QQl7FhwxPQ9Q40NXkYhGOQ6MqIgYELcLkeue7Mu6bZlW9969vo64t9RhO4sp/4scc+n5YSvUxit2v47d/+REL7sx977PNJD8WBQCDhlQUVFfNMtZffUoEYQORM20tDWNG4O2MuNvcGTgP5lnuqrknqkTgmlooztpstVqY1Wf2KKmXhvSzXIkolt9utOByL0d/fG/fX2u0VaGs7iJqamrGLel9MM8Z+v09s2uQWdnu5ePrpyMxGvGEAuDI7ZpY9cJnC6XQqPt+r4+H4ueeargrI0Y+urshHf38f+vv7xv994udEAvCT8Pl2Qtc7oOtdSlOTV+FzEptEV0YAQF/fuY8slZ5M0+xK5LmJb+l0cfEcfPhhF1wu88wgmoGm2ZWvfvWrCe3P/vDDLmzY8MdJWz7t9XoSDsO63gmv94VkDCNpLDntqM6ZgXd/3oEdu4/jsYcWCJkX3TczeHEYe18/DfW34m9uy0ZrHqjCtu8eBYplj8Q8gh0DWPnZTyR1r+14mdZ8Sb93ksq0JqtfUYUjz/4ckFEqNlauVb/c3O9RRFPl9/uxfPly9PScjfsMy4KCWSgomIXW1n3w+3cBAByOxaKy0v6RpcxtbW0wDB2G0YXCwvzxc24TMblIiBLjdDoVp9OJhgY3AIzPYEWeJwORf478b/Sc5+j/Op1O3oyYAq/Xk3AYjh5dFcvP3+WqU9zugPB4XojrsSaWbHk8Xj7PY5xOJ37/9x9CW9vBuG7kFRfPwdmzQWzatAl+v0+4XHVxdx8Yhi78fj98Ph/a2w8l9LsTXVlgtmPPLBmIAUC9dSb++vFWTH8JeHrdItnDua73fv0bAZupfmekspfNBuSsYjWlYO9FrHz4E0k/Y9uqZVqT1S9fgM3/9DaC5wfT3rSt5uciOFauJWsvNVE6jC2dFps2xb8PLSoajAHg1Kn38d57Jz5yznF+fgFsNlvCjxEVDocRDPbgzTePTOn70EddWULJM51Tye/3JbTvE7jxvuHraWhw48SJE/jZz95AScncmB8rWrIFgKF4jKbZlb/8y78WNTU1ca9sib7/nTr1/ngwrqmpgaZpcDgirzm7XYOm2ZXoahtdN9DeHkAg0Aa/fxdyciLt1Ym+j/b1nUNDw6aEvjaVLBuIAUCtnY3N61shAGGGi+9r6Tp7AbBmsfQ12csKldLKGRmx1D3Vgn0XsfCO0qSH4fEyrdr4lxAmhcQyrcnGyrXEtuZ3ABmT5WPlWmb5eRClitvtVhQFwu3eBFUtjXumeCKbzTalr7+R/v5e3HJLOVpafsTZScpIgUBA1NWtSTgM32jf8PWM7ScWS5cuxdDQYFyvT7udoXiysRbvhG9qTAzGx469g8HBoavKujStXBhG1/i/5+QARUVFU76ZmMjNlHSx/MZUtXY2Gte3Yuv2w6YMWaGBS8A00/3ekGTBvotYuGAu3nxlXdJ/OaxepjUZy7WI0qOhwa00NTXhllvKEtpTnGp9fWdx5513Y8eOH5jygo7oZqZSgtTXdxYu1yPw+V5N6Hdf0+zKgQMHEi7R83pfSMlxa5mqocGd0NFWE9lstvGtI3b7lQ9FUa769/LyxHoWJkr0Zkq6WD4QA9FQ/Abajnaa7oU2c0YuYLpRkUzB3kgYbvGuSsn3t3qZ1mQs16J0MwxdeL2ehGdxMpnb7VbWr/9D2O3/BcGgec7i1vVOPPTQwwgE2tlcTDGZWP51o4+8vDy43e6Uj2cqYbi/vxd33XVPwmE4StPsSqT8LP7XdirPIM9ULpcLf/ZnX5hSKE6HaBie6u9PKjEQj1FrC7Hknu2mm4m5ZU4BMGKqIUmld4dET8dF2cOQJtgxgJX334Y3X3lMSUVoHC/TklEiBZimTGuy+hVVwICkzetj5Vpme2+i1IgeAxRtP7Yit9ut7N27F1/4wheh650pO682FgMDF8aX+Zn5Yo7Mw+WqGwt9sX0YRpeS6oKhqYThcDiMW24pv2mjdKwSbZ4GGIon0zS70tjYiKnOFKeSrneioeGLpn//ZCCeyFFgujOKb7MXK7hkmuFIp3eft+ye6qAxmJICrYme334YKJE4O2ySMq3J6pcvAHokLZvOzwXGyrUoO0VnhDXtyjFAibYfZwtNsytNTV6lra1t/DiegYELaXv86Nm2y5Z9GrreYdplfmROmmZXYv1I9VimEoaByFnbyd4m4HLVJbzcl6H4appmVyYun+7v75M9JABXbia2tbUhE/Z+MxBPoObnAsNDpgrFc4ryseT+cgQHh2UPxRQOvt0JzDD96yrpgkcH8NTjC1MahvXukNi25U2oxdNT9RA3ZqIyrcnsZYXKyvrbEQxJeh2OlWtRdokG4eiM8LRp0ywfhCdzOp1KINCu+Hw7x8Jp5IIvFbPG0Qs4Xe/Ehg1Poq2tDT7fqzzTljLWVMNwNNCkYpvAVPbARkOx291gimt1M2hocCu63oENG55I+w3EicLh8FU3EzNli4m0QBw0Lsrbk3cDaskM04XiTy/6ODB0WfYwTEHm/lYZgqFhBPefw8E3PodtjctS+qbSvPc4oEksnjdZmdZkax6oAs7Jec9iuVZ2iAbgTZvcwm4vv2ppNIPwjblcdYrP96rS1taGDRueHJ817uqKXPglEpD7+/vGZ4KjF3CRpZwdaGrycK8wZbTokTpTCcM+386UBhqXy4Xnn38u4VDs9b7AUDxBdGWNrneM30Ds6kr96rJwOIyursj76Pz5t2XkzUQpV79B4yJ+1boBv13/Twj2DURCqImoJTMQPDOEHbuP47GHFgjZBT8r778dX/mfB4E5qTlGIlOM72+dL+P8m/QLnh7Eys/ejm2vL0tLyRTLtG6sfkWV8ty9h8WR07+Rs8d6rFzLzOemZ4K8vOk4ffoDBAKBlF1EGYYOwzDG/tmAYejo6NDR3n4IOTnAzJn5KC4usewe4alwOp2K0xk5LzMQCIjo+Zi6boz93Ltu8h0iNG0eNmx4EgDgcDjgdDp5jBJlDa/Xk/CRPEBqZ4Yn0jS7smbNGjFt2jQkMl67vQJf//oLCAQCIhBo5+t3TGSf9qswDF34/X643ZFzfwsL85GXN33KjdFAJAT39vZgdBRwOBbjmWf+Ai6XK2PfR6VNB/WfG0THrs+h8uGXEewbMl8onjcDf/14K6a/BOkXoNW/rSqf3/BJ8YO970EtlHgcjmQy97emUzA0DPx7GFteqk3bflrpNxt6h/H035g/6NWvqMKRpgOAjEA8Vq5Vv1z+TbpMVlAwCz/96X788IctKX2cnLG3qpkzIxcgubl5DMBJFg3HDQ1XGnoNQxe6Hr0ZoV/1+Zpmh92uRf+ZryHKSm53g/B6XzB9GI4a2wMLAAmFeFWtwLFjb8PpdAi/38/X9gTRn63L5RKBQADt7e0wDB0+36sAkPBZ1JpWjvnzb8Mzz/wFNE1Dqkvh0kFaIB4ZGYW9rFDpeP1RUfnIP5pzprh2Njavb4UAhOyin02fvw8/+F/vALXWDMTj+1urC2QPJWWCQyOAfgkrXembFY6SXqZ1r4r6FVWmf0NdcncFcOEyUJr+x1bzcxEcK9cy617rTFFQMCspd8jJfMaKisb+zSl1LETpVle3Wvj9uzImDE80VlyXUCguLp6DY8fextKlS3HgwAHBUHw1TbMrLpcdLlcdAKCpSRddXWewePHiuH7W0WX02RCAJ5O4YTDCXlaoHPzaw2LJ0/+K4NmQKUNx4/pWQHIorq5SlaYdnxabNrdCXWC9C7mNW1qB2ySVPaVYMDQMnIuEwhe/sQw11RVp/T2TfrNhYNSURy1dS011hbJwsSpv2fSsHATeYSAmInMzDF34fH4oWXfZnBpCCLjdm6b008rkMBw11VDc1xfE8uXL8fjjfyzcbjbDX8/YDYOEtg1Ft6xkG+mBGIhcZG75fLVofOVtBM8NyjsD9ToiofgNVN4yW8icxXI/ep/ynx394hvfPgL1tuydKZ1sVUOLaHn9PaiV2fVnDoaGgTPDWFl3O9Y8UCVthlR2mVbpHJspj1q6nqfXLcLajf8i5WemFk/HtmffxJceW8Rl01luYOACzp07x7ItyjjRZuOc7N/hlDRlZfPG93nGyzB04XY3INEwHA6HEQz2SA/DUVMNxbr+Af7P//k+NK1C1NWtkf7nocxgmuQ5dkEsGte3ArWzZQ/nI9TaQqx9sAVLznxB6oXo1//q08rwyKj47nfehvqJ7AqI15KNYTjYfwnoHsHKNbfj6XW/k/YZ4cm2vvQLqKVyCtuCoWGs/N1bpTx2oqSXa2m5LNfKYtGLU5frEfzX//p7+OIXNzIUU0aJ7t3m723shJhax197eztUNf69PP39vbjllnK0tPzIFGE4aqqh+D/+4xjs9srUDI6ykqnOId68bpGy5aVlCO4/L3so1+bIN8VxTN/5m+XKl/+yBsH2C1l9PnG2hOHg0AiC/ZcQNC7isgA2rvkUOo48ide8KxXZYbh5zwnR82Hyz/OM2bmRyHFGGaZ+RRUwMCrnwcfKtWS/D1FyRc9unHhkxS233IJRSb9mRJQZNM2utLUFEAz2xPV1fX1nceedd2PHjh+YKgxHJXpOsRmWflN6GIYu/u7v/l+UlBRN+XuZZoY4anym+Cs/g3rrTNnDuYqan4tgX+SM4o7XH5U6U/y3/89SZfFd5eJ/f+8QDh7sBD6WC3VWdhRuNe85IZ7bfhhH3j2bkWE4GBoGRgVwUQCDl7GwRsXS6gqseaBK+mzwZIF3OoEZcoaUSWVak7Fci5Jh8rEV//APX8vKspJkmdggHQurXRBPdZaRMlfkmJ2doq5uTUwzqrreCZfrEfh8r5r6NdLQ4FZcLpew2yuhqqWw2W68mk3XO+HxNFnutW9F0aPFSkqKklKSabpADERCceBol2h5432oc0xWslUywzSh+DO/O1/5zO/Oxz/uflc07z2Bf3n1fWB2DpAHIE8BpiVpaOH0TFE07zkhdv7kBFp+eBKYN338uQ+GTDQLPjrhgmNk7J9Hxv55FCitnIFVv3sr7GWFcH6qAkuqK0x7tq7eHRLbnmWZViJYrkWJCIfDGBkZxrlz57Lm7MZ0iV78xEPXOyzTNtvXdw5OZ43sYZBELled4vEYN11mrOudaGj4Ijweb0a8NjTNruh6h1i6dCl6erpRUjL3mp8XDfljy60pS011z/z1mDIQA8Br3pXKvWt3iCPHz5qvebpkBoJnh/BX3wrgfz3hlF5u87mH7lA+99Ad6PyrkDj0yzM4/kEvjA8v4NyFMMTl5Nwx/v9+HULb0c6k3X7u6A4BAPQPz6Pt7S4ceKsTPR+GgYJpUOdfWRkQDA1jlUn2mAoAlWWF4/+u3RL5Z/sts1FZVgh72WzTht9rYZnW1LBcyzxCoSHk5V2QPQwAwPDwJQDA4OAQAFy15NnhWAy7XYPTWQOHw8lZjDg0NT0f9/EgmUwIgVBoCKFQbH8Ol+sRuFyuFI+KzM7lcmHfvn/Dz372xjWDY3QGNdNCo6bZlQMHDognnvgT7N695yPvBX19ZzNixpsSZxi68Pv9iM4KJzMMAyYOxADQ4l2FyodfRrBvyHyheO4MvPz1t3DXrcWmKbepUAuV/7as8OafmAC9OyQq570I3J6k8qXcsfesXAC2aVAL86CWffR7l87Kww89K/kGlwJSy7R6wti6aamUx06W+hVVynP3HRZHPmC5lkwVFRVwuR6BYoLzXYQQ40UumqaN/2/0XFwG4MQYhi46O88k/QLIzNxuN9xud8yfb5WZcLoxTbMr3/rWt8XSpUsxNDQ4vsTYbE3SiYj+2aKhKPp+EA6Hcddd9zAMZ6mJQTgnByn7e8DUgdheVqh0vP6oMG0ovnMWNq9vhZB8RnHazLdB1cz1HFBitm4/LHp6w9ICMS5cjuzDzXBLqytw5EQvkC/hwcfKteqXL7D0LPFUz+4kMiMGXEpUdDbVbq+E3V6Bvr6zuOuue0zXJJ0ITbMrDQ1uYEIDdTDYg5aWH8keGiVRNAT7fD60tx9KaRCOMnUgBiaE4s+/gmBPyHyhuHY2Gte3AlYJxZQVAm93ATY5JfPBoREsXKyarmAsEWseqMK2b74FFKf/sVmuRURm1tWV2cvWEzVzZj6Ki0ukjiHSPN0mampqsnIpcUODW9E0TTQ0/HlGz3rTFdEQHAi0we/fhZwcYM6c0rStDDJ9IAYioXjLo9Wi8ZW3ETw3KGd54g1EQvEbqLxltsjExlyyFr07JFqaT0KtktTinsFlWpOxXIuI6GpOpxNNTU0wwS4GKXRdx3e/+y3podjpdCo7dzaLuro1WflMuFx1istVJ3sYSWMYelpr4ru6zkzl6xIaa/SUAMPQYRiRfw4E2hAIBGAYXcjJAYqKkr8/OBbmSpY3MH4c0/pWoHa27OF8hFpbiLUPtmDJmS9YevkimV/z3uNAaY60x8/0Mq3JWK5FRHSFptmVePY/Z5tAICC83hdQXCx7JEC2huFs5HAsRmdnYiE1UfEGT7u9AosXL07KY+eMXYYWFUWOTZLdEZExgRi4OhSrJg3FlfO2oePMRl6ckmmxTCu5WK5FREREU6EoivRQGAszjTEcDqO3twfl5VMfk5xNhFOwed0iZctLyxA8Zo4jNj7CMQuVD78MvTuU1qUPRLGIlmlJc/4y6pcvkPf4KbK0ugIIX5bz4GPlWnzPISIiIivo7+9FaelceL1/n5S+gowLxEAkFD/lvg/BsxdlD+Uj1PxcYHiIoZhMaeeeE0CBnOXSwaERLHSqGXVWc6zWPFAF9I/e/BNTQM3PBcbKtYiIiIiyma534s4778bevXuxeLEDo0m4/MrIQAwA2xqXKQs/ORfBPhOG4pIZwKUhrGjczVBMpqF3h8SRQFBeKV3/SNaUaU02Vq6F4NCInAGMlWsRERERZaOBgQvQ9U54PE0IBNoVTbMro8lIw8jgQAwALd5VQF6+OUPxnBl49+cd2LH7OEMxmULz3uPAbIlHLVXPzaoyrcnWrKgC+uUE4mi5Ft9riIiIKJv09/dB1zuxbNmnoesdaGhwJ/1aMqMD8dgZxeYNxbfOxF8/3hoJIkQS6d0hsXn9fmllWhgYzfqjgTavW6QsvGeuvFnisXItIiIiokwWDofR1dUJIS5jw4YnoOsd8PleVTTNnpKJlYwOxMCEUFw8y5yhuHY2Nq9vxdbthzlzQ9I07z0O3JUnbwBZWqY1mexyreY9J+Q8NhEREVGCwuHweAjW9U7Mn38btm5tgq53KU1N3pQF4aiMOnbpeuxlhcorz/yeWOv9OYLnB+XtkbwOtXY2Gte/gcpbZov6FVVZu2SUzKuZZVppseaBKmz75ltAcfofW83PxZFDQbQd7RQ11RVZ/7MmIiLKJuGwxFNA0mBkZBgAMDx8CQAwODiE0VFA08oxf/5tAIBnnvkLuFwupDoAT2au5DgF9SuqlI4Pz4vG9a2ASc8oXvtgC5ac+QLPKKa0Gi/Tmp8vZwBZXKY12Vi5ljhyWtKZxMU52PmTE6ipNs85gURERHRjmmaXPYSUq6y0QwgBu70SAKBpGhwOJ5xOp/RclDWBGEC0sEc0rm+FatJQXDlvGzrObGQoprRhmVZ6rVlRhSPP/hyQEIij5VpfemwR32OIiIgyRCDQzr+zJcr4PcSTbV63SNny0jIEj12QPZRrc8ziGcWUNizTSj+WaxERERFljqwLxEDkgvQp930InjVhyVZ+LjA8xFBMacEyLTlYrkVERESUGbJqyfRE2xqXKQePGuLI8R6oJTNkD+cqaskMBHuHsKJxN/ZseYhLGyllWKYlB8u1iOQqLMxHU1MTpk2bZtEbzwKrV9eZYm8eEZHZZW0gBoA3X1mn3Lt2hzhy/Kz5QvGcGXj35x3Ysfs4HntoAUMxJR3LtORhuRaRXMXFJfje974texjShEJDcDicAJyyh0JEZHpZHYgBoMW7CpUPv4xg35D5QvGtM/HXj7di+kvA0+sWyR4OZRmWacnFci0iuYqLS2QPQZpQqFP2EIiIMkZW7iGeyF5WqHS8/ihQUIBgnwn3FNfOxub1rdi6/bBFl3VRKrBMSz6WaxERERGZX9YHYiASig9+7WFgbqFpQ3EjQzElEcu0zIHlWkRERETmZolADET29G35fDVQNlvejM0NRELxG2g72slQTFPGMi1zWPNAFdA/KuWxJ5ZrSRkAERERUQawTCAGxs4oXns30D4oeyjXpNYWYsk923kcE03JeJmWjDInAOgd5p74MWPlWvJuwo2VaxERERHRtVkqEANjofilZQgeuyB7KNfmKOAZxTQlz28/DJRInB2+V0X9iirLzw5HrVlRBfTLCcTRci2+nxARERFdm+UCMRAJxU+570PwrAn3E+fnAsNDDMWUEL07JLZteRNq8XQ5AxgYtexRS9fDci1Kl6GhAdTU1KT8cS5dGoIQ/OuJKHn4eiJKn4++3rL+2KXr2da4TDl41BBHjveY7zimkhkI9kVCccfrj/LYFIpZ897jgCbvZV06x2bpo5auZ2l1BY6c6AVkHAk9Vq7FZeyZS9djO0KnomIeHA5HAo8gEAoNxXxUj8OxGG63O4HHmZpYfw4U+V1wOnkGsUzx/L42NHwxdQOhGxJCwDC6Yv58h2MxnE4nr3NMZqqvN8sGYgB485V1yr1rd4gjx8+aMxSfGcKO3cfx2EMLGIopJltf+oW0o5aCQyNYeOvHpDy22a15oArbvvkWUJz+x55YrlVTXcH3kQzidDrh8+2M+fNdrrqEnt/Vq+vgcMQenhJ9nKmI5+dAcp4jirDbtbh+X51OJzTNzudLEq/3hZg/V9PsDMMmk6zXm6LW/kPa12kEjYs46KuHGS7O9O6QqHz4ZWB4yHShGACC+89j60vL8LTkWTe9OyQql3wb6sfT+zO6LICz+78g/fckE8h6jqKCxhBe2fb73D98Hfeu3SGOnP6NlLKzYP8lbKz/FP5+8zI+N0REREQTWHIP8UT2skKl4/VHgYIC055RvJlnFFMMnt9+GCiS85JmmdbN1bNci4iIiMh0LB+IgUgoPvi1h4G5haYNxY0MxXQDLNMyv/rlC4BKieegs1yLiIiI6CMYiMfUVFcoWz5fDZRJvGC9gUgofgPNe04wFNNHsEzL/OxlhcrGZfOB8GU5Axgr1yIiIiKiKxiIJ9i8bpGyZe3dQPug7KFck1pbiLUPtnDZI32E1DKt/kv47w9ydjgWzk9VABdGpTy2mp+LI4Eg3z+IiIiIJmAgnmTzukXKlpeWIbj/vOyhXJsjn2cU01Wa95wQPR+G5Q3gwmgk6NFN1a+oUhbeq8pbhVKSE9lrTkREREQAGIivaTwUnzbfTLGanwsMDzEU07jAO53ADDmrlVmmFT/p5VpbWK5FREREFMVAfB2b1y1SVn72dgR7TViyVTKDoZgAjJVpPcsyrUzCci0iIiIi82AgvoHXvCuVhXfMNWfzdMkM4OIQ/upbAYZiC2OZVuaRXq5lm4a2t7vkPDYRERGRyTAQ30SLdxWQl2/OUDx3Bl7++luc7bEwqWVaPWFsXv87Uh4700kt1yrMQ0vzSd5IIyIiIgID8U3ZywqVjtcfNW8ovnMWNvOMYkvauv2w6OmVWKZ1/nJk+S/FTXq5Vlkuy7WIiIiIwEAck/FQXFpozlBcOxuNDMWWs3PPCaAgR8pjB4dGsNCpwl5WyOXSCapfUQUMSJolZrkWEREREQAG4pjZywqVLY9WA2USy3BuIBKK30DznhO8wLUAvTskjgSCkdZxGVimNWX1yxcAPXICMQCWaxERERGBgTgum9ctUrasvRtoN99xTACg1hZi7YMtnPWxgOa9x4HZ8l6+LNOaOntZobKy/nYEQ8NyBsByLSIiIiIG4niNn1G8/7zsoVyTWluIynnbGIqzHMu0ssOaB6qAc5LOJGa5FhEREREDcSLGQ/GxC7KHcm2OWTyjOIuxTCt7sFyLiIiISC4G4gRtXrdIecp9H4JnTViylZ8LDA8xFGcplmllF5ZrEREREcnDQDwF2xqXKQs/OdeczdMlM4BLQ1jRuJsXu1lEeplW/wjLtJJsyd0VwIXL8gbAci0iIiKysGmXBZDujzkVM2T/uZOmxbsKCxfMTfvPMJaP0pIZCHb04JU97yblzzqnckba/wwCzPITvbLnXZT+l3xpv1MLq0tZppVkNdUVysLF8t5DSufY0Ha0U/aPgYiIiEgKRQgGDiIiIiIiIrIeLpkmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIktiICYiIiIiIiJLYiAmIiIiIiIiS2IgJiIiIiIiIkv6/wEcLjoW4FmqDgAAAABJRU5ErkJggg==" alt="대한약사회 로고" style="height:22px;width:auto;flex-shrink:0;">
+        </a>
+        <div class="sns-divider"></div>
+        <a class="sns-link" href="https://www.kpanews.co.kr" target="_blank" rel="noopener">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAABKCAYAAADKfI14AAAQAElEQVR4AezdB7gtSVEH8ItizpjQZUEEEwjiIuwqihHD4oJr+DAiKypBDKuIAcWAGEBFRTGCIGCCNaASDIDiIgZAEUygoisGMOeAyv/39p733XfuzDnTPTPnzJw79+u6PWemq7q6Z6amu7qq+nWOyv9uEJTXD7xZ4JLAVYGHBZ4SeFbgJYE/C/xV4K8D8lckd/65yZX79uSfFbhj4C0DbxCo4SVondPrpuTrBfBeC/hEJ2RGSfqglDdtGoWZFqLar85SPtfLa2tLFY2nb5iz+n+dztx/60t9mubtJHl/1Tn3fuvK/8bnbOPFtdvhJr1Fzn1o4JsDvxZ4fuD7Al8a+NjABwduHbhp4MaBtw/Ib5bc+fdPrtwDkn934FcDLwx8T+DKwNsE3JxkgyTte9NQun3g3oGHBB4eeERAXgrfGTx8ehFzOHjyQfm6UO3Kn3JflvJj8RPS5xLh89Y5+sDA/QMPDZT23ar8twTX83NZ8pL06Sn8XYEVnUPJvzZt8mx6Rt84x2Onm6eCrwk8MnAofdjWDu+HQRY5kOaeTq0XThT1xXir/L5n4BmBpwcIMAKNsPJyoKNcLm1NyilPoMJ3QzzcPxbM3wx8buAmAdeTVSdCgbB6TigQ1I9O/uWBzwuoQ14KHtTLg/+GgTGSl+B+IdyVP+UIJG0N2ijpzUP1MwI+eL+Y/NsCXxwo7btV+c8Jrufng5KXpLulMD5WdA4lf1Da5dm8NvmPBu4QGDO9a4ir03N2KH3Y1g7vBwHYKksIovRHa/Kif2Su/mzgMQFfbQKPEMvPwRJ6mHynUDQ6IAgJXKO3nCpOBIKR1JODSajgGX3tVdc5yLWa/N+C9z+BMdI/HRMt4evfg/N/gTHSjUL0OwJG6O+SXD/qQ1DCY1PZV4VeSfrfFG6iM/dz+tKz6Zm9Im38ycClgbHSP4fwPwTm3m9d+fe+/n/a25h0fuOFnDTl+arkTwu8X0CFyUZP6jFtfmxq8kW8ZfKSBN/X7YFBcpzsoFPrze3Zai/lZ4eG0flZ6Mc0dRLponDhg2N2lMNR0ljPzCjMjkm0TQC+Yypd6fZyuLd019Rs9FkigN8hOHcPzDGNNZKr6YvbBOnqwJJ23wNUQB+++2rPXo1NAtDoy3TXYsUUeuTdwsQTAxZYkm1N75MSFhOSzS756teMtsq/6Nu75j1S5O0CS9p9D7CwGHMavPsWTbTGdQFolZeSm95vSixbKGE6Y1SyjS96K4r7beWmeJ3Os1QA0h3R1Q7ZHro+H54haa7TGkNor9cx198+hGN+fJa+P34yTgpAx1bo7nF8rTb7ryD+Y4CSmx3g3+SY0vU/k/dJ7xlkwnmbcNOOFB0tEQ6lQqorM4R3Kf9vFOJW6ZMNlthYDU1znTl1rJ/b9JtOctP1Q7rm+Srtn67t9/wO/cHsWvfkyp182W4X7hg0J6tKfx8sq7ffmvy+gY8JMBmhj2P0/I35zVD61clr04cE8cGBk3zn5wWp5usGxyqj1d3XhFobKOdF9BCl2OCJ+qGUtr5gPzkkM17AGnr6Z1sf6mf9a5pXUgf9KPpwe8LRrvHxXdJWZfWTfGgwY/AM/0cIWyGdA/zrMa81/RjU9uTlcZUB5jc5qIQXBe8zA2xu2Nqx6WM35vyv5/w1AcaXjKiNMH86v5lvJCtObPuYthQjbkAwUqVnZOjMJqsNHh8azwzU8h7UjYnBuIdzY6G1iwTmxWvn+v70oBE4pXR+PwiPCjBYbutDi2vgV1KuJFkMc4/a6E7xvH7Q1peWNHTksjyy2AEa7Hxl6uIcMHUgU1ik8CoLy8MlAtDX3qLBh1WQ9ZIQCjwE2C91IfHsFDI65E1gapyfRYk92r2Cge9kgyQvLuPeLwy1z98A3P4Ic6OcFBs0uRe3CMXSdhGApaZCqWaU5N5+USh/QaCtHxluU7UwTk+xzsnCHNvQNrpTPK8ftJUBeeeGjlyQEPGxIAB5g5ixTR18VHkQXTd033jpvEAeHl/9EvrKPyEIhNG/JC9NpsS+RDWjKWYx71xa4YbypmNj67w2VH/uklEcE55zPwr+UZjfqqD8mEX5dY9Jf4606Wi36a132a451zW4XpQAtPJ7l/RK6cjDUPo+weuTTGl82Utp3DYIQ9pJ0Qn9d2juM71XKvcxSlaUTJn1R+n9K6qkY+Ep8NCR1Z0Wm1K/WAAx02DmxC1u6sAawawPn3gf9MYRgO8bim8SKElGbfQbVnxL8NbLWhnm8cE9Z/3apt/49tJvKlNyDR9oEia+Mm3ga65MCe2uZdkv1t5go0f6w651LeXObg9Qd5mSvyBdQE8/BxA05XnhlxBMNlzy0nvxSr9QrwwLPxQYIr0sRH44UJr4DdcKjPW6fGU4VNPZiGzTBF8SJIrYj0pOQCYbNH1AqFmhS1acTIOpBYoRF4Qz1wMGO6I1+Zgzu5o6UE2xieSa23vwsX63CUDD4RIBSPdnVcsy+jq9mt+W4X+jAlGoLQbSFainULj+0YMKxGC1ugmELSIEPynYHp5kgyUPoeg6tQR9CLp6ytTWseAdRg8wKeljinYYvXDcCgLwbXNcIgBNe383OEMmAVQJ1hKaFMv7ULr/XZgcehWY5w0hFtJVie7wzsGUJ1vS0gOtPeBd9963FjhLF3QEG0Cd0rXdDDRrzFc20aeDI1g3lVm/ZhraR2is0+v6u6SvutJkMO4+dC3fVI4R9Xs3XVjOneoBz33X+6jsKQLLicPoATcX7Ls17AmtxJbw4QEGnXEmWtB0WqTsvvoNH4NPmGgbp8QWl0r2noxrqTS2gYjbAmsylZpSOxZeBugBwq9UlweHInWA6s+ToMT3Ap8/0eGAwBx6Ktqh2sGLWFSh4O1L2IgYLfenL61DxrfYJFS6gLlsUbeBcoLC0tMecr+cybZ5WUQhLtG/edGsIg3ZYXxZS/VXFk8odIfkowutkr7qQo93Q9/p76oe94VZ0+r3kp/uASZX/NZPX2k/w+rhED627S083Csb3y0CkHuJKWjXLjBVY7Tbtfy2cnjoEuZqnQ49JB/e9fNj/zZaxfMQ9Rj5MV8Zip6bLYrzad6WM6seoMMu/YgRfqU4q/oOITfb4i7Kf1vAk7nAb6Xz/zLQeu+8eDUrutzQ3j2Eh0jcv/gGl9Li07gPAUjI6LdSfpvKi5IzpG7JKJpPt7iCTfUt546OavTGNThHB/QnpB29qY2sqFlYLcwB8CqIho9e4+3wIrMELxkBIsR9jnLYcV/QkTWrlwyoWyV7IVN/m/KCOgi6aj8GW3Y2wY+k3M8FSvWmQWlMn5izpbrPoGxMDEft47Gx0HJx6YGCHmChwfzL+yanQpgDeK/x3tpUAvDlufqHgZJkGiisVV/jW4JPFJaSupWlx+Ea43gI+L0QEaWEJ4gNlRw3wSen3I8HTImS9UpiGzJC70WkAdmqsu0jGy6d1VNLu3v2gJnFEM98TzaGRycADQ+/v4I0ty27tllVq0A/okcUjocbWik+HQT/wFK8tvJuMG+QtutjnCf4h15NX/GpT01XVr+XfL89UDrDwm0NDrwxwMKnxbXLQpzJ1lyAbAKtKqGVABTAVBj7tK8o8dH7mWDwo+VRksOtyQjFhkumk+IIbkVYK0Ah+/Scs3qdbJDkBuuLQYh1ICK6xZ1SbizdEj3lUCqKsLmkHj3gHvNaKiEBZywvJ7RBCT/cTh8eBIGMn5p8LkA2gdb1itVLT8mpgWlbcaIPpDszivy0YDM0dS6H55ORjlGJxQ5Rl00jheM5X6DgQJRpYbQKULYWpdvYWmjAAoIq+BAMSPICUh5wX2kqhgsuLD923gPuhRlGacXUTKU4TeXXz+Fn9d6vX2v7DccoyoCHjnkuQA4Bs9XGtp3sCFFhf6exVLeT9v4QIcbI7nuDgh6DU7mFBUJL1Gj6KaY0KVKc2P4xXCWwi5EngsBW76PDS8lL8ecpXxoxh4D9+uAt6cIe8Mx7oS88u/lXafmT1CjhLag9MCe7ANWIqNrCzQVl8ESXJ5zd4IQnTNA9aGTPw7C6oJB9PazyrM7V5EaAFkiuDrIbLv/UHAu7laxXsivcT/SisH/kbwgLvqbJOqcfSEn2fWwfc9gpeWmpGJZR4IXdZWWQELjw7OZfguXWRD1HlcrmF3IgpHsXEJHIoOGXgjNGYj72p2MQnjBN70IjeycFoAIMB+nzCEO/pwTMVGqn6VNph48DNUDJCNj0nI7W6NcWBCVtMQrss9lVSV1DlGUSJLAruCgEbzIw0FPTZ60/96lmYzJap7dlszo0T6X0xMG0YFfyDJ1sHK8WG5WdPHewx9sa1vQgmGoRgrVfvG111lx/XJCMJJm/5HC2yZfdAkVJA+hL/+gYwQhC5Jzjn50yq8F361Ry/4Xw6UNHlSIfEtD8wTRRsNtSv16Cjz+w53BInmpoaYeZEJ16mlOcWH1YzCiZTRRXMheEJgGId1v5sYf7Yz/2CKYPdH5s8uZ+w0RqKbWb9LDaunB1C+gC6VNXv7vklOlGgRaiupTfZxkhz03bxTa0hSpbyaFA3981jbP4Vjp6okS3qGQfmqH4qaXDrIPzADfKNKcqXRssQX+TnYlkFtXY0DYBqPCT8o+jPleSHO48uUl2nGPOMZTnxc4bcVyhEYcFCVOp41OdMh8iHi8nC6NTarJEsJwUpCfpTemYfmpK/EyVFxGd+8zQCASLLEKBrWYXU23rEHxRrTTS2SQAIfC2EALe3qYEknNjw4tTgYUCXheEcH7WpQlhCadf6vUh0o1QTOvN8PATguvnN/12n4X8Z8i6qdy+r+Fz3zzMoX5KfdCHV7MrOnWmaw8JIaovizW/nONnVcDTgsOt1nObw6LEE4ttr82aaurehsNtr5GhLg+cBj062J8SMBWlP6BIzc/BEqNmq15fHYrqEazSdC8/i5NpYykSq3tQitel/EekEHVC6QPLVlAki6CfSmwp/+TU2c0nfAXhseHaXHK5epZ6wH48D02DvXcGHbVgoGTGVhNcxQcdfm3d2/BaR7ldBGD65lyybwd7Jh3FrMWIwgjt+blKIHYVIMqx4+PORsFPF4Eeuo7tNxyS1clKXykynDF0ZDZt8vEo6We8e4gIK8dNQCUgSnHTtU3nbp+LRtfJlrT0wKkeYCLko+v9LAULlKIzlZoYYcKsxiBIXlpvl/JGu+o5BaUvJgLMMZ6TA6tidISEFwlMggvv9BW5ZrWSd8gK/KaDum+uKac8PMNvoz56Rg3J5d4Jf/QjgK5sGzD5eVVqrblxQduYtFvosI2FGi5SObA9a7h0/pQph2nL+RMXHLT/uE8uTTVajI9j2FtShx6gx+tQbKdFvEs1M7AanEEaViMAT1bsgbVSLFCi0RyD3YelAANokVVW4Dd9Fg8R5czZDUu3veQhVZxM0QlZQNBuAyGp8Dm0caiR1pXF3B8dGfk9tyMeJbavZsfi54s9KkdWW5NNKo3l/zqpRg7ADHUGaCJF1cLW8ZJcvNUOCDmqYAAAC6pJREFUgZ2kOmtmUhbpwC75VdfFfQVg+ndyyUqimH2AYnUb/FRawDDUtDKHg6SrQoW9WbKiZOprpNwV6S9S0GgxWVEShNUK822LsMYvvLeRwPhNG7QGoz+Djyai7Ezp6rmemiHsEthJ1jxTdP74pFKT7woed4gCsOmh2OW5K1IZvV+youShJsxM2UsQn5zChFmyouSLS6fLs6AIccTCfMVXI3d2k5Vw1Afv49O+jwuIWASM4oHjFSjTp44+uHTl3CLbYnh6p28Z/tk7Cjm3K+Dq6plqG5mGpdbEG4Z++nYpsSt+z9Wjs1Jna2JEy4CUzkjHzxnoG71cl6e1huvJBk9CcD82VGseAmqCrlPfVHFBMhW2mnfByQ4/7EdCCPJ06FB89CIW2sSYFFDjKaltH3BN6uVvThgDMwTgeAXK7IM3dRodmd1YNAirpxJddl9//lNED/TEy7YJQFMlnhh0d4cARkoElBdM+C5fnKHuLcGKth3uSmnih5tcKd6qvFGjaU/Ng8+rQL/4Cq/oyY1I5YcG/Gh9/Xl10P8aTYm+wuyI3tbinmeDyxkgcIBjUzx6bnpa3jWsFkRvsbhncOAD6Jla78td9iEd4Lb3epf8TLmuG27rKJ1Jp8AViHJzziAwgCgsFMSG2yLfeLD5yva9SUaWhN+NKwgZ9TEpqkC9AOUF+WUVPllxEp4L/6YwkD0XgsQ6njP4GJnB+DgQWkZwVAbuO79ggp+6QgQW1gj0tsyLPBtmDMC9BY7NhO6dDqGqeFByBsSMiXlVGCDoQ3osdViMs9ikrI2qap6NVFGcFoSCHvCgbypOKT2UecqmevZ1jZ7Ei1A7JeaP6cXx8BOspe2gx/Fy1qzkNtXlBa8VpncJQVFnRKsRcGGuMePcE6Oxx6Q9+sOobSWItM203wqgkaAZTqlfcMieSt4jgwNCDm0eNwI7PCAl1e0ZM62W401g0Vxa0r57wI3bxsMQD8i2OvZ53SIAJ/kaHjzIpk5epFJ8tods8voafq/XawrH5Gj9fJffpm9eWoajcxOAFP/aTV9HrynwrgAGAtB2ec679E9NGbMoU2J7avCUwBvBzD2yNVR7TUXHOFQX4Pjnkm3ogdfs88HYwNfOL12aGkv3bQjK0XX5ZxpEYOSwc2I17wXld9kZqaAgnkz5ClDOFSWUjWhNf2v64xyRHf8jYExdTTsfnLoJvZoPUlB3kvBmFMrciU0snoVtH6pyC5fqGIrerOgUMnvTRQBe32NGCfRF1//q/p+fNMW51bmuWMJ68aCxktcVp7ScEQDFfokQZAdJ92W3PS9RaeSaUh6HKH/rEDHicw+MXvNzVuk24dao1fNDcOdn78Q+kBcUQlQZCxwdtfXBq7cJQC9S6ehGx88NLPJ46Wv41j9WAv+gA/IrUoYOiII8h6MmXjaEIM+cbRV5abjt2UFLWfed/tfxVIHO0giKrm2qPHblyyIJ/SD7wq44beV8yARMtcq9wNHRpj645zYBSCjULhC03aApnvfC9+GLR4ZVQiPCNjq8PIz8eKa0lRn6PCFoqsXGcBNtkXisZm4qM6VrgolacbXgMCW++vBCh0l/y9i6Dx0fM+6pQluxMFjg6KitD168TQB6gfjtchUzNZo05Kl5ZoCPcbKiRACCIqS1wvZTYZCsz9YuHf18ThCQbkQOd5q0y+iO9wEd33rlon+wY1tNm9avT+03VytBNiwsTI23vvwwSGd3yzqhL602fKoN9Vj8s2rtuA1cV851eG00Z3t+mwA0oqFgFlDACzx1sLBglW1fN4Q5DE+Gk/Uzg2A71mfL0ZP0ao/pmQhBH7MVDff3qvwojS0YlL0ldno2lxqCAX7jPGhEI2Iu88gQpU+0su+5F42cGgH4uPFZtUjECNpojXH0M4IjtFuNEXpQTyUzLnaJpy4MdIINLFXHU0NPRKFtoJwFJqvYQTmstE0AGk4bNXhB6K+mDkYzYpLt6y7Rm3lRVmHsLSr4bYq8L55O1itqDx2k6aPzDIGNTh3PARhsM0qu5ZXAZwRNiDKQ5gWDHgNyEYEIOCvoAoQSckZjPHQAFQHhyHyFWoGAZHPp48ajhE5S8FvnCRihoWr5FKnHnii1+JvwOAMQghZgbJlq8agNXFeOn+9crAI2tf3UtW0C8BTCDE7w+NgnmwSwl8rmNYxxKaXH56d7DfRDdIIU710WSLpTHr+kESyD45qabCalzXY8tDoupqXtF3zc3TO+tVYLLWpRG7TV4Rp/W/eVC6KPLhovCoKPCcHJvY6A5VKX08WJ9xUhXYzYAQHfpYb3Rrdzswvt0BVHR4coADs1fORC3NLoS0euppo8UxwLH617JVRTHg+RLqp26mskbqXe9N/LPB6X11MmUO2P4UNDGF5/tvv/G6QoE58lPmI6Ysy0CMAxe3ehPWQPEAgXVRCkxzMSN/2tQO+FwuDdKLBGp2eqqs29GFiQN/fAIgA3989ydTo9wNe6xWOilUl+7JT4rQV2dIFdXqkA5o1z8Y74O7PVLALwzN762TWcsTqhUML4y1PYHjHJ9pqoHEp3OeSDbxS4V8YPvfJFAB76HT6c9llhByUt4t5IcJbgjFHWwsmNCgmzwGiyKS0ksxTf1AOLANzUO8u1KfWAFdfS0dwt0oCbBfadBEoVOaiED8LPFH4bznK9Rw8sArBH5y2oO+0Bu/axSS2plPcC42bBLkrwhixr5ZrnSum7xlzlt4dkpActq9KgB4lpopbelGm2YuHqLPQATxo2jKVttZLK/5o3Uylun/KELyNpXiY1bnv2R5nKCJB95GIH2OdpWHCXHujZA6aEbOtqyAiaIGz9s4Ms/t6dkpfq5IKyNYkyzbvEXiHPS2keJDVTcH7ZPFZCYhKJc4G2yY2mrU5PAtI72/jAL75T9HRaRoCn+2Q5M90eIMQYM9dwyKjY/i8EoPD0LwwRgT6ekJyLG0NpEbp58dw95wgy7mi8R+SALk9YfaPJ+6UMN0eBJvh/M3wnoNGzX8gdcr3WfeyVwUUn2SQS/SUf+5eGm2sDhPtcAL9iLTZO4RcBmLu5pNn0AM8VcfPox2qZNhrwQhuZcVfjG311iAly8IjkNkniK/3EHBNsduyTA0KJUTVBzOWN37AtBO6RskaVRhtWnmu2RQ2Jc4nJjOALfdp4jtCA/8gJfXbz0DSdnxu0uk9qWNq0pKUHZtMDjw+ngjgkGyQZGTCV4X8rlLyRoumxzZUIs5PgnGvKKAun1DZxE9N0bbxGRJjZVK7PNe886ENjbrh8txt5nnVHNLZoOXnoPUBImMaakh1SW0WPMRWnN2QDOFbb2CSCsejPiu4iAGd1uxZmj3uAPSCdHR0cwXF8erYZG0c6RSG3CPgxG8IlbxcBIcZsw2C0FwE4WFcuhHbcA4QgH1uLFQKS7rj6QaoTeouO8c6hRr84tvBLNUdCd821v/A/KCwCcNDu3CGxpSo9wDRGXD/BSC1mCEM29ekd/oxaRVm+Mo0QjNV+MYRhfo6emNiwTcTH6JVNvYJFAE79Du2HP88FQ97S2m2iVYozRHnBTK3SWtUVTZlpCqFCQPIf3ufLrm48WNUVkdvKsfDy90rDbY1qJJvDnaZrUhtbRXzl8OCTwBKNjfSgN16Y8cmaCBpDr+bNuPvOsU4Jb5Ri9YwQ6QLKwjlHYA//8Gx0Y+MpiyTMUi4LHyIr26vFedGbtcVoy8sP4BFSIMWLEhyABlpAP6hDJBpBZ+0JY68adoGXhzrzGdGjeVbAzamdJ+234MLeURRrEaLxfKigvY2dfIgCkBGp0EPXpcV2iLM/Rxu4zrbMw0o5HJQlpQeMVoyijFTsH7ENvNyXBk/w0WRjp630CWLCkKBhMmPvDvt12PsCr4yZ7x8q9vbgp/ukHNur2VaSDJrpyLjevSTnT4IQ+q4xAiY4xBpkL4gGoWshw74l9tC4JLhXBCzWKMOI2GiPgMzpvSfCzoZI+oKnDH7vGK623es5XXcftMnHr/Fj81oAAAD//42V4s8AAAAGSURBVAMAFUS5qEs81/QAAAAASUVORK5CYII=" alt="약사공론 로고" style="height:22px;width:auto;flex-shrink:0;">
+        </a>
       </div>
     </div>
 
@@ -804,79 +970,12 @@ footer{
     <div class="sections">
       <div class="wrap" style="padding-top:0;padding-bottom:64px">
 
-      <!-- ── ISSUES CAROUSEL ── -->
-      <div class="fade">
-        <div class="sec-hd">
-          <div class="sec-hd-l">
-            <span class="eye">주요 현안</span>
-            <h2>약업계 핵심 현안</h2>
-            <p>경기도민 건강과 직결되는 현안을 명확히 알려드립니다 — 좌우로 넘겨보세요</p>
-          </div>
-          <a href="issues.html" class="btn-more">전체 현안 보기</a>
-        </div>
-        <div class="poster-carousel-wrap">
-          <button class="carousel-arrow prev" id="issuePrev" aria-label="이전">&#8592;</button>
-          <button class="carousel-arrow next" id="issueNext" aria-label="다음">&#8594;</button>
-          <div class="issue-carousel" id="issueCarousel">
-            <div class="issue-card">
-              <img class="issue-photo" src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=700&q=75&auto=format&fit=crop" alt="창고형 약국">
-              <div class="issue-body">
-                <div class="issue-meta"><span class="issue-tag tag-r">🔴 긴급</span></div>
-                <h3>창고형 약국 문제</h3>
-                <p>대형 창고형 약국의 확산은 동네 약국을 위협하고, 약사의 복약지도 없는 의약품 판매로 도민 안전을 침해합니다. 경기도약사회는 강력히 반대합니다.</p>
-                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
-              </div>
-            </div>
-            <div class="issue-card">
-              <img class="issue-photo" src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=700&q=75&auto=format&fit=crop" alt="한약사 문제">
-              <div class="issue-body">
-                <div class="issue-meta"><span class="issue-tag tag-r">🔴 대응 중</span></div>
-                <h3>한약사 면허 범위 문제</h3>
-                <p>한약사의 일반 의약품 조제·판매 허용 시도는 환자 안전과 의약품 관리 체계를 심각하게 훼손합니다. 명확한 면허 범위 구분이 필요합니다.</p>
-                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
-              </div>
-            </div>
-            <div class="issue-card">
-              <img class="issue-photo" src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=700&q=75&auto=format&fit=crop" alt="성분명 처방">
-              <div class="issue-body">
-                <div class="issue-meta"><span class="issue-tag tag-y">🟡 검토 중</span></div>
-                <h3>성분명 처방 확대</h3>
-                <p>성분명 처방 의무화는 환자 선택권을 제한하고 약국 현장의 혼란을 야기합니다. 충분한 논의와 준비 없이 강행되어서는 안 됩니다.</p>
-                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
-              </div>
-            </div>
-            <div class="issue-card">
-              <img class="issue-photo" src="https://images.unsplash.com/photo-1588776814546-1ffedfe20485?w=700&q=75&auto=format&fit=crop" alt="비대면 처방">
-              <div class="issue-body">
-                <div class="issue-meta"><span class="issue-tag tag-b">🔵 논의 중</span></div>
-                <h3>비대면 처방·조제 현안</h3>
-                <p>비대면 진료의 확대와 약 배달 허용은 의약품 오·남용 위험을 높입니다. 도민 안전을 중심에 둔 신중한 접근이 요구됩니다.</p>
-                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
-              </div>
-            </div>
-            <div class="issue-card">
-              <img class="issue-photo" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=75&auto=format&fit=crop" alt="의약품 공급">
-              <div class="issue-body">
-                <div class="issue-meta"><span class="issue-tag tag-y">🟡 모니터링</span></div>
-                <h3>필수 의약품 공급 불안정</h3>
-                <p>항생제·해열제 등 필수 의약품의 반복적인 수급 불안정 문제는 도민의 일상적 의료 접근권을 위협합니다. 정부 차원의 관리가 필요합니다.</p>
-                <a href="issues.html" class="issue-link">약사회 입장 보기 →</a>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-dots" id="issueDots">
-            <div class="dot active" data-idx="0"></div>
-            <div class="dot" data-idx="1"></div>
-          </div>
-        </div>
-      </div>
-
       <!-- ── POSTERS CAROUSEL (이슈 다음) ── -->
       <div class="fade">
         <div class="sec-hd">
           <div class="sec-hd-l">
-            <span class="eye">도민 소통</span>
-            <h2>약사회 미디어</h2>
+            <span class="eye">국민 소통</span>
+            <h2>경기약사 ON AIR</h2>
             <p>약사들이 직접 제작한 건강·의약품 안전 포스터입니다 — 좌우로 넘겨보세요</p>
           </div>
           <a href="media.html" class="btn-more">전체 보기</a>
@@ -887,51 +986,51 @@ footer{
           <div class="poster-carousel" id="posterCarousel">
             <div class="poster-card">
               <div class="poster-photo-wrap">
-                <img class="poster-photo" src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=500&q=75&auto=format&fit=crop" alt="약 복용">
+                <img class="poster-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27500%27%20viewBox%3D%270%200%20500%20500%27%3E%3Crect%20width%3D%27500%27%20height%3D%27500%27%20fill%3D%27%230F6E56%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23E1F5EE%27%3EON%20AIR%20%EC%9D%B4%EB%AF%B8%EC%A7%80%201%3C/text%3E%3C/svg%3E" alt="약 복용">
+                <span class="poster-type">📋 카드뉴스</span>
                 <div class="poster-overlay"></div>
-                <div class="poster-caption"><h3>약 올바르게 복용하는 법</h3><span>의약품 복용 전 꼭 알아야 할 기본 수칙</span></div>
+                <div class="poster-caption"><h3>약 올바르게 복용하는 법</h3><span>2025.06</span></div>
               </div>
-              <div class="poster-footer"><span class="pdate">2025.06</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
             </div>
             <div class="poster-card">
               <div class="poster-photo-wrap">
-                <img class="poster-photo" src="https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?w=500&q=75&auto=format&fit=crop" alt="건강기능식품">
+                <img class="poster-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27500%27%20viewBox%3D%270%200%20500%20500%27%3E%3Crect%20width%3D%27500%27%20height%3D%27500%27%20fill%3D%27%230F6E56%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23E1F5EE%27%3EON%20AIR%20%EC%9D%B4%EB%AF%B8%EC%A7%80%202%3C/text%3E%3C/svg%3E" alt="건강기능식품">
+                <span class="poster-type">🎬 쇼츠</span>
                 <div class="poster-overlay"></div>
-                <div class="poster-caption"><h3>건강기능식품, 약과 함께?</h3><span>병용 복용 시 주의사항 안내</span></div>
+                <div class="poster-caption"><h3>건강기능식품, 약과 함께?</h3><span>2025.05</span></div>
               </div>
-              <div class="poster-footer"><span class="pdate">2025.05</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
             </div>
             <div class="poster-card">
               <div class="poster-photo-wrap">
-                <img class="poster-photo" src="https://images.unsplash.com/photo-1632771522810-5d91b9789e21?w=500&q=75&auto=format&fit=crop" alt="어린이 해열제">
+                <img class="poster-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27500%27%20viewBox%3D%270%200%20500%20500%27%3E%3Crect%20width%3D%27500%27%20height%3D%27500%27%20fill%3D%27%230F6E56%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23E1F5EE%27%3EON%20AIR%20%EC%9D%B4%EB%AF%B8%EC%A7%80%203%3C/text%3E%3C/svg%3E" alt="어린이 해열제">
+                <span class="poster-type">🖼️ 포스터</span>
                 <div class="poster-overlay"></div>
-                <div class="poster-caption"><h3>어린이 해열제 이렇게 드세요</h3><span>체중별 적정 용량·복용 간격 안내</span></div>
+                <div class="poster-caption"><h3>어린이 해열제 이렇게 드세요</h3><span>2025.05</span></div>
               </div>
-              <div class="poster-footer"><span class="pdate">2025.05</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
             </div>
             <div class="poster-card">
               <div class="poster-photo-wrap">
-                <img class="poster-photo" src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=500&q=75&auto=format&fit=crop" alt="창고형 약국">
+                <img class="poster-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27500%27%20viewBox%3D%270%200%20500%20500%27%3E%3Crect%20width%3D%27500%27%20height%3D%27500%27%20fill%3D%27%230F6E56%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23E1F5EE%27%3EON%20AIR%20%EC%9D%B4%EB%AF%B8%EC%A7%80%204%3C/text%3E%3C/svg%3E" alt="창고형 약국">
+                <span class="poster-type">🖼️ 포스터</span>
                 <div class="poster-overlay"></div>
-                <div class="poster-caption"><h3>창고형 약국이 왜 위험한가</h3><span>도민 안전을 위협하는 문제 안내</span></div>
+                <div class="poster-caption"><h3>창고형 약국이 왜 위험한가</h3><span>2025.04</span></div>
               </div>
-              <div class="poster-footer"><span class="pdate">2025.04</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
             </div>
             <div class="poster-card">
               <div class="poster-photo-wrap">
-                <img class="poster-photo" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=500&q=75&auto=format&fit=crop" alt="당뇨 약물">
+                <img class="poster-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27500%27%20viewBox%3D%270%200%20500%20500%27%3E%3Crect%20width%3D%27500%27%20height%3D%27500%27%20fill%3D%27%230F6E56%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23E1F5EE%27%3EON%20AIR%20%EC%9D%B4%EB%AF%B8%EC%A7%80%205%3C/text%3E%3C/svg%3E" alt="당뇨 약물">
+                <span class="poster-type">📋 카드뉴스</span>
                 <div class="poster-overlay"></div>
-                <div class="poster-caption"><h3>당뇨 약물 관리 총정리</h3><span>경구약부터 인슐린까지 완벽 정리</span></div>
+                <div class="poster-caption"><h3>당뇨 약물 관리 총정리</h3><span>2025.04</span></div>
               </div>
-              <div class="poster-footer"><span class="pdate">2025.04</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
             </div>
             <div class="poster-card">
               <div class="poster-photo-wrap">
-                <img class="poster-photo" src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=500&q=75&auto=format&fit=crop" alt="자외선차단제">
+                <img class="poster-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27500%27%20viewBox%3D%270%200%20500%20500%27%3E%3Crect%20width%3D%27500%27%20height%3D%27500%27%20fill%3D%27%230F6E56%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23E1F5EE%27%3EON%20AIR%20%EC%9D%B4%EB%AF%B8%EC%A7%80%206%3C/text%3E%3C/svg%3E" alt="자외선차단제">
+                <span class="poster-type">🎬 쇼츠</span>
                 <div class="poster-overlay"></div>
-                <div class="poster-caption"><h3>자외선차단제 올바른 사용법</h3><span>SPF·PA 표시 이해, 재도포 시기</span></div>
+                <div class="poster-caption"><h3>자외선차단제 올바른 사용법</h3><span>2025.03</span></div>
               </div>
-              <div class="poster-footer"><span class="pdate">2025.03</span><a href="#" class="poster-dl">⬇ 다운로드</a></div>
             </div>
           </div>
           <div class="carousel-dots" id="posterDots">
@@ -948,7 +1047,7 @@ footer{
         <div class="sec-hd">
           <div class="sec-hd-l">
             <span class="eye">건강 정보</span>
-            <h2>약사회가 알려주는 건강 정보</h2>
+            <h2>슬기로운 약 복용법</h2>
             <p>쉬운 약학 지식, 약사회가 직접 알려드립니다 — 좌우로 넘겨보세요</p>
           </div>
           <a href="health.html" class="btn-more">전체 보기</a>
@@ -960,7 +1059,7 @@ footer{
             <a href="health.html" class="health-card">
               <div class="health-photo-wrap">
                 <span class="htag">의약품</span>
-                <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=500&q=75&auto=format&fit=crop" alt="감기약">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27320%27%20viewBox%3D%270%200%20500%20320%27%3E%3Crect%20width%3D%27500%27%20height%3D%27320%27%20fill%3D%27%23854F0B%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23FAEEDA%27%3E%EA%B1%B4%EA%B0%95%EC%A0%95%EB%B3%B4%20%EC%9D%B4%EB%AF%B8%EC%A7%80%201%3C/text%3E%3C/svg%3E" alt="감기약">
               </div>
               <div class="health-body">
                 <h3>감기약, 이렇게 먹어야 효과 있습니다</h3>
@@ -971,7 +1070,7 @@ footer{
             <a href="health.html" class="health-card">
               <div class="health-photo-wrap">
                 <span class="htag">영양제</span>
-                <img src="https://images.unsplash.com/photo-1616671276441-2f2c277b8bf6?w=500&q=75&auto=format&fit=crop" alt="비타민">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27320%27%20viewBox%3D%270%200%20500%20320%27%3E%3Crect%20width%3D%27500%27%20height%3D%27320%27%20fill%3D%27%23854F0B%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23FAEEDA%27%3E%EA%B1%B4%EA%B0%95%EC%A0%95%EB%B3%B4%20%EC%9D%B4%EB%AF%B8%EC%A7%80%202%3C/text%3E%3C/svg%3E" alt="비타민">
               </div>
               <div class="health-body">
                 <h3>비타민D 과다섭취, 조용한 위험</h3>
@@ -982,7 +1081,7 @@ footer{
             <a href="health.html" class="health-card">
               <div class="health-photo-wrap">
                 <span class="htag">만성질환</span>
-                <img src="https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?w=500&q=75&auto=format&fit=crop" alt="고혈압약">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27320%27%20viewBox%3D%270%200%20500%20320%27%3E%3Crect%20width%3D%27500%27%20height%3D%27320%27%20fill%3D%27%23854F0B%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23FAEEDA%27%3E%EA%B1%B4%EA%B0%95%EC%A0%95%EB%B3%B4%20%EC%9D%B4%EB%AF%B8%EC%A7%80%203%3C/text%3E%3C/svg%3E" alt="고혈압약">
               </div>
               <div class="health-body">
                 <h3>고혈압약, 갑자기 끊으면 안 되는 이유</h3>
@@ -993,7 +1092,7 @@ footer{
             <a href="health.html" class="health-card">
               <div class="health-photo-wrap">
                 <span class="htag">어린이</span>
-                <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=500&q=75&auto=format&fit=crop" alt="어린이 약">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27320%27%20viewBox%3D%270%200%20500%20320%27%3E%3Crect%20width%3D%27500%27%20height%3D%27320%27%20fill%3D%27%23854F0B%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23FAEEDA%27%3E%EA%B1%B4%EA%B0%95%EC%A0%95%EB%B3%B4%20%EC%9D%B4%EB%AF%B8%EC%A7%80%204%3C/text%3E%3C/svg%3E" alt="어린이 약">
               </div>
               <div class="health-body">
                 <h3>아이 해열제, 교차 복용 올바른 방법</h3>
@@ -1004,7 +1103,7 @@ footer{
             <a href="health.html" class="health-card">
               <div class="health-photo-wrap">
                 <span class="htag">노인</span>
-                <img src="https://images.unsplash.com/photo-1576765607924-3f7b8410a787?w=500&q=75&auto=format&fit=crop" alt="어르신 약">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27320%27%20viewBox%3D%270%200%20500%20320%27%3E%3Crect%20width%3D%27500%27%20height%3D%27320%27%20fill%3D%27%23854F0B%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23FAEEDA%27%3E%EA%B1%B4%EA%B0%95%EC%A0%95%EB%B3%B4%20%EC%9D%B4%EB%AF%B8%EC%A7%80%205%3C/text%3E%3C/svg%3E" alt="어르신 약">
               </div>
               <div class="health-body">
                 <h3>어르신 다약제 복용, 무엇이 위험한가</h3>
@@ -1015,7 +1114,7 @@ footer{
             <a href="health.html" class="health-card">
               <div class="health-photo-wrap">
                 <span class="htag">상식</span>
-                <img src="https://images.unsplash.com/photo-1563213126-a4273aed2016?w=500&q=75&auto=format&fit=crop" alt="약 보관">
+                <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27500%27%20height%3D%27320%27%20viewBox%3D%270%200%20500%20320%27%3E%3Crect%20width%3D%27500%27%20height%3D%27320%27%20fill%3D%27%23854F0B%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2717%27%20fill%3D%27%23FAEEDA%27%3E%EA%B1%B4%EA%B0%95%EC%A0%95%EB%B3%B4%20%EC%9D%B4%EB%AF%B8%EC%A7%80%206%3C/text%3E%3C/svg%3E" alt="약 보관">
               </div>
               <div class="health-body">
                 <h3>약 보관, 이것만은 꼭 지키세요</h3>
@@ -1032,14 +1131,74 @@ footer{
         </div>
       </div>
 
+      <!-- ── ISSUES CAROUSEL ── -->
+      <div class="fade">
+        <div class="sec-hd">
+          <div class="sec-hd-l">
+            <span class="eye">약사정책</span>
+            <h2>약사정책 국민브리핑</h2>
+            <p>국민 건강과 직결되는 현안을 명확히 알려드립니다 — 좌우로 넘겨보세요</p>
+          </div>
+          <a href="issues.html" class="btn-more">전체 현안 보기</a>
+        </div>
+        <div class="poster-carousel-wrap">
+          <button class="carousel-arrow prev" id="issuePrev" aria-label="이전">&#8592;</button>
+          <button class="carousel-arrow next" id="issueNext" aria-label="다음">&#8594;</button>
+          <div class="issue-carousel" id="issueCarousel">
+            <div class="issue-card" onclick="location.href='issues.html'">
+              <div class="issue-photo-wrap">
+                <img class="issue-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27700%27%20height%3D%27460%27%20viewBox%3D%270%200%20700%20460%27%3E%3Crect%20width%3D%27700%27%20height%3D%27460%27%20fill%3D%27%23185FA5%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2725%27%20fill%3D%27%23E6F1FB%27%3E%ED%95%B5%EC%8B%AC%ED%98%84%EC%95%88%20%EC%9D%B4%EB%AF%B8%EC%A7%80%201%3C/text%3E%3C/svg%3E" alt="창고형 약국">
+                <span class="issue-badge tag-r">🔴 긴급</span>
+                <div class="issue-overlay"></div>
+                <div class="issue-caption"><h3>창고형 약국 문제</h3></div>
+              </div>
+            </div>
+            <div class="issue-card" onclick="location.href='issues.html'">
+              <div class="issue-photo-wrap">
+                <img class="issue-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27700%27%20height%3D%27460%27%20viewBox%3D%270%200%20700%20460%27%3E%3Crect%20width%3D%27700%27%20height%3D%27460%27%20fill%3D%27%23185FA5%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2725%27%20fill%3D%27%23E6F1FB%27%3E%ED%95%B5%EC%8B%AC%ED%98%84%EC%95%88%20%EC%9D%B4%EB%AF%B8%EC%A7%80%202%3C/text%3E%3C/svg%3E" alt="한약사 문제">
+                <span class="issue-badge tag-r">🔴 대응 중</span>
+                <div class="issue-overlay"></div>
+                <div class="issue-caption"><h3>한약사 면허 범위 문제</h3></div>
+              </div>
+            </div>
+            <div class="issue-card" onclick="location.href='issues.html'">
+              <div class="issue-photo-wrap">
+                <img class="issue-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27700%27%20height%3D%27460%27%20viewBox%3D%270%200%20700%20460%27%3E%3Crect%20width%3D%27700%27%20height%3D%27460%27%20fill%3D%27%23185FA5%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2725%27%20fill%3D%27%23E6F1FB%27%3E%ED%95%B5%EC%8B%AC%ED%98%84%EC%95%88%20%EC%9D%B4%EB%AF%B8%EC%A7%80%203%3C/text%3E%3C/svg%3E" alt="성분명 처방">
+                <span class="issue-badge tag-y">🟡 검토 중</span>
+                <div class="issue-overlay"></div>
+                <div class="issue-caption"><h3>성분명 처방 확대</h3></div>
+              </div>
+            </div>
+            <div class="issue-card" onclick="location.href='issues.html'">
+              <div class="issue-photo-wrap">
+                <img class="issue-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27700%27%20height%3D%27460%27%20viewBox%3D%270%200%20700%20460%27%3E%3Crect%20width%3D%27700%27%20height%3D%27460%27%20fill%3D%27%23185FA5%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2725%27%20fill%3D%27%23E6F1FB%27%3E%ED%95%B5%EC%8B%AC%ED%98%84%EC%95%88%20%EC%9D%B4%EB%AF%B8%EC%A7%80%204%3C/text%3E%3C/svg%3E" alt="비대면 처방">
+                <span class="issue-badge tag-b">🔵 논의 중</span>
+                <div class="issue-overlay"></div>
+                <div class="issue-caption"><h3>비대면 처방·조제 현안</h3></div>
+              </div>
+            </div>
+            <div class="issue-card" onclick="location.href='issues.html'">
+              <div class="issue-photo-wrap">
+                <img class="issue-photo" src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27700%27%20height%3D%27460%27%20viewBox%3D%270%200%20700%20460%27%3E%3Crect%20width%3D%27700%27%20height%3D%27460%27%20fill%3D%27%230C447C%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20dominant-baseline%3D%27middle%27%20text-anchor%3D%27middle%27%20font-family%3D%27sans-serif%27%20font-size%3D%2725%27%20fill%3D%27%23E6F1FB%27%3E%ED%9E%88%EC%96%B4%EB%A1%9C%20%EC%9D%B4%EB%AF%B8%EC%A7%80%3C/text%3E%3C/svg%3E" alt="의약품 공급">
+                <span class="issue-badge tag-y">🟡 모니터링</span>
+                <div class="issue-overlay"></div>
+                <div class="issue-caption"><h3>필수 의약품 공급 불안정</h3></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots" id="issueDots">
+            <div class="dot active" data-idx="0"></div>
+            <div class="dot" data-idx="1"></div>
+          </div>
+        </div>
+      </div>
+
       </div><!-- /wrap -->
     </div><!-- /sections -->
 
     <!-- ── 오시는 길 배너 ── -->
     <div class="map-band fade">
-      <img class="map-bg"
-        src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1400&q=70&auto=format&fit=crop"
-        alt="수원 야경">
+      <img class="map-bg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABkAAAAIICAIAAAC5KrXiAAAO10lEQVR4nO3YQU6DUBRAUXETbsb9bwvnpColD7jVcyakSfP+47ejuywfn29jlrlRx4aNLnD88CvW2H3Gvi9efXOnnTc5+Na/08auXUoLH7RsnhFz6xyaFLuNCVe90h+8uj16r/3MRr3tOezHH/P1fun5jV/vDm7xD69pnRzWvr/RV73f5a/zxIGn7/bbP+2Sy1m//XDNkSeMP2n++Nh185yZ9sj7yAkAAAAAcBIBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACANAELAAAAgDQBCwAAAIA0AQsAAACAtC89dhNzfQVF8wAAAABJRU5ErkJggg==" alt="지도 배경">
       <div class="map-inner">
         <!-- 좌: 안내 배너 -->
         <div class="map-frame" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;">
@@ -1076,17 +1235,11 @@ footer{
     <div class="ft-grid">
       <div class="ft-brand">
         <div class="ftname">경기도약사회</div>
-        <p>경기도민의 건강을 지키고 올바른 약 사용 문화를<br>만들어 가는 경기도약사회입니다.</p>
+        <p>국민의 건강을 지키고 올바른 약 사용 문화를<br>만들어 가는 경기도약사회입니다.</p>
         <div class="ft-contact">
           <p>📍 경기도 수원시 장안구 장안로448번길 17-3 (이목동195-14) 2층</p>
           <p>📞 <strong>031-256-0663~5</strong> · 📠 031-241-0154</p>
           <p>✉️ kkpa0800@naver.com</p>
-        </div>
-        <div class="ft-sns">
-          <a href="#" title="페이스북">f</a>
-          <a href="#" title="X">𝕏</a>
-          <a href="#" title="인스타그램">◎</a>
-          <a href="#" title="유튜브">▶</a>
         </div>
       </div>
       <div class="ft-col">
@@ -1101,24 +1254,13 @@ footer{
       <div class="ft-col">
         <h4>주요 메뉴</h4>
         <ul>
-          <li><a href="issues.html">핵심 현안</a></li>
-          <li><a href="media.html">약사회 미디어</a></li>
-          <li><a href="health.html">건강정보</a></li>
-          <li><a href="news.html">소식·공지</a></li>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="media.html">경기약사 ON AIR</a></li>
+
+          <li><a href="health.html">슬기로운 약 복용법</a></li>
+
+          <li><a href="issues.html">약사정책 국민브리핑</a></li>
         </ul>
-      </div>
-      <div class="ft-col">
-        <h4>참여</h4>
-        <ul>
-          <li><a href="#">신고센터</a></li>
-          <li><a href="#">의견 보내기</a></li>
-          <li><a href="#">약사 봉사단</a></li>
-          <li><a href="#">고객센터</a></li>
-        </ul>
-      </div>
-      <div class="ft-info-box">
-        <div class="ib-label">연락처</div>
-        <p>경기도 수원시 장안구<br><strong>031-256-0663~5</strong><br>평일 09:00 – 18:00<br>점심 12:00 – 13:00</p>
       </div>
     </div>
     <div class="ft-bottom">
@@ -1150,7 +1292,7 @@ function initCarousel(carouselId, prevId, nextId, dotsId){
 
   function cardStep(){
     const card = carousel.firstElementChild;
-    return card ? card.offsetWidth + 20 : 300;
+    return card ? card.offsetWidth + 18 : 300;
   }
   function updateDots(){
     const idx = Math.round(carousel.scrollLeft / cardStep());
@@ -1193,44 +1335,7 @@ initCarousel("healthCarousel",  "healthPrev",  "healthNext",  "healthDots");
 // ── 홈페이지 동적 데이터 연동 ──
 // 관리자 페이지(admin.html)의 localStorage 데이터를 홈페이지에 반영
 
-// ── 공지사항 티커 연동 ──
-(function updateTicker() {
-  var raw = localStorage.getItem('kkpa_news');
-  var items = raw ? JSON.parse(raw) : null;
-
-  // 기본 공지 (localStorage 없을 때)
-  var defaults = [
-    {title:'2025년 제68회 정기대의원총회 개최 결과 안내', isNotice:true},
-    {title:'창고형 약국 반대 서명운동 참여 안내', isNotice:true},
-    {title:'경기도약사회, 창고형 약국 반대 긴급 기자회견 개최', isNotice:false},
-    {title:'2025년 상반기 약사 보수교육 일정 안내', isNotice:false},
-    {title:'한약사 면허범위 확대 반대 성명서 발표', isNotice:false},
-  ];
-
-  var posts = items || defaults;
-  // 최신 8개, 중복으로 이어붙여 무한 스크롤 효과
-  var recent = posts.slice(0, 8);
-  var doubled = recent.concat(recent);
-
-  var ticker = document.getElementById('ticker-items');
-  if (!ticker) return;
-
-  ticker.innerHTML = doubled.map(function(p) {
-    var today = new Date();
-    var isNew = false;
-    if (p.date) {
-      var parts = p.date.split('.');
-      var d = new Date(parts[0], parseInt(parts[1])-1, parseInt(parts[2]));
-      isNew = (today - d) < 30 * 24 * 3600 * 1000;
-    } else {
-      isNew = p.isNotice;
-    }
-    var badge = isNew ? ' <span class="tnew">NEW</span>' : '';
-    return '<a href="news.html">' + p.title + badge + '</a>';
-  }).join('');
-})();
-
-// ── 핵심 현안 카드 반영 (상태·설명·배경사진) ──
+// ── 약사정책 국민브리핑 카드 반영 (상태·설명·배경사진) ──
 (function updateIssues() {
   var keys = ['warehouse','hanyaksa','generic','nonface'];
   var cards = document.querySelectorAll('#issueCarousel .issue-card');
@@ -1268,7 +1373,7 @@ initCarousel("healthCarousel",  "healthPrev",  "healthNext",  "healthDots");
   });
 })();
 
-// ── 약사회 미디어 카드 연동 (최신 6개) ──
+// ── 경기약사 ON AIR 카드 연동 (최신 6개) ──
 (function updateMedia() {
   var raw = localStorage.getItem('kkpa_media');
   if (!raw) return;
@@ -1314,7 +1419,7 @@ initCarousel("healthCarousel",  "healthPrev",  "healthNext",  "healthDots");
         + '<span style="font-size:' + iconSz + ';">' + (p.icon||'💊') + '</span>'
         + '</div>';
     return '<a href="health.html" class="health-card">'
-      + '<div class="health-photo-wrap"><span class="htag">' + (p.cat||'건강정보') + '</span>' + thumb + '</div>'
+      + '<div class="health-photo-wrap"><span class="htag">' + (p.cat||'슬기로운 약 복용법') + '</span>' + thumb + '</div>'
       + '<div class="health-body">'
       + '<h3>' + p.title + '</h3>'
       + '<p>' + (p.excerpt||'') + '</p>'

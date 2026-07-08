@@ -545,6 +545,77 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:0}
   .top-nav-inner{padding:0 20px}
   .page-hero-inner{padding:0 20px}
 }
+
+/* ─── MOBILE NAV (hamburger + drawer) ─────────────────────────── */
+.hdr-ham{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  cursor:pointer;padding:8px;margin-left:8px;flex-shrink:0;
+  width:38px;height:38px;border-radius:8px;border:none;background:transparent;
+}
+.hdr-ham span{display:block;width:20px;height:2px;background:var(--navy);border-radius:2px;transition:.25s;}
+.hdr-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hdr-ham.open span:nth-child(2){opacity:0}
+.hdr-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.mnav-overlay{
+  position:fixed;inset:0;background:rgba(0,24,64,.5);z-index:900;
+  opacity:0;visibility:hidden;transition:opacity .25s;
+}
+.mnav-overlay.open{opacity:1;visibility:visible}
+
+.mnav-drawer{
+  position:fixed;top:0;right:0;height:100%;width:78%;max-width:320px;
+  background:var(--navy-d);z-index:901;
+  box-shadow:-8px 0 30px rgba(0,0,0,.25);
+  transform:translateX(100%);transition:transform .3s ease;
+  overflow-y:auto;padding:20px 0 40px;
+}
+.mnav-drawer.open{transform:translateX(0)}
+.mnav-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px 18px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:8px;
+}
+.mnav-head .mnav-title{font-size:13px;font-weight:700;color:white;letter-spacing:.5px}
+.mnav-close{
+  background:none;border:none;color:rgba(255,255,255,.6);font-size:22px;
+  cursor:pointer;line-height:1;padding:4px;
+}
+.mnav-drawer .mn-item{border-bottom:1px solid rgba(255,255,255,.06)}
+.mnav-drawer .mn-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 22px;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.8);
+  cursor:pointer;
+}
+.mnav-drawer .mn-item.active .mn-link{color:var(--accent);font-weight:700}
+.mnav-drawer .mn-arr{font-size:11px;opacity:.5;transition:transform .2s}
+.mnav-drawer .mn-item.expanded .mn-arr{transform:rotate(180deg)}
+.mnav-drawer .mn-sub{
+  max-height:0;overflow:hidden;transition:max-height .25s ease;
+  background:rgba(0,0,0,.18);
+}
+.mnav-drawer .mn-item.expanded .mn-sub{max-height:240px}
+.mnav-drawer .mn-sub a{
+  display:block;padding:12px 22px 12px 36px;font-size:13.5px;color:rgba(255,255,255,.6);
+}
+.mnav-drawer .mn-sub a:hover{color:white}
+
+@media(max-width:960px){
+  .top-nav{display:none}
+  .hdr-ham{display:flex}
+  .hdr-tel{display:none}
+  .breadcrumb-bar{top:var(--hh);}
+}
+@media(max-width:760px){
+  .hdr-search{min-width:0;flex:1;max-width:240px}
+}
+@media(max-width:540px){
+  .hdr-inner{padding:0 16px;gap:10px}
+  .hdr-search{display:none}
+  .hdr-logo .ltxt .en{display:none}
+}
+
+.hdr-logo{display:flex;align-items:center;}
+.hdr-search{display:none!important;}
 </style>
 </head>
 <body>
@@ -552,25 +623,11 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:0}
 <!-- ─── HEADER ─────────────────────────── -->
 <header class="site-header">
   <div class="hdr-inner">
-    <a href="index.html" class="hdr-logo">
-      <div class="lmark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-          <path d="M2 17l10 5 10-5"/>
-          <path d="M2 12l10 5 10-5"/>
-        </svg>
-      </div>
-      <div class="ltxt">
-        <div class="ko">경기도약사회</div>
-        <div class="en">Gyeonggi Pharmacists Association</div>
-      </div>
-    </a>
-    <div class="hdr-search">
-      <button aria-label="검색">🔍</button>
-      <input type="text" placeholder="검색어를 입력하세요">
-    </div>
-    <div class="hdr-tel">
-      <span>📞 031-256-0663</span>
+      <a href="index.html" class="hdr-logo">
+    <img src="data:image/png;base64,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" alt="경기도약사회" style="height:40px;width:auto;">
+  </a>
+    <div class="hdr-ham" id="hdrHam" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
     </div>
   </div>
 </header>
@@ -588,21 +645,93 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:0}
         <a href="about.html?tab=location">오시는 길</a>
       </div>
     </div>
-    <div class="tn-item"><a href="issues.html" style="color:inherit;">핵심 현안</a></div>
-    <div class="tn-item"><a href="media.html" style="color:inherit;">약사회 미디어</a></div>
-    <div class="tn-item"><a href="health.html" style="color:inherit;">건강정보</a></div>
-    <div class="tn-item"><a href="news.html" style="color:inherit;">소식·공지</a></div>
-    <div class="tn-item">
-      참여마당 <span class="tn-arr">▾</span>
-      <div class="tn-drop"><a href="#">신고센터</a><a href="#">의견 보내기</a></div>
-    </div>
-    <div class="tn-item"><a href="#" style="color:inherit;">고객센터</a></div>
-    <div class="tn-cta">
-      <a href="#" class="alert-btn">🚨 신고센터</a>
-      <a href="tel:031-256-0663" class="tel-btn">📞 031-256-0663</a>
-    </div>
+    <div class="tn-item"><a href="media.html" style="color:inherit;">경기약사 ON AIR</a></div>
+
+    <div class="tn-item"><a href="health.html" style="color:inherit;">슬기로운 약 복용법</a></div>
+
+    <div class="tn-item"><a href="issues.html" style="color:inherit;">약사정책 국민브리핑</a></div>
   </div>
 </nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mnav-overlay" id="mnavOverlay" onclick="closeMobileNav()"></div>
+<div class="mnav-drawer" id="mnavDrawer">
+  <div class="mnav-head">
+    <span class="mnav-title">MENU</span>
+    <button class="mnav-close" onclick="closeMobileNav()" aria-label="닫기">✕</button>
+  </div>
+  <div id="mnavList"></div>
+</div>
+<script>
+// 모바일 네비게이션: 데스크톱 top-nav를 복제해 드로어 생성
+(function buildMobileNav(){
+  var src = document.querySelector('.top-nav .top-nav-inner');
+  var list = document.getElementById('mnavList');
+  if(!src || !list) return;
+  Array.prototype.forEach.call(src.children, function(item){
+    if(!item.classList.contains('tn-item')) return;
+    var link = item.querySelector('a');
+    if(!link) return;
+    var drop = item.querySelector('.tn-drop');
+    var mnItem = document.createElement('div');
+    mnItem.className = 'mn-item' + (item.classList.contains('active') ? ' active' : '');
+
+    var mnLink = document.createElement('div');
+    mnLink.className = 'mn-link';
+    var span = document.createElement('span');
+    span.textContent = link.textContent.trim();
+    mnLink.appendChild(span);
+
+    if(drop){
+      var arr = document.createElement('span');
+      arr.className = 'mn-arr';
+      arr.textContent = '▾';
+      mnLink.appendChild(arr);
+      mnLink.addEventListener('click', function(e){
+        e.preventDefault();
+        mnItem.classList.toggle('expanded');
+      });
+      var sub = document.createElement('div');
+      sub.className = 'mn-sub';
+      Array.prototype.forEach.call(drop.querySelectorAll('a'), function(a){
+        var subA = document.createElement('a');
+        subA.href = a.getAttribute('href');
+        subA.textContent = a.textContent.trim();
+        sub.appendChild(subA);
+      });
+      mnItem.appendChild(mnLink);
+      mnItem.appendChild(sub);
+    } else {
+      mnLink.addEventListener('click', function(){
+        window.location.href = link.getAttribute('href');
+      });
+      mnItem.appendChild(mnLink);
+    }
+    list.appendChild(mnItem);
+  });
+})();
+
+function toggleMobileNav(){
+  var ham = document.getElementById('hdrHam');
+  var overlay = document.getElementById('mnavOverlay');
+  var drawer = document.getElementById('mnavDrawer');
+  var isOpen = drawer.classList.contains('open');
+  if(isOpen){ closeMobileNav(); }
+  else {
+    ham.classList.add('open');
+    overlay.classList.add('open');
+    drawer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+function closeMobileNav(){
+  document.getElementById('hdrHam').classList.remove('open');
+  document.getElementById('mnavOverlay').classList.remove('open');
+  document.getElementById('mnavDrawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+
 
 <!-- ─── PAGE HERO ─────────────────────────── -->
 <div class="page-hero">
@@ -612,7 +741,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:0}
   <div class="page-hero-inner">
     <div class="page-label">About Us</div>
     <h1>경기도약사회 소개</h1>
-    <p class="page-sub">경기도민의 건강을 지키는 경기도약사회를 소개합니다</p>
+    <p class="page-sub">국민의 건강을 지키는 경기도약사회를 소개합니다</p>
   </div>
 </div>
 
@@ -646,24 +775,24 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:0}
       <h2>약사가 <em>함께하는</em> 경기도,<br>더 건강한 내일을 약속합니다</h2>
       <div class="greeting-body">
         <p>
-          경기도약사회 홈페이지를 방문해 주신 도민 여러분과 회원 약사 여러분께
+          경기도약사회 홈페이지를 방문해 주신 국민 여러분과 회원 약사 여러분께
           <strong>깊은 감사</strong>의 말씀을 드립니다.
         </p>
         <p>
-          경기도약사회는 1,400만 경기도민의 건강과 의약품 안전을 지키기 위해
+          경기도약사회는 1,400만 국민의 건강과 의약품 안전을 지키기 위해
           <strong>7,200여 명의 회원 약사</strong>가 함께하는 단체입니다.
-          우리 약사들은 전문 지식과 따뜻한 마음으로 매일 도민 곁에서 올바른 약 사용을
+          우리 약사들은 전문 지식과 따뜻한 마음으로 매일 국민 곁에서 올바른 약 사용을
           돕고, 건강한 삶을 지원하고 있습니다.
         </p>
         <p>
           최근 약업계는 창고형 약국 문제, 한약사 면허 범위 논란, 비대면 처방 확대 등
-          다양한 도전에 직면해 있습니다. 경기도약사회는 도민의 안전과 약사 직능 수호를
+          다양한 도전에 직면해 있습니다. 경기도약사회는 국민의 안전과 약사 직능 수호를
           위해 <strong>단호하고 일관된 입장</strong>을 견지하며, 이를 사회에 명확히
           알려나가겠습니다.
         </p>
         <p>
-          동시에 교육·연수 강화, 지부 역량 지원, 도민 건강정보 제공 등
-          <strong>회원과 도민 모두를 위한 서비스</strong>를 더욱 내실 있게
+          동시에 교육·연수 강화, 지부 역량 지원, 국민 건강정보 제공 등
+          <strong>회원과 국민 모두를 위한 서비스</strong>를 더욱 내실 있게
           다듬어 가겠습니다. 여러분의 변함없는 관심과 성원을 부탁드립니다.
         </p>
       </div>
@@ -1197,7 +1326,7 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:0}
     </div>
     <div class="stat-item">
       <span class="stat-num">1,<em>400</em>만</span>
-      <span class="stat-label">경기도민 건강 파트너</span>
+      <span class="stat-label">국민 건강 파트너</span>
     </div>
   </div>
 </div>
@@ -1208,49 +1337,32 @@ footer{background:var(--navy-d);color:rgba(255,255,255,.6);padding:0}
     <div class="ft-grid">
       <div class="ft-brand">
         <div class="ftname">경기도약사회</div>
-        <p>경기도민의 건강을 지키고 올바른 약 사용 문화를<br>만들어 가는 경기도약사회입니다.</p>
+        <p>국민의 건강을 지키고 올바른 약 사용 문화를<br>만들어 가는 경기도약사회입니다.</p>
         <div class="ft-contact">
           <p>📍 경기도 수원시 장안구 장안로448번길 17-3 (이목동195-14) 2층</p>
           <p>📞 <strong>031-256-0663~5</strong> · 📠 031-241-0154</p>
           <p>✉️ kkpa0800@naver.com</p>
         </div>
-        <div class="ft-sns">
-          <a href="#" title="페이스북">f</a>
-          <a href="#" title="X">𝕏</a>
-          <a href="#" title="인스타그램">◎</a>
-          <a href="#" title="유튜브">▶</a>
-        </div>
       </div>
       <div class="ft-col">
         <h4>경기도약사회 소개</h4>
         <ul>
-          <li><a href="about.html?tab=greeting">인사말</a></li>
-          <li><a href="about.html?tab=history">연혁</a></li>
-          <li><a href="about.html?tab=org">조직도</a></li>
-          <li><a href="about.html?tab=location">오시는 길</a></li>
+          <li><a href="about.html">인사말</a></li>
+          <li><a href="about.html">연혁</a></li>
+          <li><a href="about.html">조직도</a></li>
+          <li><a href="about.html">오시는 길</a></li>
         </ul>
       </div>
       <div class="ft-col">
         <h4>주요 메뉴</h4>
         <ul>
-          <li><a href="issues.html">핵심 현안</a></li>
-          <li><a href="media.html">약사회 미디어</a></li>
-          <li><a href="health.html">건강정보</a></li>
-          <li><a href="news.html">소식·공지</a></li>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="media.html">경기약사 ON AIR</a></li>
+
+          <li><a href="health.html">슬기로운 약 복용법</a></li>
+
+          <li><a href="issues.html">약사정책 국민브리핑</a></li>
         </ul>
-      </div>
-      <div class="ft-col">
-        <h4>참여</h4>
-        <ul>
-          <li><a href="#">신고센터</a></li>
-          <li><a href="#">의견 보내기</a></li>
-          <li><a href="#">약사 봉사단</a></li>
-          <li><a href="#">고객센터</a></li>
-        </ul>
-      </div>
-      <div class="ft-info-box">
-        <div class="ib-label">연락처</div>
-        <p>경기도 수원시 장안구<br><strong>031-256-0663~5</strong><br>평일 09:00 – 18:00<br>점심 12:00 – 13:00</p>
       </div>
     </div>
     <div class="ft-bottom">
