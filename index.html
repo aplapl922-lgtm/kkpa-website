@@ -1292,10 +1292,16 @@ function closeMobileNav(){
 
   function getItems(key) {
     var raw = localStorage.getItem(key);
-    if (!raw) return null; // 관리자가 한번도 손대지 않음 → 하드코딩 기본값 유지
+    console.log('[KKPA 진단] ' + key + ' raw:', raw ? raw.substring(0,200) : null);
+    if (!raw) return null;
     try {
-      return JSON.parse(raw).filter(function(i){ return !i._deleted; });
-    } catch(e) { return null; }
+      var result = JSON.parse(raw).filter(function(i){ return !i._deleted; });
+      console.log('[KKPA 진단] ' + key + ' 필터 후 항목 수:', result.length);
+      return result;
+    } catch(e) {
+      console.error('[KKPA 진단] ' + key + ' 파싱 오류:', e);
+      return null;
+    }
   }
 
   function hideSection(sectionEl) {
@@ -1347,11 +1353,15 @@ function closeMobileNav(){
   // ── 3) 경기약사 ON AIR ──
   var onairItems = getItems('kkpa_onair');
   var posterCarousel = document.getElementById('posterCarousel');
+  console.log('[KKPA 진단] onairItems:', onairItems, '/ posterCarousel found:', !!posterCarousel);
   if (onairItems !== null) {
     var posterSection = posterCarousel ? posterCarousel.closest('.fade') : null;
+    console.log('[KKPA 진단] posterSection(.fade) found:', !!posterSection);
     if (onairItems.length === 0) {
+      console.log('[KKPA 진단] onair 0개 → 섹션 숨김 처리');
       hideSection(posterSection);
     } else if (posterCarousel) {
+      console.log('[KKPA 진단] onair ' + onairItems.length + '개 → 카드 렌더링 시작');
       if (posterSection) posterSection.style.display = '';
       posterCarousel.innerHTML = onairItems.slice(0,6).map(function(item) {
         var base = item.color || '#002D62';
