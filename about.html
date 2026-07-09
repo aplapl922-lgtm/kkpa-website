@@ -817,7 +817,7 @@ function closeMobileNav(){
           <div class="prow"><span class="pk">소속</span><span class="pv" id="president-org">수원시 ○○약국</span></div>
           <div class="prow"><span class="pk">학력</span><span class="pv" id="president-edu">○○대학교 약학대학</span></div>
           <div class="prow"><span class="pk">경력</span><span class="pv" id="president-career">전 수원지부장, 전 부회장</span></div>
-          <div class="prow"><span class="pk">연락처</span><span class="pv" id="president-contact">031-256-0663</span></div>
+          
         </div>
       </div>
     </div>
@@ -1437,6 +1437,10 @@ function scrollToDecade(id, btn) {
       'president-edu':     d.edu,
       'president-career':  d.career,
     };
+    if (d.name) {
+      var sigNameEl = document.getElementById('sig-name');
+      if (sigNameEl) sigNameEl.textContent = '회장 ' + d.name;
+    }
     Object.keys(textMap).forEach(function(id) {
       var el = document.getElementById(id);
       if (el && textMap[id]) el.textContent = textMap[id];
@@ -1464,6 +1468,10 @@ function scrollToDecade(id, btn) {
         }
       }
     }
+
+    // 인사말 eyebrow 라벨
+    var eyebrowEl = document.getElementById('greeting-eyebrow');
+    if (eyebrowEl && d.greetingEyebrow) eyebrowEl.textContent = d.greetingEyebrow;
 
     // 인사말 제목 (.greeting-text 안의 h2)
     var gtEl = document.querySelector('.greeting-text h2');

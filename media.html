@@ -844,79 +844,7 @@ function showExtraIssue(key, cardEl) {
   if (da) { da.style.animation='none'; da.offsetHeight; da.style.animation=''; }
 }
 </script>
-<script>
-// ============================================================
-// 구글 시트 연동 — 경기약사 ON AIR
-// ============================================================
-var SHEET_API_URL = '여기에_Apps_Script_배포_URL_입력';
 
-function loadFromSheet() {
-  if (SHEET_API_URL === '여기에_Apps_Script_배포_URL_입력') return;
-
-  fetch(SHEET_API_URL + '?page=onair')
-    .then(function(res){ return res.json(); })
-    .then(function(data){
-      if (!data.items || !data.items.length) return;
-      renderMediaCards(data.items);
-      renderMediaAccordion(data.items);
-    })
-    .catch(function(err){ console.warn('시트 연동 실패:', err); });
-}
-
-function renderMediaCards(items) {
-  var list = document.querySelector('.issue-list');
-  if (!list) return;
-  list.innerHTML = '';
-  items.forEach(function(item, i) {
-    var card = document.createElement('div');
-    card.className = 'issue-card' + (i === 0 ? ' active' : '');
-    card.innerHTML = '<div class="card-title">' + item['제목'] + '</div>'
-                   + '<div class="card-desc">' + item['설명'] + '</div>';
-    card.onclick = (function(item, card){ return function(){ showSheetMedia(item, card); }; })(item, card);
-    list.appendChild(card);
-  });
-  if (items.length) showSheetMedia(items[0], list.firstChild);
-}
-
-function renderMediaAccordion(items) {
-  var acc = document.querySelector('.mob-accordion');
-  if (!acc) return;
-  acc.innerHTML = '';
-  items.forEach(function(item, i) {
-    var div = document.createElement('div');
-    div.className = 'mob-acc-item' + (i === 0 ? ' open' : '');
-    div.innerHTML =
-      '<div class="mob-acc-head" onclick="toggleMobAcc(this)">'
-      + '<div class="mob-acc-titles">'
-      + '<div class="mob-acc-title">' + item['제목'] + '</div>'
-      + '<div class="mob-acc-desc">' + item['설명'] + '</div>'
-      + '</div><span class="mob-acc-arr">▾</span></div>'
-      + '<div class="mob-acc-body"><div class="mob-acc-content">'
-      + (item['이미지URL'] ? '<img src="' + item['이미지URL'] + '" style="width:100%;border-radius:8px;margin:0 0 16px;" />' : '<div style="padding:20px;color:var(--sub);font-size:13px;">📅 ' + item['날짜'] + ' · ' + item['유형'] + '</div>')
-      + '<button class="mob-acc-close" onclick="(function(btn){var item=btn.closest('.mob-acc-item');item.classList.remove('open');var top=item.getBoundingClientRect().top+window.scrollY-130;window.scrollTo({top:top,behavior:'smooth'});})(this)">✕ 닫기</button>'
-      + '</div></div>';
-    acc.appendChild(div);
-  });
-}
-
-function showSheetMedia(item, cardEl) {
-  document.querySelectorAll('.issue-card').forEach(function(c){ c.classList.remove('active'); });
-  if (cardEl) cardEl.classList.add('active');
-  var da = document.getElementById('detail-area');
-  if (!da) return;
-  da.innerHTML =
-    '<div style="padding:32px 36px;">'
-    + '<p style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1.5px;margin-bottom:8px;">' + item['유형'] + '</p>'
-    + '<h2 style="font-size:22px;font-weight:700;color:var(--navy);margin-bottom:16px;">' + item['제목'] + '</h2>'
-    + '<p style="font-size:13px;color:var(--sub);margin-bottom:24px;">📅 ' + item['날짜'] + '</p>'
-    + (item['이미지URL'] ? '<img src="' + item['이미지URL'] + '" style="width:100%;border-radius:12px;margin-bottom:16px;" />' : '<div style="background:var(--bg);border-radius:12px;height:200px;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:14px;margin-bottom:16px;">이미지 준비 중</div>')
-    + '<p style="font-size:14px;line-height:1.8;color:var(--text);">' + item['설명'] + '</p>'
-    + '</div>';
-  da.style.animation = 'none'; da.offsetHeight; da.style.animation = '';
-}
-
-window.addEventListener('load', loadFromSheet);
-</script>
 <script>
 (function applyAdminData(){
   var raw = localStorage.getItem('kkpa_onair');

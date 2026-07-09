@@ -252,6 +252,8 @@ body{font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;background:#F4F6F
     <!-- 인사말 -->
     <div style="background:white;border-radius:12px;padding:24px;margin-bottom:16px;border:1.5px solid #e5e8ec;">
       <div style="font-size:13px;font-weight:700;color:#002D62;margin-bottom:16px;">✉️ 인사말</div>
+      <div style="margin-bottom:12px;"><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">eyebrow 라벨 (제목 위 작은 태그)</label>
+      <input id="ab-greeting-eyebrow" type="text" value="회장 인사말" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
       <div style="margin-bottom:12px;"><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">인사말 제목</label>
       <input id="ab-greeting-title" type="text" value="약사가 함께하는 경기도, 더 건강한 내일을 약속합니다" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
       <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">인사말 본문 (문단 구분은 줄바꿈으로)</label>
@@ -1007,12 +1009,34 @@ function handlePhotoUpload(input, previewId) {
   if (!file) return;
   var reader = new FileReader();
   reader.onload = function(e) {
-    var preview = document.getElementById(previewId);
-    preview.src = e.target.result;
-    preview.style.display = 'block';
-    preview.dataset.base64 = e.target.result;
+    compressImage(e.target.result, 900, 0.75, function(compressedDataUrl) {
+      var preview = document.getElementById(previewId);
+      preview.src = compressedDataUrl;
+      preview.style.display = 'block';
+      preview.dataset.base64 = compressedDataUrl;
+    });
   };
   reader.readAsDataURL(file);
+}
+
+// 이미지 압축: 최대 가로/세로 maxDim px, JPEG 품질 quality(0~1)
+function compressImage(dataUrl, maxDim, quality, callback) {
+  var img = new Image();
+  img.onload = function() {
+    var w = img.width, h = img.height;
+    if (w > maxDim || h > maxDim) {
+      if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+      else { w = Math.round(w * maxDim / h); h = maxDim; }
+    }
+    var canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+    var result = canvas.toDataURL('image/jpeg', quality);
+    callback(result);
+  };
+  img.onerror = function() { callback(dataUrl); }; // 실패 시 원본 그대로
+  img.src = dataUrl;
 }
 
 function clearOrgImage() {
@@ -1116,6 +1140,7 @@ function saveAbout() {
     edu:     document.getElementById('ab-edu').value,
     career:  document.getElementById('ab-career').value,
     introBody: document.getElementById('ab-intro-body').value,
+    greetingEyebrow: document.getElementById('ab-greeting-eyebrow').value,
     greetingTitle: document.getElementById('ab-greeting-title').value,
     greetingBody:  document.getElementById('ab-greeting-body').value,
     photoData: photoPreview && photoPreview.dataset.base64 ? photoPreview.dataset.base64 : '',
@@ -1148,7 +1173,7 @@ function restoreAdminInputs() {
       'ab-badge': d2.badge, 'ab-name': d2.name, 'ab-title': d2.title,
       'ab-inaug': d2.inaug, 'ab-org': d2.org, 'ab-edu': d2.edu,
       'ab-career': d2.career, 'ab-intro-body': d2.introBody,
-      'ab-greeting-title': d2.greetingTitle, 'ab-greeting-body': d2.greetingBody,
+      'ab-greeting-eyebrow': d2.greetingEyebrow, 'ab-greeting-title': d2.greetingTitle, 'ab-greeting-body': d2.greetingBody,
     };
     Object.keys(fields2).forEach(function(id) {
       var el = document.getElementById(id);

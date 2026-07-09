@@ -1278,64 +1278,6 @@ function closeMobileNav(){
   </main>
 
 <script>
-// ── Fade-in observer ──
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("vis") });
-},{threshold:0.07});
-document.querySelectorAll(".fade").forEach(el=>obs.observe(el));
-
-// ── Generic carousel factory ──
-function initCarousel(carouselId, prevId, nextId, dotsId){
-  const carousel = document.getElementById(carouselId);
-  const dots = document.querySelectorAll("#"+dotsId+" .dot");
-  if(!carousel) return;
-
-  function cardStep(){
-    const card = carousel.firstElementChild;
-    return card ? card.offsetWidth + 18 : 300;
-  }
-  function updateDots(){
-    const idx = Math.round(carousel.scrollLeft / cardStep());
-    dots.forEach((d,i)=> d.classList.toggle("active", i===idx));
-  }
-  document.getElementById(prevId).addEventListener("click",()=>{
-    carousel.scrollBy({left:-cardStep()*4, behavior:"smooth"});
-  });
-  document.getElementById(nextId).addEventListener("click",()=>{
-    carousel.scrollBy({left:cardStep()*4, behavior:"smooth"});
-  });
-  dots.forEach(d=>{
-    d.addEventListener("click",()=>{
-      carousel.scrollTo({left:parseInt(d.dataset.idx)*cardStep()*4, behavior:"smooth"});
-    });
-  });
-  carousel.addEventListener("scroll", updateDots, {passive:true});
-
-  // drag-to-scroll
-  let isDown=false, startX, scrollLeft;
-  carousel.addEventListener("mousedown",e=>{
-    isDown=true; carousel.classList.add("grabbing");
-    startX=e.pageX-carousel.offsetLeft; scrollLeft=carousel.scrollLeft;
-  });
-  ["mouseleave","mouseup"].forEach(ev=>carousel.addEventListener(ev,()=>{
-    isDown=false; carousel.classList.remove("grabbing");
-  }));
-  carousel.addEventListener("mousemove",e=>{
-    if(!isDown) return; e.preventDefault();
-    carousel.scrollLeft = scrollLeft-(e.pageX-carousel.offsetLeft-startX)*1.2;
-  });
-}
-
-initCarousel("posterCarousel",  "posterPrev",  "posterNext",  "posterDots");
-initCarousel("issueCarousel",   "issuePrev",   "issueNext",   "issueDots");
-initCarousel("healthCarousel",  "healthPrev",  "healthNext",  "healthDots");
-</script>
-
-
-
-
-
-<script>
 // ── Admin CMS 데이터 → 홈페이지 실시간 반영 (0개=완전 숨김 처리) ──
 (function syncAdminData() {
 
@@ -1471,7 +1413,70 @@ initCarousel("healthCarousel",  "healthPrev",  "healthNext",  "healthDots");
     } catch(e) {}
   }
 
+  // 콘텐츠 교체 후 스크롤 위치 초기화 (캐러셀 밀림 방지)
+  [issueCarousel, posterCarousel, healthCarousel].forEach(function(el) {
+    if (el) el.scrollLeft = 0;
+  });
+
 })();
+</script>
+
+
+
+
+
+<script>
+// ── Fade-in observer ──
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("vis") });
+},{threshold:0.07});
+document.querySelectorAll(".fade").forEach(el=>obs.observe(el));
+
+// ── Generic carousel factory ──
+function initCarousel(carouselId, prevId, nextId, dotsId){
+  const carousel = document.getElementById(carouselId);
+  const dots = document.querySelectorAll("#"+dotsId+" .dot");
+  if(!carousel) return;
+
+  function cardStep(){
+    const card = carousel.firstElementChild;
+    return card ? card.offsetWidth + 18 : 300;
+  }
+  function updateDots(){
+    const idx = Math.round(carousel.scrollLeft / cardStep());
+    dots.forEach((d,i)=> d.classList.toggle("active", i===idx));
+  }
+  document.getElementById(prevId).addEventListener("click",()=>{
+    carousel.scrollBy({left:-cardStep()*4, behavior:"smooth"});
+  });
+  document.getElementById(nextId).addEventListener("click",()=>{
+    carousel.scrollBy({left:cardStep()*4, behavior:"smooth"});
+  });
+  dots.forEach(d=>{
+    d.addEventListener("click",()=>{
+      carousel.scrollTo({left:parseInt(d.dataset.idx)*cardStep()*4, behavior:"smooth"});
+    });
+  });
+  carousel.addEventListener("scroll", updateDots, {passive:true});
+
+  // drag-to-scroll
+  let isDown=false, startX, scrollLeft;
+  carousel.addEventListener("mousedown",e=>{
+    isDown=true; carousel.classList.add("grabbing");
+    startX=e.pageX-carousel.offsetLeft; scrollLeft=carousel.scrollLeft;
+  });
+  ["mouseleave","mouseup"].forEach(ev=>carousel.addEventListener(ev,()=>{
+    isDown=false; carousel.classList.remove("grabbing");
+  }));
+  carousel.addEventListener("mousemove",e=>{
+    if(!isDown) return; e.preventDefault();
+    carousel.scrollLeft = scrollLeft-(e.pageX-carousel.offsetLeft-startX)*1.2;
+  });
+}
+
+initCarousel("posterCarousel",  "posterPrev",  "posterNext",  "posterDots");
+initCarousel("issueCarousel",   "issuePrev",   "issueNext",   "issueDots");
+initCarousel("healthCarousel",  "healthPrev",  "healthNext",  "healthDots");
 </script>
 </body>
 </html>
