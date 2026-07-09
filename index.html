@@ -1333,44 +1333,7 @@ initCarousel("healthCarousel",  "healthPrev",  "healthNext",  "healthDots");
 
 
 
-<script>
-// ── Netlify CMS 콘텐츠 → 홈페이지 자동 반영 ──
-async function loadCMSContent() {
-  // 소식·공지 → 티커
-  try {
-    const newsFiles = await fetch('/content/news/').catch(()=>null);
-    // 개별 파일은 아래 updateTicker에서 처리
-  } catch(e) {}
 
-  // 회장 프로필
-  try {
-    const res = await fetch('/content/settings/president.json');
-    if (res.ok) {
-      const d = await res.json();
-      // about.html 반영용으로 localStorage에도 저장
-      localStorage.setItem('kkpa_about_president', JSON.stringify(d));
-    }
-  } catch(e) {}
-
-  // 기관 연락처
-  try {
-    const res = await fetch('/content/settings/contact.json');
-    if (res.ok) {
-      const d = await res.json();
-      localStorage.setItem('kkpa_about_contact', JSON.stringify(d));
-      // 홈페이지 오시는길 섹션 업데이트
-      const addrEl = document.querySelector('.map-info-glass .mrow:first-child .mrow-v');
-      if (addrEl && d.address) addrEl.textContent = d.address;
-    }
-  } catch(e) {}
-}
-// 페이지 로드 시 실행
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', loadCMSContent);
-} else {
-  loadCMSContent();
-}
-</script>
 
 <script>
 // ── Admin CMS 데이터 → 홈페이지 실시간 반영 (0개=완전 숨김 처리) ──

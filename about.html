@@ -1418,39 +1418,7 @@ function scrollToDecade(id, btn) {
 })();
 </script>
 
-<script>
-// Netlify CMS content 파일에서 직접 읽어서 반영
-(async function loadAboutCMS() {
-  try {
-    const res = await fetch('/content/settings/president.json');
-    if (!res.ok) return;
-    const d = await res.json();
-    const map = {
-      'president-badge':   d.badge,
-      'president-name':    d.name,
-      'president-title':   d.title,
-      'president-inaug':   d.inaug,
-      'president-org':     d.org,
-      'president-edu':     d.edu,
-      'president-career':  d.career,
-      'president-contact': d.contact,
-    };
-    Object.keys(map).forEach(id => {
-      const el = document.getElementById(id);
-      if (el && map[id]) el.textContent = map[id];
-    });
-  } catch(e) {}
-  try {
-    const res = await fetch('/content/settings/contact.json');
-    if (!res.ok) return;
-    const d = await res.json();
-    document.querySelectorAll('.contact-address').forEach(el => { if(d.address) el.textContent = d.address; });
-    document.querySelectorAll('.contact-tel').forEach(el => { if(d.tel) el.textContent = d.tel; });
-    document.querySelectorAll('.contact-email').forEach(el => { if(d.email) el.textContent = d.email; });
-    document.querySelectorAll('.contact-hours').forEach(el => { if(d.hours) el.textContent = d.hours; });
-  } catch(e) {}
-})();
-</script>
+
 
 <script>
 // ── Admin CMS → 소개 페이지 반영 (사진·소개글·조직도 포함) ──
