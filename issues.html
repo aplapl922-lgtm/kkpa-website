@@ -448,48 +448,7 @@ function closeMobileNav(){
   <div class="issue-list" id="issues-list"><div style="padding:20px;color:#888;">로딩 중...</div></div>
 
   <!-- ── 우: 상세 영역 ── -->
-  <div id="issues-detail" class="detail-area">
-
-    <!-- ======= 창고형 약국 ======= -->
-    <div id="issue-warehouse">
-      <div style="background:linear-gradient(135deg,#7B1A1A 0%,#B91C1C 100%);padding:44px 40px 40px;position:relative;overflow:hidden;">
-        <!-- 배경 장식 원 -->
-        <div style="position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-        <div style="position:absolute;right:60px;bottom:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04);"></div>
-        <!-- 아이콘 -->
-        <div style="font-size:48px;margin-bottom:20px;line-height:1;">🏪</div>
-        <!-- 상태 뱃지 -->
-        <!-- 제목 -->
-        <h2 style="font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:white;line-height:1.35;margin-bottom:10px;">창고형 약국 문제</h2>
-        <!-- 부제 -->
-        <p id="position-warehouse" style="font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.7;">복약지도 없는 대량 의약품 판매, 국민 건강권 위협</p>
-      </div>
-      <div class="detail-body">
-        <div class="detail-section">
-          <h3>💡 무엇이 문제인가요?</h3>
-          <div id="problem-warehouse"><p id="position-warehouse">창고형 약국은 대형 매장에서 의약품을 대량으로 저가에 판매하는 형태로, 약사의 <strong>복약지도 없이</strong> 의약품이 유통되는 구조적 문제를 안고 있습니다.</p>
-          <p id="position-warehouse">전문 약사의 상담 없이 의약품이 판매될 경우 약물 오남용, 부작용 발생, 다약제 복용 문제 등이 증가할 수 있으며, 이는 국민의 건강권을 직접적으로 침해합니다.</p>
-          <p id="position-warehouse">또한 동네 약국의 경영을 압박하여 의약품 접근성과 전문 서비스의 질적 저하로 이어질 우려가 큽니다.</p></div>
-        </div>
-        <div class="detail-section">
-          <h3>📌 경기도약사회 공식 입장</h3>
-          <div class="position-box">
-            <p id="position-warehouse">경기도약사회는 창고형 약국의 허용 및 확산에 <strong>단호히 반대</strong>합니다. 의약품은 전문가의 복약지도가 반드시 수반되어야 하는 전문 물품이며, 이를 일반 상품처럼 대량 판매하는 것은 국민 보건에 심각한 위해를 끼칩니다. 경기도약사회는 관련 법령의 엄격한 적용과 제도적 보완을 강력히 촉구합니다.</p>
-          </div>
-        </div>
-        <div class="detail-section">
-          <h3>🏃 경기도약사회 대응 활동</h3>
-          <div id="actions-warehouse" class="tag-list">
-            <span class="tag">대한약사회 공동 성명 발표</span>
-            <span class="tag">국민 서명운동 참여 독려</span>
-            <span class="tag">긴급 기자회견 개최</span>
-            <span class="tag">관련 기관 공문 발송</span>
-            <span class="tag">회원 안내문 배포</span>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
+  <div id="issues-detail" class="detail-area"><div id="issues-empty-state" style="padding:60px 40px;text-align:center;color:#94a3b8;"><p style="font-size:40px;margin-bottom:12px;">📋</p><p style="font-size:14px;">등록된 현안이 없습니다</p></div></div>
     </div>
 
     <!-- ======= 한약사 면허 범위 ======= -->
@@ -793,7 +752,12 @@ var defaultData = {
 
   var list = document.getElementById('issues-list');
   var detail = document.getElementById('issues-detail');
-  if (!list || !detail || !items || !items.length) return;
+  if (!list || !detail) return;
+  if (!items || !items.length) {
+    list.innerHTML = '<div style="padding:20px;color:#94a3b8;font-size:13.5px;">등록된 현안이 없습니다</div>';
+    detail.innerHTML = '<div style="padding:60px 40px;text-align:center;color:#94a3b8;"><p style="font-size:40px;margin-bottom:12px;">📋</p><p style="font-size:14px;">등록된 현안이 없습니다</p></div>';
+    return;
+  }
 
   var STATUS = {red:{cls:'status-red',txt:'🔴 긴급 대응'}, orange:{cls:'status-orange',txt:'🟡 검토 중'}, blue:{cls:'status-blue',txt:'🔵 정책 추진'}};
   var COLORS = ['linear-gradient(135deg,#002D62,#4A9FD4)','linear-gradient(135deg,#7B1A1A,#B91C1C)','linear-gradient(135deg,#065F46,#10B981)','linear-gradient(135deg,#78350F,#D97706)','linear-gradient(135deg,#1E1B4B,#6D28D9)'];

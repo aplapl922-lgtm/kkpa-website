@@ -452,7 +452,7 @@ function closeMobileNav(){
   <div class="issue-list" id="onair-list"><div style="padding:20px;color:#888;">로딩 중...</div></div>
 
   <!-- 우: 상세 내용 -->
-  <div class="detail-area" id="onair-detail"><div style="padding:40px;text-align:center;color:#888;"><p style="font-size:32px;">📺</p><p>왼쪽에서 콘텐츠를 선택해주세요</p></div></div><!-- /detail-area -->
+  <div class="detail-area" id="onair-detail"><div id="onair-detail-empty" style="padding:60px 40px;text-align:center;color:#94a3b8;"><p style="font-size:40px;margin-bottom:12px;">📺</p><p style="font-size:14px;">등록된 콘텐츠가 없습니다</p></div></div><!-- /detail-area -->
 
 
 <div class="mob-accordion">
@@ -1162,7 +1162,12 @@ var defaultData = {
 
   var list = document.getElementById('onair-list');
   var detail = document.getElementById('onair-detail');
-  if (!list || !detail || !items || !items.length) return;
+  if (!list || !detail) return;
+  if (!items || !items.length) {
+    list.innerHTML = '<div style="padding:20px;color:#94a3b8;font-size:13.5px;">등록된 콘텐츠가 없습니다</div>';
+    detail.innerHTML = '<div style="padding:60px 40px;text-align:center;color:#94a3b8;"><p style="font-size:40px;margin-bottom:12px;">📺</p><p style="font-size:14px;">등록된 콘텐츠가 없습니다</p></div>';
+    return;
+  }
 
   var STATUS = {red:{cls:'status-red',txt:'🔴 긴급 대응'}, orange:{cls:'status-orange',txt:'🟡 검토 중'}, blue:{cls:'status-blue',txt:'🔵 정책 추진'}};
   var COLORS = ['linear-gradient(135deg,#002D62,#4A9FD4)','linear-gradient(135deg,#7B1A1A,#B91C1C)','linear-gradient(135deg,#065F46,#10B981)','linear-gradient(135deg,#78350F,#D97706)','linear-gradient(135deg,#1E1B4B,#6D28D9)'];
