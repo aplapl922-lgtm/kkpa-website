@@ -991,12 +991,12 @@ function showAdminMedia(item, cardEl) {
 <script>
 // ── 경기약사 ON AIR: admin 데이터로 완전 구성 ──
 (function init() {
-  function lightenColor(hex, pct) {
+  function darkenColor(hex, pct) {
     hex = hex.replace('#','');
     var num = parseInt(hex, 16);
-    var r = Math.min(255, Math.floor(((num >> 16) & 255) + (255 - ((num >> 16) & 255)) * pct));
-    var g = Math.min(255, Math.floor(((num >> 8) & 255) + (255 - ((num >> 8) & 255)) * pct));
-    var b = Math.min(255, Math.floor((num & 255) + (255 - (num & 255)) * pct));
+    var r = Math.max(0, Math.floor(((num >> 16) & 255) * (1 - pct)));
+    var g = Math.max(0, Math.floor(((num >> 8) & 255) * (1 - pct)));
+    var b = Math.max(0, Math.floor((num & 255) * (1 - pct)));
     return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   }
   
@@ -1035,7 +1035,7 @@ function showAdminMedia(item, cardEl) {
     'linear-gradient(135deg,#1E1B4B,#6D28D9)'];
 
   detail.innerHTML = items.map(function(item, i) {
-    var bg = item.color ? 'linear-gradient(135deg,' + item.color + ',' + lightenColor(item.color, 0.65) + ')' : COLORS[i % COLORS.length];
+    var bg = item.color ? 'linear-gradient(135deg,' + item.color + ',' + darkenColor(item.color, 0.45) + ')' : COLORS[i % COLORS.length];
     var sections = '';
     if (item.sections && item.sections.length) {
       sections = item.sections.map(function(sec) {
@@ -1197,7 +1197,7 @@ var defaultData = {
 
   // 우측 상세
   detail.innerHTML = items.map(function(item, i) {
-    var bg = item.color ? 'linear-gradient(135deg,' + item.color + ',' + lightenColor(item.color, 0.65) + ')' : COLORS[i % COLORS.length];
+    var bg = item.color ? 'linear-gradient(135deg,' + item.color + ',' + darkenColor(item.color, 0.45) + ')' : COLORS[i % COLORS.length];
     var sections = '';
     if (item.sections && item.sections.length) {
       sections = item.sections.map(function(sec) {
