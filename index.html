@@ -1469,21 +1469,39 @@ if (document.readyState === 'loading') {
 </script>
 
 <script>
-// ── Admin CMS 데이터 → 홈페이지 실시간 반영 ──
+// ── Admin CMS 데이터 → 홈페이지 실시간 반영 (0개=완전 숨김 처리) ──
 (function syncAdminData() {
 
-  // 1) 홈페이지 메인 텍스트 반영
+  function darkenColor(hex, pct) {
+    hex = (hex||'#002D62').replace('#','');
+    var num = parseInt(hex, 16);
+    var r = Math.max(0, Math.floor(((num >> 16) & 255) * (1 - pct)));
+    var g = Math.max(0, Math.floor(((num >> 8) & 255) * (1 - pct)));
+    var b = Math.max(0, Math.floor((num & 255) * (1 - pct)));
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  }
+
+  function getItems(key) {
+    var raw = localStorage.getItem(key);
+    if (!raw) return null; // 관리자가 한번도 손대지 않음 → 하드코딩 기본값 유지
+    try {
+      return JSON.parse(raw).filter(function(i){ return !i._deleted; });
+    } catch(e) { return null; }
+  }
+
+  function hideSection(sectionEl) {
+    if (sectionEl) sectionEl.style.display = 'none';
+  }
+
+  // ── 1) 홈페이지 메인 텍스트 ──
   var homeData = localStorage.getItem('kkpa_home');
   if (homeData) {
     try {
       var h = JSON.parse(homeData);
-      // 태그라인
       var tagEl = document.querySelector('.hero-title, .hero-tagline, h1.main-title');
       if (tagEl && h.tagline) tagEl.innerHTML = h.tagline.replace(/\n/g, '<br>');
-      // 서브
       var subEl = document.querySelector('.hero-sub, .hero-desc, .main-sub');
       if (subEl && h.sub) subEl.textContent = h.sub;
-      // 통계
       var statNums = document.querySelectorAll('.hs-text strong, .stat-num, .hstat strong');
       var statDescs = document.querySelectorAll('.hs-text span, .stat-desc, .hstat span');
       if (statNums[0] && h.stat1num) statNums[0].textContent = h.stat1num;
@@ -1493,71 +1511,96 @@ if (document.readyState === 'loading') {
     } catch(e) {}
   }
 
-  // 2) 약사정책 국민브리핑 (핵심현안 카드) 반영
-  var briefing = localStorage.getItem('kkpa_briefing');
-  if (briefing) {
-    try {
-      var items = JSON.parse(briefing).filter(function(i){ return !i._deleted; });
-      // 현안 카드 슬라이더가 있으면 교체
-      var carousel = document.getElementById('issueCarousel');
-      if (carousel && items.length) {
-        carousel.innerHTML = items.slice(0,4).map(function(item) {
-          return '<div class="issue-card fade">'
-            + '<div class="issue-photo-wrap"><div style="width:100%;height:100%;background:linear-gradient(135deg,'+(item.color||'#002D62')+',#4A9FD4);"></div></div>'
-            + '<div class="issue-body">'
-            + '<span class="issue-tag">' + (item.subtitle||'') + '</span>'
-            + '<h3>' + item.title + '</h3>'
-            + '<p>' + (item.cardDesc||'') + '</p>'
-            + '<a href="issues.html" class="issue-link">약사회 입장 보기 →</a>'
-            + '</div></div>';
-        }).join('');
-      }
-    } catch(e) {}
+  // ── 2) 약사정책 국민브리핑 (핵심현안 카드) ──
+  var briefingItems = getItems('kkpa_briefing');
+  var issueCarousel = document.getElementById('issueCarousel');
+  if (briefingItems !== null) {
+    var issueSection = issueCarousel ? issueCarousel.closest('.fade') : null;
+    if (briefingItems.length === 0) {
+      hideSection(issueSection);
+    } else if (issueCarousel) {
+      if (issueSection) issueSection.style.display = '';
+      issueCarousel.innerHTML = briefingItems.slice(0,4).map(function(item) {
+        var base = item.color || '#002D62';
+        var bg = 'linear-gradient(135deg,' + base + ',' + darkenColor(base, 0.45) + ')';
+        return '<div class="issue-card fade">'
+          + '<div class="issue-photo-wrap"><div style="width:100%;height:100%;background:'+bg+';display:flex;align-items:center;justify-content:center;font-size:40px;">'+(item.icon||'📋')+'</div></div>'
+          + '<div class="issue-body">'
+          + '<span class="issue-tag">' + (item.subtitle||'') + '</span>'
+          + '<h3>' + item.title + '</h3>'
+          + '<p>' + (item.cardDesc||'') + '</p>'
+          + '<a href="issues.html" class="issue-link">약사회 입장 보기 →</a>'
+          + '</div></div>';
+      }).join('');
+    }
   }
 
-  // 3) 경기약사 ON AIR 카드 반영
-  var onair = localStorage.getItem('kkpa_onair');
-  if (onair) {
-    try {
-      var oItems = JSON.parse(onair).filter(function(i){ return !i._deleted; });
-      var oCarousel = document.getElementById('posterCarousel');
-      if (oCarousel && oItems.length) {
-        oCarousel.innerHTML = oItems.slice(0,6).map(function(item) {
-          var thumb = item.imageData
-            ? '<img class="poster-photo" src="'+item.imageData+'" alt="'+item.title+'">'
-            : '<div style="width:100%;height:100%;background:linear-gradient(135deg,'+(item.color||'#002D62')+',#4A9FD4);display:flex;align-items:center;justify-content:center;font-size:40px;">'+(item.icon||'📋')+'</div>';
-          return '<div class="poster-card">'
-            + '<div class="poster-photo-wrap">' + thumb
-            + '<div class="poster-overlay"></div>'
-            + '<div class="poster-caption"><h3>'+item.title+'</h3><span>'+(item.subtitle||'')+'</span></div>'
-            + '</div>'
-            + '<div class="poster-footer"><span class="pdate">'+(item.date||'')+'</span>'
-            + '<a href="media.html" class="poster-dl">보러가기</a></div>'
-            + '</div>';
-        }).join('');
-      }
-    } catch(e) {}
+  // ── 3) 경기약사 ON AIR ──
+  var onairItems = getItems('kkpa_onair');
+  var posterCarousel = document.getElementById('posterCarousel');
+  if (onairItems !== null) {
+    var posterSection = posterCarousel ? posterCarousel.closest('.fade') : null;
+    if (onairItems.length === 0) {
+      hideSection(posterSection);
+    } else if (posterCarousel) {
+      if (posterSection) posterSection.style.display = '';
+      posterCarousel.innerHTML = onairItems.slice(0,6).map(function(item) {
+        var base = item.color || '#002D62';
+        var bg = 'linear-gradient(135deg,' + base + ',' + darkenColor(base, 0.45) + ')';
+        var thumb = item.imageData
+          ? '<img class="poster-photo" src="'+item.imageData+'" alt="'+item.title+'">'
+          : '<div style="width:100%;height:100%;background:'+bg+';display:flex;align-items:center;justify-content:center;font-size:40px;">'+(item.icon||'📋')+'</div>';
+        return '<div class="poster-card">'
+          + '<div class="poster-photo-wrap">' + thumb
+          + '<div class="poster-overlay"></div>'
+          + '<div class="poster-caption"><h3>'+item.title+'</h3><span>'+(item.subtitle||item.cardDesc||'')+'</span></div>'
+          + '</div>'
+          + '<div class="poster-footer"><span class="pdate">'+(item.date||'')+'</span>'
+          + '<a href="media.html" class="poster-dl">보러가기</a></div>'
+          + '</div>';
+      }).join('');
+    }
   }
 
-  // 4) 슬기로운 약생활 카드 반영
-  var health = localStorage.getItem('kkpa_health');
-  if (health) {
+  // ── 4) 슬기로운 약생활 ──
+  var healthItems = getItems('kkpa_health');
+  var healthCarousel = document.getElementById('healthCarousel');
+  if (healthItems !== null) {
+    var healthSection = healthCarousel ? healthCarousel.closest('.fade') : null;
+    if (healthItems.length === 0) {
+      hideSection(healthSection);
+    } else if (healthCarousel) {
+      if (healthSection) healthSection.style.display = '';
+      healthCarousel.innerHTML = healthItems.slice(0,4).map(function(item) {
+        var base = item.color || '#002D62';
+        var bg = 'linear-gradient(135deg,' + base + ',' + darkenColor(base, 0.45) + ')';
+        var thumb = item.imageData
+          ? '<img src="'+item.imageData+'" style="width:100%;height:100%;object-fit:cover;">'
+          : '<div style="width:100%;height:100%;background:'+bg+';display:flex;align-items:center;justify-content:center;font-size:36px;">'+(item.icon||'💊')+'</div>';
+        return '<a href="health.html" class="health-card">'
+          + '<div class="health-photo-wrap"><span class="htag">'+(item.cat||'건강')+'</span>'+thumb+'</div>'
+          + '<div class="health-body"><h3>'+item.title+'</h3>'
+          + '<p>'+(item.excerpt||'')+'</p>'
+          + '<div class="health-meta"><span class="hmore">읽기 →</span></div>'
+          + '</div></a>';
+      }).join('');
+    }
+  }
+
+  // ── 5) 섹션 노출 설정 (관리자에서 껐으면 숨김) ──
+  var sectionConfig = localStorage.getItem('kkpa_home_sections');
+  if (sectionConfig) {
     try {
-      var hItems = JSON.parse(health).filter(function(i){ return !i._deleted; });
-      var hCarousel = document.getElementById('healthCarousel');
-      if (hCarousel && hItems.length) {
-        hCarousel.innerHTML = hItems.slice(0,4).map(function(item) {
-          var thumb = item.imageData
-            ? '<img src="'+item.imageData+'" style="width:100%;height:100%;object-fit:cover;">'
-            : '<div style="width:100%;height:100%;background:linear-gradient(135deg,'+(item.color||'#002D62')+',#4A9FD4);display:flex;align-items:center;justify-content:center;font-size:36px;">'+(item.icon||'💊')+'</div>';
-          return '<a href="health.html" class="health-card">'
-            + '<div class="health-photo-wrap"><span class="htag">'+(item.cat||'건강')+'</span>'+thumb+'</div>'
-            + '<div class="health-body"><h3>'+item.title+'</h3>'
-            + '<p>'+(item.excerpt||'')+'</p>'
-            + '<div class="health-meta"><span class="hmore">읽기 →</span></div>'
-            + '</div></a>';
-        }).join('');
-      }
+      var sections = JSON.parse(sectionConfig);
+      var keyToCarousel = { briefing: 'issueCarousel', onair: 'posterCarousel', health: 'healthCarousel' };
+      sections.forEach(function(sec) {
+        if (sec.visible === false) {
+          var carouselId = keyToCarousel[sec.key];
+          var el = carouselId ? document.getElementById(carouselId) : null;
+          var sectionEl = el ? el.closest('.fade') : null;
+          if (sectionEl) sectionEl.style.display = 'none';
+        }
+      });
     } catch(e) {}
   }
 

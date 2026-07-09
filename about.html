@@ -1453,13 +1453,14 @@ function scrollToDecade(id, btn) {
 </script>
 
 <script>
-// ── Admin CMS → 소개 페이지 반영 ──
+// ── Admin CMS → 소개 페이지 반영 (사진·소개글·조직도 포함) ──
 (function syncAbout() {
   var data = localStorage.getItem('kkpa_about');
   if (!data) return;
   try {
     var d = JSON.parse(data);
-    var map = {
+
+    var textMap = {
       'president-badge':   d.badge,
       'president-name':    d.name,
       'president-title':   d.title,
@@ -1468,19 +1469,63 @@ function scrollToDecade(id, btn) {
       'president-edu':     d.edu,
       'president-career':  d.career,
     };
-    Object.keys(map).forEach(function(id) {
+    Object.keys(textMap).forEach(function(id) {
       var el = document.getElementById(id);
-      if (el && map[id]) el.textContent = map[id];
+      if (el && textMap[id]) el.textContent = textMap[id];
     });
-    // 인사말 제목
-    var gtEl = document.querySelector('.greeting-title, .sig-title, h2.greeting');
+
+    // 회장 사진
+    if (d.photoData) {
+      var photoEl = document.querySelector('.president-photo');
+      if (photoEl) photoEl.src = d.photoData;
+    }
+
+    // 회장 소개글 (연락처 행 다음에 삽입)
+    if (d.introBody) {
+      var contactRow = document.getElementById('president-contact');
+      if (contactRow) {
+        var rowsWrap = contactRow.closest('.prow') ? contactRow.closest('.prow').parentElement : null;
+        if (rowsWrap) {
+          var existing = document.getElementById('president-intro-block');
+          if (existing) existing.remove();
+          var introBlock = document.createElement('div');
+          introBlock.id = 'president-intro-block';
+          introBlock.style.cssText = 'margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:13.5px;color:var(--sub);line-height:1.8;';
+          introBlock.innerHTML = d.introBody.split('\n').filter(Boolean).map(function(p){ return '<p style="margin-bottom:8px;">'+p+'</p>'; }).join('');
+          rowsWrap.insertAdjacentElement('afterend', introBlock);
+        }
+      }
+    }
+
+    // 인사말 제목 (.greeting-text 안의 h2)
+    var gtEl = document.querySelector('.greeting-text h2');
     if (gtEl && d.greetingTitle) gtEl.textContent = d.greetingTitle;
+
     // 인사말 본문
-    var gbEl = document.querySelector('.greeting-body, .greeting-text, .sig-text');
+    var gbEl = document.querySelector('.greeting-body');
     if (gbEl && d.greetingBody) {
       gbEl.innerHTML = d.greetingBody.split('\n').filter(Boolean).map(function(p){ return '<p>'+p+'</p>'; }).join('');
     }
-  } catch(e) {}
+
+    // 지부 조직도 이미지 (있으면 기존 다이어그램 대신 이미지로 교체)
+    if (d.orgImageData) {
+      var orgTab = document.getElementById('tab-org');
+      if (orgTab) {
+        var orgImgWrap = document.createElement('div');
+        orgImgWrap.id = 'org-custom-image';
+        orgImgWrap.style.cssText = 'padding:20px 0;text-align:center;';
+        orgImgWrap.innerHTML = '<img src="' + d.orgImageData + '" style="max-width:100%;border-radius:12px;box-shadow:0 4px 24px rgba(0,45,98,.1);">';
+        // style 태그 다음의 모든 콘텐츠(기존 다이어그램)를 숨기고 이미지 삽입
+        var styleTag = orgTab.querySelector('style');
+        var target = styleTag ? styleTag.nextElementSibling : orgTab.firstElementChild;
+        while (target) {
+          target.style.display = 'none';
+          target = target.nextElementSibling;
+        }
+        orgTab.appendChild(orgImgWrap);
+      }
+    }
+  } catch(e) { console.error('syncAbout error:', e); }
 })();
 </script>
 </body>

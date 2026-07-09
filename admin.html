@@ -182,56 +182,97 @@ body{font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;background:#F4F6F
         <label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">서브 설명 문구</label>
         <textarea id="home-sub" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;resize:vertical;min-height:60px;">약사의 전문 지식으로 도민의 건강과 의약품 안전을 책임집니다.</textarea>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
-        <div>
-          <label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">통계1 숫자</label>
-          <input id="home-stat1-num" type="text" value="7,200+" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;">
-        </div>
-        <div>
-          <label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">통계1 설명</label>
-          <input id="home-stat1-desc" type="text" value="경기도 소속 회원 약사" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;">
-        </div>
-        <div>
-          <label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">통계2 숫자</label>
-          <input id="home-stat2-num" type="text" value="31개 지부" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;">
-        </div>
-        <div>
-          <label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">통계2 설명</label>
-          <input id="home-stat2-desc" type="text" value="경기도 전 시·군 조직" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;">
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">통계1 숫자</label>
+        <input id="home-stat1-num" type="text" value="7,200+" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">통계1 설명</label>
+        <input id="home-stat1-desc" type="text" value="경기도 소속 회원 약사" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">통계2 숫자</label>
+        <input id="home-stat2-num" type="text" value="31개 지부" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">통계2 설명</label>
+        <input id="home-stat2-desc" type="text" value="경기도 전 시·군 조직" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
       </div>
-      <button onclick="saveHome()" style="background:#002D62;color:white;border:none;padding:12px 28px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">💾 홈페이지에 반영</button>
     </div>
+
+    <!-- 섹션 노출 관리 -->
+    <div class="section-label">📐 홈페이지 섹션 구성</div>
+    <div style="background:white;border-radius:12px;padding:24px;margin-bottom:16px;border:1.5px solid #e5e8ec;">
+      <p style="font-size:12.5px;color:#5A6A7E;margin-bottom:16px;">각 섹션의 노출 여부와 표시 형식을 선택하세요. 콘텐츠가 0개인 섹션은 자동으로 숨겨집니다.</p>
+
+      <div id="section-config-list" style="display:flex;flex-direction:column;gap:12px;"></div>
+
+      <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid #f0f3f7;">
+        <button onclick="addCustomSection()" style="background:#f0f3f7;border:1.5px dashed #c8d2e0;color:#5A6A7E;padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;width:100%;">➕ 새 섹션 영역 추가하기</button>
+      </div>
+    </div>
+
+    <button onclick="saveHome()" style="background:#002D62;color:white;border:none;padding:12px 28px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">💾 홈페이지에 반영</button>
   </div>
 
   <!-- ══ 협회 소개 편집 ══ -->
   <div class="adm-page" id="page-about">
     <div class="section-label">🏛️ 협회 소개 편집</div>
+
+    <!-- 회장 프로필 -->
     <div style="background:white;border-radius:12px;padding:24px;margin-bottom:16px;border:1.5px solid #e5e8ec;">
       <div style="font-size:13px;font-weight:700;color:#002D62;margin-bottom:16px;">👤 회장 프로필</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
-        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">배지 텍스트</label>
-        <input id="ab-badge" type="text" value="제34대 회장" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
-        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">회장 이름</label>
-        <input id="ab-name" type="text" value="연 제 덕" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
-        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">직함</label>
-        <input id="ab-title" type="text" value="경기도약사회 회장" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
-        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">취임일</label>
-        <input id="ab-inaug" type="text" value="2025년 2월" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
-        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">소속</label>
-        <input id="ab-org" type="text" value="수원시 ○○약국" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
-        <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">학력</label>
-        <input id="ab-edu" type="text" value="○○대학교 약학대학" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+
+      <div style="display:flex;gap:20px;margin-bottom:20px;align-items:flex-start;">
+        <div style="flex-shrink:0;text-align:center;">
+          <img id="ab-photo-preview" src="" style="width:120px;height:120px;border-radius:50%;object-fit:cover;background:#f0f3f7;border:2px solid #e5e8ec;display:block;margin-bottom:8px;">
+          <input type="file" id="ab-photo-file" accept="image/*" style="display:none;" onchange="handlePhotoUpload(this,'ab-photo-preview')">
+          <button onclick="document.getElementById('ab-photo-file').click()" style="background:#f0f3f7;border:1.5px solid #e5e8ec;color:#002D62;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">📷 사진 변경</button>
+        </div>
+        <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">배지 텍스트</label>
+          <input id="ab-badge" type="text" value="제34대 회장" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+          <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">회장 이름</label>
+          <input id="ab-name" type="text" value="연 제 덕" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+          <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">직함</label>
+          <input id="ab-title" type="text" value="경기도약사회 회장" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+          <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">취임일</label>
+          <input id="ab-inaug" type="text" value="2025년 2월" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+          <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">소속</label>
+          <input id="ab-org" type="text" value="수원시 ○○약국" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+          <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">학력</label>
+          <input id="ab-edu" type="text" value="○○대학교 약학대학" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
+        </div>
       </div>
-      <div style="margin-bottom:16px;"><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">경력</label>
+      <div style="margin-bottom:0;"><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">경력</label>
       <input id="ab-career" type="text" value="전 수원지부장, 전 부회장" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
-      <div style="font-size:13px;font-weight:700;color:#002D62;margin:20px 0 16px;">✉️ 인사말</div>
+    </div>
+
+    <!-- 회장 소개글 -->
+    <div style="background:white;border-radius:12px;padding:24px;margin-bottom:16px;border:1.5px solid #e5e8ec;">
+      <div style="font-size:13px;font-weight:700;color:#002D62;margin-bottom:16px;">📝 회장 소개글</div>
+      <label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">소개글 본문 (약력, 철학, 비전 등 자유롭게 작성)</label>
+      <textarea id="ab-intro-body" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;resize:vertical;min-height:140px;">경기도약사회 제34대 회장으로서, 도민의 건강과 회원 약사들의 권익 보호를 최우선 가치로 삼고 있습니다.</textarea>
+    </div>
+
+    <!-- 인사말 -->
+    <div style="background:white;border-radius:12px;padding:24px;margin-bottom:16px;border:1.5px solid #e5e8ec;">
+      <div style="font-size:13px;font-weight:700;color:#002D62;margin-bottom:16px;">✉️ 인사말</div>
       <div style="margin-bottom:12px;"><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">인사말 제목</label>
       <input id="ab-greeting-title" type="text" value="약사가 함께하는 경기도, 더 건강한 내일을 약속합니다" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;"></div>
-      <div style="margin-bottom:20px;"><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">인사말 본문</label>
-      <textarea id="ab-greeting-body" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;resize:vertical;min-height:120px;">경기도약사회 홈페이지를 방문해 주신 도민 여러분과 회원 약사 여러분께 깊은 감사의 말씀을 드립니다.</textarea></div>
-      <button onclick="saveAbout()" style="background:#002D62;color:white;border:none;padding:12px 28px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">💾 소개 페이지에 반영</button>
+      <div><label style="font-size:12px;font-weight:700;color:#5A6A7E;display:block;margin-bottom:6px;">인사말 본문 (문단 구분은 줄바꿈으로)</label>
+      <textarea id="ab-greeting-body" style="width:100%;padding:10px;border:1.5px solid #e5e8ec;border-radius:8px;font-family:inherit;font-size:14px;resize:vertical;min-height:160px;">경기도약사회 홈페이지를 방문해 주신 도민 여러분과 회원 약사 여러분께 깊은 감사의 말씀을 드립니다.</textarea></div>
     </div>
+
+    <!-- 지부 조직도 -->
+    <div style="background:white;border-radius:12px;padding:24px;margin-bottom:16px;border:1.5px solid #e5e8ec;">
+      <div style="font-size:13px;font-weight:700;color:#002D62;margin-bottom:16px;">🗂️ 지부 조직도</div>
+      <p style="font-size:12.5px;color:#5A6A7E;margin-bottom:14px;">최신 조직도 이미지를 업로드하면 기존 도식 대신 이 이미지가 표시됩니다.</p>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <img id="ab-org-preview" src="" style="width:180px;height:110px;object-fit:cover;border-radius:8px;background:#f0f3f7;border:1.5px solid #e5e8ec;display:none;">
+        <div>
+          <input type="file" id="ab-org-file" accept="image/*" style="display:none;" onchange="handlePhotoUpload(this,'ab-org-preview')">
+          <button onclick="document.getElementById('ab-org-file').click()" style="background:#f0f3f7;border:1.5px solid #e5e8ec;color:#002D62;padding:8px 16px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;">📁 조직도 이미지 업로드</button>
+          <button onclick="clearOrgImage()" style="background:none;border:none;color:#94a3b8;font-size:12px;cursor:pointer;margin-left:8px;font-family:inherit;">이미지 제거(기존 도식 사용)</button>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="saveAbout()" style="background:#002D62;color:white;border:none;padding:12px 28px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">💾 소개 페이지에 반영</button>
   </div>
 
 </div>
@@ -954,6 +995,99 @@ function applyToFront() {
   localStorage.setItem('kkpa_onair',    JSON.stringify(DATA.onair));
 }
 
+
+
+
+
+function handlePhotoUpload(input, previewId) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var preview = document.getElementById(previewId);
+    preview.src = e.target.result;
+    preview.style.display = 'block';
+    preview.dataset.base64 = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearOrgImage() {
+  var preview = document.getElementById('ab-org-preview');
+  preview.src = '';
+  preview.style.display = 'none';
+  preview.dataset.base64 = '';
+}
+
+// ── 홈페이지 섹션 구성 관리 ──
+var DEFAULT_SECTIONS = [
+  { key: 'briefing', label: '📋 약사정책 국민브리핑', layout: 'card4', locked: true },
+  { key: 'onair',    label: '📺 경기약사 ON AIR',      layout: 'card6', locked: true },
+  { key: 'health',   label: '💊 슬기로운 약생활',       layout: 'card4', locked: true },
+];
+var LAYOUT_OPTIONS = [
+  { v: 'card4', t: '카드 4개 그리드' },
+  { v: 'card6', t: '카드 6개 캐러셀' },
+  { v: 'list',  t: '리스트형' },
+  { v: 'banner',t: '큰 배너 1개' },
+];
+
+function getSectionConfig() {
+  var raw = localStorage.getItem('kkpa_home_sections');
+  if (raw) { try { return JSON.parse(raw); } catch(e) {} }
+  return JSON.parse(JSON.stringify(DEFAULT_SECTIONS));
+}
+
+function renderSectionConfig() {
+  var sections = getSectionConfig();
+  var wrap = document.getElementById('section-config-list');
+  if (!wrap) return;
+  wrap.innerHTML = sections.map(function(sec, i) {
+    var opts = LAYOUT_OPTIONS.map(function(o) {
+      return '<option value="'+o.v+'"'+(sec.layout===o.v?' selected':'')+'>'+o.t+'</option>';
+    }).join('');
+    return '<div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f8fafc;border-radius:9px;border:1.5px solid #eef1f5;">'
+      + '<span style="flex:1;font-size:13.5px;font-weight:700;color:#1B2A3B;">'+sec.label+'</span>'
+      + '<select onchange="updateSectionLayout('+i+',this.value)" style="padding:6px 10px;border-radius:7px;border:1.5px solid #e5e8ec;font-size:12.5px;font-family:inherit;">'+opts+'</select>'
+      + '<label style="display:flex;align-items:center;gap:4px;font-size:12px;color:#5A6A7E;cursor:pointer;">'
+        + '<input type="checkbox" '+(sec.visible!==false?'checked':'')+' onchange="toggleSectionVisible('+i+',this.checked)"> 노출'
+      + '</label>'
+      + (sec.locked ? '' : '<button onclick="removeSection('+i+')" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:16px;padding:2px 6px;">✕</button>')
+      + '</div>';
+  }).join('');
+}
+
+function updateSectionLayout(idx, layout) {
+  var sections = getSectionConfig();
+  sections[idx].layout = layout;
+  localStorage.setItem('kkpa_home_sections', JSON.stringify(sections));
+}
+
+function toggleSectionVisible(idx, visible) {
+  var sections = getSectionConfig();
+  sections[idx].visible = visible;
+  localStorage.setItem('kkpa_home_sections', JSON.stringify(sections));
+}
+
+function removeSection(idx) {
+  if (!confirm('이 섹션을 홈페이지 구성에서 제거하시겠습니까?')) return;
+  var sections = getSectionConfig();
+  sections.splice(idx, 1);
+  localStorage.setItem('kkpa_home_sections', JSON.stringify(sections));
+  renderSectionConfig();
+  showToast('섹션이 제거되었습니다.');
+}
+
+function addCustomSection() {
+  var label = prompt('새 섹션의 이름을 입력하세요 (예: 🎓 약사 교육 프로그램)');
+  if (!label) return;
+  var sections = getSectionConfig();
+  sections.push({ key: 'custom_' + Date.now(), label: label, layout: 'card4', visible: true, locked: false });
+  localStorage.setItem('kkpa_home_sections', JSON.stringify(sections));
+  renderSectionConfig();
+  showToast('새 섹션이 추가되었습니다. 홈페이지에 반영하려면 저장해주세요.');
+}
+
 function saveHome() {
   var data = {
     tagline:  document.getElementById('home-tagline').value,
@@ -968,6 +1102,8 @@ function saveHome() {
 }
 
 function saveAbout() {
+  var photoPreview = document.getElementById('ab-photo-preview');
+  var orgPreview = document.getElementById('ab-org-preview');
   var data = {
     badge:   document.getElementById('ab-badge').value,
     name:    document.getElementById('ab-name').value,
@@ -976,15 +1112,17 @@ function saveAbout() {
     org:     document.getElementById('ab-org').value,
     edu:     document.getElementById('ab-edu').value,
     career:  document.getElementById('ab-career').value,
+    introBody: document.getElementById('ab-intro-body').value,
     greetingTitle: document.getElementById('ab-greeting-title').value,
     greetingBody:  document.getElementById('ab-greeting-body').value,
+    photoData: photoPreview && photoPreview.dataset.base64 ? photoPreview.dataset.base64 : '',
+    orgImageData: orgPreview && orgPreview.dataset.base64 ? orgPreview.dataset.base64 : '',
   };
   localStorage.setItem('kkpa_about', JSON.stringify(data));
   showToast('소개 페이지 설정이 저장되었습니다! ✅');
 }
 
 function restoreAdminInputs() {
-  // 홈 복원
   var h = localStorage.getItem('kkpa_home');
   if (h) {
     var d = JSON.parse(h);
@@ -998,20 +1136,29 @@ function restoreAdminInputs() {
       if (el && fields[id]) el.value = fields[id];
     });
   }
-  // 소개 복원
+  renderSectionConfig();
+
   var a = localStorage.getItem('kkpa_about');
   if (a) {
     var d2 = JSON.parse(a);
     var fields2 = {
       'ab-badge': d2.badge, 'ab-name': d2.name, 'ab-title': d2.title,
       'ab-inaug': d2.inaug, 'ab-org': d2.org, 'ab-edu': d2.edu,
-      'ab-career': d2.career, 'ab-greeting-title': d2.greetingTitle,
-      'ab-greeting-body': d2.greetingBody,
+      'ab-career': d2.career, 'ab-intro-body': d2.introBody,
+      'ab-greeting-title': d2.greetingTitle, 'ab-greeting-body': d2.greetingBody,
     };
     Object.keys(fields2).forEach(function(id) {
       var el = document.getElementById(id);
       if (el && fields2[id]) el.value = fields2[id];
     });
+    if (d2.photoData) {
+      var pp = document.getElementById('ab-photo-preview');
+      if (pp) { pp.src = d2.photoData; pp.dataset.base64 = d2.photoData; }
+    }
+    if (d2.orgImageData) {
+      var op = document.getElementById('ab-org-preview');
+      if (op) { op.src = d2.orgImageData; op.dataset.base64 = d2.orgImageData; op.style.display = 'block'; }
+    }
   }
 }
 
