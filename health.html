@@ -1033,12 +1033,12 @@ var defaultData = {
 };
 
 (function init() {
-  function darkenColor(hex, pct) {
+  function lightenColor(hex, pct) {
     hex = hex.replace('#','');
     var num = parseInt(hex, 16);
-    var r = Math.max(0, Math.floor(((num >> 16) & 255) * (1 - pct)));
-    var g = Math.max(0, Math.floor(((num >> 8) & 255) * (1 - pct)));
-    var b = Math.max(0, Math.floor((num & 255) * (1 - pct)));
+    var r = Math.min(255, Math.floor(((num >> 16) & 255) + (255 - ((num >> 16) & 255)) * pct));
+    var g = Math.min(255, Math.floor(((num >> 8) & 255) + (255 - ((num >> 8) & 255)) * pct));
+    var b = Math.min(255, Math.floor((num & 255) + (255 - (num & 255)) * pct));
     return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   }
   
@@ -1079,7 +1079,7 @@ var defaultData = {
 
   // 우측 상세
   detail.innerHTML = items.map(function(item, i) {
-    var bg = item.color ? 'linear-gradient(135deg,' + darkenColor(item.color, 0.4) + ',' + item.color + ')' : COLORS[i % COLORS.length];
+    var bg = item.color ? 'linear-gradient(135deg,' + item.color + ',' + lightenColor(item.color, 0.35) + ')' : COLORS[i % COLORS.length];
     var sections = '';
     if (item.sections && item.sections.length) {
       sections = item.sections.map(function(sec) {
