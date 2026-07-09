@@ -406,6 +406,9 @@ function switchTab(page, el) {
   document.querySelectorAll('.adm-page').forEach(function(p){ p.classList.remove('on'); });
   el.classList.add('on');
   document.getElementById('page-' + page).classList.add('on');
+  if (page === 'home' || page === 'about') {
+    restoreAdminInputs();
+  }
 }
 
 // ══════════════════════════════════════════════════════════
