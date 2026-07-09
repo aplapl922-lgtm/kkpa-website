@@ -1079,7 +1079,7 @@ var defaultData = {
 
   // 우측 상세
   detail.innerHTML = items.map(function(item, i) {
-    var bg = item.color ? 'linear-gradient(135deg,' + item.color + ',' + lightenColor(item.color, 0.35) + ')' : COLORS[i % COLORS.length];
+    var bg = item.color ? 'linear-gradient(135deg,' + item.color + ',' + lightenColor(item.color, 0.65) + ')' : COLORS[i % COLORS.length];
     var sections = '';
     if (item.sections && item.sections.length) {
       sections = item.sections.map(function(sec) {
